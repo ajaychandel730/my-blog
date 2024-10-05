@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import TopicsDropdown from './TopicsDropdown';
 import { Button } from '@nextui-org/button';
+import Link from 'next/link';
 
 const Navbar = () => {
   return (
@@ -18,7 +19,9 @@ const Navbar = () => {
           </div>
           {/* right section */}
           <div className='flex items-center h-full gap-2'>
+            <Link href={"/signin"}>
               <Button size="md" color='primary'>Sigin in</Button>
+            </Link>
           </div>
     </div>
   )
