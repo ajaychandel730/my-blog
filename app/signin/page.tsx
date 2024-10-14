@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import SiginForm from "./SiginForm";
+import ToastProvider from "../ToastProvider";
 
 const Signin = () => {
   return (
@@ -28,6 +29,7 @@ const Signin = () => {
           </div>
         </div>
       </div>
+      <ToastProvider/>
     </section>
   );
 };

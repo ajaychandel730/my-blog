@@ -1,11 +1,12 @@
 "use server";
 import { FormState, signupFormSchema } from "@/lib/zodDefinations/userSchema";
-import { dbConnect } from "@/lib/dbConnect";
-import { MongoClient } from "mongodb";
+import client from "@/lib/dbConnect";
 import { getErrorMessage } from "@/utils/errors";
 import bcrypt  from "bcrypt";
 
+
 const signup = async (state: FormState, formData: FormData) => {
+
   try {
     const validatedFields = signupFormSchema.safeParse({
       email: formData.get("email"),
@@ -18,8 +19,7 @@ const signup = async (state: FormState, formData: FormData) => {
         errors: validatedFields.error.flatten().fieldErrors,
       };
     }
-
-    const client: MongoClient = await dbConnect();
+    
     const database = client.db("blogz");
     const userCollection = database.collection("users");
     const { email, password } = validatedFields.data;
@@ -41,6 +41,9 @@ const signup = async (state: FormState, formData: FormData) => {
     
     if(!user.acknowledged || !user.insertedId){
       return {
+        error : {
+          server : true
+        },
         message: "An error occurred while creating your account.",
       };
     }
@@ -52,6 +55,9 @@ const signup = async (state: FormState, formData: FormData) => {
   } catch (err: unknown) {
     console.log(getErrorMessage(err));
     return {
+      error : {
+        server : true
+      },
       message: "An error occurred while creating your account.",
     };
   }

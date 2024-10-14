@@ -1,35 +1,35 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import Submitbutton from "../components/Submitbutton";
 import { useFormState } from "react-dom";
 import { signup } from "@/actions/siginup";
-import {
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  useDisclosure,
-} from "@nextui-org/modal";
-import { Button } from "@nextui-org/button";
+import { useDisclosure } from "@nextui-org/modal";
+import { toast } from "react-toastify";
 import Link from "next/link";
+import SignupSuccessModal from "./SignupSuccessModal";
+
+export type SignUpErrorState =
+  | {
+      errors: {
+        email?: string[] | undefined;
+        password?: string[] | undefined;
+        repeatPassword?: string[] | undefined;
+      };
+      error?: undefined;
+      message?: undefined;
+    }
+  | {
+      error: {
+        server: boolean;
+      };
+      message: string;
+    }
+  | undefined;
 
 const SignupForm = () => {
   const [state, action] = useFormState(signup, undefined);
   const [showPassword, setShowPassword] = useState(false);
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  
-  console.log(state);
-  
-  if (
-    state != undefined &&
-    "message" in state &&
-    state.message == "successfull"
-  ) {
-    onOpen();
-    state.message = "";
-  }
-
+  console.log("state:", state);
   return (
     <>
       <form action={action} className="max-w-sm mx-auto">
@@ -88,7 +88,7 @@ const SignupForm = () => {
             </label>
           </div>
           {state?.errors?.password &&
-            state.errors.password.map((message) => (
+            state.errors.password.map((message: string) => (
               <p className="mt-2 text-sm text-red-500 font-medium">{message}</p>
             ))}
         </div>
@@ -113,31 +113,17 @@ const SignupForm = () => {
           )}
         </div>
         <Submitbutton text="Register new account" />
+        <p className="text-sm mt-4 font-light text-gray-500 dark:text-gray-400">
+         Already have an account?{" "}
+        <Link
+          href="/signin"
+          className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+        >
+          Sign in
+        </Link>
+      </p>
+      <SignupSuccessModal state={state}/>
       </form>
-
-      <Modal  hideCloseButton isOpen={isOpen} onOpenChange={onOpenChange}>
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1">
-                Welcome
-              </ModalHeader>
-              <ModalBody>
-                <p>
-                  Congratulations, your account hash been successfully created. Please continue for sign in.
-                </p>
-              </ModalBody>
-              <ModalFooter>
-                <Link href={"/signin"}>
-                  <Button color="primary">
-                    Continue
-                  </Button>
-                </Link>
-              </ModalFooter>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
     </>
   );
 };

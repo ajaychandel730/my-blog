@@ -1,11 +1,38 @@
+"use client";
 import React from "react";
 import Submitbutton from "../components/Submitbutton";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
+import { toast } from "react-toastify";
+import { getErrorMessage } from "@/utils/errors";
+import { useRouter } from "next/navigation";
 
 const SiginForm = () => {
+  const router = useRouter();
+
+  const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    try {
+      const formData = new FormData(event.currentTarget);
+      const userInputs = Object.fromEntries(formData.entries());
+      const result = await signIn("credentials", {
+        ...userInputs,
+        redirect: false,
+      });
+      console.log("result:", result)
+      if(result?.ok){
+        router.push("/");
+        
+      }else if (result?.error) {
+        toast.error(result.error);
+      }
+    } catch (err: unknown) {
+      toast.error(getErrorMessage(err));
+    }
+  };
 
   return (
-    <form className="space-y-4 md:space-y-6" action="#">
+    <form onSubmit={submitHandler} className="space-y-4 md:space-y-6">
       <div>
         <label
           htmlFor="email"
@@ -44,7 +71,7 @@ const SiginForm = () => {
           Forgot password?
         </Link>
       </div>
-       <Submitbutton text={"Sign in"}/>
+      <Submitbutton text={"Sign in"} />
       <p className="text-sm font-light text-gray-500 dark:text-gray-400">
         Don’t have an account yet?{" "}
         <Link

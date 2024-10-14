@@ -3,10 +3,11 @@ import Image from 'next/image';
 import TopicsDropdown from './TopicsDropdown';
 import SigninBtn from './SigninBtn';
 import AuthSessionProvider from './AuthSessionProvider';
+import { Button } from '@nextui-org/button';
 
 const Navbar = () => {
   return (
-    <div className='flex items-center justify-between  h-24 bg-gray-50 border-gray-300 border-b  fixed top-0 right-0 left-0 px-10'>
+    <div className=' flex items-center justify-between  h-24 bg-gray-50 border-gray-300 border-b fixed z-50   top-0 right-0 left-0 px-10'>
           {/* left section */}
           <div className='flex items-center h-full gap-2'>
                <Image 
@@ -19,9 +20,8 @@ const Navbar = () => {
           </div>
           {/* right section */}
           <div className='flex items-center h-full gap-2'>
-            <AuthSessionProvider>
-                  <SigninBtn/>
-            </AuthSessionProvider>
+            <Button>Publish</Button>
+            <Button>Save draft</Button>
           </div>
     </div>
   )
