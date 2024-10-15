@@ -3,10 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import BlogImage from "./BlogImage";
 import { Textarea } from "@nextui-org/input";
 import EditorJS from "@editorjs/editorjs";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { RootState, setEditor } from "@/lib/store";
 import { toast } from "react-toastify";
-import { Button } from "@nextui-org/button";
 import tools from "@/lib/editorTools";
 
 const BlogEditor = () => {
@@ -42,7 +39,6 @@ const BlogEditor = () => {
         id="editor"
         className="w-full h-max bg-gray-100 rounded-md px-1"
       ></div>
-      <Button onPress={async()=>{console.log("save", await editor?.save());}}>save</Button>
     </div>
   );
 };

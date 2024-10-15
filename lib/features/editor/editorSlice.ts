@@ -1,23 +1,32 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import EditorJS from "@editorjs/editorjs";
 
-type InitialState = {
-    editor : EditorJS | undefined;
+export interface Blog {
+    image? : string;
 }
 
+type InitialState = {
+    blog : Blog;
+};
+
 const initialState:InitialState = {
-    editor : undefined,
-}
+    blog : {
+        image : ""
+    }
+};
 
 const editorSlice = createSlice({
     name : "editorSlice",
     initialState,
     reducers : {
-        setEditor : (state, action:PayloadAction<EditorJS | undefined>)=>{
-         state.editor = action.payload;
-        }
+       setBlog : (state, action:PayloadAction<Blog>)=>{
+          state.blog = {
+            ...state.blog,
+            ...action.payload
+          }
+       }
     }
 });
 
-export const {setEditor} = editorSlice.actions;
+export const {setBlog} = editorSlice.actions;
 export const editorReducer = editorSlice.reducer;
