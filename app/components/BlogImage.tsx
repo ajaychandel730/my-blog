@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@nextui-org/button";
+import { Button, ButtonGroup } from "@nextui-org/button";
 import { BsUpload } from "react-icons/bs";
 import React, { useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
@@ -9,6 +9,9 @@ import convertIntoCompressFile from "@/lib/convertIntoCompressFile";
 import { toast } from "react-toastify";
 import { uploadImageOnCloudinary } from "@/lib/cloudinary";
 import { getErrorMessage } from "@/utils/errors";
+import { Tooltip } from "@nextui-org/tooltip";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { AiOutlinePicture } from "react-icons/ai";
 
 const BlogImage = () => {
   const fileRef = useRef<HTMLInputElement>(null);
@@ -41,7 +44,6 @@ const BlogImage = () => {
         }
         setImageLoading(false);
       };
-
     } catch (err) {
       toast.error(getErrorMessage(err));
       setImageLoading(false);
@@ -57,17 +59,40 @@ const BlogImage = () => {
         type="file"
         className="hidden"
       />
-      <Button
-        isLoading = {imageloading}
-        startContent={imageloading? "" :  <BsUpload />}
-        onPress={() => {
-          fileRef?.current?.click();
-        }}
-        color="default"
-        className="bg-gray-50 absolute z-20"
-      >
-        {blog.image ? "Change image" : "Upload image"}
-      </Button>
+      {blog.image ? (
+        <ButtonGroup size="lg" variant="faded" className="absolute z-20 ">
+          <Tooltip content="Change image.">
+            <Button
+              onPress={() => {
+                fileRef?.current?.click();
+              }}
+              color="primary"
+              isIconOnly
+            >
+              <AiOutlinePicture />
+            </Button>
+          </Tooltip>
+          <Tooltip content="Delete image.">
+            <Button onPress={()=>{dispatch(setBlog({image : ''}));}} color="danger" isIconOnly>
+              <RiDeleteBin6Line />
+            </Button>
+          </Tooltip>
+        </ButtonGroup>
+      ) : (
+        <Button
+          variant="shadow"
+          isLoading={imageloading}
+          startContent={imageloading ? "" : <BsUpload />}
+          onPress={() => {
+            fileRef?.current?.click();
+          }}
+          color="default"
+          className="bg-gray-50 absolute z-20"
+        >
+          Upload image
+        </Button>
+      )}
+
       {blog.image && (
         <Image
           fill

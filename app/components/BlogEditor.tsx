@@ -1,44 +1,52 @@
 "use client";
-import React, { useCallback, useEffect, useState } from "react";
+import React, {useEffect } from "react";
 import BlogImage from "./BlogImage";
-import { Textarea } from "@nextui-org/input";
-import EditorJS from "@editorjs/editorjs";
+import { Input, Textarea } from "@nextui-org/input";
 import { toast } from "react-toastify";
-import tools from "@/lib/editorTools";
+import TailwindEditor from "./TailwindEditor";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { RootState, setBlog } from "@/lib/store";
+import BlogTopicTags from "./BlogTopicTags";
 
 const BlogEditor = () => {
-  const [editor, setEditor] = useState<EditorJS | null>(null);
+  const dispatch = useAppDispatch();
+  const { blog } = useAppSelector((state: RootState) => state.editorReducer);
 
-  const configEditor = useCallback( async () => {
-    const newEditor = new EditorJS({
-      holder: "editor",
-      placeholder: "Type here",
-      tools,
-    });
-    
-    setEditor(newEditor);
-  }, [editor]);
-    
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // textarea handler
+    e.preventDefault();
+    const { value, name } = e.target;
+    dispatch(setBlog({ [name]: value }));
+  };
+
   useEffect(() => {
-    try{
-      configEditor();
-    }catch(err){
+    try {
+      const blog = window.localStorage.getItem("blog")
+        ? JSON.parse(localStorage.getItem("blog") as string)
+        : {};
+
+       dispatch(setBlog(blog));
+    } catch (err) {
+      console.log(err);
       toast.error("Something went wrong. Please refresh page again.");
     }
   }, []);
 
   return (
     <div className="max-w-[700px] space-y-4 w-full ">
+      <Input name="title" onChange={onChangeHandler} placeholder="Blog title" label="Title" type="text" isRequired/>
+       <BlogTopicTags/>
       <BlogImage />
       <Textarea
+        isRequired
+        defaultValue={blog.description}
+        onChange={onChangeHandler}
         label="Description"
+        name="description"
         placeholder="Enter your description"
         className="w-full "
       />
-      <div
-        id="editor"
-        className="w-full h-max bg-gray-100 rounded-md px-1"
-      ></div>
+      <TailwindEditor />
     </div>
   );
 };

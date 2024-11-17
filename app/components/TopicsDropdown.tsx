@@ -8,12 +8,13 @@ import {
   DropdownItem,
 } from "@nextui-org/dropdown";
 import { Button } from "@nextui-org/button";
+import { SlArrowDown } from "react-icons/sl";
 //
 const TopicsDropdown = () => {
   return (
       <Dropdown>
         <DropdownTrigger>
-          <Button className="bg-transparent" size="lg">
+          <Button endContent={<SlArrowDown/>} className="bg-transparent" size="lg">
             Topics
           </Button>
         </DropdownTrigger>

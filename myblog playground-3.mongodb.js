@@ -10,13 +10,11 @@
 // https://www.mongodb.com/docs/mongodb-vscode/playgrounds/
 
 // Select the database to use.
-use('blogsz');
+use('blogz');
+const collection = "drafts";
 
 
-db.getCollection("users").insertOne({
-   email : "ksjk",
-   password : "jd"
-});
+// db.getCollectionInfos({name : collection});
 
 // db.runCommand( { collMod: "users",
 //    validator: {
@@ -38,28 +36,35 @@ db.getCollection("users").insertOne({
 //    }
 // } );
 
-// db.createCollection("students", {
-//     validator: {
-//        $jsonSchema: {
-//           bsonType: "object",
-//           title: "Student Object Validation",
-//           required: [ "address", "major", "name", "year" ],
-//           properties: {
-//              name: {
-//                 bsonType: "string",
-//                 description: "'name' must be a string and is required"
-//              },
-//              year: {
-//                 bsonType: "int",
-//                 minimum: 2017,
-//                 maximum: 3017,
-//                 description: "'year' must be an integer in [ 2017, 3017 ] and is required"
-//              },
-//              gpa: {
-//                 bsonType: [ "double" ],
-//                 description: "'gpa' must be a double if the field exists"
-//              }
-//           }
-//        }
-//     }
-//  } )
+db.createCollection(collection, {
+    validator: {
+       $jsonSchema: {
+          bsonType: "object",
+          title: "Drafts Object Validation",
+          required: [ "title"],
+          properties: {
+             title: {
+                bsonType: "string",
+                description: "title must be a string and is required"
+             },
+             banner: {
+                bsonType: "string",
+                description: "banner muse be a string."
+             },
+             description: {
+                bsonType: "string",
+                maxLength : 300,
+                description: "Description Maximum character muse be under 300."
+             },
+             topics : {
+              bsonType : "array",
+              description : "Topics muse be a array string."
+             },
+             content : {
+               bsonType : "array",
+               description : "Content muse be a array."
+             }
+          }
+       }
+    }
+ } )

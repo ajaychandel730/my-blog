@@ -1,31 +1,51 @@
 import Header from '@editorjs/header';
-import ImageTool from '@editorjs/image';
+import Image from '@editorjs/image';
 import List from '@editorjs/list';
-import Checklist from "@editorjs/checklist";
 import Quote from "@editorjs/quote";
-import Warning from "@editorjs/warning";
 import Marker from "@editorjs/marker";
-import CodeTool from "@editorjs/code";
-import Delimiter from "@editorjs/delimiter";
 import InlineCode from "@editorjs/inline-code";
 import LinkTool from "@editorjs/link";
 import Embed from "@editorjs/embed";
 import Table from "@editorjs/table";
 
-const tools = {
-    header: Header,
-    image: ImageTool,
-    list: List,
-    checklist: Checklist,
-    quote: Quote,
-    warning: Warning,
+
+export const tools = {
+    image: {
+        class: Image,
+        config: {
+            uploader: {
+                uploadByFile: (file:File) => {
+                    return {
+                        success: 1,
+                        file: {
+                            url: URL.createObjectURL(file),
+                            raw: file
+                        }
+                    }
+                }
+            }
+        }
+
+    },
+    list: {
+        class : List,
+        inlineToolbar : true,
+    },
+    header: {
+        class : Header,
+        config : {
+            placeholder : "Type heading...",
+            levels : [1,2,3,4,5,6],
+            defaultLevel : 1
+        }
+    },
+    quote: {
+        class : Quote,
+        inlineToolBar : true,
+    },
     marker: Marker,
-    code: CodeTool,
-    delimiter: Delimiter,
     inlineCode: InlineCode,
     linkTool: LinkTool,
     embed: Embed,
     table: Table
 }
-
-export default tools;
