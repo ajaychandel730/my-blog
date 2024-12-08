@@ -9,15 +9,19 @@ const SigninBtn = () => {
   const session = useSession();
 
   return session.status === "authenticated" ? (
-    <Button onPress={()=> {signOut()}} size="md" color="primary">
+    <Button
+      onPress={() => {
+        signOut();
+      }}
+      size="md"
+      color="primary"
+    >
       Sign out
     </Button>
   ) : (
-    <Link href={"/signin"}>
-      <Button size="md" color="primary">
-        Sign in
-      </Button>
-    </Link>
+    <Button as={Link} href="/signin" size="md" color="primary">
+      Sign in
+    </Button>
   );
 };
 

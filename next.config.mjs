@@ -20,6 +20,12 @@ const nextConfig = {
                 hostname : "res.cloudinary.com",
                 port : "",
                 pathname : "/instagram-clone-images-27017/image/upload/**"
+            },
+            {
+                protocol : "https",
+                hostname : "nextui.org",
+                port : "",
+                pathname : "/images/**"
             }
         ]
     },

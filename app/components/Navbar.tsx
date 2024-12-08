@@ -5,11 +5,11 @@ import SigninBtn from "./SigninBtn";
 import AuthSessionProvider from "./AuthSessionProvider";
 import Link from "next/link";
 import { Button } from "@nextui-org/button";
-import { AiOutlinePlus } from "react-icons/ai";
+import { AiOutlinePlus, AiOutlineSearch } from "react-icons/ai";
 
 const Navbar = () => {
   return (
-    <div className="flex items-center justify-between  h-24 bg-gray-50 border-gray-300 border-b  fixed top-0 right-0 left-0 px-10">
+    <div className="flex z-50 items-center justify-between  h-24 bg-gray-50 border-gray-300 border-b  fixed top-0 right-0 left-0 px-10">
       {/* left section */}
       <div className="flex items-center h-full gap-2">
         <Link href={"/"}>
@@ -24,10 +24,24 @@ const Navbar = () => {
       </div>
       {/* right section */}
 
-      <div className="flex items-center h-full gap-2">
-        <Link href={"/blog/create"}>
-          <Button startContent={<AiOutlinePlus />}>Create blog</Button>
-        </Link>
+      <div className="flex items-center h-full gap-4">
+        <Button
+          as={Link}
+          href="/blog"
+          size="sm"
+          isIconOnly
+          className="bg-transparent "
+        >
+          <AiOutlineSearch className="w-full h-full text-gray-700" />
+        </Button>
+
+        <Button
+          as={Link}
+          href={"/blog/create"}
+          startContent={<AiOutlinePlus />}
+        >
+          Create blog
+        </Button>
         <AuthSessionProvider>
           <SigninBtn />
         </AuthSessionProvider>

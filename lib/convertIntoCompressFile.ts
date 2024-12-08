@@ -3,7 +3,7 @@ import imageCompression from 'browser-image-compression';
 
 const options:Options = {
     maxSizeMB: 0.7,
-    maxWidthOrHeight: 800,
+    // maxWidthOrHeight: 900,
     useWebWorker: true,
     initialQuality : 0.6
 };

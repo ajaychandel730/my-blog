@@ -14,12 +14,10 @@ export default async function(blog:Blog){
      } 
 
      const newBlog =  await blogsColl.insertOne(result.data);
-     console.log("new blog:", newBlog);
      return  {status : "ok", message : "New blog added."};
 
  }catch(err:unknown){
     const message  = getErrorMessage(err);
-    console.log("publish error: ", message);
     return {status : "error",  message : "Server error. Please try later."}
  }
 }

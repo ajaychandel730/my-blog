@@ -1,48 +1,60 @@
 "use client";
-import React, {useState} from 'react'
-import { toast } from 'react-toastify';
+import React, { useState } from "react";
+import { toast } from "react-toastify";
 import publishBlog from "@/actions/publishBlog";
 import { IoPaperPlaneOutline } from "react-icons/io5";
 import { Button } from "@nextui-org/button";
+import { useAppSelector } from "@/lib/hooks";
+import { RootState } from "@/lib/store";
+import { getErrorMessage } from "@/utils/errors";
 
 const PublishButton = () => {
+  const {
+    blog: { title, topics, image: banner, description, content },
+  } = useAppSelector((state: RootState) => state.editorReducer);
+
   const [publishLoading, setPublishLoading] = useState<boolean>(false);
+  console.log(Array.isArray( content?.content));
   const handlePublish = async () => {
     try {
       setPublishLoading(true);
-      const res = await publishBlog({
-        title: "",
-        topics: [],
-        banner: "dksjds",
-        description: "ksdjskjd ksjd ksjk",
-        content: [{}, {}],
-      });
-    
-      if(res.status ==  "ok"){
-          toast.success(res.message || "New blog added.");
-      }else{
-        if("error" in  res && typeof res.error == "object"){
-          Object.entries(res.error).forEach(([key, value])=>{
+      const blogData = {
+        title: title || "",
+        topics: topics || [],
+        banner: banner || "",
+        description: description || "",
+        content: content == undefined? [] : Array.isArray(content?.content)? content.content : [],
+      }
+      const res = await publishBlog(JSON.parse(JSON.stringify(blogData)));
+
+      if (res.status == "ok") {
+        toast.success(res.message || "New blog added.");
+      } else {
+        if ("error" in res && typeof res.error == "object") {
+          Object.entries(res.error).forEach(([key, value]) => {
             toast.error(value.toString());
-          })            
+          });
         }
       }
     } catch (err) {
-      console.log("publish error: ", err);
-    }finally{
+       console.log("publish error: ", err);
+       toast.error(getErrorMessage(err));
+    } finally {
       setPublishLoading(false);
     }
   };
   return (
     <Button
-          isLoading = {publishLoading}
-          onPress={handlePublish}
-          startContent={!publishLoading && <IoPaperPlaneOutline className="w-5 h-5" />}
-          color="primary"
-        >
-          Publish
-        </Button>
-  )
-}
+      isLoading={publishLoading}
+      onPress={handlePublish}
+      startContent={
+        !publishLoading && <IoPaperPlaneOutline className="w-5 h-5" />
+      }
+      color="primary"
+    >
+      Publish
+    </Button>
+  );
+};
 
-export default PublishButton
+export default PublishButton;

@@ -54,12 +54,12 @@ const BlogImage = () => {
     <div className=" relative aspect-video flex items-center justify-center bg-gray-100  rounded-lg overflow-hidden">
       <input
         onChange={handleOnChange}
-        accept=".png, .jpg, .jpeg"
+        accept=".png, .jpg, .jpeg, .webp"
         ref={fileRef}
         type="file"
         className="hidden"
       />
-      {blog.image ? (
+      {blog.image && !imageloading? (
         <ButtonGroup size="lg" variant="faded" className="absolute z-20 ">
           <Tooltip content="Change image.">
             <Button
@@ -80,6 +80,7 @@ const BlogImage = () => {
         </ButtonGroup>
       ) : (
         <Button
+          
           variant="shadow"
           isLoading={imageloading}
           startContent={imageloading ? "" : <BsUpload />}
@@ -87,7 +88,7 @@ const BlogImage = () => {
             fileRef?.current?.click();
           }}
           color="default"
-          className="bg-gray-50 absolute z-20"
+          className="bg-gray-50 absolute z-30"
         >
           Upload image
         </Button>
