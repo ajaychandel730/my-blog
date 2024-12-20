@@ -13,9 +13,7 @@
 use('blogz');
 const collection = "drafts";
 
-
 // db.getCollectionInfos({name : collection});
-
 // db.runCommand( { collMod: "users",
 //    validator: {
 //       $jsonSchema: {
@@ -36,35 +34,76 @@ const collection = "drafts";
 //    }
 // } );
 
-db.createCollection(collection, {
-    validator: {
-       $jsonSchema: {
-          bsonType: "object",
-          title: "Drafts Object Validation",
-          required: [ "title"],
-          properties: {
-             title: {
-                bsonType: "string",
-                description: "title must be a string and is required"
-             },
-             banner: {
-                bsonType: "string",
-                description: "banner muse be a string."
-             },
-             description: {
-                bsonType: "string",
-                maxLength : 300,
-                description: "Description Maximum character muse be under 300."
-             },
-             topics : {
+db.runCommand({collMod : "blogs", 
+   validator: {
+      $jsonSchema: {
+         bsonType: "object",
+         title: "Drafts Object Validation",
+         required: [ "title", "createdAt"],
+         properties: {
+            title: {
+               bsonType: "string",
+               description: "title must be a string and is required"
+            },
+            banner: {
+               bsonType: "string",
+               description: "banner muse be a string."
+            },
+            description: {
+               bsonType: "string",
+               maxLength : 300,
+               description: "Description Maximum character muse be under 300."
+            },
+            topics : {
+             bsonType : "array",
+             description : "Topics muse be a array string."
+            },
+            content : {
               bsonType : "array",
-              description : "Topics muse be a array string."
-             },
-             content : {
-               bsonType : "array",
-               description : "Content muse be a array."
-             }
-          }
-       }
-    }
- } )
+              description : "Content muse be a array."
+            },
+            date : {
+              bsonType : "date",
+              description : "createAt must be a date."
+            }
+         }
+      }
+   }
+});
+
+// db.createCollection(collection, {
+//     validator: {
+//        $jsonSchema: {
+//           bsonType: "object",
+//           title: "Drafts Object Validation",
+//           required: [ "title"],
+//           properties: {
+//              title: {
+//                 bsonType: "string",
+//                 description: "title must be a string and is required"
+//              },
+//              banner: {
+//                 bsonType: "string",
+//                 description: "banner muse be a string."
+//              },
+//              description: {
+//                 bsonType: "string",
+//                 maxLength : 300,
+//                 description: "Description Maximum character muse be under 300."
+//              },
+//              topics : {
+//               bsonType : "array",
+//               description : "Topics muse be a array string."
+//              },
+//              content : {
+//                bsonType : "array",
+//                description : "Content muse be a array."
+//              },
+//              createdAt : {
+//                bsonType : "number",
+//                description : "createAt must be a number."
+//              }
+//           }
+//        }
+//     }
+//  } )

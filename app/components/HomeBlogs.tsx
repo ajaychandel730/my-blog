@@ -5,7 +5,7 @@ import HomeBlogCardSekelton from "./HomeBlogCardSekelton";
 import { TBlogCard } from "@/types/blog";
 import BlogContent from "./BlogContent";
 
-const fetcher = async (url: string) => {
+export const fetcher = async (url: string) => {
   const res = await fetch(url);
   return res.json();
 };
@@ -27,7 +27,7 @@ const HomeBlogs = () => {
 
   return (
     <div>
-      {blogs.map(({ _id, title, banner, description, content, topics }) => (
+      {blogs.map(({ _id, title, banner, description, content, topics, date }) => (
         <BlogContent
           key={_id}
           topics={topics}
@@ -35,8 +35,9 @@ const HomeBlogs = () => {
           title={title}
           banner={banner}
           description={description}
-          content={content}
-        />
+          content={content} 
+          date={date}
+          />
       ))}
     </div>
   );

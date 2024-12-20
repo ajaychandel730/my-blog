@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar from '../components/Navbar';
-import SearchBlogs from '../components/DefaultBlogs';
 import DefaultBlogs from '../components/DefaultBlogs';
+import BlogsPagination from '../components/BlogsPagination';
 
 const BlogPage = () => {
   return (

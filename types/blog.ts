@@ -9,4 +9,5 @@ export interface Blog{
 
 export type TBlogCard = Blog & {
     _id : string;
+    date : string;
 } 
