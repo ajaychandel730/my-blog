@@ -1,7 +1,7 @@
 import { EditorCommand, EditorCommandEmpty, EditorCommandList, EditorCommandItem } from 'novel'
 import { SuggestionItem } from 'novel/extensions'
 import React from 'react'
-import { suggestionItems } from '../novel/suggestionsItems'
+import { suggestionItems } from '../../novel/suggestionsItems'
 
 const NovelEditorCommand = () => {
   return (

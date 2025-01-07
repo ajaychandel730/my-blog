@@ -1,7 +1,7 @@
 import { Button } from "@nextui-org/button";
 import Navbar from "./components/Navbar";
 import ToastProvider from "./ToastProvider";
-import HomeMainSection from "./components/HomeMainSection";
+import HomeMainSection from "./components/homePage/HomeMainSection";
 
 export default function Home() {
   return (

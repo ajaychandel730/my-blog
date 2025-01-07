@@ -1,4 +1,4 @@
-import CreateNavbar from "../components/CreateNavbar";
+import CreateNavbar from "../components/blogs/CreateNavbar";
 
 
 export default function BlogLayout({

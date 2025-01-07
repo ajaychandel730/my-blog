@@ -5,13 +5,17 @@ import NextImage from "next/image";
 import { Button } from "@nextui-org/button";
 import { TBlogCard } from "@/types/blog";
 
-type Props = TBlogCard;
+type Props = {
+  _id : string;
+  title : string;
+  description : string;
+  banner : string;
+};
 
 const BlogContent = ({
   _id,
   title,
   description = "",
-  content,
   banner,
 }: Props) => {
   return (
@@ -22,7 +26,7 @@ const BlogContent = ({
             {title}
           </h4>
         </CardHeader>
-        <CardBody className="overflow-visible py-2 flex-col items-center md:items-start space-y-4">
+        <CardBody className="overflow-visible py-2 flex-col items-start space-y-4">
           <Image
             as={NextImage}
             // fallbackSrc={"https://nextui.org/images/hero-card-complete.jpeg"}

@@ -1,9 +1,10 @@
 import React from 'react'
 import Navbar from '../components/Navbar';
-import DefaultBlogs from '../components/DefaultBlogs';
 import BlogsPagination from '../components/BlogsPagination';
+import DefaultBlogs from '../components/searchPage/DefaultBlogs';
 
 const BlogPage = () => {
+
   return (
     <>
       <Navbar/>

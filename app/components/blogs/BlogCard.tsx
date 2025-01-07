@@ -3,10 +3,12 @@ import React from "react";
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
 import { Image } from "@nextui-org/image";
 import { TBlogCard } from "@/types/blog";
+import {Avatar} from "@nextui-org/avatar";
+import { FaUser } from "react-icons/fa";
 
 type Props = TBlogCard;
 
-const BlogCard = ({ _id, title, topics, banner, description, date }: Props) => {
+const BlogCard = ({ _id, title, banner, description, date, userImg }: Props) => {
 
   const formatDate = date
     ? new Date(date).toLocaleDateString(undefined, {
@@ -21,7 +23,7 @@ const BlogCard = ({ _id, title, topics, banner, description, date }: Props) => {
       <CardHeader>
         <h3 className="text-sm font-medium">{title}</h3>
       </CardHeader>
-      <CardBody className="overflow-visible px-2 ">
+      <CardBody className="overflow-visible px-2 space-y-2">
         <Image
           shadow="sm"
           radius="lg"
@@ -36,8 +38,15 @@ const BlogCard = ({ _id, title, topics, banner, description, date }: Props) => {
         </p>
       </CardBody>
       <CardFooter className="text-small justify-between">
-        <span className="text-sm font-thin ">{formatDate}</span>
-        <div className="w-8 h-8 rounded-full bg-gray-400 "></div>
+        <span suppressHydrationWarning className="text-sm font-thin ">{formatDate}</span>
+         <Avatar
+          size="sm"
+          showFallback
+          fallback={
+            <FaUser  className="w-5 h-5 text-gray-700"/>
+          }
+          src = {userImg}
+         />
       </CardFooter>
     </Card>
   );

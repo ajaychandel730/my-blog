@@ -6,14 +6,14 @@ import {
   JSONContent,
 } from "novel";
 import { useState } from "react";
-import { novelExtensions } from "../extension";
+import { novelExtensions } from "../../extension";
 import {
   handleCommandNavigation,
   ImageResizer,
   SuggestionItem,
 } from "novel/extensions";
 import { handleImageDrop, handleImagePaste } from "novel/plugins";
-import { uploadFn } from "../novel/imageUpload";
+import { uploadFn } from "../../novel/imageUpload";
 import NovelEditorCommand from "./NovelEditorCommand";
 import NovelEditorBubble from "./NovelEditorBubble";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";

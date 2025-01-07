@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import PublishButton from "./PublishButton";
 import SaveDraftButton from "./SaveDraftButton";
+import AuthSessionProvider from "../AuthSessionProvider";
 
 
 const Navbar = () => {
@@ -23,7 +24,9 @@ const Navbar = () => {
       </div>
       {/* right section */}
       <div className="flex items-center h-full gap-2">
-        <PublishButton/>
+        <AuthSessionProvider>
+           <PublishButton/>
+        </AuthSessionProvider>
         <SaveDraftButton/>
       </div>
     </div>

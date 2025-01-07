@@ -6,6 +6,7 @@ import AuthSessionProvider from "./AuthSessionProvider";
 import Link from "next/link";
 import { Button } from "@nextui-org/button";
 import { AiOutlinePlus, AiOutlineSearch } from "react-icons/ai";
+import UserProfile from "./UserProfile";
 
 const Navbar = () => {
   return (
@@ -43,7 +44,7 @@ const Navbar = () => {
           Create blog
         </Button>
         <AuthSessionProvider>
-          <SigninBtn />
+          <UserProfile/>
         </AuthSessionProvider>
       </div>
     </div>

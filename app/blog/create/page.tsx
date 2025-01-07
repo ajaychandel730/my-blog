@@ -1,7 +1,7 @@
 // import { NextUIProvider } from "@nextui-org/system";
 // import StoreProvider from "@/app/StoreProvider";
-import CreateNavbar from "@/app/components/CreateNavbar";
-import BlogEditor from "../../components/BlogEditor";
+import CreateNavbar from "@/app/components/blogs/CreateNavbar";
+import BlogEditor from "../../components/blogs/BlogEditor";
 import ToastProvider from "@/app/ToastProvider";
 
 export default function Home() {

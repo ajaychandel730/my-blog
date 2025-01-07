@@ -9,9 +9,19 @@
 // For more documentation on playgrounds please refer to
 // https://www.mongodb.com/docs/mongodb-vscode/playgrounds/
 
+const { ObjectId } = require("mongodb");
+
 // Select the database to use.
 use('blogz');
-const collection = "drafts";
+const collection = "blogs";
+
+db.getCollection(collection).updateMany({},{
+   $set : {
+      userId : new ObjectId("676ffa364a0f166268b55cc7"),
+      userName : "ajay",
+      userImg : "https://res.cloudinary.com/instagram-clone-images-27017/image/upload/v1643711892/instagram/blank-profile-picture-g38b61f937_640_onexzk.png"
+   }
+});
 
 // db.getCollectionInfos({name : collection});
 // db.runCommand( { collMod: "users",
@@ -34,42 +44,57 @@ const collection = "drafts";
 //    }
 // } );
 
-db.runCommand({collMod : "blogs", 
-   validator: {
-      $jsonSchema: {
-         bsonType: "object",
-         title: "Drafts Object Validation",
-         required: [ "title", "createdAt"],
-         properties: {
-            title: {
-               bsonType: "string",
-               description: "title must be a string and is required"
-            },
-            banner: {
-               bsonType: "string",
-               description: "banner muse be a string."
-            },
-            description: {
-               bsonType: "string",
-               maxLength : 300,
-               description: "Description Maximum character muse be under 300."
-            },
-            topics : {
-             bsonType : "array",
-             description : "Topics muse be a array string."
-            },
-            content : {
-              bsonType : "array",
-              description : "Content muse be a array."
-            },
-            date : {
-              bsonType : "date",
-              description : "createAt must be a date."
-            }
-         }
-      }
-   }
-});
+// db.runCommand({collMod : "blogs", 
+//    validator: {
+//       $jsonSchema: {
+//          bsonType: "object",
+//          title: "blog Validation",
+//          required: [ "title", "date", "userId", "userName", "userImg"],
+//          properties: {
+//             userId : {
+//              bsonType : "objectId",
+//              description : "userId must be a objectId and is required."
+//             },
+//             userName : {
+//              bsonType : "string",
+//              maxLength : 60,
+//              description : "userId must be a string and is required."
+
+//             },
+//             userImg : {
+//              bsonType : "string",
+//              description : "userImg must be a url and is required."
+
+//             },
+//             title: {
+//                bsonType: "string",
+//                description: "title must be a string and is required"
+//             },
+//             banner: {
+//                bsonType: "string",
+//                description: "banner muse be a string."
+//             },
+//             description: {
+//                bsonType: "string",
+//                maxLength : 300,
+//                description: "Description Maximum character muse be under 300."
+//             },
+//             topics : {
+//              bsonType : "array",
+//              description : "Topics muse be a array string."
+//             },
+//             content : {
+//               bsonType : "array",
+//               description : "Content muse be a array."
+//             },
+//             date : {
+//               bsonType : "date",
+//               description : "Date property must be a date."
+//             }
+//          }
+//       }
+//    }
+// });
 
 // db.createCollection(collection, {
 //     validator: {

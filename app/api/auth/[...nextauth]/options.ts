@@ -48,11 +48,13 @@ export const nextAuthOptions:NextAuthOptions =  {
           if (!passwordMatch) {
             throw new Error("Password not matched.");
           }
-  
+          console.log("authUser:", user); 
           return {
             id: user._id.toString(),
             email: user.email,
             password: user.password,
+            name : user.name || user.email.split('@')[0],
+            image : user.image || "https://res.cloudinary.com/instagram-clone-images-27017/image/upload/v1643711892/instagram/blank-profile-picture-g38b61f937_640_onexzk.png",
           };
         },
       }),
@@ -64,9 +66,11 @@ export const nextAuthOptions:NextAuthOptions =  {
       async redirect({ url, baseUrl }) {
         return baseUrl;
       },
-      async session({ session, token }) {
+      async session({ session, token}) {
         if (token) {
           session.user.id = token.id;
+          session.user.name = token.name;
+          session.user.image = token.picture;
         }
   
         return session;
@@ -74,7 +78,10 @@ export const nextAuthOptions:NextAuthOptions =  {
       async jwt({ token, user, account, profile }) {
         if (user) {
           token.id = user.id;
+          token.name = user.name;
+          token.picture = user.image;
         }
+
         return token;
       },
     },
