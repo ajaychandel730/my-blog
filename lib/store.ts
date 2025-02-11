@@ -3,7 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import {editorReducer} from "./features/editor/editorSlice";
 
 // actions
-import { setBlog } from "./features/editor/editorSlice";
+import { setBlog, resetBlog, isReseting } from "./features/editor/editorSlice";
 
 export const makeStore = () => {
   return configureStore({
@@ -19,5 +19,7 @@ export type AppDispatch = AppStore["dispatch"];
 
 // export actions
 export {
-  setBlog
+  setBlog,
+  resetBlog,
+  isReseting
 }

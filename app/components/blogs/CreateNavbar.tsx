@@ -5,10 +5,9 @@ import Link from "next/link";
 import PublishButton from "./PublishButton";
 import SaveDraftButton from "./SaveDraftButton";
 import AuthSessionProvider from "../AuthSessionProvider";
-
+import NewBlogButton from "./NewBlogButton";
 
 const Navbar = () => {
- 
   return (
     <div className=" flex items-center justify-between  h-24 bg-gray-50 border-gray-300 border-b fixed z-50   top-0 right-0 left-0 px-10">
       {/* left section */}
@@ -24,10 +23,11 @@ const Navbar = () => {
       </div>
       {/* right section */}
       <div className="flex items-center h-full gap-2">
+        <NewBlogButton/>
         <AuthSessionProvider>
-           <PublishButton/>
+          <PublishButton />
+          <SaveDraftButton />
         </AuthSessionProvider>
-        <SaveDraftButton/>
       </div>
     </div>
   );

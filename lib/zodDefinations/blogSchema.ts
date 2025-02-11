@@ -3,9 +3,7 @@ import { z } from "zod";
 
 
 export default z.object({
-    userId : z.string(),
-    userName : z.string(),
-    userImg : z.string().url({message : "User image have invaild url."}),
+    userId: z.string(),
     title : z.string().max(64).min(3, {message : "Title must contain at least 3 characters."}),
     banner : z.string().url({message : "Blog image must be required."}),
     topics : z.array(z.string()).min(1, {message : "Please enter blog topic."}),

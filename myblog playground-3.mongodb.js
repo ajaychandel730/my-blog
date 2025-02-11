@@ -1,27 +1,20 @@
-/* global use, db */
-// MongoDB Playground
-// To disable this template go to Settings | MongoDB | Use Default Template For Playground.
-// Make sure you are connected to enable completions and to be able to run a playground.
-// Use Ctrl+Space inside a snippet or a string literal to trigger completions.
-// The result of the last command run in a playground is shown on the results panel.
-// By default the first 20 documents will be returned with a cursor.
-// Use 'console.log()' to print to the debug output.
-// For more documentation on playgrounds please refer to
-// https://www.mongodb.com/docs/mongodb-vscode/playgrounds/
-
-const { ObjectId } = require("mongodb");
-
-// Select the database to use.
-use('blogz');
+use("blogz");
 const collection = "blogs";
 
-db.getCollection(collection).updateMany({},{
-   $set : {
-      userId : new ObjectId("676ffa364a0f166268b55cc7"),
-      userName : "ajay",
-      userImg : "https://res.cloudinary.com/instagram-clone-images-27017/image/upload/v1643711892/instagram/blank-profile-picture-g38b61f937_640_onexzk.png"
-   }
-});
+
+db.getCollectionInfos({name : collection});
+
+// db.getCollection(collection).updateMany({userId : new ObjectId("676ffa364a0f166268b55cc7")},{
+//    $unset : {
+//       // userId : new ObjectId("676ffa364a0f166268b55cc7"),
+//       userName : "",
+//       userImg : ""
+//    },
+   
+// },
+// {
+//    bypassDocumentValidation: true
+// });
 
 // db.getCollectionInfos({name : collection});
 // db.runCommand( { collMod: "users",
@@ -49,22 +42,11 @@ db.getCollection(collection).updateMany({},{
 //       $jsonSchema: {
 //          bsonType: "object",
 //          title: "blog Validation",
-//          required: [ "title", "date", "userId", "userName", "userImg"],
+//          required: [ "title", "date", "userId"],
 //          properties: {
 //             userId : {
 //              bsonType : "objectId",
 //              description : "userId must be a objectId and is required."
-//             },
-//             userName : {
-//              bsonType : "string",
-//              maxLength : 60,
-//              description : "userId must be a string and is required."
-
-//             },
-//             userImg : {
-//              bsonType : "string",
-//              description : "userImg must be a url and is required."
-
 //             },
 //             title: {
 //                bsonType: "string",
@@ -96,39 +78,4 @@ db.getCollection(collection).updateMany({},{
 //    }
 // });
 
-// db.createCollection(collection, {
-//     validator: {
-//        $jsonSchema: {
-//           bsonType: "object",
-//           title: "Drafts Object Validation",
-//           required: [ "title"],
-//           properties: {
-//              title: {
-//                 bsonType: "string",
-//                 description: "title must be a string and is required"
-//              },
-//              banner: {
-//                 bsonType: "string",
-//                 description: "banner muse be a string."
-//              },
-//              description: {
-//                 bsonType: "string",
-//                 maxLength : 300,
-//                 description: "Description Maximum character muse be under 300."
-//              },
-//              topics : {
-//               bsonType : "array",
-//               description : "Topics muse be a array string."
-//              },
-//              content : {
-//                bsonType : "array",
-//                description : "Content muse be a array."
-//              },
-//              createdAt : {
-//                bsonType : "number",
-//                description : "createAt must be a number."
-//              }
-//           }
-//        }
-//     }
-//  } )
+

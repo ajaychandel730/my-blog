@@ -1,12 +1,12 @@
+import { User } from "@/lib/types";
+
 export interface Blog {
-  userId: string;
-  userName: string;
-  userImg: string;
+  user : User
   title: string;
   banner: string;
   topics: string[];
   description: string;
-  content: Array<unknown>;
+  content?: Array<unknown>;
 }
 
 export type TBlogCard = Blog & {

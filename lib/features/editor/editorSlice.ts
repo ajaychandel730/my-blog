@@ -11,6 +11,7 @@ export interface Blog {
 
 type InitialState = {
   blog: Blog;
+  isReseting? : boolean,
 };
 
 
@@ -20,8 +21,9 @@ const initialState: InitialState = {
     topics : [], 
     image: "",
     description: "",
-    content: undefined
+    content: undefined,
   },
+  isReseting : false
 };
 
 const editorSlice = createSlice({
@@ -29,14 +31,23 @@ const editorSlice = createSlice({
   initialState,
   reducers: {
     setBlog: (state, action: PayloadAction<Blog>) => {
+      
       state.blog = {
         ...state.blog,
         ...action.payload,
       };
       localStorage.setItem("blog", JSON.stringify(state.blog));
     },
+    isReseting : (state, action:PayloadAction<boolean>)=>{
+      state.isReseting = action.payload;
+      return state;
+    },
+
+    resetBlog : ()=>{
+         return {...initialState};
+    }
   },
 });
 
-export const { setBlog } = editorSlice.actions;
+export const { setBlog, resetBlog, isReseting } = editorSlice.actions;
 export const editorReducer = editorSlice.reducer;

@@ -8,6 +8,9 @@ import bcrypt  from "bcrypt";
 const signup = async (state: FormState, formData: FormData) => {
 
   try {
+    console.log("state", state);
+    console.log("formData", Object.fromEntries(formData));
+
     const validatedFields = signupFormSchema.safeParse({
       email: formData.get("email"),
       password: formData.get("password"),
@@ -36,6 +39,9 @@ const signup = async (state: FormState, formData: FormData) => {
     
     const user = await userCollection.insertOne({
       email,
+      joinDate : new Date(),
+      name : email.split('@')[0],
+      image : "https://res.cloudinary.com/instagram-clone-images-27017/image/upload/v1643711892/instagram/blank-profile-picture-g38b61f937_640_onexzk.png",
       password : hashedPassword,
     });
     
@@ -53,7 +59,7 @@ const signup = async (state: FormState, formData: FormData) => {
     }
     
   } catch (err: unknown) {
-    console.log(getErrorMessage(err));
+    console.log(err.errInfo.details.schemaRulesNotSatisfied[0].propertiesNotSatisfied);
     return {
       error : {
         server : true

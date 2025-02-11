@@ -3,9 +3,10 @@ import React from "react";
 import useSWR from "swr";
 import HomeBlogCardSekelton from "./HomeBlogCardSekelton";
 import { TBlogCard } from "@/types/blog";
-import BlogContent from "../blogs/BlogContent";
+import BlogBrief from "../blogs/Blogbrief";
 import { toast } from "react-toastify";
-export const fetcher = async (url: string) => {
+
+export const fetcheAllPublishBlogs = async (url: string) => {
   const res = await fetch(url);
   return res.json();
 };
@@ -15,7 +16,7 @@ const HomeBlogs = () => {
     data,
     error,
     isLoading,
-  } = useSWR("/api/getBlogs/?page=1&limit=10", fetcher);
+  } = useSWR("/api/getBlogs/?page=1&limit=10", fetcheAllPublishBlogs);
   const blogData = !data || !("data" in data)?  [] : data.data; 
   const blogs: TBlogCard[] = blogData ? (Array.isArray(blogData) ? blogData : []) : [];
   
@@ -30,9 +31,9 @@ const HomeBlogs = () => {
   }
 
   return (
-    <div>
+    <div className="flex space-y-4 flex-col items-center mx-auto w-full ">
       {blogs.map(({_id, title, banner, description}) => (
-        <BlogContent
+        <BlogBrief
           key={_id}
           _id={_id}
           title={title}

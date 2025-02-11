@@ -3,20 +3,16 @@ import React from "react";
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
 import { Image } from "@nextui-org/image";
 import { TBlogCard } from "@/types/blog";
+import NextImage  from "next/image";
 import {Avatar} from "@nextui-org/avatar";
 import { FaUser } from "react-icons/fa";
+import toLocaleDateString from "@/utils/toLocaleDateString";
 
 type Props = TBlogCard;
 
-const BlogCard = ({ _id, title, banner, description, date, userImg }: Props) => {
+const BlogCard = ({ _id, title, banner, description, date, user }: Props) => {
 
-  const formatDate = date
-    ? new Date(date).toLocaleDateString(undefined, {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-      })
-    : "";
+  const formatDate = toLocaleDateString(date);
     
   return (
     <Card  shadow="sm" isPressable>
@@ -28,6 +24,7 @@ const BlogCard = ({ _id, title, banner, description, date, userImg }: Props) => 
           shadow="sm"
           radius="lg"
           width="100%"
+          loading="lazy"
           height="100%"
           alt={title}
           className="w-full object-cover aspect-video"
@@ -45,7 +42,7 @@ const BlogCard = ({ _id, title, banner, description, date, userImg }: Props) => 
           fallback={
             <FaUser  className="w-5 h-5 text-gray-700"/>
           }
-          src = {userImg}
+          src = {user?.image || ""}
          />
       </CardFooter>
     </Card>

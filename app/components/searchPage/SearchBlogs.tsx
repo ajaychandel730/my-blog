@@ -1,7 +1,7 @@
 import React from "react";
 import BlogSearchInput from "./BlogSearchInput";
 import { confirmData } from "@/actions/getSearchBlogs";
-import BlogCard from "./blogs/BlogCard";
+import BlogCard from "../blogs/BlogCard";
 import { getErrorMessage } from "@/utils/errors";
 import { serverBlogCard } from "@/actions/getSearchBlogs";
 import SearchPagePagination from "./SearchPagePagination";
@@ -23,7 +23,7 @@ const fetchSearchBlogs = async (
     }
 
     const res = await fetch(endPoint, {
-      next: { revalidate: 3600 },
+      next: { revalidate: 0 },
     });
     const data = await res.json();
 
@@ -58,11 +58,12 @@ const SearchBlogs = async ({ query, token }: Props) => {
 
       <div className="mt-10 w-full   grid gap-4 grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
         {result.map(
-          ({ _id, title, description, banner, topics, content, date }) => (
+          ({ _id, title, user, description, banner, topics, content, date }) => (
             <BlogCard
               key={_id}
               _id={_id}
               title={title}
+              user={user}
               description={description}
               banner={banner}
               topics={topics}

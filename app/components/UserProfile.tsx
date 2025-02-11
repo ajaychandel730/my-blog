@@ -11,14 +11,13 @@ import {
 } from "@nextui-org/dropdown";
 import SigninBtn from "./SigninBtn";
 import { signOut } from "next-auth/react";
+import Link from "next/link";
 
 const UserProfile = () => {
   const session = useSession();
-
   const { data } = session;
   const isAuthenticated = session.status === "authenticated";
 
-  console.log(session);
   const user = {
     name: "",
     image: "",
@@ -47,7 +46,14 @@ const UserProfile = () => {
           <p className="font-semibold text-sm">Signed in as</p>
           <p className="font-semibold text-sm">{user.email}</p>
         </DropdownItem>
-        <DropdownItem key="profile">Profile</DropdownItem>
+        <DropdownItem
+          as={Link}
+          aria-label="User profile link"
+          href="/user/profile"
+          key="profile"
+        >
+          Profile
+        </DropdownItem>
         <DropdownItem color="danger" onPress={() => signOut()} key="signOut">
           Sign out
         </DropdownItem>

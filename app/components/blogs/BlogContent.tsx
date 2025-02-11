@@ -1,51 +1,19 @@
-import React from "react";
-import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
-import { Image } from "@nextui-org/image";
-import NextImage from "next/image";
-import { Button } from "@nextui-org/button";
-import { TBlogCard } from "@/types/blog";
+"use server";
+import getBlogById from '@/actions/getBlogById'
+import { Card } from '@nextui-org/card'
+import { notFound } from 'next/navigation';
+import React from 'react'
 
-type Props = {
-  _id : string;
-  title : string;
-  description : string;
-  banner : string;
-};
+const BlogContent = async({blogId}:{blogId:string}) => {
+const blog = await getBlogById(blogId);
+if(!blog){notFound()};
+    
 
-const BlogContent = ({
-  _id,
-  title,
-  description = "",
-  banner,
-}: Props) => {
   return (
-    <>
-      <Card className={"py-4"} shadow={"none"} radius="none" fullWidth>
-        <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-          <h4 className="font-bold text-large text-wrap line-clamp-1">
-            {title}
-          </h4>
-        </CardHeader>
-        <CardBody className="overflow-visible py-2 flex-col items-start space-y-4">
-          <Image
-            as={NextImage}
-            // fallbackSrc={"https://nextui.org/images/hero-card-complete.jpeg"}
-            alt="Card background"
-            width={700}
-            height={350}
-            className="object-cover w-full aspect-video bg-black  rounded-xl"
-            src={banner}
-          />
-          <p className="text-base font-normal tracking-normal line-clamp-3 leading-relaxed text-left text-wrap ">
-            {description}
-          </p>
-        </CardBody>
-        <CardFooter>
-          <Button>Read more...</Button>
-        </CardFooter>
-      </Card>
-    </>
-  );
-};
+    <Card>
 
-export default BlogContent;
+    </Card>
+  )
+}
+
+export default BlogContent

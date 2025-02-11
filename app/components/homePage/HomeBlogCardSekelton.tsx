@@ -5,11 +5,6 @@ import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
 const HomeBlogCardSekelton = () => {
   return (
     <Card className={"py-4 w-full lg:w-[700px]"} shadow={"none"} radius="none" >
-      <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-        <Skeleton className="rounded-lg h-5 w-[20%]">
-          <div className="w-full h-4 font-bold text-large text-wrap line-clamp-1"></div>
-        </Skeleton>
-      </CardHeader>
       <CardBody className="overflow-visible py-2 flex-col items-center md:items-start space-y-4">
         <Skeleton className="w-full h-[350px] rounded-lg">
           <div className="h-full w-full"></div>

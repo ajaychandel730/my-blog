@@ -4,7 +4,7 @@ import BlogSearchInput from "./BlogSearchInput";
 import useSWR from "swr";
 import { TBlogCard } from "@/types/blog";
 import { Spinner } from "@nextui-org/spinner";
-import { fetcher } from "../homePage/HomeBlogs";
+import { fetcheAllPublishBlogs } from "../homePage/HomeBlogs";
 import BlogCard from "../blogs/BlogCard";
 import BlogsPagination from "../BlogsPagination";
 
@@ -14,7 +14,7 @@ const DefaultBlogs = () => {
 
   const { data, error, isLoading } = useSWR(
     `/api/getBlogs/?page=${page}&limit=10`,
-    fetcher,
+    fetcheAllPublishBlogs,
     {
       keepPreviousData: true,
     }
@@ -59,15 +59,11 @@ const DefaultBlogs = () => {
             description,
             content,
             date,
-            userName,
-            userId,
-            userImg,
+            user
           }) => (
             <BlogCard
               key={_id}
-              userName={userName}
-              userImg={userImg}
-              userId={userId}
+              user={user}
               topics={topics}
               _id={_id}
               title={title}

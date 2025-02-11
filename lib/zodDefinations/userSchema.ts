@@ -4,7 +4,8 @@ export const signupFormSchema = z.object({
   email: z.string().email({ message: 'Please enter a valid email.' }).trim(),
   password: z
     .string()
-    .min(8, { message: 'Be at least 8 characters long' })
+    .min(6, "must be a string of at least 6 characters.")
+    .max(10, "Password must be less than 10 characters.")
     .regex(/[a-zA-Z]/, { message: 'Contain at least one letter.' })
     .regex(/[0-9]/, { message: 'Contain at least one number.' })
     .regex(/[^a-zA-Z0-9]/, {
@@ -23,8 +24,6 @@ export const signInSchema = z.object({
     .email("Invalid email"),
   password: z.string({ required_error: "Password is required" })
     .min(1, "Password is required")
-    .min(6, "Password must be more than 8 characters")
-    .max(32, "Password must be less than 32 characters"),
 })
 
  

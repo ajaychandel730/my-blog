@@ -29,7 +29,7 @@ export type SignUpErrorState =
 const SignupForm = () => {
   const [state, action] = useFormState(signup, undefined);
   const [showPassword, setShowPassword] = useState(false);
-  console.log("state:", state);
+  
   return (
     <>
       <form action={action} className="max-w-sm mx-auto">

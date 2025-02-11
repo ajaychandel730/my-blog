@@ -1,6 +1,7 @@
 import Navbar from '@/app/components/Navbar'
-import SearchBlogs from '@/app/components/SearchBlogs'
+import SearchBlogs from '@/app/components/searchPage/SearchBlogs';
 import React from 'react'
+
 type Props = {
   params : Promise<{slug : string; token?:string[]}>;
 }

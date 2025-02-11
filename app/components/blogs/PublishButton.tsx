@@ -30,9 +30,6 @@ const PublishButton = () => {
       const {data:{user : {name, id, image }}} = session;
 
       const blogData = {
-        userId : id,
-        userName : name,
-        userImg : image,
         title: title || "",
         topics: topics || [],
         banner: banner || "",
@@ -61,6 +58,7 @@ const PublishButton = () => {
   };
   return (
     <Button
+      size="md"
       isLoading={publishLoading}
       onPress={handlePublish}
       startContent={
