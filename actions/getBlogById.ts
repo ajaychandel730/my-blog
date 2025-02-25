@@ -41,6 +41,7 @@ export default async function(blogId:string){
 
 
   const blog = (await collection.aggregate([match, lookup, addFieldsQuery]).toArray())[0];
+  console.log("blog->", blog);
   return blog
 
  }catch(err){

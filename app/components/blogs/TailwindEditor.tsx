@@ -5,7 +5,6 @@ import {
   JSONContent,
   useEditor,
 } from "novel";
-import { FC, useEffect, useRef, useState } from "react";
 import { novelExtensions } from "../../extension";
 import {
   handleCommandNavigation,
@@ -20,17 +19,18 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { RootState, setBlog } from "@/lib/store";
 
 const TailwindEditor = () => {
-  const {blog:{content, title}} = useAppSelector((state:RootState)=> state.editorReducer);
+  const {blog:{content}} = useAppSelector((state:RootState)=> state.editorReducer);
   const dispatch = useAppDispatch();
- 
+   
+  console.log("content:", content);
   return (
     <>
      <div className="flex items-center">
           <span className="text-lg font-medium tracking-wider"></span>
      </div>
-      <EditorRoot  >
+      <EditorRoot>
       <EditorContent 
-        immediatelyRender={false}
+        // immediatelyRender={false}
         editorProps={{
           handleDOMEvents: {
             keydown: (_view, event) => handleCommandNavigation(event),
@@ -44,7 +44,7 @@ const TailwindEditor = () => {
           handleImageDrop(view, event, moved, uploadFn),
         }}
         extensions={novelExtensions}
-        initialContent={content}
+        initialContent={JSON.parse(localStorage.getItem("blog") as string)?.content}
         onUpdate={({ editor }) => {
           const json = editor.getJSON();
            dispatch(setBlog({content : json}));

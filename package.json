@@ -23,6 +23,7 @@
     "@editorjs/quote": "^2.7.2",
     "@editorjs/table": "^2.4.2",
     "@editorjs/warning": "^1.4.0",
+    "@heroui/image": "^2.2.9",
     "@nextui-org/avatar": "^2.2.5",
     "@nextui-org/button": "^2.0.38",
     "@nextui-org/card": "^2.2.8",

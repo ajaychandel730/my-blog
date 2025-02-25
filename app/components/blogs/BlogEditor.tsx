@@ -1,5 +1,5 @@
 "use client";
-import React, {useEffect } from "react";
+import React, {useLayoutEffect } from "react";
 import BlogImage from "./BlogImage";
 import { Input, Textarea } from "@nextui-org/input";
 import { toast } from "react-toastify";
@@ -20,7 +20,7 @@ const BlogEditor = () => {
     dispatch(setBlog({ [name]: value }));
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     try {
       const blog = window.localStorage.getItem("blog")
         ? JSON.parse(localStorage.getItem("blog") as string)
@@ -31,7 +31,7 @@ const BlogEditor = () => {
       toast.error("Something went wrong. Please refresh page again.");
     }
   }, []);
-   console.log("isReseting:", isReseting);
+
   return (
     <div className="max-w-[700px] space-y-4 w-full ">
       <Input name="title" value={blog.title} onChange={onChangeHandler} placeholder="Blog title" label="Title" type="text" isRequired/>
