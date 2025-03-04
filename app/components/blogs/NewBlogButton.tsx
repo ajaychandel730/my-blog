@@ -1,7 +1,7 @@
 "use client";
 import { useAppDispatch } from '@/lib/hooks'
 import { isReseting, resetBlog, setBlog } from '@/lib/store';
-import { Button } from '@nextui-org/button'
+import { Button } from "@heroui/button"
 import React, { useTransition } from 'react'
 import { toast } from 'react-toastify';
 

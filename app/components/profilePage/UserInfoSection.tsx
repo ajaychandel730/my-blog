@@ -1,5 +1,5 @@
-import { Avatar } from "@nextui-org/avatar";
-import { Button } from "@nextui-org/button";
+import { Avatar } from "@heroui/avatar";
+import { Button } from "@heroui/button";
 import React from "react";
 import { FaUser } from "react-icons/fa";
 

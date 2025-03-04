@@ -1,14 +1,14 @@
 "use client";
 import { useSession } from "next-auth/react";
 import React from "react";
-import { User } from "@nextui-org/user";
-import { Button } from "@nextui-org/button";
+import { User } from "@heroui/user";
+import { Button } from "@heroui/button";
 import {
   Dropdown,
   DropdownMenu,
   DropdownItem,
   DropdownTrigger,
-} from "@nextui-org/dropdown";
+} from "@heroui/dropdown";
 import SigninBtn from "./SigninBtn";
 import { signOut } from "next-auth/react";
 import Link from "next/link";

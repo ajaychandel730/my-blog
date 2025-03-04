@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import { Button } from "@nextui-org/button";
+import { Button } from "@heroui/button";
 import {useSession } from "next-auth/react";
 
 const SigninBtn = () => {

@@ -2,6 +2,7 @@
 import client from "@/lib/dbConnect";
 import { ObjectId } from "mongodb";
 import { getErrorMessage } from "@/utils/errors";
+import { TBlogCard } from "@/types/blog";
 
 
 export default async function(blogId:string){
@@ -41,9 +42,8 @@ export default async function(blogId:string){
 
 
   const blog = (await collection.aggregate([match, lookup, addFieldsQuery]).toArray())[0];
-  console.log("blog->", blog);
-  return blog
 
+  return blog;
  }catch(err){
   console.log(getErrorMessage(err));
   return null;

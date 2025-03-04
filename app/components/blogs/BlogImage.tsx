@@ -1,5 +1,5 @@
 "use client";
-import { Button, ButtonGroup } from "@nextui-org/button";
+import { Button, ButtonGroup } from "@heroui/button";
 import { BsUpload } from "react-icons/bs";
 import React, { useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
@@ -9,7 +9,7 @@ import convertIntoCompressFile from "@/lib/convertIntoCompressFile";
 import { toast } from "react-toastify";
 import { uploadImageOnCloudinary } from "@/lib/cloudinary";
 import { getErrorMessage } from "@/utils/errors";
-import { Tooltip } from "@nextui-org/tooltip";
+import { Tooltip } from "@heroui/tooltip";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { AiOutlinePicture } from "react-icons/ai";
 

@@ -1,5 +1,5 @@
 "use server";
-import { Skeleton } from '@nextui-org/skeleton'
+import { Skeleton } from "@heroui/skeleton"
 import React from 'react'
 
 const PublishBlogItemSkeleton = () => {

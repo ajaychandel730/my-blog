@@ -2,8 +2,8 @@ import { Check, ChevronDown } from "lucide-react";
 import type { Dispatch, SetStateAction } from "react";
 import { EditorBubbleItem, useEditor } from "novel";
 
-import { PopoverTrigger, Popover, PopoverContent } from "@nextui-org/popover";
-import { Button } from "@nextui-org/button";
+import { PopoverTrigger, Popover, PopoverContent } from "@heroui/popover";
+import { Button } from "@heroui/button";
 
 export interface BubbleColorMenuItem {
   name: string;

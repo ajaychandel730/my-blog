@@ -15,8 +15,8 @@ import {
   
 //   import { Popover } from "@radix-ui/react-popover";
 //   import { PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import {Popover, PopoverTrigger, PopoverContent} from "@nextui-org/popover";
-  import { Button } from "@nextui-org/button";
+import {Popover, PopoverTrigger, PopoverContent} from "@heroui/popover";
+  import { Button } from "@heroui/button";
 import { Editor } from "@tiptap/react";
   
   export type SelectorItem = {

@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,6 +5,7 @@ import PublishButton from "./PublishButton";
 import SaveDraftButton from "./SaveDraftButton";
 import AuthSessionProvider from "../AuthSessionProvider";
 import NewBlogButton from "./NewBlogButton";
+import StoreProvider from "@/app/StoreProvider";
 
 const Navbar = () => {
   return (
@@ -23,11 +23,13 @@ const Navbar = () => {
       </div>
       {/* right section */}
       <div className="flex items-center h-full gap-2">
-        <NewBlogButton/>
-        <AuthSessionProvider>
-          <PublishButton />
-          <SaveDraftButton />
-        </AuthSessionProvider>
+        <StoreProvider>
+          <NewBlogButton />
+          <AuthSessionProvider>
+            <PublishButton />
+            <SaveDraftButton />
+          </AuthSessionProvider>
+        </StoreProvider>
       </div>
     </div>
   );

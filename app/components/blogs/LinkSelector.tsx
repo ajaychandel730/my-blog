@@ -2,8 +2,8 @@
 import { useEditor } from "novel";
 import { Check, Trash } from "lucide-react";
 import { type Dispatch, type FC, type SetStateAction, useEffect, useRef } from "react";
-import { Button } from "@nextui-org/button";
-import {Popover, PopoverContent, PopoverTrigger} from "@nextui-org/popover"
+import { Button } from "@heroui/button";
+import {Popover, PopoverContent, PopoverTrigger} from "@heroui/popover"
 
 export function isValidUrl(url: string) {
   try {

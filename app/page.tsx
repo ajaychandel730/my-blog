@@ -1,4 +1,3 @@
-import { Button } from "@nextui-org/button";
 import Navbar from "./components/Navbar";
 import ToastProvider from "./ToastProvider";
 import HomeMainSection from "./components/homePage/HomeMainSection";

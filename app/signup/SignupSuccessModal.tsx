@@ -7,8 +7,8 @@ import {
     ModalFooter,
     ModalHeader,
     useDisclosure,
-  } from "@nextui-org/modal";
-  import { Button } from "@nextui-org/button";
+  } from "@heroui/modal";
+  import { Button } from "@heroui/button";
   import Link from "next/link";
 import { toast } from 'react-toastify';
 import { SignUpErrorState } from './SignupForm';

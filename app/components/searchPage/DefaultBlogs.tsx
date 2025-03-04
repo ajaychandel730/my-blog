@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import BlogSearchInput from "./BlogSearchInput";
 import useSWR from "swr";
 import { TBlogCard } from "@/types/blog";
-import { Spinner } from "@nextui-org/spinner";
+import { Spinner } from "@heroui/spinner";
 import { fetcheAllPublishBlogs } from "../homePage/HomeBlogs";
 import BlogCard from "../blogs/BlogCard";
 import BlogsPagination from "../BlogsPagination";

@@ -3,7 +3,7 @@ import React from "react";
 import useSWR from "swr";
 import HomeBlogCardSekelton from "./HomeBlogCardSekelton";
 import { TBlogCard } from "@/types/blog";
-import BlogBrief from "../blogs/Blogbrief";
+import BlogBrief from "../blogs/BlogBrief";
 import { toast } from "react-toastify";
 
 export const fetcheAllPublishBlogs = async (url: string) => {
@@ -27,7 +27,7 @@ const HomeBlogs = () => {
   if (blogs.length == 0 &&  isLoading) {
     return Array(10)
       .fill(1)
-      .map((_) => <HomeBlogCardSekelton />);
+      .map((_, idx) => <HomeBlogCardSekelton key={idx} />);
   }
 
   return (

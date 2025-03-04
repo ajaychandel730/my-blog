@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Input } from "@nextui-org/input";
+import { Input } from "@heroui/input";
 import ListOfTags from "./ListOfTags";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { RootState, setBlog } from "@/lib/store";

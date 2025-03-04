@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Submitbutton from "../components/Submitbutton";
 import { useFormState } from "react-dom";
 import { signup } from "@/actions/siginup";
-import { useDisclosure } from "@nextui-org/modal";
+import { useDisclosure } from "@heroui/modal";
 import { toast } from "react-toastify";
 import Link from "next/link";
 import SignupSuccessModal from "./SignupSuccessModal";

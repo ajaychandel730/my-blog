@@ -1,7 +1,7 @@
 "use client";
 import React from 'react'
-import { Card, CardBody } from '@nextui-org/card';
-import {Tabs, Tab} from "@nextui-org/tabs";
+import { Card, CardBody } from "@heroui/card";
+import {Tabs, Tab} from "@heroui/tabs";
 import UserPublishBlogs from './UserPublishBlogs';
 import UserDrafts from './UserDrafts';
 

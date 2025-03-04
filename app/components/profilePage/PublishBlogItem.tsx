@@ -1,11 +1,11 @@
 import React from "react";
-import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
-import { Image } from "@nextui-org/image";
+import { Card, CardBody, CardFooter, CardHeader } from "@heroui/card";
+import { Image } from "@heroui/image";
 import NextImage from "next/image";
-import { Chip } from "@nextui-org/chip";
+import { Chip } from "@heroui/chip";
 import { IoEyeSharp, IoTrashBin } from "react-icons/io5";
-import { Button } from "@nextui-org/button";
-import { Tooltip } from "@nextui-org/tooltip";
+import { Button } from "@heroui/button";
+import { Tooltip } from "@heroui/tooltip";
 import toLocaleDateString from "@/utils/toLocaleDateString";
 
 type Props = {

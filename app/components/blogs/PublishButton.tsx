@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import publishBlog from "@/actions/publishBlog";
 import { IoPaperPlaneOutline } from "react-icons/io5";
-import { Button } from "@nextui-org/button";
+import { Button } from "@heroui/button";
 import { useAppSelector } from "@/lib/hooks";
 import { RootState } from "@/lib/store";
 import { getErrorMessage } from "@/utils/errors";

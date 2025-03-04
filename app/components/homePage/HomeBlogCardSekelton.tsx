@@ -1,6 +1,6 @@
 import React from "react";
-import { Skeleton } from "@nextui-org/skeleton";
-import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
+import { Skeleton } from "@heroui/skeleton";
+import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
 
 const HomeBlogCardSekelton = () => {
   return (
