@@ -48,7 +48,7 @@ export const nextAuthOptions:NextAuthOptions =  {
           if (!passwordMatch) {
             throw new Error("Password not matched.");
           }
-          console.log("authUser:", user); 
+          
           return {
             id: user._id.toString(),
             email: user.email,

@@ -33,13 +33,24 @@ const DefaultBlogs = () => {
   };
 
   const result = verifydata(data);
+  console.log("blogs:", data);
+  console.log("blogs state :", blogs);
 
   useEffect(() => {
     if (!isLoading) {
       if (result.length > 0) {
-        setBlogs((preBlogs) => [...preBlogs, ...result]);
+        setBlogs((preBlogs) => {
+          const isAlreadyExist = preBlogs.some(
+            (blog) => blog._id == result[0]._id
+          );
+          if (isAlreadyExist) return preBlogs;
+          else return [...preBlogs, ...result];
+        });
       }
     }
+    return () => {
+      console.log("distry.");
+    };
   }, [result]);
 
   return (
@@ -59,7 +70,7 @@ const DefaultBlogs = () => {
             description,
             content,
             date,
-            user
+            user,
           }) => (
             <BlogCard
               key={_id}

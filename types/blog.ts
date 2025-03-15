@@ -1,4 +1,3 @@
-import { User } from "@/lib/types";
 
 export interface Blog {
   user : {

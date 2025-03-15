@@ -8,40 +8,67 @@ import { useAppSelector } from "@/lib/hooks";
 import { RootState } from "@/lib/store";
 import { getErrorMessage } from "@/utils/errors";
 import { useSession } from "next-auth/react";
+import { useParams } from "next/navigation";
+import updateBlogById, { BlogUpdatePayload } from "@/actions/updateBlogById";
 
 const PublishButton = () => {
   const session = useSession();
-  
+  const { editBlogId } = useParams();
+
   const {
     blog: { title, topics, image: banner, description, content },
   } = useAppSelector((state: RootState) => state.editorReducer);
-
+  
   const [publishLoading, setPublishLoading] = useState<boolean>(false);
- 
+
   const handlePublish = async () => {
     try {
       setPublishLoading(true);
 
-      if(session.status !== "authenticated"){
-         toast.warn("Please login your account.");
-         return;
+      if (session.status !== "authenticated") {
+        toast.warn("Please login your account.");
+        return;
       }
-      
-      const {data:{user : {name, id, image }}} = session;
 
+      const {
+        data: {
+          user: { name, id, image },
+        },
+      } = session;
+     
       const blogData = {
         title: title || "",
         topics: topics || [],
         banner: banner || "",
         description: description || "",
-        content: content == undefined? [] : Array.isArray(content?.content)? content.content : [],
+        content:
+          content == undefined
+            ? []
+            : Array.isArray(content?.content)
+            ? content.content
+            : [],
+      };
+
+      let res;
+
+      if (editBlogId && typeof editBlogId == "string") {
+        const blog: BlogUpdatePayload = {
+          _id: editBlogId,
+          ...blogData,
+        };
+         console.log("blog before:", blog);
+        res = await updateBlogById(JSON.parse(JSON.stringify(blog)));
+      } else {
+        res = await publishBlog(JSON.parse(JSON.stringify(blogData)));
       }
-      const res = await publishBlog(JSON.parse(JSON.stringify(blogData)));
-      console.log("res:", res);
+
       if (res.status == "ok") {
-        toast.success(res.message || "New blog added.");
-      }else if(res.status == "error"){
-       toast.error(res.message);
+        toast.success(
+          res.message ??
+            (editBlogId ? "Blog updated successfully." : "New blog added.")
+        );
+      } else if (res.status == "error") {
+        toast.error(res.message);
       } else {
         if ("error" in res && typeof res.error == "object") {
           Object.entries(res.error).forEach(([key, value]) => {
@@ -50,8 +77,8 @@ const PublishButton = () => {
         }
       }
     } catch (err) {
-       console.log("publish error: ", err);
-       toast.error(getErrorMessage(err));
+      console.log("publish error: ", err);
+      toast.error(getErrorMessage(err));
     } finally {
       setPublishLoading(false);
     }

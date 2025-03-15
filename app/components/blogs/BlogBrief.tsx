@@ -26,14 +26,17 @@ const BlogBrief = ({ _id: blogId, title, description = "", banner }: Props) => {
           </h4>
         </CardHeader>
         <CardBody className="overflow-visible py-2 flex-col items-start space-y-4">
-          <div className="flex w-full my-4">
+          {banner.length > 0 ? (
             <Image
               src={banner}
               width={"100%"}
+              loading="lazy"
               alt="blog banner"
               className="rounded-lg aspect-video object-fill shadow-lg w-full"
             />
-          </div>
+          ) : (
+            <p>No image</p>
+          )}
 
           <p className="text-base w-full font-normal tracking-normal line-clamp-3 leading-relaxed text-left text-wrap ">
             {description}

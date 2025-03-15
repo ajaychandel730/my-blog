@@ -3,16 +3,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import {editorReducer} from "./features/editor/editorSlice";
 
 // actions
-import { setBlog, resetBlog, isReseting } from "./features/editor/editorSlice";
+import { setBlog, resetBlog, isReseting, editBlog } from "./features/editor/editorSlice";
 
-export const makeStore = () => {
-  return configureStore({
+export const globalStore = configureStore({
     reducer: {editorReducer},
   });
-};
 
 // Infer the type of makeStore
-export type AppStore = ReturnType<typeof makeStore>;
+export type AppStore = typeof globalStore;
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<AppStore["getState"]>;
 export type AppDispatch = AppStore["dispatch"];
@@ -21,5 +19,6 @@ export type AppDispatch = AppStore["dispatch"];
 export {
   setBlog,
   resetBlog,
-  isReseting
+  isReseting,
+  editBlog
 }

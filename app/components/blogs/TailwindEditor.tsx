@@ -3,28 +3,32 @@ import React, { useEffect, useState } from "react";
 
 import { EditorContent, EditorRoot, JSONContent, useEditor } from "novel";
 import { novelExtensions } from "../../extension";
-import {
-  handleCommandNavigation,
-  ImageResizer
-} from "novel/extensions";
+import { handleCommandNavigation, ImageResizer } from "novel/extensions";
 import { handleImageDrop, handleImagePaste } from "novel/plugins";
 import { uploadFn } from "../../novel/imageUpload";
 import NovelEditorCommand from "./NovelEditorCommand";
 import NovelEditorBubble from "./NovelEditorBubble";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { RootState, setBlog } from "@/lib/store";
+import { editBlog, RootState, setBlog } from "@/lib/store";
+import { useParams } from "next/navigation";
 
 const TailwindEditor = () => {
   const { blog } = useAppSelector((state: RootState) => state.editorReducer);
+  const {editBlogId} = useParams();
   const dispatch = useAppDispatch();
   const [mounted, setMounted] = useState(false);
+  console.log("blog:", blog);
+  const intialContent: JSONContent | undefined =
+     !Array.isArray(blog.content)
+      ? blog.content
+      : { type: "doc", content: blog.content };
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
   if (!mounted) return <></>;
-
+  console.log("in intialContent editor:", intialContent);
   return (
     <>
       <div className="flex items-center">
@@ -46,10 +50,10 @@ const TailwindEditor = () => {
               handleImageDrop(view, event, moved, uploadFn),
           }}
           extensions={novelExtensions}
-          initialContent={blog.content}
+          initialContent={intialContent}
           onUpdate={({ editor }) => {
             const json = editor.getJSON();
-            dispatch(setBlog({ content: json }));
+              dispatch(setBlog({ content: json }));
           }}
         >
           <ImageResizer />

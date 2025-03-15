@@ -46,9 +46,9 @@ const CardContentWrapper = ({ blog }: Props) => {
           src={blog.banner}
           width={"100%"}
           alt="blog banner"
-          className="rounded-lg aspect-video object-fill shadow-lg w-full"
+          className="rounded-lg aspect-video object-fill  shadow-lg w-full"
         />
-        <p>{blog.description}</p>
+        <p className="!mb-10">{blog.description}</p>
         <ShowBlogContent content={blog.content ?? []} />
       </CardBody>
     </Card>

@@ -38,6 +38,13 @@ const editorSlice = createSlice({
       };
       localStorage.setItem("blog", JSON.stringify(state.blog));
     },
+
+    editBlog : (state, action: PayloadAction<Blog>)=>{
+      state.blog = {
+        ...state.blog,
+        ...action.payload,
+      };
+    } ,
     isReseting : (state, action:PayloadAction<boolean>)=>{
       state.isReseting = action.payload;
       return state;
@@ -49,5 +56,5 @@ const editorSlice = createSlice({
   },
 });
 
-export const { setBlog, resetBlog, isReseting } = editorSlice.actions;
+export const { setBlog, resetBlog, isReseting, editBlog } = editorSlice.actions;
 export const editorReducer = editorSlice.reducer;
