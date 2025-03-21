@@ -27,7 +27,7 @@ const BlogTopicTags = () => {
         onValueChange={setTopicValue}
         onKeyDown={handleKeyDown}
         type="text"
-        label="Topic"
+        label="Tags"
         isRequired
       />
       <ListOfTags/>

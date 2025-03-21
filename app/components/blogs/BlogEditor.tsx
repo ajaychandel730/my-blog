@@ -10,10 +10,11 @@ import BlogTopicTags from "./BlogTopicTags";
 import { useParams } from "next/navigation";
 import { Blog, editBlog } from "@/lib/features/editor/editorSlice";
 import getEditBlogById from "@/actions/getEditBlogById";
+import getEditDraftById from "@/actions/getEditDraftById";
 
 const BlogEditor = () => {
   const dispatch = useAppDispatch();
-  const { editBlogId } = useParams();
+  const {type, editBlogId } = useParams();
   const [loading, setLoading] = useState(editBlogId ? true : false);
 
   const { blog, isReseting } = useAppSelector(
@@ -30,6 +31,18 @@ const BlogEditor = () => {
     }
     setTimeout(setLoading, 0, false);
   };
+   
+  const fetchDraft = async(id: string) => {
+    setLoading(true);
+    const blog:(Blog | null) = await getEditDraftById(id);
+    if (!blog) {
+        toast.error("Draft not found.");
+    }else{
+      dispatch(setBlog(blog));
+    }
+    setTimeout(setLoading, 0, false);
+  };
+  
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -40,7 +53,11 @@ const BlogEditor = () => {
   useEffect(() => {
     try {
       if (editBlogId && typeof editBlogId == "string") {
-         fetchBlog(editBlogId);
+         if(type == "blog"){
+           fetchBlog(editBlogId);
+         }else{
+            fetchDraft(editBlogId);
+         }
       } else {
         const blog = window.localStorage.getItem("blog")
           ? JSON.parse(localStorage.getItem("blog") as string)

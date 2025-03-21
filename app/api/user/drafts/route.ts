@@ -19,14 +19,14 @@ export  async function GET(req: NextRequest) {
       const drafts = await collection
         .find({ userId: objectUserId }, { skip: (page - 1) * limit, limit })
         .toArray();
-      console.log("drafts:", drafts);
+    
       return NextResponse.json(
         { status: "ok", result: drafts },
         { status: 200 }
       );
     }
   } catch (err) {
-    console.log("Error message:", getErrorMessage(err));
+    console.error("Error:", getErrorMessage(err));
     return NextResponse.json({
       status: "error",
       message: "Someting went wrong.",

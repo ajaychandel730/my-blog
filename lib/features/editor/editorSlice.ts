@@ -31,11 +31,16 @@ const editorSlice = createSlice({
   initialState,
   reducers: {
     setBlog: (state, action: PayloadAction<Blog>) => {
-      
+
+      if(Array.isArray(action.payload.content)){
+       action.payload.content = {type : "doc", content : action.payload.content};
+      }
+
       state.blog = {
         ...state.blog,
         ...action.payload,
       };
+
       localStorage.setItem("blog", JSON.stringify(state.blog));
     },
 
@@ -45,6 +50,7 @@ const editorSlice = createSlice({
         ...action.payload,
       };
     } ,
+
     isReseting : (state, action:PayloadAction<boolean>)=>{
       state.isReseting = action.payload;
       return state;

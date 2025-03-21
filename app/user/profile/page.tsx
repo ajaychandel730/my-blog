@@ -1,6 +1,5 @@
 import getUserTotalPostsCount from "@/actions/getUserTotalPostsCount";
 import { nextAuthOptions } from "@/app/api/auth/[...nextauth]/options";
-import AuthSessionProvider from "@/app/components/AuthSessionProvider";
 import UserInfoSection from "@/app/components/profilePage/UserInfoSection";
 import UsersBlogsAndDrafts from "@/app/components/profilePage/UsersBlogsAndDrafts";
 import { getServerSession } from "next-auth";
@@ -8,6 +7,7 @@ import { redirect } from "next/navigation";
 import PublishBlogItemSkeleton from "@/app/components/profilePage/PublishBlogItemSkeleton";
 
 import React from "react";
+import ToastProvider from "@/app/ToastProvider";
 
 const UserProfilePage = async () => {
   const session = await getServerSession(nextAuthOptions);
@@ -37,6 +37,7 @@ const UserProfilePage = async () => {
         />
         <UsersBlogsAndDrafts PublishBlogItemSkeleton={<PublishBlogItemSkeleton/>} />
       </div>
+      <ToastProvider/>
     </div>
   );
 };

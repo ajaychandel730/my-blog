@@ -15,13 +15,18 @@ import { toast } from "react-toastify";
 type Props = {
   isOpen: boolean;
   onOpenChange: () => void;
+  slug: string;
+  onDeleteBlog?: (blogId: string) => void;
 };
 
-const BlogDeleteModal = ({ isOpen, onOpenChange }: Props) => {
-  const { slug } = useParams();
-  const [loading, setloading ] = useState<boolean>(false);
-  console.log("blogId:", slug);
-
+const BlogDeleteModal = ({
+  isOpen,
+  onOpenChange,
+  slug,
+  onDeleteBlog,
+}: Props) => {
+  const [loading, setloading] = useState<boolean>(false);
+  console.log("blogId:", slug, "onDeleteBlog:", onDeleteBlog);
   const deleteHandler = async (onClose: () => void) => {
     setloading(true);
     if (!slug || Array.isArray(slug)) {
@@ -31,13 +36,17 @@ const BlogDeleteModal = ({ isOpen, onOpenChange }: Props) => {
     }
 
     const res = await deletePostById(slug);
-   
+
     if (res.status == "ok") {
+      if (typeof onDeleteBlog == "function") {
+        onDeleteBlog(slug);
+      }
+
       toast.success(res.message || "Your post has been removed.");
     } else {
       toast.error(res.message || "Something went wrong. Please try later.");
     }
-    
+
     setloading(false);
     onClose();
   };
@@ -58,7 +67,11 @@ const BlogDeleteModal = ({ isOpen, onOpenChange }: Props) => {
                 <Button color="danger" variant="light" onPress={onClose}>
                   Cancel
                 </Button>
-                <Button isLoading={loading} color="primary" onPress={() => deleteHandler(onClose)}>
+                <Button
+                  isLoading={loading}
+                  color="primary"
+                  onPress={() => deleteHandler(onClose)}
+                >
                   Delete
                 </Button>
               </ModalFooter>

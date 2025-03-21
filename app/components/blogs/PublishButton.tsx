@@ -13,14 +13,14 @@ import updateBlogById, { BlogUpdatePayload } from "@/actions/updateBlogById";
 
 const PublishButton = () => {
   const session = useSession();
-  const { editBlogId } = useParams();
+  const { type, editBlogId } = useParams();
 
   const {
     blog: { title, topics, image: banner, description, content },
   } = useAppSelector((state: RootState) => state.editorReducer);
   
   const [publishLoading, setPublishLoading] = useState<boolean>(false);
-
+  
   const handlePublish = async () => {
     try {
       setPublishLoading(true);
@@ -51,13 +51,13 @@ const PublishButton = () => {
 
       let res;
 
-      if (editBlogId && typeof editBlogId == "string") {
+      if (type == "blog" && editBlogId && typeof editBlogId == "string") {
         const blog: BlogUpdatePayload = {
           _id: editBlogId,
           ...blogData,
         };
-         console.log("blog before:", blog);
         res = await updateBlogById(JSON.parse(JSON.stringify(blog)));
+        
       } else {
         res = await publishBlog(JSON.parse(JSON.stringify(blogData)));
       }

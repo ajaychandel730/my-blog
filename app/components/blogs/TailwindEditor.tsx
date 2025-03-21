@@ -9,15 +9,14 @@ import { uploadFn } from "../../novel/imageUpload";
 import NovelEditorCommand from "./NovelEditorCommand";
 import NovelEditorBubble from "./NovelEditorBubble";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { editBlog, RootState, setBlog } from "@/lib/store";
+import {RootState, setBlog } from "@/lib/store";
 import { useParams } from "next/navigation";
 
 const TailwindEditor = () => {
   const { blog } = useAppSelector((state: RootState) => state.editorReducer);
-  const {editBlogId} = useParams();
   const dispatch = useAppDispatch();
   const [mounted, setMounted] = useState(false);
-  console.log("blog:", blog);
+
   const intialContent: JSONContent | undefined =
      !Array.isArray(blog.content)
       ? blog.content

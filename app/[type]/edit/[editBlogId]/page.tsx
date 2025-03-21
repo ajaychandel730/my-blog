@@ -10,7 +10,7 @@ const EditPage = async ({
   params: Promise<{ editBlogId: string }>;
 }) => {
   const { editBlogId } = await params;
-  console.log("edit page editBlogId: ", editBlogId);
+  
 
   return (
     <>

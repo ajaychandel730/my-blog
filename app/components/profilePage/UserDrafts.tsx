@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import PublishBlogItem from "./PublishBlogItem";
 import useSWR from "swr";
-import { useSession } from "next-auth/react";
 import BlogsPagination from "../BlogsPagination";
+import { TBlogCard } from "@/types/blog";
 
 const fetchUserPublishDrafts = async (url: string) => {
   const res = await fetch(url);
@@ -15,13 +15,18 @@ type Props = {
 
 const UserDrafts = ({PublishBlogItemSkeleton}:Props) => {
   const [page, setPage] = useState<number>(1);
-  const [drafts, setDrafts] = useState<[]>([]);
+  const [drafts, setDrafts] = useState<TBlogCard[]>([]);
+
   const { data, error, isLoading } = useSWR(
     `/api/user/drafts?page=${page}&limit=${20}`,
     fetchUserPublishDrafts
   );
   
   const result: [] = Array.isArray(data?.result) ? data.result : [];
+
+  const onDeleteDraft = (blogId: string) => {
+    setDrafts((prev) => prev.filter((blog) => blog._id !== blogId));
+  };
 
   useEffect(() => {
     if (!isLoading && result.length > 0) {
@@ -40,6 +45,7 @@ const UserDrafts = ({PublishBlogItemSkeleton}:Props) => {
           banner={banner}
           title={title}
           date={date}
+          onDeleteBlog={onDeleteDraft}
         />
       ))}
 

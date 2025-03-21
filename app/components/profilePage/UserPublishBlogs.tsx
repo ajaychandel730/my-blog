@@ -3,6 +3,7 @@ import PublishBlogItem from "./PublishBlogItem";
 import useSWR from "swr";
 import { useSession } from "next-auth/react";
 import BlogsPagination from "../BlogsPagination";
+import { TBlogCard } from "@/types/blog";
 
 const fetchUserPublishBlogs = async (url: string) => {
   const res = await fetch(url);
@@ -10,17 +11,22 @@ const fetchUserPublishBlogs = async (url: string) => {
 };
 
 type Props = {
-  PublishBlogItemSkeleton : React.JSX.Element;
-}
+  PublishBlogItemSkeleton: React.JSX.Element;
+};
 
-const UserPublishBlogs = ({PublishBlogItemSkeleton}:Props) => {
+const UserPublishBlogs = ({ PublishBlogItemSkeleton }: Props) => {
   const [page, setPage] = useState<number>(1);
-  const [blogs, setBlogs] = useState<[]>([]);
+  const [blogs, setBlogs] = useState<TBlogCard[]>([]);
+
   const { data, error, isLoading } = useSWR(
     `/api/user/publish_blogs?page=${page}&limit=${20}`,
     fetchUserPublishBlogs
   );
-  
+
+  const onDeleteBlog = (blogId: string) => {
+    setBlogs((prev) => prev.filter((blog) => blog._id !== blogId));
+  };
+
   const result: [] = Array.isArray(data?.result) ? data.result : [];
 
   useEffect(() => {
@@ -28,7 +34,7 @@ const UserPublishBlogs = ({PublishBlogItemSkeleton}:Props) => {
       setBlogs((preBlogs) => [...preBlogs, ...result]);
     }
   }, [result]);
-  
+
   return (
     <div className="flex flex-col w-full  space-y-2">
       {blogs.map(({ _id, banner, topics, title, date }) => (
@@ -40,6 +46,7 @@ const UserPublishBlogs = ({PublishBlogItemSkeleton}:Props) => {
           banner={banner}
           title={title}
           date={date}
+          onDeleteBlog = {onDeleteBlog}
         />
       ))}
 
