@@ -5,8 +5,9 @@ import SigninBtn from "./SigninBtn";
 import AuthSessionProvider from "./AuthSessionProvider";
 import Link from "next/link";
 import { Button } from "@heroui/button";
-import { AiOutlinePlus, AiOutlineSearch } from "react-icons/ai";
+import {AiOutlineSearch } from "react-icons/ai";
 import UserProfile from "./UserProfile";
+import CreateBlogButton from "./blogs/CreateBlogButton";
 
 const Navbar = () => {
   return (
@@ -36,13 +37,7 @@ const Navbar = () => {
           <AiOutlineSearch className="w-full h-full text-gray-700" />
         </Button>
 
-        <Button
-          as={Link}
-          href={"/blog/create"}
-          startContent={<AiOutlinePlus />}
-        >
-          Create blog
-        </Button>
+        <CreateBlogButton/>
         <AuthSessionProvider>
           <UserProfile/>
         </AuthSessionProvider>

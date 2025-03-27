@@ -16,7 +16,7 @@ const SaveDraftButton = () => {
   const { type, editBlogId } = useParams();
   const [loading, setLoading] = useState<boolean>(false);
   const session = useSession();
-   console.log("saveDraft:", blog.content); 
+
   const handleSaveDraft = async () => {
     try {
       setLoading(true);

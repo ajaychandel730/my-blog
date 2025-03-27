@@ -1,7 +1,6 @@
 import React from "react";
 import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
 import { Image } from "@heroui/image";
-import NextImage from "next/image";
 import { Button } from "@heroui/button";
 import Link from "next/link";
 
@@ -16,7 +15,7 @@ const BlogBrief = ({ _id: blogId, title, description = "", banner }: Props) => {
   return (
     <>
       <Card
-        className={"py-4 bg-gray-100 rounded-lg w-full lg:w-[900px]"}
+        className={"py-4 bg-gray-100 rounded-lg w-full min-w-[300px] lg:w-[900px]"}
         shadow={"none"}
         radius="none"
       >
@@ -32,7 +31,7 @@ const BlogBrief = ({ _id: blogId, title, description = "", banner }: Props) => {
               width={"100%"}
               loading="lazy"
               alt="blog banner"
-              className="rounded-lg aspect-video object-fill shadow-lg w-full"
+              className="lg:min-w-[750px] lg:min-h-[350px] rounded-lg aspect-video object-fill shadow-lg w-full"
             />
           ) : (
             <p>No image</p>
