@@ -7,7 +7,7 @@ import {useSession } from "next-auth/react";
 const SigninBtn = () => {
 
   return (
-    <Button as={Link} href="/signin" size="md" color="primary">
+    <Button as={Link} href="/signin" size="md"  color="primary">
       Sign in
     </Button>
   );

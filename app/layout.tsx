@@ -27,7 +27,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-w-[300px]`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-w-[300px] overflow-x-hidden`}
       >
       {children}
       </body>

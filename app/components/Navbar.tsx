@@ -1,17 +1,18 @@
 import React from "react";
 import Image from "next/image";
-import TopicsDropdown from "./TopicsDropdown";
-import SigninBtn from "./SigninBtn";
 import AuthSessionProvider from "./AuthSessionProvider";
 import Link from "next/link";
 import { Button } from "@heroui/button";
-import {AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineSearch } from "react-icons/ai";
 import UserProfile from "./UserProfile";
 import CreateBlogButton from "./blogs/CreateBlogButton";
+import dynamic from "next/dynamic";
+import SideBarMenu from "./SideBarMenu";
+
 
 const Navbar = () => {
   return (
-    <div className="flex z-50 items-center justify-between  h-24 bg-gray-50 border-gray-300 border-b  fixed top-0 right-0 left-0 px-10">
+    <div className="box-border flex z-50 items-center  justify-between h-24 bg-gray-50 border-gray-300 border-b  fixed top-0 right-0 left-0 px-10">
       {/* left section */}
       <div className="flex items-center h-full gap-2">
         <Link href={"/"}>
@@ -22,25 +23,28 @@ const Navbar = () => {
             src={"https://nextjs.org/icons/next.svg"}
           />
         </Link>
-        <TopicsDropdown />
+        {/* <TopicsDropdown /> */}
       </div>
       {/* right section */}
 
       <div className="flex items-center h-full gap-4">
-        <Button
-          as={Link}
-          href="/blog"
-          size="sm"
-          isIconOnly
-          className="bg-transparent "
-        >
-          <AiOutlineSearch className="w-full h-full text-gray-700" />
-        </Button>
+        <div className="hidden  md:flex items-center gap-4">
+            <Button
+              as={Link}
+              href="/blog"
+              size="sm"
+              isIconOnly
+              className="bg-transparent "
+            >
+              <AiOutlineSearch className="w-full h-full text-gray-700" />
+            </Button>
+          <CreateBlogButton />
+        </div>
 
-        <CreateBlogButton/>
         <AuthSessionProvider>
-          <UserProfile/>
+          <UserProfile />
         </AuthSessionProvider>
+        <SideBarMenu />
       </div>
     </div>
   );
