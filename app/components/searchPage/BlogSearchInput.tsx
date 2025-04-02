@@ -12,7 +12,7 @@ const BlogSearchInput = () => {
     event: React.KeyboardEvent<HTMLInputElement> | KeyboardEvent
   ) =>{
     const keyType = event.key;
-
+     
     if(keyType == "Enter" && query.length > 0){
        router.push(`/blog/search/${query.toString()}`);
     }
@@ -30,8 +30,6 @@ const BlogSearchInput = () => {
         isClearable
         color="default"
         label="Search blogs"
-        // name="query"
-        // id="query"
         value={query}
         defaultValue="hi"
         className="max-w-xs text-lg"

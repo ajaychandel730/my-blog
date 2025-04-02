@@ -1,10 +1,9 @@
 "use server";
+import React from "react";
 import getBlogById from "@/actions/getBlogById";
 import { notFound } from "next/navigation";
-import React from "react";
 import CardContentWrapper from "./CardContentWrapper";
 import { TBlogCard } from "@/types/blog";
-import { User } from "@/lib/types";
 import { isUser } from "@/utils/isUser";
 
 const BlogContent = async ({ blogId }: { blogId: string }) => {

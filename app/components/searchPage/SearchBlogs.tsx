@@ -53,7 +53,7 @@ const SearchBlogs = async ({ query, token }: Props) => {
       <BlogSearchInput />
 
       <div className="flex w-full ">
-        <h3 className="font-[600]">Search results for {query}</h3>
+        <h3 className="font-[600]">Search results for <p className="turncate inline-block font-normal text-gray-600">{query}</p></h3>
       </div>
 
       <div className="mt-10 w-full   grid gap-4 grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">

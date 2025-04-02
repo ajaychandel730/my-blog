@@ -12,12 +12,13 @@ import {
 import SigninBtn from "./SigninBtn";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const UserProfile = () => {
   const session = useSession();
   const { data } = session;
   const isAuthenticated = session.status === "authenticated";
-
+  const router = useRouter();
   const user = {
     name: "",
     image: "",
@@ -26,7 +27,7 @@ const UserProfile = () => {
   };
 
   return isAuthenticated ? (
-    <Dropdown>
+    <Dropdown shouldBlockScroll={false}>
       <DropdownTrigger>
         <User
           className="cursor-pointer"
@@ -47,9 +48,10 @@ const UserProfile = () => {
           <p className="font-semibold text-sm">{user.email}</p>
         </DropdownItem>
         <DropdownItem
-          as={Link}
-          aria-label="User profile link"
-          href="/user/profile"
+          onPress={() => {
+            router.push("/user/profile");
+          }}
+          aria-label="User profile button"
           key="profile"
         >
           Profile

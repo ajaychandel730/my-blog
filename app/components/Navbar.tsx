@@ -12,7 +12,7 @@ import SideBarMenu from "./SideBarMenu";
 
 const Navbar = () => {
   return (
-    <div className="box-border flex z-50 items-center  justify-between h-24 bg-gray-50 border-gray-300 border-b  fixed top-0 right-0 left-0 px-10">
+    <div className="box-border flex z-50 items-center  justify-between h-24 bg-gray-50 border-gray-300 border-b  fixed top-0 right-0 left-0 px-4">
       {/* left section */}
       <div className="flex items-center h-full gap-2">
         <Link href={"/"}>
@@ -27,8 +27,8 @@ const Navbar = () => {
       </div>
       {/* right section */}
 
-      <div className="flex items-center h-full gap-4">
-        <div className="hidden  md:flex items-center gap-4">
+      <div className="flex items-center h-full gap-2">
+        <div className="hidden  md:flex items-center gap-2">
             <Button
               as={Link}
               href="/blog"

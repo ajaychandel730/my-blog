@@ -1,21 +1,31 @@
 "use client";
-import React from 'react'
+import React from "react";
 import { Button } from "@heroui/button";
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { BsChevronRight } from "react-icons/bs";
 type Props = {
-    paginationToken : string | undefined;
-}
+  paginationToken: string | undefined;
+};
 
-const NextSearchPage = ({paginationToken}:Props) => {
-  const [,a,b,query] = usePathname().split("/");
- 
+const NextSearchPage = ({ paginationToken }: Props) => {
+  const [, a, b, query] = usePathname().split("/");
+
   return (
-   <>
-   <Button isDisabled={!paginationToken} as={Link} href={`/${a}/${b}/${query}/${paginationToken}`} color='default'>next</Button>
-   </>
-  )
-}
+    <>
+      <Button
+        size="sm"
+        isIconOnly
+        radius="full"
+        isDisabled={!paginationToken}
+        as={Link}
+        href={`/${a}/${b}/${query}/${paginationToken}`}
+        color="default"
+      >
+        <BsChevronRight />
+      </Button>
+    </>
+  );
+};
 
 export default NextSearchPage;

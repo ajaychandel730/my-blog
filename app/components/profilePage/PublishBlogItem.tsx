@@ -30,21 +30,24 @@ const PublishBlogItem = ({ tab, _id, banner, date, topics, title, onDeleteBlog }
   return (
     <>
       <Card as={"div"} fullWidth className="flex items-center group">
+        <CardHeader className="md:hidden">
+            <h3 className="text-base">{title}</h3>
+        </CardHeader>
         <CardBody>
-          <div className="w-full flex space-x-2">
-            <div className="flex-0.4">
+          <div className="w-full flex max-md:flex-col space-x-2">
+            <div className="flex md:flex-[0.2] items-center justify-center max-md:mb-2">
               <Image
                 loading="lazy"
                 fallbackSrc="https://res.cloudinary.com/instagram-clone-images-27017/image/upload/v1738907232/utils/mrrhsalsg3o3s2tiuotr.png"
                 alt="blog banner"
                 src={banner}
-                className="object-fill aspect-square"
-                width={100}
-                height={100}
+                width={"100%"}
+                height={"100%"}
+                className="object-fill md:aspect-square max-md:aspect-video"
               />
             </div>
             <div className="flex flex-col flex-1">
-              <h3 className="text-base">{title}</h3>
+              <h3 className="text-base max-md:hidden">{title}</h3>
               <p className="text-gray-500 text-sm">
                 {tab == "Drafts" ? "Draft" : "Published"} <span>•</span>{" "}
                 {formattedDate}

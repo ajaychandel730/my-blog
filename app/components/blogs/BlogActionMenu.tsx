@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import { Button } from "@heroui/button";
 import {
   Dropdown,
@@ -6,16 +7,15 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from "@heroui/dropdown";
- import { useDisclosure } from "@heroui/modal";
-import React from "react";
+import { useDisclosure } from "@heroui/modal";
 import { BsThreeDots } from "react-icons/bs";
-import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import BlogDeleteModal from "./BlogDeleteModal";
 
 const BlogActionMenu = () => {
   const { slug } = useParams();
-  const {isOpen, onOpen, onOpenChange}  = useDisclosure();
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const router = useRouter();
 
   return (
     <>
@@ -32,15 +32,29 @@ const BlogActionMenu = () => {
           </Button>
         </DropdownTrigger>
         <DropdownMenu aria-label="Static Actions">
-          <DropdownItem as={Link} href={`/blog/edit/${slug}`} key="edit">
+          <DropdownItem
+            onPress={() => {
+              router.push(`/blog/edit/${slug}`);
+            }}
+            key="edit"
+          >
             Edit
           </DropdownItem>
-          <DropdownItem onPress={onOpen} key="delete" className="text-danger" color="danger">
+          <DropdownItem
+            onPress={onOpen}
+            key="delete"
+            className="text-danger"
+            color="danger"
+          >
             Delete
           </DropdownItem>
         </DropdownMenu>
-      </Dropdown> 
-      <BlogDeleteModal slug={slug as string} isOpen={isOpen} onOpenChange={onOpenChange}/>
+      </Dropdown>
+      <BlogDeleteModal
+        slug={slug as string}
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+      />
     </>
   );
 };

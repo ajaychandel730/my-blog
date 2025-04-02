@@ -67,7 +67,9 @@ const SaveDraftButton = () => {
   };
 
   return (
-    <Button
+    <>
+     <Button
+      className="hidden lg:inline-flex"
       startContent={!loading && <RiDraftLine className="w-5 h-5" />}
       isLoading={loading}
       size="md"
@@ -75,6 +77,18 @@ const SaveDraftButton = () => {
     >
       Save draft
     </Button>
+    <Button
+      className="lg:hidden"
+      isIconOnly
+      radius="full"
+      startContent={!loading && <RiDraftLine className="w-5 h-5" />}
+      isLoading={loading}
+      size="md"
+      onPress={handleSaveDraft}
+    >
+    </Button>
+    </>
+   
   );
 };
 

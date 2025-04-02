@@ -84,8 +84,10 @@ const PublishButton = () => {
     }
   };
   return (
-    <Button
+    <>
+        <Button
       size="md"
+      className="hidden lg:inline-flex"
       isLoading={publishLoading}
       onPress={handlePublish}
       startContent={
@@ -95,6 +97,22 @@ const PublishButton = () => {
     >
       Publish
     </Button>
+      <Button
+      size="md"
+      isIconOnly
+      className="lg:hidden"
+      radius="full"
+      isLoading={publishLoading}
+      onPress={handlePublish}
+      startContent={
+        !publishLoading && <IoPaperPlaneOutline className="w-5 h-5" />
+      }
+      color="primary"
+    >
+      
+    </Button>
+    </>
+
   );
 };
 
