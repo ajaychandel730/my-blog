@@ -3,7 +3,6 @@ import React from "react";
 import { Card, CardBody, CardFooter, CardHeader } from "@heroui/card";
 import { Image } from "@heroui/image";
 import { TBlogCard } from "@/types/blog";
-import NextImage from "next/image";
 import { Avatar } from "@heroui/avatar";
 import { FaUser } from "react-icons/fa";
 import toLocaleDateString from "@/utils/toLocaleDateString";
