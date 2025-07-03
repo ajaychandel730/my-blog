@@ -19,7 +19,7 @@ const SiginForm = () => {
         ...userInputs,
         redirect: false,
       });
-      console.log("result:", result)
+    
       if(result?.ok){
         router.push("/");
         
@@ -65,7 +65,7 @@ const SiginForm = () => {
       </div>
       <div className="flex items-center justify-between">
         <Link
-          href="#"
+          href="/Forgot-password/ConfirmEmail"
           className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
         >
           Forgot password?

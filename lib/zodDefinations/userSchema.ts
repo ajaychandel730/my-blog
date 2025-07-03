@@ -1,6 +1,6 @@
 import {z } from 'zod'
  
-export const signupFormSchema = z.object({
+export const signupSchema = z.object({
   email: z.string().email({ message: 'Please enter a valid email.' }).trim(),
   password: z
     .string()
@@ -13,8 +13,10 @@ export const signupFormSchema = z.object({
     })
     .trim(),
     repeatPassword : z.string(),
-}).refine((data) => data.password === data.repeatPassword, {
-  message: "Passwords don't match",
+});
+
+export const signupFormSchema = signupSchema.refine((data) => data.password === data.repeatPassword, {
+  message: "Password and Repeat password don't match",
   path: ["repeatPassword"],
 });
 

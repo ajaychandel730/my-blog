@@ -8,9 +8,6 @@ import bcrypt  from "bcrypt";
 const signup = async (state: FormState, formData: FormData) => {
 
   try {
-    console.log("state", state);
-    console.log("formData", Object.fromEntries(formData));
-
     const validatedFields = signupFormSchema.safeParse({
       email: formData.get("email"),
       password: formData.get("password"),
@@ -21,7 +18,7 @@ const signup = async (state: FormState, formData: FormData) => {
       return {
         errors: validatedFields.error.flatten().fieldErrors,
       };
-    }
+    } 
     
     const database = client.db("blogz");
     const userCollection = database.collection("users");
@@ -59,7 +56,7 @@ const signup = async (state: FormState, formData: FormData) => {
     }
     
   } catch (err: unknown) {
-    console.log(err.errInfo.details.schemaRulesNotSatisfied[0].propertiesNotSatisfied);
+    console.log("error:", getErrorMessage(err));
     return {
       error : {
         server : true

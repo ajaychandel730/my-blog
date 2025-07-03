@@ -3,28 +3,26 @@ import React, { useState } from "react";
 import Submitbutton from "../components/Submitbutton";
 import { useFormState } from "react-dom";
 import { signup } from "@/actions/siginup";
-import { useDisclosure } from "@heroui/modal";
-import { toast } from "react-toastify";
 import Link from "next/link";
 import SignupSuccessModal from "./SignupSuccessModal";
 
-export type SignUpErrorState =
-  | {
-      errors: {
-        email?: string[] | undefined;
-        password?: string[] | undefined;
-        repeatPassword?: string[] | undefined;
-      };
-      error?: undefined;
-      message?: undefined;
-    }
-  | {
-      error: {
-        server: boolean;
-      };
-      message: string;
-    }
-  | undefined;
+// export type SignUpErrorState =
+//   | {
+//       errors: {
+//         email?: string[] | undefined;
+//         password?: string[] | undefined;
+//         repeatPassword?: string[] | undefined;
+//       };
+//       error?: undefined;
+//       message?: undefined;
+//     }
+//   | {
+//       error: {
+//         server: boolean;
+//       };
+//       message: string;
+//     }
+//   | undefined;
 
 const SignupForm = () => {
   const [state, action] = useFormState(signup, undefined);
@@ -122,7 +120,7 @@ const SignupForm = () => {
           Sign in
         </Link>
       </p>
-      <SignupSuccessModal state={state}/>
+       <SignupSuccessModal state={state}/>
       </form>
     </>
   );
