@@ -19,7 +19,6 @@ const resetForgotPasswordSchema = signupSchema
 // action
 export default async function (
   preState: unknown,
-  userId: string,
   formData: FormData
 ) {
   try {
@@ -28,6 +27,8 @@ export default async function (
       repeatPassword: formData.get("repeatPassword"),
     });
 
+    const userId = formData.get("userId") as string;
+    
     if (!result.success) {
       return { status: 400, errors: result.error.flatten().fieldErrors };
     }
