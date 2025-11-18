@@ -9,7 +9,6 @@ import { toast } from "react-toastify";
 const ConfirmEmailForm = () => {
   const [state, formAction, pending] = useActionState(confirmEmail, undefined);
   
-  console.log("conform_email_state:", state);
   useEffect(() => {
     if (state && state.status >= 400 && typeof state?.error === "string") {
       toast.error(state.error);
@@ -28,7 +27,7 @@ const ConfirmEmailForm = () => {
           name="email"
           variant="bordered"
           type="email"
-          placeholder="Email"
+          placeholder="example@gmail.com"
         />
       </div>
 

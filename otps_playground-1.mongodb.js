@@ -2,6 +2,7 @@
 
 use("blogz");
 
+
 // db.otps.createIndex(
 //   { expires_at: 1 },       // the field that stores expiry time
 //   { expireAfterSeconds: 0 }
@@ -14,7 +15,7 @@ use("blogz");
 //     validator : {
 //       $jsonSchema : {
 //         bsonType : "object",
-//         required : ["email", "code", "expries_at", "created_at"],
+//         required : ["email", "code", "expires_at", "created_at"],
 //         properties : {
 //             email : {
 //                 bsonType : "string",
@@ -23,7 +24,7 @@ use("blogz");
 //             },
 //             code : {
 //                 bsonType : "string",
-//                 description : "code should be in between 4-10."
+//                 description : "code should be provided."
 //             },
 //             expires_at : {
 //                 bsonType : "date",
