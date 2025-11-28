@@ -1,44 +1,19 @@
-"use client";
 import React from "react";
-import useSWR from "swr";
-import HomeBlogCardSekelton from "./HomeBlogCardSekelton";
-import { TBlogCard } from "@/types/blog";
-import BlogBrief from "../blogs/BlogBrief";
-import { toast } from "react-toastify";
 import EmptyBlogs from "./EmptyBlogs";
+import BlogBrief from "../blogs/BlogBrief";
 
-export const fetcheAllPublishBlogs = async (url: string) => {
-  const res = await fetch(url);
-  return res.json();
+type Props = {
+  blogs: Promise<
+    { _id: string; title: string; banner: string; description: string }[]
+  >;
 };
 
-const HomeBlogs = () => {
-  const { data, error, isLoading } = useSWR(
-    "/api/getBlogs/?page=1&limit=10",
-    fetcheAllPublishBlogs
-  );
-  const blogData = !data || !("data" in data) ? [] : data.data;
-  const blogs: TBlogCard[] = blogData
-    ? Array.isArray(blogData)
-      ? blogData
-      : []
-    : [];
+const HomeBlogs = async({ blogs }: Props) => {
+  const allBlogs =  await blogs;
 
-  if (typeof error === "object" && "status" in error && error.status >= 400) {
-    toast.warn(
-      error.message || "Something went wrong on server. Please try later."
-    );
-  }
-
-  if (blogs.length == 0 && isLoading) {
-    return Array(10)
-      .fill(1)
-      .map((_, idx) => <HomeBlogCardSekelton key={idx} />);
-  }
-
-  return blogs.length > 0 ? (
+  return  Array.isArray(allBlogs) && allBlogs.length > 0 ? (
     <div className="flex space-y-4 flex-col items-center mx-auto w-full ">
-      {blogs.map(({ _id, title, banner, description }) => (
+      {allBlogs.map(({ _id, title, banner, description }) => (
         <BlogBrief
           key={_id}
           _id={_id}
@@ -54,3 +29,49 @@ const HomeBlogs = () => {
 };
 
 export default HomeBlogs;
+
+//   const { data, error, isLoading } = useSWR(
+//     "/api/getBlogs/?page=1&limit=10",
+//     fetcheAllPublishBlogs,
+//     {
+//     dedupingInterval: 60000, // cache for 1 min
+//     revalidateOnFocus: false
+//     }
+//   );
+//   const blogData = !data || !("data" in data) ? [] : data.data;
+//   const blogs: TBlogCard[] = blogData
+//     ? Array.isArray(blogData)
+//       ? blogData
+//       : []
+//     : [];
+
+//   if (typeof error === "object" && "status" in error && error.status >= 400) {
+//     toast.warn(
+//       error.message || "Something went wrong on server. Please try later."
+//     );
+//   }
+
+//   if (blogs.length == 0 && isLoading) {
+//     return Array(10)
+//       .fill(1)
+//       .map((_, idx) => <HomeBlogCardSekelton key={idx} />);
+//   }
+
+//   return blogs.length > 0 ? (
+//     <div className="flex space-y-4 flex-col items-center mx-auto w-full ">
+//       {blogs.map(({ _id, title, banner, description }) => (
+//         <BlogBrief
+//           key={_id}
+//           _id={_id}
+//           title={title}
+//           banner={banner}
+//           description={description}
+//         />
+//       ))}
+//     </div>
+//   ) : (
+//     <EmptyBlogs />
+//   );
+// };
+
+// export default HomeBlogs;

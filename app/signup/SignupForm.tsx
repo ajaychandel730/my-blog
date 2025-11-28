@@ -5,29 +5,12 @@ import { useFormState } from "react-dom";
 import { signup } from "@/actions/siginup";
 import Link from "next/link";
 import SignupSuccessModal from "./SignupSuccessModal";
-
-// export type SignUpErrorState =
-//   | {
-//       errors: {
-//         email?: string[] | undefined;
-//         password?: string[] | undefined;
-//         repeatPassword?: string[] | undefined;
-//       };
-//       error?: undefined;
-//       message?: undefined;
-//     }
-//   | {
-//       error: {
-//         server: boolean;
-//       };
-//       message: string;
-//     }
-//   | undefined;
+import FormLink from "../components/FormLink";
 
 const SignupForm = () => {
   const [state, action] = useFormState(signup, undefined);
   const [showPassword, setShowPassword] = useState(false);
-  
+
   return (
     <>
       <form action={action} className="max-w-sm mx-auto">
@@ -111,16 +94,12 @@ const SignupForm = () => {
           )}
         </div>
         <Submitbutton text="Register new account" />
-        <p className="text-sm mt-4 font-light text-gray-500 dark:text-gray-400">
-         Already have an account?{" "}
-        <Link
+        <FormLink
+          text={"  Already have an account?"}
           href="/signin"
-          className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-        >
-          Sign in
-        </Link>
-      </p>
-       <SignupSuccessModal state={state}/>
+          linkText="Sign in"
+        />
+        <SignupSuccessModal state={state} />
       </form>
     </>
   );

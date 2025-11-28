@@ -1,6 +1,8 @@
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Header";
 import ToastProvider from "./ToastProvider";
 import HomeMainSection from "./components/homePage/HomeMainSection";
+
+
 
 export default function Home() {
   return (

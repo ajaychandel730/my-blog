@@ -1,18 +1,44 @@
 "use client";
-import React from "react";
+import React, { useActionState, useEffect } from "react";
 import { Form } from "@heroui/form";
 import { Input } from "@heroui/input";
 import { Button } from "@heroui/button";
+import resetForgotPassword from "@/actions/resetForgotPassword";
+import { toast } from "react-toastify";
+import FormLink from "@/app/components/FormLink";
 
 const ResetPasswordForm = () => {
+  const [state, resetPasswordAction, isPending] = useActionState(resetForgotPassword, undefined);
+
+  useEffect(() => {
+    if (typeof state?.status === "number" && state.status === 200) {
+      toast.success(state.message);
+
+    } else if (typeof state?.status === "number" && state.status >= 400 && state?.message) {
+      toast.error(state?.message);
+    }
+    
+  }, [state]);
 
   return (
-    <Form className=" flex flex-1  pt-10 lg:mt-0 flex-col items-end justify-evenly space-y-4">
+    <Form
+      action={resetPasswordAction}
+      validationBehavior="aria"
+      className="flex flex-1 pt-10 lg:mt-0 flex-col items-end justify-evenly space-y-4"
+    >
       <Input
         isRequired
+        isInvalid={!!state?.errors?.password}
+        errorMessage={() => (
+          <ul>
+            {state?.errors?.password?.map((message, index) => (
+              <li key={index}>{message}</li>
+            ))}
+          </ul>
+        )}
         size="lg"
-        min={6}
-        max={10}
+        minLength={6}
+        maxLength={10}
         name="password"
         variant="bordered"
         type="password"
@@ -21,14 +47,23 @@ const ResetPasswordForm = () => {
       <Input
         isRequired
         size="lg"
-        name="confirmPassword"
+        isInvalid={!!state?.errors?.repeatPassword}
+        errorMessage={() => (
+          <ul>
+            {state?.errors?.repeatPassword?.map((message, index) => (
+              <li key={index}>{message}</li>
+            ))}
+          </ul>
+        )}
+        name="repeatPassword"
         variant="bordered"
         type="password"
         placeholder="Confirm password"
       />
-      <Button color="primary" size="md">
+      <Button type="submit" isLoading={isPending} color="primary" size="md">
         submit
       </Button>
+      <FormLink text="Remember your password?" href="/signin" linkText="Sign in" />
     </Form>
   );
 };

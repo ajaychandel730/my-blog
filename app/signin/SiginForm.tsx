@@ -6,6 +6,7 @@ import { signIn } from "next-auth/react";
 import { toast } from "react-toastify";
 import { getErrorMessage } from "@/utils/errors";
 import { useRouter } from "next/navigation";
+import FormLink from "../components/FormLink";
 
 const SiginForm = () => {
   const router = useRouter();
@@ -72,15 +73,7 @@ const SiginForm = () => {
         </Link>
       </div>
       <Submitbutton text={"Sign in"} />
-      <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-        Don’t have an account yet?{" "}
-        <Link
-          href="/signup"
-          className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-        >
-          Sign up
-        </Link>
-      </p>
+      <FormLink text=" Don’t have an account yet?" href="/signup" linkText="Sign up" />
     </form>
   );
 };

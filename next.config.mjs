@@ -5,6 +5,12 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 
 const nextConfig = {
+    logging : {
+     fetches: {
+      fullUrl: true,
+      hmrRefreshes: true,
+    },
+    },
     webpack  : (config, { isServer }) => {
         if (!isServer) {
           // Ensure that all imports of 'yjs' resolve to the same instance

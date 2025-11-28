@@ -6,6 +6,7 @@ import { Button } from "@heroui/button";
 import { toast } from "react-toastify";
 import ConfirmPasswordOtp from "@/actions/ConfirmPasswordOtp";
 import { useParams } from "next/navigation";
+import FormLink from "@/app/components/FormLink";
 const VerifyOtpForm = () => {
   const [state, formAction, pending] = useActionState(
     ConfirmPasswordOtp,
@@ -14,10 +15,9 @@ const VerifyOtpForm = () => {
 
   const [otp, setOtp] = useState<string>("");
 
-  console.log("otp_state:", state);
   const params = useParams();
   const userId = params.id;
-
+  
   useEffect(() => {
     if (state && state.status >= 400 && typeof state?.error === "string") {
       toast.error(state.error);
@@ -50,6 +50,7 @@ const VerifyOtpForm = () => {
       >
         submit
       </Button>
+       <FormLink text="Didn't receive the code?" href="/Forgot-password/ConfirmEmail" linkText="Resend"/>
     </Form>
   );
 };

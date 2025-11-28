@@ -1,14 +1,17 @@
 "use server";
 
-import { hashOTP, verifyHashCode } from "@/lib/otp";
+import client from "@/lib/dbConnect";
+import {verifyHashCode } from "@/lib/otp";
 import { password_otpSchema } from "@/lib/zodDefinations/password_otpSchema";
 import { getErrorMessage } from "@/utils/errors";
-import client from "@/lib/dbConnect";
 import { ObjectId } from "mongodb";
+import { redirect } from "next/navigation";
+import { signResetToken } from "@/lib/jose";
+import { cookies } from "next/headers";
 
 export default async function(preState:unknown, formData:FormData){
     const {userId , otp} =  Object.fromEntries(formData.entries());
-
+    let _id;
     try{
         const result = password_otpSchema.safeParse({
             userId,
@@ -25,7 +28,6 @@ export default async function(preState:unknown, formData:FormData){
      const otpsColl = client.db("blogz").collection("otps");
      const objectId = new ObjectId(userId as string);
      const findDoc = await otpsColl.findOne({_id : objectId});
-     console.log("otpDoc:", findDoc);
 
      if(!findDoc){
         new Error("something went wrong.")
@@ -37,12 +39,27 @@ export default async function(preState:unknown, formData:FormData){
             status : 400,
             error : "Invalid OTP. Please enter again."
          }   
-    }  
+    }
+    // verify email
+   const userColl = client.db("blogz").collection("users");
+    const user = await userColl.findOne({email : findDoc?.email}, {projection : {_id : 1}});
     
-    return {
-        status : 400,
-        error : "otp verified"
-    };
+    if(!user){
+        new Error();
+    }
+    
+    // create token with jose
+    const min = 10;
+    const token = await signResetToken({id : user?._id.toString()!}, min);
+    
+    (await cookies()).set("reset_token", token, {
+        secure : process.env.NODE_ENV === "production", 
+        httpOnly : true,
+        sameSite : "strict",
+        path : "/Forgot-password",
+        maxAge : min * 60
+    });
+    
   }catch(err){
    console.log("error:", getErrorMessage(err));
    return {
@@ -50,4 +67,6 @@ export default async function(preState:unknown, formData:FormData){
     error : "Something went wrong."
    }
   }
+
+  redirect(`/Forgot-password/ResetPassword/${Date.now()}`);
 }

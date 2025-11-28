@@ -1,4 +1,4 @@
-import Navbar from '@/app/components/Navbar'
+import Navbar from '@/app/components/Header'
 import SearchBlogs from '@/app/components/searchPage/SearchBlogs';
 import React from 'react'
 

@@ -1,7 +1,7 @@
 import { Button } from '@heroui/button';
 import React from 'react'
 import { BsFileImage } from "react-icons/bs";
-import CreateBlog from '../blogs/CreateBlogButton';
+import CreateBlog from './HeaderButtons/CreateBlogButton';
 
 const EmptyBlogs = () => {
   return (

@@ -5,6 +5,7 @@ import { Input } from "@heroui/input";
 import { Button } from "@heroui/button";
 import confirmEmail from "../../../actions/confirmEmail";
 import { toast } from "react-toastify";
+import FormLink from "@/app/components/FormLink";
 
 const ConfirmEmailForm = () => {
   const [state, formAction, pending] = useActionState(confirmEmail, undefined);
@@ -40,6 +41,7 @@ const ConfirmEmailForm = () => {
       >
         Next
       </Button>
+      <FormLink text="Remember your password?" href="/signin" linkText="Sign in"/>
     </Form>
   );
 };

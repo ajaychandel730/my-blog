@@ -9,10 +9,10 @@ import {
   DropdownItem,
   DropdownTrigger,
 } from "@heroui/dropdown";
-import SigninBtn from "./SigninBtn";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import SigninButton from "./homePage/HeaderButtons/SigninButton";
 
 const UserProfile = () => {
   const session = useSession();
@@ -62,7 +62,7 @@ const UserProfile = () => {
       </DropdownMenu>
     </Dropdown>
   ) : (
-    <SigninBtn />
+    <SigninButton/>
   );
 };
 
