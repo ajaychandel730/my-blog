@@ -20,7 +20,7 @@ const Header = () => {
             <AuthSessionProvider>
               <UserProfile />
             </AuthSessionProvider>
-            <SideBarMenu />
+            {/* <SideBarMenu /> */}
           </nav>
         </div>
       </div>

@@ -2,7 +2,7 @@
 import { Input } from "@heroui/input";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import { FiSearch } from "react-icons/fi";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 const BlogSearchInput = () => {
   const router = useRouter();
@@ -14,17 +14,17 @@ const BlogSearchInput = () => {
     const keyType = event.key;
      
     if(keyType == "Enter" && query.length > 0){
-       router.push(`/blog/search/${query.toString()}`);
+       router.push(`/blogs/search/${query.toString()}`);
     }
   };
 
 
   return (
-    <div className="mt-4 flex items-center justify-start w-full">
+    // <div className="mt-4 flex items-center justify-start w-full">
       <Input
         onKeyDown={onKeyHandler}
         onValueChange={(query:string)=>{setQuery(query)}}
-        startContent={<FiSearch className="w-5 h-5 " />}
+        startContent={<MagnifyingGlassIcon className="w-5 h-5 " />}
         placeholder="Type to search"
         size="lg"
         isClearable
@@ -34,7 +34,7 @@ const BlogSearchInput = () => {
         defaultValue="hi"
         className="max-w-xs text-lg"
       />
-    </div>
+    // </div>
   );
 };
 

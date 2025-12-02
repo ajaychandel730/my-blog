@@ -4,9 +4,13 @@ import BlogSearchInput from "./BlogSearchInput";
 import useSWR from "swr";
 import { TBlogCard } from "@/types/blog";
 import { Spinner } from "@heroui/spinner";
-import { fetcheAllPublishBlogs } from "../homePage/HomeBlogs";
 import BlogCard from "../blogs/BlogCard";
 import BlogsPagination from "../BlogsPagination";
+
+const fetchPublishBlogs = async (url: string) => {
+  const res = await fetch(url);
+  return res.json();
+}
 
 const DefaultBlogs = () => {
   const [page, setPage] = useState<number>(1);
@@ -14,13 +18,13 @@ const DefaultBlogs = () => {
 
   const { data, error, isLoading } = useSWR(
     `/api/getBlogs/?page=${page}&limit=10`,
-    fetcheAllPublishBlogs,
+     fetchPublishBlogs,
     {
       keepPreviousData: true,
     }
   );
 
-  const verifydata = (result: object): TBlogCard[] => {
+  const verifydata = (result: object | undefined): TBlogCard[] => {
     const resultData = !result || !("data" in result) ? [] : result.data;
 
     const blogsData: TBlogCard[] = resultData
@@ -33,9 +37,7 @@ const DefaultBlogs = () => {
   };
 
   const result = verifydata(data);
-  console.log("blogs:", data);
-  console.log("blogs state :", blogs);
-
+ 
   useEffect(() => {
     if (!isLoading) {
       if (result.length > 0) {
@@ -56,11 +58,11 @@ const DefaultBlogs = () => {
   return (
     <div
       className={
-        "mt-24 mb-8 mx-auto w-full lg:w-[1015px] md:px-4 flex  flex-col items-center space-y-4"
+        " mb-8 flex flex-col items-center w-full"
       }
     >
-      <BlogSearchInput />
-      <div className="mt-10 w-full   grid gap-4 grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
+      {/* <BlogSearchInput /> */}
+      <div className=" w-full grid gap-4 grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
         {blogs.map(
           ({
             _id,

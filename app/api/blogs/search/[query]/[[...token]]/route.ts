@@ -9,7 +9,6 @@ type Params = {
 export async function GET(request: Request, { params }: Params) {
   try {
     const {query, token} = await params;
-    console.log('api call');
     const Searchquery = decodeURIComponent(query);
     const searchToken:(string|undefined) = token? decodeURIComponent(token[0]) : undefined;
      const result:serverBlogCard[] = await getSearchBlogs(Searchquery, searchToken);

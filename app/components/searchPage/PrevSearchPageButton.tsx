@@ -2,7 +2,7 @@
 import { Button } from "@heroui/button";
 import { usePathname, useRouter} from 'next/navigation';
 import React from 'react'
-import { BsChevronLeft } from "react-icons/bs";
+import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 
 const PrevSearchPageButton = () => {
     const [,,,,token] = usePathname().split("/");
@@ -10,7 +10,7 @@ const PrevSearchPageButton = () => {
 
   return (
     <Button isIconOnly radius="full" size="sm" onPress={()=>{router.back()}} isDisabled={!token}color='default'>
-        <BsChevronLeft/>
+        <ChevronLeftIcon className="w-5 h-5"/>
     </Button>
   )
 }

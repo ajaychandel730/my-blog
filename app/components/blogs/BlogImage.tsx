@@ -1,6 +1,6 @@
 "use client";
 import { Button, ButtonGroup } from "@heroui/button";
-import { BsUpload } from "react-icons/bs";
+import { ArrowUpTrayIcon, TrashIcon, PhotoIcon } from "@heroicons/react/24/outline";
 import React, { useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { RootState, setBlog } from "@/lib/store";
@@ -10,8 +10,6 @@ import { toast } from "react-toastify";
 import { uploadImageOnCloudinary } from "@/lib/cloudinary";
 import { getErrorMessage } from "@/utils/errors";
 import { Tooltip } from "@heroui/tooltip";
-import { RiDeleteBin6Line } from "react-icons/ri";
-import { AiOutlinePicture } from "react-icons/ai";
 
 const BlogImage = () => {
   const fileRef = useRef<HTMLInputElement>(null);
@@ -69,12 +67,12 @@ const BlogImage = () => {
               color="primary"
               isIconOnly
             >
-              <AiOutlinePicture />
+              <PhotoIcon />
             </Button>
           </Tooltip>
           <Tooltip content="Delete image.">
             <Button onPress={()=>{dispatch(setBlog({image : ''}));}} color="danger" isIconOnly>
-              <RiDeleteBin6Line />
+              <TrashIcon />
             </Button>
           </Tooltip>
         </ButtonGroup>
@@ -83,7 +81,7 @@ const BlogImage = () => {
           
           variant="shadow"
           isLoading={imageloading}
-          startContent={imageloading ? "" : <BsUpload />}
+          startContent={imageloading ? "" : <ArrowUpTrayIcon className="w-5 h-5" />}
           onPress={() => {
             fileRef?.current?.click();
           }}

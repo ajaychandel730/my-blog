@@ -8,7 +8,7 @@ import {
   DropdownTrigger,
 } from "@heroui/dropdown";
 import { useDisclosure } from "@heroui/modal";
-import { BsThreeDots } from "react-icons/bs";
+import { EllipsisHorizontalIcon } from "@heroicons/react/24/outline";
 import { useParams, useRouter } from "next/navigation";
 import BlogDeleteModal from "./BlogDeleteModal";
 
@@ -28,7 +28,7 @@ const BlogActionMenu = () => {
             isIconOnly
             variant="light"
           >
-            <BsThreeDots className="w-5 h-5" />
+            <EllipsisHorizontalIcon className="w-5 h-5" />
           </Button>
         </DropdownTrigger>
         <DropdownMenu aria-label="Static Actions">

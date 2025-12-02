@@ -4,7 +4,7 @@ import { Card, CardBody, CardFooter, CardHeader } from "@heroui/card";
 import { Image } from "@heroui/image";
 import NextImage from "next/image";
 import { Chip } from "@heroui/chip";
-import { IoEyeSharp, IoTrashBin } from "react-icons/io5";
+import { EyeIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { Button } from "@heroui/button";
 import { Tooltip } from "@heroui/tooltip";
 import toLocaleDateString from "@/utils/toLocaleDateString";
@@ -71,7 +71,7 @@ const PublishBlogItem = ({ tab, _id, banner, date, topics, title, onDeleteBlog }
               variant="light"
               radius="full"
             >
-              <IoEyeSharp className="w-6 h-6 text-gray-500" />
+              <EyeIcon className="w-6 h-6 text-gray-500" />
             </Button>
           </Tooltip>
           <Tooltip as="div" key={2} size="sm" content="Delete">
@@ -82,7 +82,7 @@ const PublishBlogItem = ({ tab, _id, banner, date, topics, title, onDeleteBlog }
               size="md"
               radius="full"
             >
-              <IoTrashBin className="w-6 h-6 text-gray-500" />
+              <TrashIcon className="w-6 h-6 text-gray-500" />
             </Button>
           </Tooltip>
         </CardFooter>

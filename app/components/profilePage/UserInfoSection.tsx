@@ -1,7 +1,7 @@
 import { Avatar } from "@heroui/avatar";
 import { Button } from "@heroui/button";
 import React from "react";
-import { FaUser } from "react-icons/fa";
+import { UserIcon } from "@heroicons/react/24/solid";
 
 type Props = {
   id: string;
@@ -19,7 +19,7 @@ const UserInfoSection = ({ id, name, email, image, totalPosts }: Props) => {
         size="lg"
         className="w-24 h-24"
         showFallback
-        fallback={<FaUser className="w-full h-full text-gray-700" />}
+        fallback={<UserIcon className="w-full h-full text-gray-700" />}
         src={image}
       />
       <p>{name}</p>

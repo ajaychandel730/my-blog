@@ -20,7 +20,7 @@ type SearchQuery = {
 };
 
 export default async function (query: string, token?:string): Promise<serverBlogCard[]> {
-  console.log("query:", query, " token:", token);
+
   const blogsCollection = client.db("blogz").collection("blogs");
   // stage 1
   const searchQuery:SearchQuery = {
@@ -75,7 +75,6 @@ export default async function (query: string, token?:string): Promise<serverBlog
     .aggregate([searchQuery, limitQuery, lookup, addFieldsQuery])
     .toArray();
 
-  console.log("result", result);
   return confirmData(result);
 }
 

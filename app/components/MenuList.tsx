@@ -3,13 +3,13 @@
 import { Listbox, ListboxItem } from "@heroui/listbox";
 import Link from "next/link";
 import React from "react";
-import { AiOutlinePlus, AiOutlineSearch } from "react-icons/ai";
+import { PlusIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 const MenuList = () => {
   return (
     <Listbox  aria-label="Actions" onAction={(key) => key}>
       <ListboxItem
-        startContent={<AiOutlineSearch className="w-5 h-5" />}
+        startContent={<MagnifyingGlassIcon className="w-5 h-5" />}
         key="search"
         as={Link}
         href="/blog"
@@ -17,7 +17,7 @@ const MenuList = () => {
         Search
       </ListboxItem>
       <ListboxItem
-        startContent={<AiOutlinePlus className="w-5 h-5" />}
+        startContent={<PlusIcon className="w-5 h-5" />}
         key="create blog"
         as={Link}
         href="/blog/create"

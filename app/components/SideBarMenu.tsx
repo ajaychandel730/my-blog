@@ -10,7 +10,7 @@ import {
 import { Button } from "@heroui/button";
 import { useDisclosure } from "@heroui/modal";
 import MenuList from "./MenuList";
-import { IoReorderTwoOutline } from "react-icons/io5";
+import { Bars3Icon } from "@heroicons/react/24/outline";
 
 const SideBarMenu = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -23,7 +23,7 @@ const SideBarMenu = () => {
         radius="full"
         size="md"
         variant="light"
-        startContent={<IoReorderTwoOutline className="w-5 h-5" />}
+        startContent={<Bars3Icon className="w-5 h-5" />}
         onPress={onOpen}
       ></Button>
       <Drawer size="sm" isOpen={isOpen} onOpenChange={onOpenChange}>

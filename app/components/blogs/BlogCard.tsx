@@ -4,7 +4,7 @@ import { Card, CardBody, CardFooter, CardHeader } from "@heroui/card";
 import { Image } from "@heroui/image";
 import { TBlogCard } from "@/types/blog";
 import { Avatar } from "@heroui/avatar";
-import { FaUser } from "react-icons/fa";
+import { UserIcon } from "@heroicons/react/24/solid";
 import toLocaleDateString from "@/utils/toLocaleDateString";
 import { useRouter } from "next/navigation";
 
@@ -41,7 +41,7 @@ const BlogCard = ({ _id, title, banner, description, date, user }: Props) => {
         <Avatar
           size="sm"
           showFallback
-          fallback={<FaUser className="w-5 h-5 text-gray-700" />}
+          fallback={<UserIcon className="w-5 h-5 text-gray-700" />}
           src={user?.image || ""}
         />
       </CardFooter>

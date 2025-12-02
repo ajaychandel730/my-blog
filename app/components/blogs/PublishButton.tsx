@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import publishBlog from "@/actions/publishBlog";
-import { IoPaperPlaneOutline } from "react-icons/io5";
+import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 import { Button } from "@heroui/button";
 import { useAppSelector } from "@/lib/hooks";
 import { RootState } from "@/lib/store";
@@ -91,7 +91,7 @@ const PublishButton = () => {
       isLoading={publishLoading}
       onPress={handlePublish}
       startContent={
-        !publishLoading && <IoPaperPlaneOutline className="w-5 h-5" />
+        !publishLoading && <PaperAirplaneIcon className="w-5 h-5" />
       }
       color="primary"
     >
@@ -105,12 +105,10 @@ const PublishButton = () => {
       isLoading={publishLoading}
       onPress={handlePublish}
       startContent={
-        !publishLoading && <IoPaperPlaneOutline className="w-5 h-5" />
+        !publishLoading && <PaperAirplaneIcon className="w-5 h-5" />
       }
       color="primary"
-    >
-      
-    </Button>
+    />
     </>
 
   );

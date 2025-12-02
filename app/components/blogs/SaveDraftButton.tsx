@@ -9,7 +9,7 @@ import { RootState } from "@/lib/store";
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 import updateDraftById from "@/actions/updateDraftById";
-import { RiDraftLine } from "react-icons/ri";
+import { DocumentDuplicateIcon } from "@heroicons/react/24/outline";
 
 const SaveDraftButton = () => {
   const { blog } = useAppSelector((state: RootState) => state.editorReducer);
@@ -70,7 +70,7 @@ const SaveDraftButton = () => {
     <>
      <Button
       className="hidden lg:inline-flex"
-      startContent={!loading && <RiDraftLine className="w-5 h-5" />}
+      startContent={!loading && <DocumentDuplicateIcon className="w-5 h-5" />}
       isLoading={loading}
       size="md"
       onPress={handleSaveDraft}
@@ -81,7 +81,7 @@ const SaveDraftButton = () => {
       className="lg:hidden"
       isIconOnly
       radius="full"
-      startContent={!loading && <RiDraftLine className="w-5 h-5" />}
+      startContent={!loading && <DocumentDuplicateIcon className="w-5 h-5" />}
       isLoading={loading}
       size="md"
       onPress={handleSaveDraft}

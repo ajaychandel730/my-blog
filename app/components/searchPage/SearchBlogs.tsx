@@ -1,5 +1,4 @@
 import React from "react";
-import BlogSearchInput from "./BlogSearchInput";
 import { confirmData } from "@/actions/getSearchBlogs";
 import BlogCard from "../blogs/BlogCard";
 import { getErrorMessage } from "@/utils/errors";
@@ -25,6 +24,7 @@ const fetchSearchBlogs = async (
     const res = await fetch(endPoint, {
       next: { revalidate: 0 },
     });
+    
     const data = await res.json();
 
     if (data.status == "ok") {
@@ -41,17 +41,16 @@ const fetchSearchBlogs = async (
 const SearchBlogs = async ({ query, token }: Props) => {
   const result: serverBlogCard[] = await fetchSearchBlogs(query, token);
   const lastIndex = result.length - 1;
+  
   const paginationToken =
     result.length == 20 ? result[lastIndex].paginationToken : undefined;
 
   return (
     <div
       className={
-        "mt-24 mx-auto w-full mb-10 lg:w-[1015px] md:px-4 flex  flex-col items-center space-y-4"
+        " w-full mb-10   flex  flex-col items-center"
       }
     >
-      <BlogSearchInput />
-
       <div className="flex w-full ">
         <h3 className="font-[600]">Search results for <p className="turncate inline-block font-normal text-gray-600">{query}</p></h3>
       </div>

@@ -3,7 +3,7 @@ import { useAppDispatch } from "@/lib/hooks";
 import { isReseting, resetBlog, setBlog } from "@/lib/store";
 import { Button } from "@heroui/button";
 import React, { useTransition } from "react";
-import { AiOutlinePlus } from "react-icons/ai";
+import { PlusIcon } from "@heroicons/react/24/outline";
 import { toast } from "react-toastify";
 
 const NewBlogButton = () => {
@@ -27,7 +27,7 @@ const NewBlogButton = () => {
   return (
     <>
       <Button
-        startContent={<AiOutlinePlus className="w-5 h-5" />}
+        startContent={<PlusIcon className="w-5 h-5" />}
         onPress={handleNewBlogClick}
         color="default"
         size="md"
@@ -42,7 +42,7 @@ const NewBlogButton = () => {
         radius="full"
         onPress={handleNewBlogClick}
       >
-        <AiOutlinePlus className="w-5 h-5" />
+        <PlusIcon className="w-5 h-5" />
       </Button>
     </>
   );
