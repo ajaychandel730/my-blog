@@ -25,7 +25,7 @@ const HeroWrapper = () => {
           </Link>
 
           <Link
-            href="/blogs/category"
+            href="/blogs/category/all"
             className="inline-flex items-center gap-2 px-5 py-3 border border-neutral-200 rounded-full text-neutral-800 hover:bg-neutral-50 transition-colors"
           >
             View Blogs

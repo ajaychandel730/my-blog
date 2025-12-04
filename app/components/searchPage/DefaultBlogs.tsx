@@ -91,6 +91,7 @@ const DefaultBlogs = () => {
       {result.length != 0 && !isLoading && (
         <BlogsPagination setPage={setPage} isLoading={isLoading} />
       )}
+      
       {isLoading && <Spinner color="primary" />}
     </div>
   );
