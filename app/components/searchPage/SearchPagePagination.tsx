@@ -6,7 +6,7 @@ import NextSearchPageButton from "./NextSearchPageButton"
 
 const SearchPagePagination = ({paginationToken}:{paginationToken:string|undefined}) => {
   return (
-    <div className='flex items-center justify-center gap-2 w-full'>
+    <div className='flex items-center justify-center gap-2 w-full my-4'>
         <PrevSearchPageButton/>
         <NextSearchPageButton paginationToken={paginationToken}/>
     </div>

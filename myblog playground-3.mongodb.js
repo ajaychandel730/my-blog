@@ -1,8 +1,33 @@
 use("blogz");
 const collection = "blogs";
 
+// db.getCollectionInfos({ name: collection });
 
-db.getCollectionInfos({name : collection});
+// db.blogs.updateMany({}, [
+//   {
+//     $set: {
+//       topics: {
+//         $reduce: {
+//           input: "$topics",
+//           initialValue: [],
+//           in: {
+//             $concatArrays: [
+//               "$$value",
+//               {
+//                 $map: {
+//                   input: {
+//                     $regexFindAll: { input: "$$this", regex: /[a-zA-Z0-9]+/g },
+//                   },
+//                   in: "$$this.match",
+//                 },
+//               },
+//             ],
+//           },
+//         },
+//       },
+//     },
+//   },
+// ]);
 
 // db.getCollection(collection).updateMany({userId : new ObjectId("676ffa364a0f166268b55cc7")},{
 //    $unset : {
@@ -10,7 +35,7 @@ db.getCollectionInfos({name : collection});
 //       userName : "",
 //       userImg : ""
 //    },
-   
+
 // },
 // {
 //    bypassDocumentValidation: true
@@ -37,7 +62,7 @@ db.getCollectionInfos({name : collection});
 //    }
 // } );
 
-// db.runCommand({collMod : "blogs", 
+// db.runCommand({collMod : "blogs",
 //    validator: {
 //       $jsonSchema: {
 //          bsonType: "object",
@@ -77,5 +102,3 @@ db.getCollectionInfos({name : collection});
 //       }
 //    }
 // });
-
-

@@ -20,7 +20,7 @@ const NextSearchPage = ({ paginationToken }: Props) => {
         isDisabled={!paginationToken}
         as={Link}
         href={`/${a}/${b}/${query}/${paginationToken}`}
-        color="default"
+        color="primary"
       >
         <ChevronRightIcon className="w-5 h-5" />
       </Button>

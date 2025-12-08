@@ -1,9 +1,9 @@
 
 export interface Blog {
   user : {
-    name : string;
-    email : string;
-    image : string;
+    name? : string;
+    email? : string;
+    image? : string;
     _id : string;
   };
   title: string;
@@ -11,9 +11,18 @@ export interface Blog {
   topics: string[];
   description: string;
   content?: Array<unknown>;
+  _id : string;
 }
 
-export type TBlogCard = Blog & {
-  _id: string;
-  date: string;
-};
+export interface BlogCard  {
+  user : {
+    image? : string;
+  };
+  title: string;
+  banner: string;
+  topics: string[];
+  description: string;
+  _id : string;
+  date : string;
+}
+

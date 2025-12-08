@@ -2,13 +2,13 @@
 import React from "react";
 import { Card, CardBody, CardFooter, CardHeader } from "@heroui/card";
 import { Image } from "@heroui/image";
-import { TBlogCard } from "@/types/blog";
+import { BlogCard as BlogCardInterface} from "@/types/blog";
 import { Avatar } from "@heroui/avatar";
 import { UserIcon } from "@heroicons/react/24/solid";
 import toLocaleDateString from "@/utils/toLocaleDateString";
 import { useRouter } from "next/navigation";
 
-type Props = TBlogCard;
+type Props = BlogCardInterface;
 
 const BlogCard = ({ _id, title, banner, description, date, user }: Props) => {
   const formatDate = toLocaleDateString(date);

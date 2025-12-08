@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
-import DefaultBlogs from "../../../components/searchPage/DefaultBlogs";
 import BlogCategoriesFilters from "@/app/components/blogs/BlogCategoriesFilters";
 import BlogCategoryList from "@/app/components/blogs/BlogCategoryList";
+import BlogLoading from "@/app/components/blogs/BlogLoading";
 
 type Params = {
   params : Promise<{type:string}>
@@ -9,12 +9,11 @@ type Params = {
 
 const BlogsPage = async ({params}:Params) => {
 
-
   return (
-    <section className="bg-gray-50  w-full flex flex-col p-2 rounded-md">
+    <section className=" min-h-[500px] bg-gray-50 border-t-1 border-t-gray-300 w-full flex flex-col p-2 rounded-md !mb-[100px] space-y-10">
       {/* <DefaultBlogs/> */}
        <BlogCategoriesFilters/>
-       <Suspense fallback={"...loading"}>
+       <Suspense fallback={<BlogLoading/>}>
           <BlogCategoryList params ={params}/>
        </Suspense>
     </section>

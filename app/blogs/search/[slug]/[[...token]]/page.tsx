@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import SearchBlogs from '@/app/components/searchPage/SearchBlogs';
+import BlogLoading from '@/app/components/blogs/BlogLoading';
 
 type Props = {
   params : Promise<{slug : string; token?:string[]}>;
@@ -12,7 +13,9 @@ const SearchPage = async ({params}: Props) => {
 
   return (
     <>
+      <Suspense fallback={<BlogLoading/>}>
       <SearchBlogs query={query} token={searchToken}/>
+      </Suspense>
     </>
   )
 }

@@ -2,10 +2,11 @@
 import React, { useEffect, useState } from "react";
 import BlogSearchInput from "./BlogSearchInput";
 import useSWR from "swr";
-import { TBlogCard } from "@/types/blog";
+import { BlogCard as  BlogCardInterface } from "@/types/blog";
 import { Spinner } from "@heroui/spinner";
 import BlogCard from "../blogs/BlogCard";
 import BlogsPagination from "../BlogsPagination";
+import BlogLoading from "../blogs/BlogLoading";
 
 const fetchPublishBlogs = async (url: string) => {
   const res = await fetch(url);
@@ -14,7 +15,7 @@ const fetchPublishBlogs = async (url: string) => {
 
 const DefaultBlogs = () => {
   const [page, setPage] = useState<number>(1);
-  const [blogs, setBlogs] = useState<TBlogCard[]>([]);
+  const [blogs, setBlogs] = useState<BlogCardInterface[]>([]);
 
   const { data, error, isLoading } = useSWR(
     `/api/getBlogs/?page=${page}&limit=10`,
@@ -24,10 +25,10 @@ const DefaultBlogs = () => {
     }
   );
 
-  const verifydata = (result: object | undefined): TBlogCard[] => {
+  const verifydata = (result: object | undefined): BlogCardInterface[] => {
     const resultData = !result || !("data" in result) ? [] : result.data;
 
-    const blogsData: TBlogCard[] = resultData
+    const blogsData: BlogCardInterface[] = resultData
       ? Array.isArray(resultData)
         ? resultData
         : []
@@ -70,7 +71,6 @@ const DefaultBlogs = () => {
             banner,
             title,
             description,
-            content,
             date,
             user,
           }) => (
@@ -82,7 +82,6 @@ const DefaultBlogs = () => {
               title={title}
               banner={banner}
               description={description}
-              content={content}
               date={date}
             />
           )
@@ -92,7 +91,7 @@ const DefaultBlogs = () => {
         <BlogsPagination setPage={setPage} isLoading={isLoading} />
       )}
       
-      {isLoading && <Spinner color="primary" />}
+      {isLoading && result.length == 0 && <BlogLoading/>}
     </div>
   );
 };

@@ -29,11 +29,12 @@ export default async function (blog: Blog) {
       return { status: "failed", error: result.error.flatten().fieldErrors };
     }
 
-    const newBlog = await blogsColl.insertOne({
+    await blogsColl.insertOne({
       ...result.data,
       userId : new ObjectId(result.data.userId),
       date: new Date(),
     });
+    
     return { status: "ok", message: "New blog added." };
   } catch (err: unknown) {
     const message = getErrorMessage(err);

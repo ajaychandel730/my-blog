@@ -1,6 +1,5 @@
 import client from "@/lib/dbConnect";
-import { TBlogCard } from "@/types/blog";
-import { pipeline } from "stream";
+import { BlogCard } from "@/types/blog";
 
 type User = {
   _id? : string;
@@ -9,7 +8,7 @@ type User = {
   email? : string;
 }
 
-export type serverBlogCard = TBlogCard & {paginationToken:string | undefined, user :User};
+export type serverBlogCard = BlogCard & {paginationToken:string | undefined, user :User};
 
 type SearchQuery = {
   $search : {
@@ -52,8 +51,8 @@ export default async function (query: string, token?:string): Promise<serverBlog
        pipeline : [
         {
           $project : {
-            password : 0,
-            _id : 0,
+            _id : 1,
+            image : 1
           }
         }
        ],
@@ -84,15 +83,12 @@ export const confirmData = (data: Array<object>): serverBlogCard[] => {
  
   data.forEach((blog) => {
     const card: serverBlogCard = {
-      userId : "userId" in blog ? String(blog.userId) : "",
       user : ("user" in blog && typeof  blog.user == 'object' && blog.user != null)? blog.user : {},
       _id: "_id" in blog ? String(blog._id) : "",
       title: "title" in blog ? String(blog.title) : "",
       description: "description" in blog ? String(blog.description) : "",
       banner: "banner" in blog ? String(blog.banner) : "",
       topics: "topics" in blog && Array.isArray(blog.topics) ? blog.topics : [],
-      content:
-        "content" in blog && Array.isArray(blog.content) ? blog.content : [],
       date: "date" in blog ? String(blog.date) : "",
       paginationToken : "paginationToken" in blog ? String(blog.paginationToken) : undefined
     };

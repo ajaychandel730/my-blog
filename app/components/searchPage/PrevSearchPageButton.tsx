@@ -9,7 +9,7 @@ const PrevSearchPageButton = () => {
     const router = useRouter();
 
   return (
-    <Button isIconOnly radius="full" size="sm" onPress={()=>{router.back()}} isDisabled={!token}color='default'>
+    <Button isIconOnly radius="full" size="sm" onPress={()=>{router.back()}} isDisabled={!token} color='primary'>
         <ChevronLeftIcon className="w-5 h-5"/>
     </Button>
   )
