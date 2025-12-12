@@ -1,16 +1,16 @@
 "use client";
 import React from 'react'
-import { useFormStatus } from 'react-dom'
 import { Button } from "@heroui/button";
 interface props {
     text : string;
+    isPending : boolean;
 }
-const Submitbutton = ({text}:props) => {
-  const {pending} = useFormStatus();
+const Submitbutton = ({text, isPending}:props) => {
+
   return (
     <Button
     type="submit"
-    isLoading = {pending}
+    isLoading = {isPending}
     fullWidth
     color='primary'
     size='md'

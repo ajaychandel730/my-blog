@@ -1,39 +1,32 @@
-import React from 'react';
-import { ArrowRightIcon } from '@heroicons/react/24/solid';
-import Link from 'next/link';
+import React from "react";
+import { ArrowRightIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
+import GetStartedButton from "./buttons/GetStartedButton";
+import ViewBlogsButton from "./buttons/ViewBlogsButton";
 
 const HeroWrapper = () => {
   return (
     <div className="w-full flex justify-center">
       <div className="w-full max-w-3xl text-center px-4">
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-neutral-900">
-          Welcome to 
-          <span className="ml-2 bg-gradient-to-br from-blue-600 to-purple-600 bg-clip-text text-transparent">BlogSpace</span>
+          Welcome to
+          <span className="ml-2 bg-gradient-to-br from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            BlogSpace
+          </span>
         </h1>
 
         <p className="mt-6 text-lg sm:text-xl text-neutral-600 leading-relaxed">
-          A platfrom where everyone can write, share, and explore amazing blogs on any topic you love.
+          A platfrom where everyone can write, share, and explore amazing blogs
+          on any topic you love.
         </p>
 
         <div className="mt-8 flex items-center justify-center gap-4">
-          <Link
-            href="/blog/create"
-            className="inline-flex items-center gap-3 px-6 py-3 bg-slate-800 text-white rounded-full shadow hover:bg-slate-900 transition-colors"
-          >
-            <span>Get Started</span>
-            <ArrowRightIcon className="h-4 w-4" aria-hidden="true" />
-          </Link>
-
-          <Link
-            href="/blogs/category/all"
-            className="inline-flex items-center gap-2 px-5 py-3 border border-neutral-200 rounded-full text-neutral-800 hover:bg-neutral-50 transition-colors"
-          >
-            View Blogs
-          </Link>
+          <GetStartedButton />
+          <ViewBlogsButton />
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default HeroWrapper;

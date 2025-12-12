@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-
-import { EditorContent, EditorRoot, JSONContent, useEditor } from "novel";
+import { EditorContent, EditorRoot, JSONContent } from "novel";
 import { novelExtensions } from "../../extension";
 import { handleCommandNavigation, ImageResizer } from "novel/extensions";
 import { handleImageDrop, handleImagePaste } from "novel/plugins";
@@ -29,6 +28,7 @@ const TailwindEditor = () => {
   return (
     <>
       <div className="border border-gray-400 dark:border-blue-400 rounded-md">
+        <span className="p-2 text-sm text-gray-600">Content</span>
         <EditorRoot>
           <EditorContent
             editorProps={{

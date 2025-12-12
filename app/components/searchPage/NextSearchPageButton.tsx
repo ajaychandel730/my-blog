@@ -3,7 +3,7 @@ import React from "react";
 import { Button } from "@heroui/button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronRightIcon } from "@heroicons/react/24/outline";
+import { ChevronRightIcon } from "lucide-react";
 type Props = {
   paginationToken: string | undefined;
 };

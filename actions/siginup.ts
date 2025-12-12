@@ -24,12 +24,13 @@ const signup = async (state: FormState, formData: FormData) => {
     const userCollection = database.collection("users");
     const { email, password } = validatedFields.data;
     const hashedPassword:string = await bcrypt.hash(password, 10);
+    
     // check user email alread exist or not
     const checkUser = await userCollection.findOne({email});
     if(checkUser){
       return {
         errors : {
-          email : ["An account with email address already exists."]
+          email : ["An account with this email already exists."]
         }
       }
     }
@@ -38,7 +39,7 @@ const signup = async (state: FormState, formData: FormData) => {
       email,
       joinDate : new Date(),
       name : email.split('@')[0],
-      image : "https://res.cloudinary.com/instagram-clone-images-27017/image/upload/v1643711892/instagram/blank-profile-picture-g38b61f937_640_onexzk.png",
+      image : process.env.USER_DEFAULT_IMAGE,
       password : hashedPassword,
     });
     

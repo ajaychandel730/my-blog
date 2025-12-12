@@ -12,6 +12,7 @@ export interface Blog {
   description: string;
   content?: Array<unknown>;
   _id : string;
+  date:string;
 }
 
 export interface BlogCard  {

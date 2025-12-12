@@ -1,6 +1,6 @@
 "use client";
 import { Button, ButtonGroup } from "@heroui/button";
-import { ArrowUpTrayIcon, TrashIcon, PhotoIcon } from "@heroicons/react/24/outline";
+import { ArrowUpToLine, TrashIcon, Camera } from "lucide-react";
 import React, { useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { RootState, setBlog } from "@/lib/store";
@@ -67,7 +67,7 @@ const BlogImage = () => {
               color="primary"
               isIconOnly
             >
-              <PhotoIcon />
+              <Camera />
             </Button>
           </Tooltip>
           <Tooltip content="Delete image.">
@@ -78,10 +78,9 @@ const BlogImage = () => {
         </ButtonGroup>
       ) : (
         <Button
-          
           variant="shadow"
           isLoading={imageloading}
-          startContent={imageloading ? "" : <ArrowUpTrayIcon className="w-5 h-5" />}
+          startContent={imageloading ? "" : <ArrowUpToLine className="w-5 h-5" />}
           onPress={() => {
             fileRef?.current?.click();
           }}

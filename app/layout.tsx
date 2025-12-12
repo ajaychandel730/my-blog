@@ -31,7 +31,6 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-w-[300px] flex flex-col items-center box-border  overflow-x-hidden`}
         > 
-        <Header/>
         {children}
       </body>
     </html>

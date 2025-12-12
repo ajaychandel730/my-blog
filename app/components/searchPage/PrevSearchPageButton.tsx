@@ -2,7 +2,7 @@
 import { Button } from "@heroui/button";
 import { usePathname, useRouter} from 'next/navigation';
 import React from 'react'
-import { ChevronLeftIcon } from "@heroicons/react/24/outline";
+import { ChevronLeftIcon } from "lucide-react";
 
 const PrevSearchPageButton = () => {
     const [,,,,token] = usePathname().split("/");

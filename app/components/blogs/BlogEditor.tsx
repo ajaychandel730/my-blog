@@ -75,7 +75,7 @@ const BlogEditor = () => {
   }
   
   return (
-    <div className="max-w-[700px] space-y-4 w-full ">
+    <div className="w-full max-w-[700px] space-y-4">
       <Input
         name="title"
         value={blog.title}

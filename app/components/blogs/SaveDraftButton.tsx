@@ -69,6 +69,7 @@ const SaveDraftButton = () => {
   return (
     <>
      <Button
+      variant="light"
       className="hidden lg:inline-flex"
       startContent={!loading && <DocumentDuplicateIcon className="w-5 h-5" />}
       isLoading={loading}
@@ -80,6 +81,7 @@ const SaveDraftButton = () => {
     <Button
       className="lg:hidden"
       isIconOnly
+      variant="bordered"
       radius="full"
       startContent={!loading && <DocumentDuplicateIcon className="w-5 h-5" />}
       isLoading={loading}

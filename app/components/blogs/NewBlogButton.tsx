@@ -30,6 +30,7 @@ const NewBlogButton = () => {
         startContent={<PlusIcon className="w-5 h-5" />}
         onPress={handleNewBlogClick}
         color="default"
+        variant="light"
         size="md"
         className="hidden lg:inline-flex"
       >
@@ -37,6 +38,7 @@ const NewBlogButton = () => {
       </Button>
       <Button
         className="lg:hidden"
+        variant="bordered"
         isIconOnly
         size="md"
         radius="full"

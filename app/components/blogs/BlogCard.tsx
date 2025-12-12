@@ -4,7 +4,7 @@ import { Card, CardBody, CardFooter, CardHeader } from "@heroui/card";
 import { Image } from "@heroui/image";
 import { BlogCard as BlogCardInterface} from "@/types/blog";
 import { Avatar } from "@heroui/avatar";
-import { UserIcon } from "@heroicons/react/24/solid";
+import { UserRound } from "lucide-react";
 import toLocaleDateString from "@/utils/toLocaleDateString";
 import { useRouter } from "next/navigation";
 
@@ -41,7 +41,7 @@ const BlogCard = ({ _id, title, banner, description, date, user }: Props) => {
         <Avatar
           size="sm"
           showFallback
-          fallback={<UserIcon className="w-5 h-5 text-gray-700" />}
+          fallback={<UserRound className="w-5 h-5 text-gray-700" />}
           src={user?.image || ""}
         />
       </CardFooter>

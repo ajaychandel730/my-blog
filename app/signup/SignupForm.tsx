@@ -1,14 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { useActionState, useState } from "react";
 import Submitbutton from "../components/Submitbutton";
-import { useFormState } from "react-dom";
 import { signup } from "@/actions/siginup";
-import Link from "next/link";
 import SignupSuccessModal from "./SignupSuccessModal";
 import FormLink from "../components/FormLink";
 
 const SignupForm = () => {
-  const [state, action] = useFormState(signup, undefined);
+  const [state, action, isPending] = useActionState(signup, undefined);
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -26,7 +24,7 @@ const SignupForm = () => {
             id="email"
             name="email"
             className="input"
-            placeholder="name@flowbite.com"
+            placeholder="name@gmail.com"
             required
           />
           {state?.errors?.email && (
@@ -69,8 +67,8 @@ const SignupForm = () => {
             </label>
           </div>
           {state?.errors?.password &&
-            state.errors.password.map((message: string) => (
-              <p className="mt-2 text-sm text-red-500 font-medium">{message}</p>
+            state.errors.password.map((message: string, idx) => (
+              <p key={idx} className="mt-2 text-sm text-red-500 font-medium">{message}</p>
             ))}
         </div>
         <div className="mb-5">
@@ -93,7 +91,7 @@ const SignupForm = () => {
             </p>
           )}
         </div>
-        <Submitbutton text="Register new account" />
+        <Submitbutton isPending={isPending} text="Register new account" />
         <FormLink
           text={"  Already have an account?"}
           href="/signin"

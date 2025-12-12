@@ -24,8 +24,6 @@ export default async function (
   preState: unknown,
   formData: FormData
 ) {
-
-  console.log("------------------>hit--------");
   try {
     const result = resetForgotPasswordSchema.safeParse({
       password: formData.get("password"),

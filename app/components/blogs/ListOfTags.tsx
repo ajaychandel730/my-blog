@@ -23,7 +23,7 @@ const ListOfTags = () => {
         </Button>
         </div>
         {tags.map((tag, index) => (
-        <Chip  key={tag + index} onClose={() => handleClose(tag)} variant="flat">
+        <Chip color="primary" key={tag + index} onClose={() => handleClose(tag)} variant="flat">
           {tag}
         </Chip>
       ))}

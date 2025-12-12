@@ -11,9 +11,9 @@ type Props = {
 
 const UsersBlogsAndDrafts = ({PublishBlogItemSkeleton}:Props) => {
   return (
-    <div className="flex w-full min-h-[600px] flex-col items-center mt-10 p-2 border-2 rounded-md border-gray-100">
-    <Tabs size='md' aria-label="Blogs and drafts tabs" className='w-full flex  justify-end'>
-      <Tab key="blogs" title="Blogs" className='w-full'>
+    <div className="flex w-full min-h-[600px] flex-col items-center mt-10 p-2  rounded-md ">
+    <Tabs  variant='underlined' color='primary' size="lg" aria-label="Blogs and drafts tabs" className='w-full flex'>
+      <Tab key="blogs" title="Published" className='w-full'>
         <UserPublishBlogs PublishBlogItemSkeleton={PublishBlogItemSkeleton}/>
       </Tab>
       <Tab key="drafts" title="Drafts" className='w-full'>

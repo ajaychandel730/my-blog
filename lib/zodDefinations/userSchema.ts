@@ -1,7 +1,8 @@
 import {z } from 'zod'
+import { emailSchema } from './emailSchema';
  
 export const signupSchema = z.object({
-  email: z.string().email({ message: 'Please enter a valid email.' }).trim(),
+  email:emailSchema.shape.email,
   password: z
     .string()
     .min(6, "must be a string of at least 6 characters.")

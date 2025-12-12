@@ -2,7 +2,7 @@
 import { Input } from "@heroui/input";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { SearchIcon } from "lucide-react";
 
 const BlogSearchInput = () => {
   const router = useRouter();
@@ -24,7 +24,7 @@ const BlogSearchInput = () => {
       <Input
         onKeyDown={onKeyHandler}
         onValueChange={(query:string)=>{setQuery(query)}}
-        startContent={<MagnifyingGlassIcon className="w-5 h-5 " />}
+        startContent={<SearchIcon className="w-5 h-5 " />}
         placeholder="Type to search"
         size="lg"
         isClearable

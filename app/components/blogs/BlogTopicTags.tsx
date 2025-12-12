@@ -3,6 +3,7 @@ import { Input } from "@heroui/input";
 import ListOfTags from "./ListOfTags";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { RootState, setBlog } from "@/lib/store";
+import cleanTag from "@/lib/cleanTag";
 
 const BlogTopicTags = () => {
   const {blog:{topics}} = useAppSelector((state:RootState)=> state.editorReducer); 
@@ -13,7 +14,7 @@ const BlogTopicTags = () => {
     const { key } = e;
     if (key !== "Enter") return;
     if(topicValue.length == 0) return;
-    const newTopics =  Array.isArray(topics)? [...topics, topicValue] : [topicValue];
+    const newTopics =  Array.isArray(topics)? [...topics, cleanTag(topicValue)] : [cleanTag(topicValue)];
     dispatch(setBlog({topics : newTopics}));
     setTopicValue("");
   };

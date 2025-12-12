@@ -1,9 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import BlogSearchInput from "./BlogSearchInput";
 import useSWR from "swr";
 import { BlogCard as  BlogCardInterface } from "@/types/blog";
-import { Spinner } from "@heroui/spinner";
 import BlogCard from "../blogs/BlogCard";
 import BlogsPagination from "../BlogsPagination";
 import BlogLoading from "../blogs/BlogLoading";
