@@ -8,6 +8,7 @@ declare module "next-auth" {
             id? : string;
             name : string;
             image : string;
+            email : string;
         } & DefaultSession["user"]
     }
 
@@ -27,5 +28,6 @@ declare module "next-auth/jwt"{
         name : string;
         picture : string;
         isVerify : boolean;
+        email : string;
     }
 }

@@ -2,7 +2,6 @@
 import { useSession } from "next-auth/react";
 import React from "react";
 import { User } from "@heroui/user";
-import { Button } from "@heroui/button";
 import {
   Dropdown,
   DropdownMenu,
@@ -10,9 +9,9 @@ import {
   DropdownTrigger,
 } from "@heroui/dropdown";
 import { signOut } from "next-auth/react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import SigninButton from "./homePage/HeaderButtons/SigninButton";
+import UserSkeleton from "./UserSkeleton";
 
 const UserProfile = () => {
   const session = useSession();
@@ -25,6 +24,10 @@ const UserProfile = () => {
     email: "",
     ...data?.user,
   };
+
+  if (session.status === "loading") {
+    return <UserSkeleton />;
+  }
 
   return isAuthenticated ? (
     <Dropdown shouldBlockScroll={false}>
@@ -62,7 +65,7 @@ const UserProfile = () => {
       </DropdownMenu>
     </Dropdown>
   ) : (
-    <SigninButton/>
+    <SigninButton />
   );
 };
 

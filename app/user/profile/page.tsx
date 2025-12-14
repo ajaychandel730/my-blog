@@ -8,6 +8,7 @@ import PublishBlogItemSkeleton from "@/app/components/profilePage/PublishBlogIte
 
 import React from "react";
 import ToastProvider from "@/app/ToastProvider";
+import Header from "@/app/components/Header";
 
 const UserProfilePage = async () => {
   const session = await getServerSession(nextAuthOptions);
@@ -27,7 +28,8 @@ const UserProfilePage = async () => {
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center p-4  ">
-      <div className="w-full md:max-w-[900px] flex flex-col items-center">
+      <Header/>
+      <div className="w-full md:max-w-[900px] flex flex-col items-center mt-20">
         <UserInfoSection
           totalPosts={totalPosts}
           id={id}

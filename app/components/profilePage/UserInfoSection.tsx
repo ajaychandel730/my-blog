@@ -2,7 +2,7 @@ import { Avatar } from "@heroui/avatar";
 import { Button } from "@heroui/button";
 import React from "react";
 import { UserRound } from "lucide-react";
-
+import Link from "next/link";
 type Props = {
   id: string;
   name: string;
@@ -30,7 +30,7 @@ const UserInfoSection = ({ id, name, email, image, totalPosts }: Props) => {
         </p>
       )}
 
-      <Button color="default" size="md" className="px-10 bg-gray-200 mt-10">
+      <Button as={Link} href="/user/edit" color="default" size="md" className="px-10 bg-gray-200 mt-10">
         Edit profile
       </Button>
     </div>
