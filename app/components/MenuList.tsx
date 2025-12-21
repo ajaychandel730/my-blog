@@ -3,13 +3,13 @@
 import { Listbox, ListboxItem } from "@heroui/listbox";
 import Link from "next/link";
 import React from "react";
-import { PlusIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { PlusIcon, Search } from "lucide-react";
 
 const MenuList = () => {
   return (
     <Listbox  aria-label="Actions" onAction={(key) => key}>
       <ListboxItem
-        startContent={<MagnifyingGlassIcon className="w-5 h-5" />}
+        startContent={<Search className="w-5 h-5" />}
         key="search"
         as={Link}
         href="/blog"

@@ -1,18 +1,32 @@
 "use server";
-import client from "@/lib/dbConnect";
 import { sendOTPEmail } from "@/lib/mail";
 import { generateOTP, hashOTP } from "@/lib/otp";
 import { emailSchema } from "@/lib/zodDefinations/emailSchema";
 import { getErrorMessage } from "@/utils/errors";
 import { redirect } from "next/navigation";
+import { headers } from "next/headers";
+import { rateLimit } from "@/lib/rateLimit";
+import clientPromise from "@/lib/dbConnect";
 
 export default async function name(initialState: unknown, formData: FormData) {
-  const email: string = formData.get("email")?.toString() || "";
-  const session = client.startSession();
-  let userId;
+  // limiting
+   const  headerList = await headers();
+    const ip =
+    headerList.get("x-forwarded-for") ??
+    headerList.get("x-real-ip") ??
+    "unknown";
 
+  if (!rateLimit(ip)) {
+    throw new Error("Too many requests");
+  }
+  //
+  let userId;
   try {
+    const email: string = formData.get("email")?.toString() || "";
     const result = emailSchema.safeParse({ email });
+    const client = await clientPromise;
+  const session = client.startSession();
+
 
     if (!result.success) {
       return {
@@ -20,7 +34,6 @@ export default async function name(initialState: unknown, formData: FormData) {
         error: result.error.format().email?._errors[0],
       };
     }
-
     const collection = client.db("blogz").collection("users");
     const user = await collection.findOne({ email: result.data.email });
 

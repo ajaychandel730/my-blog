@@ -3,8 +3,8 @@ import { useAppDispatch } from "@/lib/hooks";
 import { isReseting, resetBlog, setBlog } from "@/lib/store";
 import { Button } from "@heroui/button";
 import React, { useTransition } from "react";
-import { PlusIcon } from "@heroicons/react/24/outline";
-import { toast } from "react-toastify";
+import { PlusIcon } from "lucide-react";
+import { toast } from "sonner";
 
 const NewBlogButton = () => {
   const dispatch = useAppDispatch();

@@ -1,7 +1,7 @@
 "use server";
 import BlogContent from "@/app/components/blogs/BlogContent";
+import Header from "@/app/components/Header";
 import HomeBlogCardSekelton from "@/app/components/homePage/HomeBlogCardSekelton";
-import ToastProvider from "@/app/ToastProvider";
 import React, { Suspense } from "react";
 
 
@@ -14,10 +14,12 @@ const page = async ({ params }: Params) => {
 
   return (
     <div className="flex w-full min-h-dvh p-4 pb-20 flex-col items-center">
+      <Header/>
       <Suspense fallback={<HomeBlogCardSekelton/>}>
-        <BlogContent blogId={blogId} />
+         <div className="mt-20 flex">
+             <BlogContent blogId={blogId} />
+         </div>
       </Suspense>
-      <ToastProvider />
     </div>
   );
 };

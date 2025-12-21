@@ -16,6 +16,7 @@ import UserSkeleton from "./UserSkeleton";
 const UserProfile = () => {
   const session = useSession();
   const { data } = session;
+  console.log("profile:", data);
   const isAuthenticated = session.status === "authenticated";
   const router = useRouter();
   const user = {
@@ -34,11 +35,11 @@ const UserProfile = () => {
       <DropdownTrigger>
         <User
           className="cursor-pointer"
-          description={"@" + user.email?.split("@")[0].slice(0, 10)}
+          description={<p className="hidden sm:block turncate">{"@" + user.email?.split("@")[0].slice(0, 10)}</p>}
           avatarProps={{
             src: user.image,
           }}
-          name={user.name}
+          name={<p className="hidden sm:block">{user.name}</p>}
         />
       </DropdownTrigger>
       <DropdownMenu aria-label="User Actions" variant="flat">

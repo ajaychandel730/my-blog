@@ -1,5 +1,4 @@
 import React from "react";
-import ToastProvider from "@/app/ToastProvider";
 import Header from "@/app/components/Header";
 import BackToProfileLink from "@/app/components/profilePage/BackToProfileLink";
 import UserEditForm from "@/app/components/profilePage/UserEditForm";
@@ -9,8 +8,7 @@ import { notFound } from "next/navigation";
 
 const page = async () => {
   const session = await getServerSession(nextAuthOptions);
-  console.log("session", session);
-  
+
   if (!session?.user) {
     notFound();
   }
@@ -34,7 +32,6 @@ const page = async () => {
         </div>
         <UserEditForm user={{email, image, name}}/>
       </div>
-      <ToastProvider />
     </div>
   );
 };

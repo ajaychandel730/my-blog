@@ -1,7 +1,7 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProviders from "next-auth/providers/credentials";
-import client from "@/lib/dbConnect";
 import bcrypt from "bcrypt";
+import clientPromise from "@/lib/dbConnect";
 
 export const nextAuthOptions:NextAuthOptions =  {
     pages: {
@@ -24,6 +24,7 @@ export const nextAuthOptions:NextAuthOptions =  {
           password: {},
         },
         async authorize(credentials) {
+          const client = await clientPromise;
           const db = client.db("blogz");
           const userCollection = db.collection("users");
           if(!credentials?.email){

@@ -15,7 +15,7 @@ const BlogCard = ({ _id, title, banner, description, date, user }: Props) => {
   const router = useRouter();
 
   return (
-    <Card onPress={() => router.push(`/blog/${_id}`)} shadow="sm" isPressable>
+    <Card className="z-0" onPress={() => router.push(`/blog/${_id}`)} shadow="sm" isPressable>
       <CardHeader>
         <h3 className="text-sm font-medium line-clamp-1">{title}</h3>
       </CardHeader>

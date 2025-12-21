@@ -27,3 +27,7 @@ export interface BlogCard  {
   date : string;
 }
 
+export enum BlogType {
+  published = "PUBLISHED",
+  draft = "DRAFT",
+}

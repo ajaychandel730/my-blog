@@ -1,6 +1,4 @@
 import React from "react";
-import { ArrowRightIcon } from "@heroicons/react/24/solid";
-import Link from "next/link";
 import GetStartedButton from "./buttons/GetStartedButton";
 import ViewBlogsButton from "./buttons/ViewBlogsButton";
 

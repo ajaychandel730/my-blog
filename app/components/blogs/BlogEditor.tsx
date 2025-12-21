@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import BlogImage from "./BlogImage";
 import { Input, Textarea } from "@heroui/input";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import TailwindEditor from "./TailwindEditor";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { RootState, setBlog } from "@/lib/store";
@@ -11,38 +11,43 @@ import { useParams } from "next/navigation";
 import { Blog, editBlog } from "@/lib/features/editor/editorSlice";
 import getEditBlogById from "@/actions/getEditBlogById";
 import getEditDraftById from "@/actions/getEditDraftById";
+import BlogEditorLoading from "./BlogEditorLoading";
 
-const BlogEditor = () => {
+type Props = {
+  type: string;
+};
+
+const BlogEditor = ({ type }: Props) => {
   const dispatch = useAppDispatch();
-  const {type, editBlogId } = useParams();
+  const { editBlogId, editDraftId } = useParams();
   const [loading, setLoading] = useState(editBlogId ? true : false);
 
   const { blog, isReseting } = useAppSelector(
     (state: RootState) => state.editorReducer
   );
 
-  const fetchBlog = async(id: string) => {
+  const fetchBlog = async (id: string) => {
     setLoading(true);
-    const blog:(Blog | null) = await getEditBlogById(id);
+    const blog: Blog | null = await getEditBlogById(id);
     if (!blog) {
-        toast.error("Blog not found.");
-    }else{
+      toast.info("Blog not found.");
+    } else {
       dispatch(setBlog(blog));
     }
     setTimeout(setLoading, 0, false);
   };
-   
-  const fetchDraft = async(id: string) => {
+
+  const fetchDraft = async (id: string) => {
     setLoading(true);
-    const blog:(Blog | null) = await getEditDraftById(id);
+    const blog: Blog | null = await getEditDraftById(id);
+
     if (!blog) {
-        toast.error("Draft not found.");
-    }else{
+      toast.info("Draft not found.");
+    } else {
       dispatch(setBlog(blog));
     }
     setTimeout(setLoading, 0, false);
   };
-  
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -52,12 +57,10 @@ const BlogEditor = () => {
 
   useEffect(() => {
     try {
-      if (editBlogId && typeof editBlogId == "string") {
-         if(type == "blog"){
-           fetchBlog(editBlogId);
-         }else{
-            fetchDraft(editBlogId);
-         }
+      if (editBlogId && typeof editBlogId === "string") {
+        fetchBlog(editBlogId);
+      } else if (editDraftId && typeof editDraftId === "string") {
+        fetchDraft(editDraftId);
       } else {
         const blog = window.localStorage.getItem("blog")
           ? JSON.parse(localStorage.getItem("blog") as string)
@@ -65,15 +68,14 @@ const BlogEditor = () => {
         dispatch(setBlog(blog));
       }
     } catch (err) {
-      console.log(err);
       toast.error("Something went wrong. Please refresh page again.");
     }
   }, [editBlogId]);
-  
+
   if (loading) {
-    return <>...loading</>;
+    return <BlogEditorLoading/>;
   }
-  
+
   return (
     <div className="w-full max-w-[700px] space-y-4">
       <Input

@@ -62,7 +62,8 @@ const options = {
 }
  
 let client: MongoClient
- 
+let clientPromise :Promise<MongoClient>;
+
 if (process.env.NODE_ENV === "development") {
   // In development mode, use a global variable so that the value
   // is preserved across module reloads caused by HMR (Hot Module Replacement).
@@ -74,11 +75,26 @@ if (process.env.NODE_ENV === "development") {
     globalWithMongo._mongoClient = new MongoClient(uri, options)
   }
   client = globalWithMongo._mongoClient
+  clientPromise = client.connect();
 } else {
   // In production mode, it's best to not use a global variable.
   client = new MongoClient(uri, options)
+  clientPromise = client.connect();
 }
  
 // Export a module-scoped MongoClient. By doing this in a
 // separate module, the client can be shared across functions.
-export default client;
+export default clientPromise;
+
+
+// // import clientPromise from './path/to/your/mongoClientFile';
+// async function shutdown() {
+//   const client = await clientPromise;
+//   await client.close();
+//   console.log('MongoDB connection closed.');
+//   process.exit(0);
+// }
+
+// // Listen for process termination signals
+// process.on('SIGINT', shutdown);
+// process.on('SIGTERM', shutdown);

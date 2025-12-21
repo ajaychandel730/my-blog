@@ -3,8 +3,7 @@ import { Filter } from "@/actions/getBlogsFilterList";
 import {
   useParams,
   usePathname,
-  useRouter,
-  useSearchParams,
+  useRouter
 } from "next/navigation";
 import React from "react";
 
@@ -23,7 +22,7 @@ const CategoriesFilters = ({ filters }: Props) => {
   };
 
   return (
-    <div className="w-full   p-2 space-x-4">
+    <div className="w-full flex items-center p-2 space-x-4">
       {filters.map(({_id, count}) => (
         <button
           key={_id}

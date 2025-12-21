@@ -5,7 +5,6 @@ import DefaultBlogs from "../searchPage/DefaultBlogs";
 import BlogCard from "./BlogCard";
 import { BlogCard as BlogCardInterface } from "@/types/blog";
 import EmptyBlogsErrorMessage from "./EmptyBlogsErrorMessage";
-import BlogLoading from "./BlogLoading";
 
 type Props = {
   params: Promise<{ type: string }>;

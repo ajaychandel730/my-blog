@@ -1,8 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import { toast } from "react-toastify";
 import publishBlog from "@/actions/publishBlog";
-import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
+import { Plane } from "lucide-react";
 import { Button } from "@heroui/button";
 import { useAppSelector } from "@/lib/hooks";
 import { RootState } from "@/lib/store";
@@ -10,23 +9,23 @@ import { getErrorMessage } from "@/utils/errors";
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 import updateBlogById, { BlogUpdatePayload } from "@/actions/updateBlogById";
+import { toast } from "sonner";
 
 const PublishButton = () => {
   const session = useSession();
-  const { type, editBlogId } = useParams();
-
+  const {editBlogId } = useParams();
   const {
     blog: { title, topics, image: banner, description, content },
   } = useAppSelector((state: RootState) => state.editorReducer);
-  
+
   const [publishLoading, setPublishLoading] = useState<boolean>(false);
-  
+
   const handlePublish = async () => {
     try {
       setPublishLoading(true);
 
       if (session.status !== "authenticated") {
-        toast.warn("Please login your account.");
+         toast.warning("Please login your account.");
         return;
       }
 
@@ -35,7 +34,7 @@ const PublishButton = () => {
           user: { name, id, image },
         },
       } = session;
-     
+
       const blogData = {
         title: title || "",
         topics: topics || [],
@@ -51,13 +50,12 @@ const PublishButton = () => {
 
       let res;
 
-      if (type == "blog" && editBlogId && typeof editBlogId == "string") {
+      if (editBlogId && typeof editBlogId == "string") {
         const blog: BlogUpdatePayload = {
           _id: editBlogId,
           ...blogData,
         };
         res = await updateBlogById(JSON.parse(JSON.stringify(blog)));
-        
       } else {
         res = await publishBlog(JSON.parse(JSON.stringify(blogData)));
       }
@@ -66,6 +64,8 @@ const PublishButton = () => {
         toast.success(
           res.message ??
             (editBlogId ? "Blog updated successfully." : "New blog added.")
+      
+        
         );
       } else if (res.status == "error") {
         toast.error(res.message);
@@ -74,6 +74,8 @@ const PublishButton = () => {
           Object.entries(res.error).forEach(([key, value]) => {
             toast.error(value.toString());
           });
+        }else{
+          toast.error("Something went wrong. Please try later.");
         }
       }
     } catch (err) {
@@ -85,32 +87,31 @@ const PublishButton = () => {
   };
   return (
     <>
-        <Button
-      size="md"
-      className="hidden lg:inline-flex"
-      isLoading={publishLoading}
-      onPress={handlePublish}
-      startContent={
-        !publishLoading && <PaperAirplaneIcon className="w-5 h-5" />
-      }
-      color="primary"
-    >
-      Publish
-    </Button>
       <Button
-      size="md"
-      isIconOnly
-      className="lg:hidden"
-      radius="full"
-      isLoading={publishLoading}
-      onPress={handlePublish}
-      startContent={
-        !publishLoading && <PaperAirplaneIcon className="w-5 h-5" />
-      }
-      color="primary"
-    />
+        size="md"
+        className="hidden lg:inline-flex"
+        isLoading={publishLoading}
+        onPress={handlePublish}
+        startContent={
+          !publishLoading && <Plane className="w-5 h-5" />
+        }
+        color="primary"
+      >
+        Publish
+      </Button>
+      <Button
+        size="md"
+        isIconOnly
+        className="lg:hidden"
+        radius="full"
+        isLoading={publishLoading}
+        onPress={handlePublish}
+        startContent={
+          !publishLoading && <Plane className="w-5 h-5" />
+        }
+        color="primary"
+      />
     </>
-
   );
 };
 

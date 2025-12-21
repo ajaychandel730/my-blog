@@ -4,7 +4,7 @@ import { Form } from "@heroui/form";
 import { Input } from "@heroui/input";
 import { Button } from "@heroui/button";
 import confirmEmail from "../../../actions/confirmEmail";
-import { toast } from "react-toastify";
+import {toast} from "sonner";
 import FormLink from "@/app/components/FormLink";
 
 const ConfirmEmailForm = () => {

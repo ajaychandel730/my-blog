@@ -1,10 +1,12 @@
 "use server";
 import { nextAuthOptions } from "@/app/api/auth/[...nextauth]/options";
 import { getServerSession } from "next-auth";
-import client from "@/lib/dbConnect";
 import { ObjectId } from "mongodb";
 import updateBlogSchema from "@/lib/zodDefinations/updateBlogSchema";
 import { getErrorMessage } from "@/utils/errors";
+import { headers } from "next/headers";
+import { rateLimit } from "@/lib/rateLimit";
+import clientPromise from "@/lib/dbConnect";
 
 export type BlogUpdatePayload = {
   title: string;
@@ -17,6 +19,17 @@ export type BlogUpdatePayload = {
 
 export default async function (blog: BlogUpdatePayload) {
   try {
+       // limiting
+           const  headerList = await headers();
+            const ip =
+            headerList.get("x-forwarded-for") ??
+            headerList.get("x-real-ip") ??
+            "unknown";
+        
+          if (!rateLimit(ip)) {
+            throw new Error("Too many requests");
+          }
+         //F
     const session = await getServerSession(nextAuthOptions);
 
     if (!session) {
@@ -30,6 +43,7 @@ export default async function (blog: BlogUpdatePayload) {
       return { status: "failed", error: result.error.flatten().fieldErrors };
     }
     //
+    const client = await clientPromise;
     const blogsColl = client.db("blogz").collection("blogs");
 
     const updateBlog = await blogsColl.findOneAndUpdate(

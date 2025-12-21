@@ -3,11 +3,10 @@ import React, { useState } from "react";
 import Submitbutton from "../components/Submitbutton";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import { getErrorMessage } from "@/utils/errors";
 import { useRouter } from "next/navigation";
 import FormLink from "../components/FormLink";
-
 
 const SiginForm = () => {
   const router = useRouter();
@@ -22,14 +21,13 @@ const SiginForm = () => {
         ...userInputs,
         redirect: false,
       });
-      
+
       setIsPending(false);
 
-      if(result?.ok){
+      if (result?.ok) {
         router.push("/");
-        
-      }else if (result?.error) {
-        toast.error(result.error);
+      } else if (result?.error) {
+      toast.error(result.error);
       }
     } catch (err: unknown) {
       setIsPending(false);
@@ -78,7 +76,11 @@ const SiginForm = () => {
         </Link>
       </div>
       <Submitbutton text={"Sign in"} isPending={isPending} />
-      <FormLink text=" Don’t have an account yet?" href="/signup" linkText="Sign up" />
+      <FormLink
+        text=" Don’t have an account yet?"
+        href="/signup"
+        linkText="Sign up"
+      />
     </form>
   );
 };

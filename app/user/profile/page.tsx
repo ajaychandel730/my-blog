@@ -7,7 +7,6 @@ import { redirect } from "next/navigation";
 import PublishBlogItemSkeleton from "@/app/components/profilePage/PublishBlogItemSkeleton";
 
 import React from "react";
-import ToastProvider from "@/app/ToastProvider";
 import Header from "@/app/components/Header";
 
 const UserProfilePage = async () => {
@@ -28,7 +27,7 @@ const UserProfilePage = async () => {
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center p-4  ">
-      <Header/>
+      <Header />
       <div className="w-full md:max-w-[900px] flex flex-col items-center mt-20">
         <UserInfoSection
           totalPosts={totalPosts}
@@ -37,9 +36,10 @@ const UserProfilePage = async () => {
           image={image}
           name={name}
         />
-        <UsersBlogsAndDrafts PublishBlogItemSkeleton={<PublishBlogItemSkeleton/>} />
+          <UsersBlogsAndDrafts
+            PublishBlogItemSkeleton={<PublishBlogItemSkeleton />}
+          />
       </div>
-      <ToastProvider/>
     </div>
   );
 };

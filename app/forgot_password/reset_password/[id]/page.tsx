@@ -1,6 +1,5 @@
 import React from "react";
 import ResetPasswordForm from "./ResetPasswordForm";
-import ToastProvider from "@/app/ToastProvider";
 import LogoButton from "@/app/components/homePage/HeaderButtons/LogoButton";
 
 const page = () => {
@@ -22,7 +21,6 @@ const page = () => {
         </div>
       </div>
       {/* //form end/ */}
-      <ToastProvider/>
     </div>
   );
 };

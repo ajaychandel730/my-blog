@@ -1,6 +1,6 @@
 import React from "react";
 import { Skeleton } from "@heroui/skeleton";
-import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
+import { Card, CardBody } from "@heroui/card";
 
 type Props = {
   limit?: number;

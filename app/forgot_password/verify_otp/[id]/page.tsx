@@ -1,9 +1,7 @@
 import React from "react";
 
-import Link from "next/link";
-import Image from "next/image";
+
 import VerifyOtpForm from "./VerifyOtpForm";
-import ToastProvider from "@/app/ToastProvider";
 import LogoButton from "@/app/components/homePage/HeaderButtons/LogoButton";
 
 const page = () => {
@@ -25,7 +23,6 @@ const page = () => {
         </div>
       </div>
       {/* //form end/ */}
-      <ToastProvider/>
     </div>
   );
 };

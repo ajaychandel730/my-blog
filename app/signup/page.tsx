@@ -1,7 +1,5 @@
 import React from "react";
-import Image from "next/image";
 import SignupForm from "./SignupForm";
-import ToastProvider from "../ToastProvider";
 import LogoButton from "../components/homePage/HeaderButtons/LogoButton";
 
 const SignUp = () => {
@@ -14,11 +12,10 @@ const SignUp = () => {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Create a new account
             </h1>
-            <SignupForm/>
+               <SignupForm/>
           </div>
         </div>
       </div>
-      <ToastProvider/>
     </section>
   );
 };

@@ -51,6 +51,7 @@ const BlogActionMenu = () => {
         </DropdownMenu>
       </Dropdown>
       <BlogDeleteModal
+        tab="blog"
         slug={slug as string}
         isOpen={isOpen}
         onOpenChange={onOpenChange}

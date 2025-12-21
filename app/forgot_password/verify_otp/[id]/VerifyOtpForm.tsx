@@ -3,7 +3,7 @@ import React, { useActionState, useEffect, useMemo, useState } from "react";
 import { Form } from "@heroui/form";
 import { InputOtp } from "@heroui/input-otp";
 import { Button } from "@heroui/button";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import ConfirmPasswordOtp from "@/actions/ConfirmPasswordOtp";
 import { useParams } from "next/navigation";
 import FormLink from "@/app/components/FormLink";

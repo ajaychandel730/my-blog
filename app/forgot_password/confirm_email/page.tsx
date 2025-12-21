@@ -1,11 +1,7 @@
 import React from "react";
 
-import Link from "next/link";
-import Image from "next/image";
 import ConfirmEmailForm from "./ConfirmEmailForm";
-import ToastProvider from "@/app/ToastProvider";
 import LogoButton from "@/app/components/homePage/HeaderButtons/LogoButton";
-import FormLink from "@/app/components/FormLink";
 
 const page = () => {
   return (
@@ -26,7 +22,6 @@ const page = () => {
         </div>
       </div>
       {/* //form end/ */}
-      <ToastProvider/>
     </div>
   );
 };

@@ -1,73 +1,107 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import PublishBlogItem from "./PublishBlogItem";
-import useSWR from "swr";
+import useInfiniteSwr from "swr/infinite";
 import BlogsPagination from "../BlogsPagination";
-import { TBlogCard } from "@/types/blog";
+import { BlogItem } from "./UserPublishBlogs";
+import { BlogCard, BlogType } from "@/types/blog";
 
-const fetchUserPublishDrafts = async (url: string) => {
-  const res = await fetch(url);
-  return res.json();
-};
 
 type Props = {
-  PublishBlogItemSkeleton : React.JSX.Element;
-}
+  PublishBlogItemSkeleton: React.JSX.Element;
+};
 
-const UserDrafts = ({PublishBlogItemSkeleton}:Props) => {
-  const [page, setPage] = useState<number>(1);
-  const [drafts, setDrafts] = useState<TBlogCard[]>([]);
-
-  const { data, error, isLoading } = useSWR(
-    `/api/user/drafts?page=${page}&limit=${20}`,
-    fetchUserPublishDrafts
-  );
-  
-  const result: [] = Array.isArray(data?.result) ? data.result : [];
+const UserDrafts = ({ PublishBlogItemSkeleton }: Props) => {
+  const { data, error, isLoading, isValidating, mutate, size, setSize } =
+    useInfiniteSwr(getKey, fetchUserPublishDrafts, {
+      revalidateFirstPage: false,
+    });
 
   const onDeleteDraft = (blogId: string) => {
-    setDrafts((prev) => prev.filter((blog) => blog._id !== blogId));
+    mutate((data) => {
+      if (!data) return data;
+      for (let i = 0; i < data?.length; i++) {
+        if (!data[i].result && !Array.isArray(data[i].result)) {
+          continue;
+        }
+        for (let j = 0; j < data[i]?.result?.length; j++) {
+          if (data[i].result[j]._id === blogId) {
+            data[i].result[j].isDeleted = true;
+            return data;
+          }
+        }
+      }
+      return data;
+    });
   };
 
-  useEffect(() => {
-    if (!isLoading && result.length > 0) {
-      setDrafts((preDrafts) => [...preDrafts, ...result]);
-    }
-  }, [result]);
-  
   return (
     <div className="flex flex-col w-full  space-y-2">
-      {drafts.map(({ _id, banner, topics, title, date }) => (
-        <PublishBlogItem
-          key={_id}
-          tab={"Drafts"}
-          topics={topics}
-          _id={_id}
-          banner={banner}
-          title={title}
-          date={date}
-          onDeleteBlog={onDeleteDraft}
-        />
-      ))}
+      {data &&
+        data?.map(({ result }: { result: BlogItem[] }) => {
+          return result?.map(
+            ({ _id, banner, topics, title, date, isDeleted = false }) => (
+              <PublishBlogItem
+                key={_id}
+                tab={BlogType.draft}
+                topics={topics}
+                _id={_id}
+                banner={banner}
+                title={title}
+                date={date}
+                isDeleted={isDeleted}
+                onDeleteBlog={onDeleteDraft}
+              />
+            )
+          );
+        })}
 
-       {
-          !isLoading && drafts.length == 0 && (
-             <div className="flex w-full font-semibold text-center text-base text-gray-400"> 
-                 <p className="w-full">No data to display.</p>
-             </div>
-          )
-       }
-      
+      {!isLoading &&
+        (!data || !("result" in data[0]) || data[0]?.result?.length == 0) && (
+          <div className="flex w-full font-semibold text-center text-base text-gray-400">
+            <p className="w-full">No data to display.</p>
+          </div>
+        )}
 
-      {isLoading &&
+      {(isLoading || isValidating) &&
+        (!data || (data && data[data.length - 1].status !== "error")) &&
         Array(10)
           .fill(1)
           .map(() => PublishBlogItemSkeleton)}
 
-      {result.length != 0 && !isLoading && (
-        <BlogsPagination setPage={setPage} isLoading={isLoading} />
-      )}
+      {data &&
+        "result" in data[data.length - 1] &&
+        data[data?.length - 1].result?.length > 0 &&
+        !isLoading  && (
+          <BlogsPagination setPage={setSize}  />
+        )}
     </div>
   );
 };
 
 export default UserDrafts;
+
+
+// ------------------------->
+const fetchUserPublishDrafts = async (url: string) => {
+  const res = await fetch(url, {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+    },
+    next: { revalidate: 0 },
+  });
+  return res.json();
+};
+
+
+// ----------------------->
+const getKey = (
+  pageIndex: number,
+  previousPageData: { status: string; result: BlogCard[] }
+) => {
+  if (previousPageData && previousPageData?.result?.length == 0) {
+    return null;
+  }
+  return `/api/user/drafts?page=${pageIndex + 1}&limit=${20}`;
+};

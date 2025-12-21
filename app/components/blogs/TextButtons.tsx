@@ -4,7 +4,6 @@ import { EditorBubbleItem, useEditor } from "novel";
 import { BoldIcon, ItalicIcon, UnderlineIcon, StrikethroughIcon, CodeIcon } from "lucide-react";
 import type { SelectorItem } from "./NodeSelector";
 import { Button } from "@heroui/button";
-import { toast } from "react-toastify";
 
 export const TextButtons = () => {
   const { editor } = useEditor();

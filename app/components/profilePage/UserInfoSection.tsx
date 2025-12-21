@@ -3,6 +3,7 @@ import { Button } from "@heroui/button";
 import React from "react";
 import { UserRound } from "lucide-react";
 import Link from "next/link";
+
 type Props = {
   id: string;
   name: string;

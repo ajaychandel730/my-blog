@@ -5,23 +5,27 @@ import AuthSessionProvider from "../AuthSessionProvider";
 import NewBlogButton from "./NewBlogButton";
 import StoreProvider from "@/app/StoreProvider";
 import LogoButton from "../homePage/HeaderButtons/LogoButton";
-// import StoreProvider from "@/app/StoreProvider";
+import UserProfile from "../UserProfile";
 
-const CreateNavbar = ({editBlogId}:{editBlogId?:string}) => {
-
+const CreateNavbar = ({
+  showNewBlogButton = false,
+}: {
+  showNewBlogButton?: boolean;
+}) => {
   return (
-    <div className=" flex items-center justify-between h-16 bg-gray-50 border-gray-300 border-b fixed z-50   top-0 right-0 left-0 px-10">
+    <div className=" flex items-center justify-between h-16 bg-gray-50 border-gray-300 border-b fixed z-20   top-0 right-0 left-0 px-10">
       {/* left section */}
       <div className="flex items-center h-full gap-2">
-        <LogoButton/>
+        <LogoButton />
       </div>
       {/* right section */}
-      <div className="flex items-center h-full gap-2">
+      <div className="flex items-center h-full space-x-4">
         <StoreProvider>
-           {!editBlogId && <NewBlogButton />}
+          {showNewBlogButton && <NewBlogButton />}
           <AuthSessionProvider>
             <SaveDraftButton />
             <PublishButton />
+            <UserProfile />
           </AuthSessionProvider>
         </StoreProvider>
       </div>

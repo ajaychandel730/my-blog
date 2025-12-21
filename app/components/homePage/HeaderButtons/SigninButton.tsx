@@ -9,7 +9,7 @@ const SigninButton = () => {
     <Button
       as = {Link}
       href={"/signin"}
-      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors"
+      className="inline-flex items-center sm:gap-2 sm:px-4 sm:py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors"
       aria-label="Sign In"
     >
       <LogIn className="w-5 h-5" />

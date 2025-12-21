@@ -1,8 +1,7 @@
 import { createImageUpload } from "novel/plugins";
-import { toast } from "react-toastify";
 import { uploadImageOnCloudinary } from "@/lib/cloudinary";
 import convertIntoCompressFile from "@/lib/convertIntoCompressFile";
-import { resolve } from "path";
+import { toast } from "sonner";
 
 const onUpload = async (file: File) => {
      const compressFile:File | null = await convertIntoCompressFile(file);
@@ -36,7 +35,7 @@ export const uploadFn = createImageUpload({
             toast.error("File type not supported.");
             return false;
         } else if (file.size / 1024 / 1024 > 20) {
-            toast.error("File size too big (max 20MB).");
+            toast.warning("File size too big (max 20MB).");
             return false;
         }
         return true;

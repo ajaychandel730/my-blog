@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { RootState, setBlog } from "@/lib/store";
 import Image from "next/image";
 import convertIntoCompressFile from "@/lib/convertIntoCompressFile";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import { uploadImageOnCloudinary } from "@/lib/cloudinary";
 import { getErrorMessage } from "@/utils/errors";
 import { Tooltip } from "@heroui/tooltip";
@@ -57,7 +57,7 @@ const BlogImage = () => {
         type="file"
         className="hidden"
       />
-      {blog.image && !imageloading? (
+      {blog.image && !imageloading ? (
         <ButtonGroup size="lg" variant="faded" className="absolute z-20 ">
           <Tooltip content="Change image.">
             <Button
@@ -71,7 +71,13 @@ const BlogImage = () => {
             </Button>
           </Tooltip>
           <Tooltip content="Delete image.">
-            <Button onPress={()=>{dispatch(setBlog({image : ''}));}} color="danger" isIconOnly>
+            <Button
+              onPress={() => {
+                dispatch(setBlog({ image: "" }));
+              }}
+              color="danger"
+              isIconOnly
+            >
               <TrashIcon />
             </Button>
           </Tooltip>
@@ -80,7 +86,9 @@ const BlogImage = () => {
         <Button
           variant="shadow"
           isLoading={imageloading}
-          startContent={imageloading ? "" : <ArrowUpToLine className="w-5 h-5" />}
+          startContent={
+            imageloading ? "" : <ArrowUpToLine className="w-5 h-5" />
+          }
           onPress={() => {
             fileRef?.current?.click();
           }}

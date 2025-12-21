@@ -2,9 +2,9 @@ import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 import { nextAuthOptions } from "../../auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
-import client from "@/lib/dbConnect";
 import { ObjectId } from "mongodb";
 import { getErrorMessage } from "@/utils/errors";
+import clientPromise from "@/lib/dbConnect";
 
 export  async function GET(req: NextRequest) {
   try {
@@ -14,10 +14,11 @@ export  async function GET(req: NextRequest) {
     const session = await getServerSession(nextAuthOptions);
 
     if (session && "id" in session.user) {
+      const client = await clientPromise;
       const collection = client.db("blogz").collection("blogs");
       const objectUserId = new ObjectId(session.user.id);
       const blogs = await collection
-        .find({ userId: objectUserId }, { skip: (page - 1) * limit, limit })
+        .find({ userId: objectUserId }, {sort :{_id : -1},  skip: (page - 1) * limit, limit })
         .toArray();
       
       return NextResponse.json(

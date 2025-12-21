@@ -1,14 +1,28 @@
-import client from "@/lib/dbConnect";
 import { getErrorMessage } from "@/utils/errors";
 export const dynamic = "force-dynamic";
+import { headers } from "next/headers";
+import { rateLimit } from "@/lib/rateLimit";
+import clientPromise from "@/lib/dbConnect";
 
-export interface Filter{
-  _id : string;
-  count : number;
+export interface Filter {
+  _id: string;
+  count: number;
 }
 
-export default async function (numBucketSize:number=4): Promise<Filter[]> {
+export default async function (numBucketSize: number = 4): Promise<Filter[]> {
   try {
+    // limiting
+    const headerList = await headers();
+    const ip =
+      headerList.get("x-forwarded-for") ??
+      headerList.get("x-real-ip") ??
+      "unknown";
+
+    if (!rateLimit(ip)) {
+      throw new Error("Too many requests");
+    }
+    //
+    const client = await clientPromise;
     const blogsColl = client.db("blogz").collection("blogs");
     const searchMetaStage = {
       $searchMeta: {

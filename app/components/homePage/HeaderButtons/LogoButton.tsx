@@ -10,7 +10,7 @@ const LogoButton = () => {
         <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
           <span className="text-white">B</span>
         </div>
-        <span className="text-xl tracking-tight text-gray-900">BlogSpace</span>
+        <span className="text-xl hidden sm:inline-block tracking-tight text-gray-900">BlogSpace</span>
       </div>
     </Link>
   );

@@ -1,65 +1,103 @@
-import React, { useEffect, useState } from "react";
+"use client";
+import React  from "react";
 import PublishBlogItem from "./PublishBlogItem";
-import useSWR from "swr";
-import { useSession } from "next-auth/react";
+import useInfiniteSwr from "swr/infinite";
 import BlogsPagination from "../BlogsPagination";
-import { TBlogCard } from "@/types/blog";
+import { BlogCard, BlogType } from "@/types/blog";
 
-const fetchUserPublishBlogs = async (url: string) => {
-  const res = await fetch(url);
-  return res.json();
-};
 
 type Props = {
   PublishBlogItemSkeleton: React.JSX.Element;
 };
 
-const UserPublishBlogs = ({ PublishBlogItemSkeleton }: Props) => {
-  const [page, setPage] = useState<number>(1);
-  const [blogs, setBlogs] = useState<TBlogCard[]>([]);
+export type BlogItem = BlogCard & {
+  isDeleted?: boolean;
+};
 
-  const { data, error, isLoading } = useSWR(
-    `/api/user/publish_blogs?page=${page}&limit=${20}`,
-    fetchUserPublishBlogs
-  );
+const UserPublishBlogs = ({ PublishBlogItemSkeleton }: Props) => {
+  const { data, error, isLoading, isValidating, mutate, setSize, size } =
+    useInfiniteSwr(getKey, fetchUserPublishBlogs, {
+      revalidateFirstPage: false,
+      
+    });
 
   const onDeleteBlog = (blogId: string) => {
-    setBlogs((prev) => prev.filter((blog) => blog._id !== blogId));
+    mutate((data) => {
+      if (!data) return data;
+      for (let i = 0; i < data?.length; i++) {
+        if (!data[i].result && !Array.isArray(data[i].result)) {
+          continue;
+        }
+        for (let j = 0; j < data[i].result.length; j++) {
+          if (data[i].result[j]._id === blogId) {
+            data[i].result[j].isDeleted = true;
+            return data;
+          }
+        }
+      }
+      return data;
+    });
   };
-
-  const result: [] = Array.isArray(data?.result) ? data.result : [];
-
-  useEffect(() => {
-    if (!isLoading && result.length > 0) {
-      setBlogs((preBlogs) => [...preBlogs, ...result]);
-    }
-  }, [result]);
 
   return (
     <div className="flex flex-col w-full  space-y-2">
-      {blogs.map(({ _id, banner, topics, title, date }) => (
-        <PublishBlogItem
-          key={_id}
-          tab="Blogs"
-          topics={topics}
-          _id={_id}
-          banner={banner}
-          title={title}
-          date={date}
-          onDeleteBlog = {onDeleteBlog}
-        />
-      ))}
+      {data && data?.map(({result}:{result:BlogItem[]}) => {
+        return result?.map(
+          ({ _id, banner, topics, title, date, isDeleted = false }) => (
+            <PublishBlogItem
+              key={_id}
+              tab={BlogType.published}
+              topics={topics}
+              _id={_id}
+              banner={banner}
+              title={title}
+              date={date}
+              isDeleted={isDeleted}
+              onDeleteBlog={onDeleteBlog}
+            />
+          )
+        );
+      })}
 
-      {isLoading &&
+      {!isLoading && (!data || !("result" in data[0])  || data[0]?.result?.length == 0) && (
+        <div className="flex w-full font-semibold text-center text-base text-gray-400">
+          <p className="w-full">No data to display.</p>
+        </div>
+      )}
+
+      {(isLoading || isValidating) && (!data ||  (data[data.length-1]?.status !== "error")) &&
         Array(10)
           .fill(1)
           .map(() => PublishBlogItemSkeleton)}
 
-      {result.length != 0 && !isLoading && (
-        <BlogsPagination setPage={setPage} isLoading={isLoading} />
+      {data && ("result" in data[data?.length - 1]) && data[data?.length - 1]?.result?.length > 0 && !isLoading && (
+        <BlogsPagination setPage={setSize}/>
       )}
     </div>
   );
 };
 
 export default UserPublishBlogs;
+
+// ------------------------>
+const fetchUserPublishBlogs = async (url: string) => {
+  const res = await fetch(url, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+    },
+  });
+  return res.json();
+};
+
+// ------------------------->
+const getKey = (
+  pageIndex: number,
+  previousPageData: { status: string; result: BlogCard[] }
+) => {
+  if (previousPageData && previousPageData?.result?.length == 0) {
+    return null;
+  }
+
+  return `/api/user/publish_blogs?page=${pageIndex+1}&limit=${20}`;
+};

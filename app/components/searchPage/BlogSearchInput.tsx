@@ -10,20 +10,21 @@ const BlogSearchInput = () => {
 
   const onKeyHandler = (
     event: React.KeyboardEvent<HTMLInputElement> | KeyboardEvent
-  ) =>{
+  ) => {
     const keyType = event.key;
-     
-    if(keyType == "Enter" && query.length > 0){
-       router.push(`/blogs/search/${query.toString()}`);
+
+    if (keyType == "Enter" && query.length > 0) {
+      router.push(`/blogs/search/${query.toString()}`);
     }
   };
-
 
   return (
     // <div className="mt-4 flex items-center justify-start w-full">
       <Input
         onKeyDown={onKeyHandler}
-        onValueChange={(query:string)=>{setQuery(query)}}
+        onValueChange={(query: string) => {
+          setQuery(query);
+        }}
         startContent={<SearchIcon className="w-5 h-5 " />}
         placeholder="Type to search"
         size="lg"
@@ -31,8 +32,7 @@ const BlogSearchInput = () => {
         color="default"
         label="Search blogs"
         value={query}
-        defaultValue="hi"
-        className="max-w-xs text-lg"
+        className="max-w-xs text-lg z-0"
       />
     // </div>
   );

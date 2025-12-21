@@ -10,7 +10,7 @@ const SearchButton = () => {
       as = {Link}
       variant="light"
       href={"/blogs/category/all"}
-      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
+      className="inline-flex items-center sm:gap-2 sm:px-4 sm:py-2 rounded-full sm:rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
       aria-label="Search"
     >
       <Search className="w-5 h-5" />
