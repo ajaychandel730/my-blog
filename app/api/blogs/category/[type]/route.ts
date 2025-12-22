@@ -1,9 +1,8 @@
 "use server";
 import { getErrorMessage } from "@/utils/errors";
 import { NextRequest, NextResponse } from "next/server";
-import { headers } from "next/headers";
-import { rateLimit } from "@/lib/rateLimit";
 import clientPromise from "@/lib/dbConnect";
+import rateLimitHandler from "@/lib/rateLimitHandler";
 
 type Params = {
   params: Promise<{ type: string }>;
@@ -12,15 +11,7 @@ type Params = {
 export async function GET(req: NextRequest, { params }: Params) {
   try {
     // limiting
-    const headerList = await headers();
-    const ip =
-      headerList.get("x-forwarded-for") ??
-      headerList.get("x-real-ip") ??
-      "unknown";
-
-    if (!rateLimit(ip)) {
-      throw new Error("Too many requests");
-    }
+    await rateLimitHandler();
     //
     const { type } = await params;
     const client = await clientPromise;

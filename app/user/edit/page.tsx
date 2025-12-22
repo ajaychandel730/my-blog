@@ -1,10 +1,10 @@
 import React from "react";
 import Header from "@/app/components/Header";
 import BackToProfileLink from "@/app/components/profilePage/BackToProfileLink";
-import UserEditForm from "@/app/components/profilePage/UserEditForm";
 import { getServerSession } from "next-auth";
 import { nextAuthOptions } from "@/app/api/auth/[...nextauth]/options";
 import { notFound } from "next/navigation";
+import UserEditForm from "@/app/components/profilePage/UserEditForm";
 
 const page = async () => {
   const session = await getServerSession(nextAuthOptions);
@@ -30,7 +30,9 @@ const page = async () => {
             </p>
           </div>
         </div>
+
         <UserEditForm user={{email, image, name}}/>
+        
       </div>
     </div>
   );

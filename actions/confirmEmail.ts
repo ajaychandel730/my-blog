@@ -4,21 +4,12 @@ import { generateOTP, hashOTP } from "@/lib/otp";
 import { emailSchema } from "@/lib/zodDefinations/emailSchema";
 import { getErrorMessage } from "@/utils/errors";
 import { redirect } from "next/navigation";
-import { headers } from "next/headers";
-import { rateLimit } from "@/lib/rateLimit";
 import clientPromise from "@/lib/dbConnect";
+import rateLimitHandler from "@/lib/rateLimitHandler";
 
 export default async function name(initialState: unknown, formData: FormData) {
   // limiting
-   const  headerList = await headers();
-    const ip =
-    headerList.get("x-forwarded-for") ??
-    headerList.get("x-real-ip") ??
-    "unknown";
-
-  if (!rateLimit(ip)) {
-    throw new Error("Too many requests");
-  }
+   await rateLimitHandler();
   //
   let userId;
   try {

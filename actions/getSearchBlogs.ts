@@ -1,8 +1,7 @@
 "use server";
 import { BlogCard } from "@/types/blog";
-import { headers } from "next/headers";
-import { rateLimit } from "@/lib/rateLimit";
 import clientPromise from "@/lib/dbConnect";
+import rateLimitHandler from "@/lib/rateLimitHandler";
 
 type User = {
   _id?: string;
@@ -29,15 +28,7 @@ export default async function (
   token?: string
 ): Promise<serverBlogCard[]> {
   // limiting
-  const headerList = await headers();
-  const ip =
-    headerList.get("x-forwarded-for") ??
-    headerList.get("x-real-ip") ??
-    "unknown";
-
-  if (!rateLimit(ip)) {
-    throw new Error("Too many requests");
-  }
+    await rateLimitHandler();
   //
   const client = await clientPromise;
   const blogsCollection = client.db("blogz").collection("blogs");

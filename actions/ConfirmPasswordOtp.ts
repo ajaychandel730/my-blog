@@ -6,24 +6,15 @@ import { ObjectId } from "mongodb";
 import { redirect } from "next/navigation";
 import { signResetToken } from "@/lib/jose";
 import { cookies } from "next/headers";
-import { headers } from "next/headers";
-import { rateLimit } from "@/lib/rateLimit";
 import clientPromise from "@/lib/dbConnect";
+import rateLimitHandler from "@/lib/rateLimitHandler";
 
 export default async function (preState: unknown, formData: FormData) {
   const { userId, otp } = Object.fromEntries(formData.entries());
   let _id;
   try {
     // limiting
-    const headerList = await headers();
-    const ip =
-      headerList.get("x-forwarded-for") ??
-      headerList.get("x-real-ip") ??
-      "unknown";
-
-    if (!rateLimit(ip)) {
-      throw new Error("Too many requests");
-    }
+     await rateLimitHandler();
     //
 
     const result = password_otpSchema.safeParse({

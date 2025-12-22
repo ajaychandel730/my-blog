@@ -4,9 +4,8 @@ import { getServerSession } from "next-auth";
 import { ObjectId } from "mongodb";
 import updateBlogSchema from "@/lib/zodDefinations/updateBlogSchema";
 import { getErrorMessage } from "@/utils/errors";
-import { headers } from "next/headers";
-import { rateLimit } from "@/lib/rateLimit";
 import clientPromise from "@/lib/dbConnect";
+import rateLimitHandler from "@/lib/rateLimitHandler";
 
 export type BlogUpdatePayload = {
   title: string;
@@ -20,16 +19,8 @@ export type BlogUpdatePayload = {
 export default async function (blog: BlogUpdatePayload) {
   try {
        // limiting
-           const  headerList = await headers();
-            const ip =
-            headerList.get("x-forwarded-for") ??
-            headerList.get("x-real-ip") ??
-            "unknown";
-        
-          if (!rateLimit(ip)) {
-            throw new Error("Too many requests");
-          }
-         //F
+          await rateLimitHandler();
+         //
     const session = await getServerSession(nextAuthOptions);
 
     if (!session) {

@@ -1,41 +1,54 @@
-import {z } from 'zod'
-import { emailSchema } from './emailSchema';
- 
+import { z } from "zod";
+import { emailSchema } from "./emailSchema";
+
 export const signupSchema = z.object({
-  email:emailSchema.shape.email,
+  email: emailSchema.shape.email,
   password: z
     .string()
     .min(6, "must be a string of at least 6 characters.")
     .max(10, "Password must be less than 10 characters.")
-    .regex(/[a-zA-Z]/, { message: 'Contain at least one letter.' })
-    .regex(/[0-9]/, { message: 'Contain at least one number.' })
+    .regex(/[a-zA-Z]/, { message: "Contain at least one letter." })
+    .regex(/[0-9]/, { message: "Contain at least one number." })
     .regex(/[^a-zA-Z0-9]/, {
-      message: 'Contain at least one special character.',
+      message: "Contain at least one special character.",
     })
     .trim(),
-    repeatPassword : z.string(),
+  repeatPassword: z.string(),
 });
 
-export const signupFormSchema = signupSchema.refine((data) => data.password === data.repeatPassword, {
-  message: "Password and Repeat password don't match",
-  path: ["repeatPassword"],
-});
+export const signupFormSchema = signupSchema.refine(
+  (data) => data.password === data.repeatPassword,
+  {
+    message: "Password and Repeat password don't match",
+    path: ["repeatPassword"],
+  }
+);
 
 export const signInSchema = z.object({
-  email: z.string({ required_error: "Email is required" })
+  email: z
+    .string({ required_error: "Email is required" })
     .min(1, "Email is required")
     .email("Invalid email"),
-  password: z.string({ required_error: "Password is required" })
-    .min(1, "Password is required")
-})
+  password: z
+    .string({ required_error: "Password is required" })
+    .min(1, "Password is required"),
+});
 
- 
+export const UserEditSchema = z.object({
+  email: emailSchema.shape.email,
+  name: z
+    .string({ required_error: "Please enter your username." })
+    .min(3, { message: "Username must be at least 3 characters long" })
+    .max(32, { message: "Username must be at most 32 characters long" }),
+   image : z.string().url("Invalid user image.") 
+});
+
 export type FormState =
   | {
       errors?: {
-        email?: string[]
-        password?: string[]
-      }
-      message?: string
+        email?: string[];
+        password?: string[];
+      };
+      message?: string;
     }
-  | undefined
+  | undefined;

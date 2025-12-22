@@ -1,9 +1,11 @@
 import { NextResponse } from "next/server";
 import clientPromise from "@/lib/dbConnect";
+import rateLimitHandler from "@/lib/rateLimitHandler";
 
 
 export async function POST(req:Request){
     try {
+        await rateLimitHandler();
         const {email} = await req.json();
         const client = await clientPromise;
         const db = client.db("blogsz");

@@ -55,7 +55,7 @@ const BlogImage = () => {
         accept=".png, .jpg, .jpeg, .webp"
         ref={fileRef}
         type="file"
-        className="hidden"
+        hidden
       />
       {blog.image && !imageloading ? (
         <ButtonGroup size="lg" variant="faded" className="absolute z-20 ">

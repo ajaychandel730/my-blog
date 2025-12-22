@@ -8,6 +8,7 @@ import {
 import { Button } from "@heroui/button";
 import Link from "next/link";
 import { Ellipsis } from "lucide-react";
+import { BlogType } from "@/types/blog";
 
 type Props = {
   _id: string;
@@ -24,7 +25,7 @@ export default function BlogItemOptionsDropdown({ _id, tab, onOpen }: Props) {
         </Button>
       </DropdownTrigger>
       <DropdownMenu aria-label="Static Actions">
-        <DropdownItem as={Link} href={tab == "Blogs" ? `/blog/${_id}` : `/draft/edit/${_id}`} key="view">
+        <DropdownItem as={Link} href={tab === BlogType.published ? `/blog/${_id}` : `/draft/edit/${_id}`} key="view">
            View
         </DropdownItem>
         <DropdownItem onPress={onOpen} key="delete" className="text-danger" color="danger">

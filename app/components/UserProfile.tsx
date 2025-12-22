@@ -16,7 +16,7 @@ import UserSkeleton from "./UserSkeleton";
 const UserProfile = () => {
   const session = useSession();
   const { data } = session;
-  console.log("profile:", data);
+  
   const isAuthenticated = session.status === "authenticated";
   const router = useRouter();
   const user = {
