@@ -43,7 +43,7 @@ export default async function (state: any, formData: FormData): Promise<any> {
     const user = await userCollection.updateOne(
       { _id: objectId },
       {
-        $set: { email:email, name:name, image:image },
+        $set: { email, name, image },
       }
     );
 
@@ -53,11 +53,12 @@ export default async function (state: any, formData: FormData): Promise<any> {
         message: "User not found.",
       };
     }
-
+    
     if (user.modifiedCount > 0) {
       return {
         status: "ok",
-        message: "Profile upadted successfully.",
+        message: "Profile updated successfully.",
+        user : {name, email, image}
       };
     }
 

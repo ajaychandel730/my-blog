@@ -5,7 +5,9 @@ import useInfiniteSwr from "swr/infinite";
 import BlogsPagination from "../BlogsPagination";
 import { BlogItem } from "./UserPublishBlogs";
 import { BlogCard, BlogType } from "@/types/blog";
-
+import EmptyBlogsErrorMessage from "../blogs/EmptyBlogsErrorMessage";
+import BlogsEmptyState from "../blogs/BlogsEmptyState";
+import HandleErrrorMessage from "./HandleErrrorMessage";
 
 type Props = {
   PublishBlogItemSkeleton: React.JSX.Element;
@@ -34,7 +36,9 @@ const UserDrafts = ({ PublishBlogItemSkeleton }: Props) => {
       return data;
     });
   };
+ 
 
+  
   return (
     <div className="flex flex-col w-full  space-y-2">
       {data &&
@@ -56,31 +60,27 @@ const UserDrafts = ({ PublishBlogItemSkeleton }: Props) => {
           );
         })}
 
-      {!isLoading &&
-        (!data || !("result" in data[0]) || data[0]?.result?.length == 0) && (
-          <div className="flex w-full font-semibold text-center text-base text-gray-400">
-            <p className="w-full">No data to display.</p>
-          </div>
-        )}
+      <HandleErrrorMessage
+        isLoading={isLoading}
+        data={data as Object[] | undefined}
+        error={error}
+      />
 
       {(isLoading || isValidating) &&
         (!data || (data && data[data.length - 1].status !== "error")) &&
-        Array(10)
+        Array(5)
           .fill(1)
           .map(() => PublishBlogItemSkeleton)}
 
       {data &&
         "result" in data[data.length - 1] &&
         data[data?.length - 1].result?.length > 0 &&
-        !isLoading  && (
-          <BlogsPagination setPage={setSize}  />
-        )}
+        !isLoading && <BlogsPagination setPage={setSize} />}
     </div>
   );
 };
 
 export default UserDrafts;
-
 
 // ------------------------->
 const fetchUserPublishDrafts = async (url: string) => {
@@ -93,7 +93,6 @@ const fetchUserPublishDrafts = async (url: string) => {
   });
   return res.json();
 };
-
 
 // ----------------------->
 const getKey = (

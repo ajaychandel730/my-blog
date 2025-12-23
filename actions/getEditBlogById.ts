@@ -2,8 +2,6 @@
 import { ObjectId } from "mongodb";
 import { getErrorMessage } from "@/utils/errors";
 import { Blog } from "@/lib/features/editor/editorSlice";
-import { headers } from "next/headers";
-import { rateLimit } from "@/lib/rateLimit";
 import clientPromise from "@/lib/dbConnect";
 import rateLimitHandler from "@/lib/rateLimitHandler";
 

@@ -18,13 +18,14 @@ const CreateBlogButton = () => {
     <>
       <Button
         as={Link}
+        isIconOnly
         variant="light"
         href={"/blog/create"}
-        className="inline-flex items-center rounded-full sm:first-line:gap-2 sm:px-4 sm:py-2 sm:rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
+        className="inline-flex px-0 w-fit items-center sm:px-4 sm:py-2 rounded-full sm:rounded-lg text-gray-700"
         aria-label="Create Blog"
       >
         <PenSquare className="w-5 h-5" />
-        <span className="hidden sm:inline">Create Blog</span>
+        <span className="hidden sm:inline px-2">Create Blog</span>
       </Button>
     </>
   );

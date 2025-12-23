@@ -5,6 +5,7 @@ import { getServerSession } from "next-auth";
 import { nextAuthOptions } from "@/app/api/auth/[...nextauth]/options";
 import { notFound } from "next/navigation";
 import UserEditForm from "@/app/components/profilePage/UserEditForm";
+import UserEditFormWrapper from "@/app/components/profilePage/UserEditFormWrapper";
 
 const page = async () => {
   const session = await getServerSession(nextAuthOptions);
@@ -12,9 +13,8 @@ const page = async () => {
   if (!session?.user) {
     notFound();
   }
-
   const {email, image, name} = session.user;
-
+  
   return (
     <div className="min-h-screen w-full flex flex-col items-center p-4  ">
       <Header />
@@ -30,9 +30,7 @@ const page = async () => {
             </p>
           </div>
         </div>
-
-        <UserEditForm user={{email, image, name}}/>
-        
+        <UserEditFormWrapper user={{email, image, name}}/>
       </div>
     </div>
   );

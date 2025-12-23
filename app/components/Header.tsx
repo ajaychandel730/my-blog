@@ -15,7 +15,7 @@ const Header = () => {
           {/* Logo */}
           <LogoButton />
           {/* Buttons */}
-          <nav className="flex items-center   sm:space-x-3">
+          <nav className="flex items-center space-x-3">
             <SearchButton />
             <CreateBlogButton />
             <AuthSessionProvider>

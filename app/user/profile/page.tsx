@@ -15,15 +15,16 @@ const UserProfilePage = async () => {
   if (!session) {
     redirect("/signin");
   }
-  const {
-    user: { id, email, name, image },
-  } = session;
-
-  if (typeof id !== "string" || typeof email !== "string") {
+ 
+  if (!session) {
     redirect("/signin");
   }
 
-  const totalPosts: number | undefined = await getUserTotalPostsCount(id);
+   const {
+    user: { id, name, image },
+  } = session;
+
+  const totalPosts: number | undefined = await getUserTotalPostsCount(id as string);
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center p-4  ">
@@ -31,8 +32,6 @@ const UserProfilePage = async () => {
       <div className="w-full md:max-w-[900px] flex flex-col items-center mt-20">
         <UserInfoSection
           totalPosts={totalPosts}
-          id={id}
-          email={email}
           image={image}
           name={name}
         />

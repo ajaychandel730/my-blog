@@ -1,10 +1,11 @@
 "use client";
-import React  from "react";
+import React from "react";
 import PublishBlogItem from "./PublishBlogItem";
 import useInfiniteSwr from "swr/infinite";
 import BlogsPagination from "../BlogsPagination";
 import { BlogCard, BlogType } from "@/types/blog";
-
+import EmptyBlogsErrorMessage from "../blogs/EmptyBlogsErrorMessage";
+import HandleErrrorMessage from "./HandleErrrorMessage";
 
 type Props = {
   PublishBlogItemSkeleton: React.JSX.Element;
@@ -18,7 +19,6 @@ const UserPublishBlogs = ({ PublishBlogItemSkeleton }: Props) => {
   const { data, error, isLoading, isValidating, mutate, setSize, size } =
     useInfiniteSwr(getKey, fetchUserPublishBlogs, {
       revalidateFirstPage: false,
-      
     });
 
   const onDeleteBlog = (blogId: string) => {
@@ -41,38 +41,41 @@ const UserPublishBlogs = ({ PublishBlogItemSkeleton }: Props) => {
 
   return (
     <div className="flex flex-col w-full  space-y-2">
-      {data && data?.map(({result}:{result:BlogItem[]}) => {
-        return result?.map(
-          ({ _id, banner, topics, title, date, isDeleted = false }) => (
-            <PublishBlogItem
-              key={_id}
-              tab={BlogType.published}
-              topics={topics}
-              _id={_id}
-              banner={banner}
-              title={title}
-              date={date}
-              isDeleted={isDeleted}
-              onDeleteBlog={onDeleteBlog}
-            />
-          )
-        );
-      })}
+      {data &&
+        data?.map(({ result }: { result: BlogItem[] }) => {
+          return result?.map(
+            ({ _id, banner, topics, title, date, isDeleted = false }) => (
+              <PublishBlogItem
+                key={_id}
+                tab={BlogType.published}
+                topics={topics}
+                _id={_id}
+                banner={banner}
+                title={title}
+                date={date}
+                isDeleted={isDeleted}
+                onDeleteBlog={onDeleteBlog}
+              />
+            )
+          );
+        })}
 
-      {!isLoading && (!data || !("result" in data[0])  || data[0]?.result?.length == 0) && (
-        <div className="flex w-full font-semibold text-center text-base text-gray-400">
-          <p className="w-full">No data to display.</p>
-        </div>
-      )}
+      <HandleErrrorMessage
+        isLoading={isLoading}
+        data={data as Object[] | undefined}
+        error={error}
+      />
 
-      {(isLoading || isValidating) && (!data ||  (data[data.length-1]?.status !== "error")) &&
-        Array(10)
+      {(isLoading || isValidating) &&
+        (!data || data[data.length - 1]?.status !== "error") &&
+        Array(6)
           .fill(1)
           .map(() => PublishBlogItemSkeleton)}
 
-      {data && ("result" in data[data?.length - 1]) && data[data?.length - 1]?.result?.length > 0 && !isLoading && (
-        <BlogsPagination setPage={setSize}/>
-      )}
+      {data &&
+        "result" in data[data?.length - 1] &&
+        data[data?.length - 1]?.result?.length > 0 &&
+        !isLoading && <BlogsPagination setPage={setSize} />}
     </div>
   );
 };
@@ -99,5 +102,5 @@ const getKey = (
     return null;
   }
 
-  return `/api/user/publish_blogs?page=${pageIndex+1}&limit=${20}`;
+  return `/api/user/publish_blogs?page=${pageIndex + 1}&limit=${20}`;
 };

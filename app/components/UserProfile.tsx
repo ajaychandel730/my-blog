@@ -12,6 +12,7 @@ import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import SigninButton from "./homePage/HeaderButtons/SigninButton";
 import UserSkeleton from "./UserSkeleton";
+import { LogOut, UserRoundPen, UserRound } from "lucide-react";
 
 const UserProfile = () => {
   const session = useSession();
@@ -39,7 +40,7 @@ const UserProfile = () => {
           avatarProps={{
             src: user.image,
           }}
-          name={<p className="hidden sm:block">{user.name}</p>}
+          name={<p className=" hidden sm:block truncate ">{user.name.slice(0,10)}</p>}
         />
       </DropdownTrigger>
       <DropdownMenu aria-label="User Actions" variant="flat">
@@ -52,16 +53,27 @@ const UserProfile = () => {
           <p className="font-semibold text-sm">{user.email}</p>
         </DropdownItem>
         <DropdownItem
+          startContent={<UserRound className="w-5 h-5"/>}
           onPress={() => {
             router.push("/user/profile");
           }}
           aria-label="User profile button"
           key="profile"
         >
-          Profile
+           Profile
         </DropdownItem>
-        <DropdownItem color="danger" onPress={() => signOut()} key="signOut">
-          Sign out
+         <DropdownItem
+           startContent={<UserRoundPen className="w-5  h-5"/>}
+          onPress={() => {
+            router.push("/user/edit");
+          }}
+          aria-label="User profile edit button"
+          key="editprofile"
+        >
+          Edit Profile
+        </DropdownItem>
+        <DropdownItem startContent={<LogOut className="w-5 h-5"/>} color="danger" onPress={() => signOut()} key="signOut">
+          Sign Out
         </DropdownItem>
       </DropdownMenu>
     </Dropdown>

@@ -5,14 +5,12 @@ import { UserRound } from "lucide-react";
 import Link from "next/link";
 
 type Props = {
-  id: string;
   name: string;
-  email: string;
   image: string;
   totalPosts: number | undefined;
 };
 
-const UserInfoSection = ({ id, name, email, image, totalPosts }: Props) => {
+const UserInfoSection = ({name, image, totalPosts }: Props) => {
  
   return (
     <div className="flex flex-col items-center w-full">
@@ -23,7 +21,7 @@ const UserInfoSection = ({ id, name, email, image, totalPosts }: Props) => {
         fallback={<UserRound className="w-full h-full text-gray-700" />}
         src={image}
       />
-      <p>{name}</p>
+      <p className="turncate line-clamp-1">{name}</p>
 
       {typeof totalPosts == "number" && (
         <p>

@@ -5,7 +5,7 @@ import { fileURLToPath } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const csp = `
   default-src 'self';
-  script-src 'self' 'unsafe-eval' 'unsafe-inline';
+  script-src 'self' 'unsafe-eval' 'unsafe-inline' https://cdn.jsdelivr.net;
   style-src 'self' 'unsafe-inline';
   img-src 'self' blob: data: https://res.cloudinary.com https://nextui.org;
   font-src 'self';
@@ -13,6 +13,7 @@ const csp = `
   frame-ancestors 'none';
   base-uri 'self';
   form-action 'self';
+  worker-src 'self' blob:;
   `.replace(/\s{2,}/g, ' ').trim();
   
   // upgrade-insecure-requests;  

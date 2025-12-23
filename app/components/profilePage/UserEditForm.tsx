@@ -1,6 +1,7 @@
 "use client";
 import { Form } from "@heroui/form";
-import React, { useActionState, useEffect } from "react";
+import React, { useActionState, useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 import { Image } from "@heroui/image";
 import UploadNewPhotoButton from "./UploadNewPhotoButton";
 import { Input } from "@heroui/input";
@@ -8,8 +9,10 @@ import { Button } from "@heroui/button";
 import EditUserInfo from "@/actions/EditUserInfo";
 import Link from "next/link";
 import { toast } from "sonner";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
-type Props = {
+export type UserEditFormProps = {
   user: {
     email: string;
     name: string;
@@ -17,12 +20,23 @@ type Props = {
   };
 };
 
-const UserEditForm = ({ user }: Props) => {
+const UserEditForm = ({ user }: UserEditFormProps) => {
   const [state, formAction, isPending] = useActionState(EditUserInfo, user);
-  console.log("state:", state);
+  const [profileUrl, setProfileUrl] = useState<string>(user.image);
+  const { data: session, update } = useSession();
+  const router = useRouter();
 
   useEffect(() => {
-    if("errors" in state && "image" in state.errors){
+    const updateSession = ():void => {
+      if (state?.status == "ok" && "user" in state) {
+        const { name, email, image } = { ...session, ...state.user };
+        update({ name, email, image }).catch(()=>{
+          toast.error("Unable to update session. Please login for updated profile.");
+        });
+      }
+    };
+
+    if ("errors" in state && "image" in state.errors) {
       toast.error(state.errors.image[0]);
       return;
     }
@@ -30,6 +44,7 @@ const UserEditForm = ({ user }: Props) => {
     if ("message" in state && typeof state.message === "string") {
       if ("status" in state && state.status == "ok") {
         toast.success(state?.message);
+        updateSession();
       } else {
         toast.error(state.message);
       }
@@ -41,14 +56,14 @@ const UserEditForm = ({ user }: Props) => {
       <div className="w-full space-y-2 pb-10 border-b-1 border-gray-300">
         <h2>Profile picture</h2>
         <div className="flex space-x-4 items-center">
-          <input type="text" value={user.image} readOnly name="image" hidden/> 
+          <input type="text" value={profileUrl} readOnly name="image" hidden />
           <Image
-            src={user.image}
+            src={profileUrl}
             width={100}
             height={100}
             radius="full"
           ></Image>
-          <UploadNewPhotoButton />
+          <UploadNewPhotoButton setProfileUrl={setProfileUrl} />
         </div>
       </div>
       <div className="min-w-[300px] flex flex-col space-y-14">
@@ -57,6 +72,8 @@ const UserEditForm = ({ user }: Props) => {
           <Input
             name="name"
             defaultValue={user.name}
+            minLength={3}
+            maxLength={32}
             size="md"
             className="z-0"
             type="text"

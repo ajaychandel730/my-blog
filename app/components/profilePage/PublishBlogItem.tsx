@@ -44,7 +44,7 @@ const PublishBlogItem = ({
         className={`flex items-center group  ${isDeleted && "bg-danger-100"}`}
       >
         <CardHeader className="flex justify-between md:hidden">
-          <h3 className="text-base">{title}</h3>
+          <h3 className="text-sm sm:text-base line-clamp-1">{title}</h3>
           {isDeleted ? (
             <span className="text-sm text-danger-600">Deleted</span>
           ) : (
