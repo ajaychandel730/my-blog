@@ -8,7 +8,7 @@ const requests = new Map<string, { count: number; time: number }>();
 
 function memoryRateLimit(
   key: string,
-  limit = 10,
+  limit = 30,
   windowMs = 60000
 ) {
   const now = Date.now();
@@ -40,7 +40,7 @@ const redisLimiter = redis
 /* ---------- PUBLIC API ---------- */
 export async function rateLimit(
   key: string,
-  limit = 10,
+  limit = 30,
   windowMs = 60000
 ) {
   if (!isProd) {

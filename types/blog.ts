@@ -31,3 +31,8 @@ export enum BlogType {
   published = "PUBLISHED",
   draft = "DRAFT",
 }
+
+export interface BlogFilter{
+  _id : string;
+  count : number;
+}

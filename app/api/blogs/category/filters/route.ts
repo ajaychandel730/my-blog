@@ -1,18 +1,21 @@
-import { getErrorMessage } from "@/utils/errors";
-export const dynamic = "force-dynamic";
 import clientPromise from "@/lib/dbConnect";
 import rateLimitHandler from "@/lib/rateLimitHandler";
+import { getErrorMessage } from "@/utils/errors";
+import { NextRequest, NextResponse } from "next/server";
 
-export interface Filter {
-  _id: string;
-  count: number;
-}
 
-export default async function (numBucketSize: number = 4): Promise<Filter[]> {
-  try {
+export async function GET(req:NextRequest){
+ try {
     // limiting
       await rateLimitHandler();
     //
+    const {searchParams} = req.nextUrl;
+    let numBucketSize = 4; 
+    const limit = Number(searchParams.get("limit"));
+    if(!isNaN(limit) && limit < 10 && limit > 0){
+        numBucketSize = limit;
+    }
+
     const client = await clientPromise;
     const blogsColl = client.db("blogz").collection("blogs");
     const searchMetaStage = {
@@ -37,9 +40,17 @@ export default async function (numBucketSize: number = 4): Promise<Filter[]> {
 
     const filtersFacet = await blogsColl.aggregate([searchMetaStage]).toArray();
     const filterList = filtersFacet[0].facet.filterFacet.buckets;
-    return filterList;
+
+    return NextResponse.json({
+        status : "ok",
+        result : filterList
+    });
+
   } catch (err) {
-    console.log("error on getBlogsFiltersList:", getErrorMessage(err));
-    return [];
+    console.log("error on BlogsFiltersList:", getErrorMessage(err));
+    return NextResponse.json({
+        status : "error",
+        message : "Somthing went wrong."
+    })
   }
 }
