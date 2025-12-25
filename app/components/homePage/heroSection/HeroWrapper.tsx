@@ -6,7 +6,7 @@ const HeroWrapper = () => {
   return (
     <div className="w-full flex justify-center">
       <div className="w-full max-w-3xl text-center px-4">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-neutral-900">
+        <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-neutral-900">
           Welcome to
           <span className="ml-2 bg-gradient-to-br from-blue-600 to-purple-600 bg-clip-text text-transparent">
             BlogSpace

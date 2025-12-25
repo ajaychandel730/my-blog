@@ -4,12 +4,10 @@ import useSWR from "swr";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { BlogFilter } from "@/types/blog";
-import CategoryFilterSkeleton from "./CategoryFilterSkeleton";
 import { getErrorMessage } from "@/utils/errors";
-
-const convertLowercaseToCammelCase = (word: string) => {
-  return word.slice(0, 1).toUpperCase() + word.slice(1);
-};
+import CategoriesFilterListDropdown from "./CategoriesFilterListDropdown";
+import CategoryFilterSkeleton from "./CategoryFilterSkeleton";
+import convertLowerCaseIntocammelCase from "@/lib/convertLowerCaseIntocammelCase";
 
 const fetchFiltersList = async (url: string) => {
   try {
@@ -29,7 +27,7 @@ const fetchFiltersList = async (url: string) => {
 };
 
 const BlogCategoriesFilters = () => {
-  const { data, isLoading, error } = useSWR(
+  const { data, isLoading } = useSWR(
     "/api/blogs/category/filters",
     fetchFiltersList
   );
@@ -47,7 +45,8 @@ const BlogCategoriesFilters = () => {
   };
 
   return (
-    <div className="w-full flex items-center p-2 space-x-4">
+    <>
+    <div  className="hidden  w-full md:flex items-center p-2 space-x-4">
       <button
         key={"all"}
         type="button"
@@ -71,11 +70,16 @@ const BlogCategoriesFilters = () => {
               : "bg-white text-black"
           } `}
         >
-          {convertLowercaseToCammelCase(_id)} {`(${count})`}
+          {convertLowerCaseIntocammelCase(_id)} {`(${count})`}
         </button>
       ))}
       {filters.length == 0 && isLoading && <CategoryFilterSkeleton />}
     </div>
+    <div className="md:hidden !mt-2">
+      <CategoriesFilterListDropdown filters={filters} handleClick={handleClick}/>
+    </div>
+    </>
+    
   );
 };
 
