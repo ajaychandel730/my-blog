@@ -5,11 +5,9 @@ import React, { useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { RootState, setBlog } from "@/lib/store";
 import Image from "next/image";
-import convertIntoCompressFile from "@/lib/convertIntoCompressFile";
-import { toast } from "sonner";
-import { uploadImageOnCloudinary } from "@/lib/cloudinary";
 import { getErrorMessage } from "@/utils/errors";
 import { Tooltip } from "@heroui/tooltip";
+
 
 const BlogImage = () => {
   const fileRef = useRef<HTMLInputElement>(null);
@@ -18,11 +16,15 @@ const BlogImage = () => {
   const dispatch = useAppDispatch();
 
   const handleOnChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { default: convertIntoCompressFile } = await import("@/lib/convertIntoCompressFile");
+    const uploadImageOnCloudinary = (await import("@/lib/cloudinary")).uploadImageOnCloudinary;
+    const {toast} = await import("sonner");
+
     const { files } = event.target;
     if (files == null) return;
     try {
       setImageLoading(true);
-      const file: File | null = await convertIntoCompressFile(files[0]);
+      const file: File | null = await convertIntoCompressFile(files[0], {});
       if (!file) {
         toast.error("Unable to load image. Try again.");
         return;

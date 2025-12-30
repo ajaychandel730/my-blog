@@ -4,7 +4,6 @@ import PublishBlogItem from "./PublishBlogItem";
 import useInfiniteSwr from "swr/infinite";
 import BlogsPagination from "../BlogsPagination";
 import { BlogCard, BlogType } from "@/types/blog";
-import EmptyBlogsErrorMessage from "../blogs/EmptyBlogsErrorMessage";
 import HandleErrrorMessage from "./HandleErrrorMessage";
 
 type Props = {

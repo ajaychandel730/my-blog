@@ -4,7 +4,7 @@ import convertIntoCompressFile from "@/lib/convertIntoCompressFile";
 import { toast } from "sonner";
 
 const onUpload = async (file: File) => {
-     const compressFile:File | null = await convertIntoCompressFile(file);
+     const compressFile:File | null = await convertIntoCompressFile(file, {});
 
      if(!compressFile){
         toast.error("onUpload error. Please try again.");

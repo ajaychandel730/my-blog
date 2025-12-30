@@ -2,15 +2,14 @@
 import { Form } from "@heroui/form";
 import React, { useActionState, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
-import { Image } from "@heroui/image";
 import UploadNewPhotoButton from "./UploadNewPhotoButton";
 import { Input } from "@heroui/input";
 import { Button } from "@heroui/button";
 import EditUserInfo from "@/actions/EditUserInfo";
 import Link from "next/link";
 import { toast } from "sonner";
-import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export type UserEditFormProps = {
   user: {
@@ -58,11 +57,12 @@ const UserEditForm = ({ user }: UserEditFormProps) => {
         <div className="flex space-x-4 items-center">
           <input type="text" value={profileUrl} readOnly name="image" hidden />
           <Image
+            alt="profile image"
+            className="rounded-full bg-red-600 object-fill w-20 h-20"
             src={profileUrl}
             width={100}
-            height={100}
-            radius="full"
-          ></Image>
+            height={100} 
+          />
           <UploadNewPhotoButton setProfileUrl={setProfileUrl} />
         </div>
       </div>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import {Toaster} from "sonner";
+import ClientToastProvider from "./ClientToastProvider";
 
 
 const geistSans = localFont({
@@ -31,8 +31,8 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-w-[300px] flex flex-col items-center box-border  overflow-x-hidden`}
         > 
-        {children}       
-        <Toaster position="top-center" visibleToasts={6}/>
+        {children} 
+       <ClientToastProvider/>
       </body>
     </html>
   );

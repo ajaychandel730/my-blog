@@ -13,13 +13,15 @@ const getUserByEmail = async (email: string): Promise<User | null> => {
 
     if (userRes.status == "ok" && "user" in userRes) {
       const {
-        user: { _id, email, password },
+        user: { _id, email, password, name, image },
       } = userRes;
 
       const user: User = {
         _id: _id || "",
         email: email || "",
-        password : password || ""
+        password : password || "",
+        name : name || "",
+        image : image || "https://res.cloudinary.com/instagram-clone-images-27017/image/upload/v1643711892/instagram/blank-profile-picture-g38b61f937_640_onexzk.png"
       };
 
       return user;

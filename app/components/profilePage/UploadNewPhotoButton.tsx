@@ -1,11 +1,10 @@
 "use client";
-import { uploadImageOnCloudinary } from '@/lib/cloudinary';
-import convertIntoCompressFile from '@/lib/convertIntoCompressFile';
+
 import { getErrorMessage } from '@/utils/errors';
 import { Button } from '@heroui/button';
 import { Upload } from 'lucide-react';
 import React, { useRef, useState } from 'react'
-import { toast } from 'sonner';
+
 
 interface Props{
   setProfileUrl : React.Dispatch<React.SetStateAction<string>>
@@ -16,6 +15,9 @@ const UploadNewPhotoButton = ({setProfileUrl}:Props) => {
   const [isImageLoading, setIsImageLoading] = useState(false);
 
   const imageHandler = async (event :React.ChangeEvent<HTMLInputElement>)=>{
+    const {toast} = await import("sonner");
+    const {default : convertIntoCompressFile} = await import('@/lib/convertIntoCompressFile');
+    const {uploadImageOnCloudinary} = await import('@/lib/cloudinary');
     const {files} = event.target;
     if(files == null){
       toast.info("Image not selected. Please re-select again.");
@@ -24,7 +26,7 @@ const UploadNewPhotoButton = ({setProfileUrl}:Props) => {
 
    try{
      setIsImageLoading(true);
-     const conpressFile = await convertIntoCompressFile(files[0]);
+     const conpressFile = await convertIntoCompressFile(files[0],{maxSizeMB : 0.1, maxWidthOrHeight:200});
      if(!conpressFile){
        toast.error("Enable to load image. Please try again.");
        return;

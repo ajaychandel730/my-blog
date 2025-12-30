@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 import SigninButton from "./homePage/HeaderButtons/SigninButton";
 import UserSkeleton from "./UserSkeleton";
 import { LogOut, UserRoundPen, UserRound } from "lucide-react";
+import Image from "next/image";
 
 const UserProfile = () => {
   const session = useSession();
@@ -36,9 +37,11 @@ const UserProfile = () => {
       <DropdownTrigger>
         <User
           className="cursor-pointer"
+          
           description={<p className="hidden sm:block turncate">{"@" + user.email?.split("@")[0].slice(0, 10)}</p>}
-          avatarProps={{
-            src: user.image,
+          avatarProps={{  
+            imgProps: {loading : "lazy"},
+            src: user.image
           }}
           name={<p className=" hidden sm:block truncate ">{user.name.slice(0,10)}</p>}
         />

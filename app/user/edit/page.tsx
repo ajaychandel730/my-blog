@@ -4,7 +4,6 @@ import BackToProfileLink from "@/app/components/profilePage/BackToProfileLink";
 import { getServerSession } from "next-auth";
 import { nextAuthOptions } from "@/app/api/auth/[...nextauth]/options";
 import { notFound } from "next/navigation";
-import UserEditForm from "@/app/components/profilePage/UserEditForm";
 import UserEditFormWrapper from "@/app/components/profilePage/UserEditFormWrapper";
 
 const page = async () => {

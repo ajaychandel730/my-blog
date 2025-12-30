@@ -1,17 +1,23 @@
+"use client";
 import React from "react";
-import PublishButton from "./PublishButton";
-import SaveDraftButton from "./SaveDraftButton";
-import AuthSessionProvider from "../AuthSessionProvider";
-import NewBlogButton from "./NewBlogButton";
-import StoreProvider from "@/app/StoreProvider";
+import dynamic from "next/dynamic";
 import LogoButton from "../homePage/HeaderButtons/LogoButton";
-import UserProfile from "../UserProfile";
+// ---------------dynamic
+const StoreProvider = dynamic(() => import("@/app/StoreProvider"), { ssr: false });
+const AuthSessionProvider = dynamic(() => import("../AuthSessionProvider"), { ssr: false });
+const UserProfile = dynamic(() => import("../UserProfile"), { ssr: false });
+const SaveDraftButton = dynamic(() => import("./SaveDraftButton"), { ssr: false });
+const PublishButton = dynamic(() => import("./PublishButton"), { ssr: false });
+const NewBlogButton = dynamic(() => import("./NewBlogButton"), { ssr: false });
+//----------------------------->
 
 const CreateNavbar = ({
   showNewBlogButton = false,
 }: {
   showNewBlogButton?: boolean;
 }) => {
+
+
   return (
     <div className=" flex items-center justify-between h-16 bg-gray-50 border-gray-300 border-b fixed z-20   top-0 right-0 left-0 px-10">
       {/* left section */}

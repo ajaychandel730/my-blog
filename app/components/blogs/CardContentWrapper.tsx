@@ -4,6 +4,7 @@ import { Card, CardHeader, CardBody } from "@heroui/card";
 import { Image } from "@heroui/image";
 import { User } from "@heroui/user";
 import GoBackButton from "./GoBackButton";
+import NextImage from "next/image";
 import { Blog } from "@/types/blog";
 import ShowBlogContent from "./ShowBlogContent";
 import toLocaleDateString from "@/utils/toLocaleDateString";
@@ -32,6 +33,7 @@ const CardContentWrapper = ({ blog }: Props) => {
           </span>
           <User
             avatarProps={{
+              imgProps: { loading: "lazy" },
               src: blog.user.image,
             }}
             description={
@@ -45,12 +47,13 @@ const CardContentWrapper = ({ blog }: Props) => {
         </div>
       </CardHeader>
       <CardBody className="space-y-2">
-        <Image
-          src={blog.banner}
-          width={"100%"}
-          alt="blog banner"
-          className="rounded-lg aspect-video object-fill  shadow-lg w-full"
-        />
+        <div className="relative w-full rounded-lg overflow-hidden aspect-video shadow-lg  bg-gray-200">
+          <NextImage
+           src={blog.banner}
+           alt={blog.title}
+           fill
+          />
+        </div>
         <p className="!mb-10">{blog.description}</p>
         <ShowBlogContent content={blog.content ?? []} />
       </CardBody>

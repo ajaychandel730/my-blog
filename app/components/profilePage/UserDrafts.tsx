@@ -1,12 +1,10 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React  from "react";
 import PublishBlogItem from "./PublishBlogItem";
 import useInfiniteSwr from "swr/infinite";
 import BlogsPagination from "../BlogsPagination";
 import { BlogItem } from "./UserPublishBlogs";
 import { BlogCard, BlogType } from "@/types/blog";
-import EmptyBlogsErrorMessage from "../blogs/EmptyBlogsErrorMessage";
-import BlogsEmptyState from "../blogs/BlogsEmptyState";
 import HandleErrrorMessage from "./HandleErrrorMessage";
 
 type Props = {
@@ -14,7 +12,7 @@ type Props = {
 };
 
 const UserDrafts = ({ PublishBlogItemSkeleton }: Props) => {
-  const { data, error, isLoading, isValidating, mutate, size, setSize } =
+  const { data, error, isLoading, isValidating, mutate, setSize } =
     useInfiniteSwr(getKey, fetchUserPublishDrafts, {
       revalidateFirstPage: false,
     });
@@ -36,9 +34,7 @@ const UserDrafts = ({ PublishBlogItemSkeleton }: Props) => {
       return data;
     });
   };
- 
-
-  
+   
   return (
     <div className="flex flex-col w-full  space-y-2">
       {data &&
