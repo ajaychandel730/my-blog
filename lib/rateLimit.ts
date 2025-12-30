@@ -1,6 +1,7 @@
 import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
 
+const defaultLimit = Number(process.env.RATE_LIMIT);
 const isProd = process.env.NODE_ENV === "production";
 
 /* ---------- DEV (Map) ---------- */
@@ -8,8 +9,8 @@ const requests = new Map<string, { count: number; time: number }>();
 
 function memoryRateLimit(
   key: string,
-  limit = 30,
-  windowMs = 60000
+  limit:number=defaultLimit,
+  windowMs:number = 60000
 ) {
   const now = Date.now();
   const entry = requests.get(key);
@@ -40,8 +41,8 @@ const redisLimiter = redis
 /* ---------- PUBLIC API ---------- */
 export async function rateLimit(
   key: string,
-  limit = 30,
-  windowMs = 60000
+  limit:number = defaultLimit,
+  windowMs:number = 60000
 ) {
   if (!isProd) {
     return memoryRateLimit(key, limit, windowMs);
