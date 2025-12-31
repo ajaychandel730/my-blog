@@ -10,10 +10,11 @@ import { useParams } from "next/navigation";
 import updateDraftById from "@/actions/updateDraftById";
 import { Files } from "lucide-react";
 import { toast } from "sonner";
+import getBlogUserId from "@/actions/getBlogUserId";
 
 const SaveDraftButton = () => {
   const { blog } = useAppSelector((state: RootState) => state.editorReducer);
-  const {editDraftId } = useParams();
+  const {editDraftId, editBlogId} = useParams();
   const [loading, setLoading] = useState<boolean>(false);
   const session = useSession();
 
@@ -43,6 +44,13 @@ const SaveDraftButton = () => {
           JSON.parse(JSON.stringify({ _id: editDraftId, ...draftData }))
         );
       } else {
+        if(editBlogId && typeof editBlogId === "string"){
+           const blogOwnerId:string | null = await getBlogUserId(editBlogId);
+            if(!blogOwnerId || blogOwnerId !== session.data.user.id){
+              toast.error("Only owner can save draft of publish blog.");    
+              return;      
+            }
+       }
         res = await saveDraftBlog(JSON.parse(JSON.stringify(draftData)));
       }
 
@@ -69,6 +77,8 @@ const SaveDraftButton = () => {
   return (
     <>
       <Button
+        aria-describedby="save draft button"
+        role="button"
         variant="light"
         className="hidden lg:inline-flex"
         startContent={!loading && <Files className="w-5 h-5" />}
@@ -79,6 +89,8 @@ const SaveDraftButton = () => {
         Save draft
       </Button>
       <Button
+        aria-label="save draft button"
+        role="button"
         className="lg:hidden"
         isIconOnly
         variant="bordered"

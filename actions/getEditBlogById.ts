@@ -24,7 +24,7 @@ export default async function (blogId: string): Promise<Blog | null> {
           : [],
       image: result?.banner ?? "",
       description: result?.description ?? "",
-      content: result?.content ?? [],
+      content: result?.content ?? []
     };
 
     return blog;

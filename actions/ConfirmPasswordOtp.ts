@@ -36,7 +36,7 @@ export default async function (preState: unknown, formData: FormData) {
     if (!findDoc) {
       new Error("something went wrong.");
     }
-
+  
     // verify otp
     if (!verifyHashCode(otp as string, findDoc?.code)) {
       return {
@@ -63,7 +63,7 @@ export default async function (preState: unknown, formData: FormData) {
       secure: process.env.NODE_ENV === "production",
       httpOnly: true,
       sameSite: "strict",
-      path: "/Forgot-password",
+      path: "/forgot_password",
       maxAge: min * 60,
     });
   } catch (err) {
@@ -74,5 +74,5 @@ export default async function (preState: unknown, formData: FormData) {
     };
   }
 
-  redirect(`/Forgot-password/ResetPassword/${Date.now()}`);
+  redirect(`/forgot_password/reset_password/${Date.now()}`);
 }

@@ -45,7 +45,7 @@ export default async function name(initialState: unknown, formData: FormData) {
       const otpDoc = await otpsCollection.insertOne({
         email: email,
         code: hashMyOtp,
-        expires_at: new Date(Date.now() + 30000),
+        expires_at: new Date(Date.now() + 300000),
         created_at: new Date(),
       });
 
@@ -61,5 +61,5 @@ export default async function name(initialState: unknown, formData: FormData) {
     };
   }
 
-  redirect(`/Forgot-password/Verify_otp/${userId}`);
+  redirect(`/forgot_password/verify_otp/${userId}`);
 }

@@ -58,7 +58,7 @@ const UserEditForm = ({ user }: UserEditFormProps) => {
           <input type="text" value={profileUrl} readOnly name="image" hidden />
           <Image
             alt="profile image"
-            className="rounded-full bg-red-600 object-fill w-20 h-20"
+            className="rounded-full bg-gray-200 object-fill w-20 h-20"
             src={profileUrl}
             width={100}
             height={100} 

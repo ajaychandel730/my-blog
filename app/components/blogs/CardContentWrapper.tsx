@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { Card, CardHeader, CardBody } from "@heroui/card";
-import { Image } from "@heroui/image";
 import { User } from "@heroui/user";
 import GoBackButton from "./GoBackButton";
 import NextImage from "next/image";
@@ -9,12 +8,14 @@ import { Blog } from "@/types/blog";
 import ShowBlogContent from "./ShowBlogContent";
 import toLocaleDateString from "@/utils/toLocaleDateString";
 import BlogActionMenu from "./BlogActionMenu";
+import { useSession } from "next-auth/react";
 
 type Props = {
   blog: Blog;
+  isBlogOwner : boolean;
 };
 
-const CardContentWrapper = ({ blog }: Props) => {
+const CardContentWrapper = ({ blog, isBlogOwner }: Props) => {
   const formattedDate = toLocaleDateString(blog.date, { month: "long" });
 
   return (
@@ -22,7 +23,7 @@ const CardContentWrapper = ({ blog }: Props) => {
       <CardHeader className="flex flex-col w-full p-0 items-start">
         <div className="flex w-full items-center justify-between">
           <GoBackButton />
-          <BlogActionMenu />
+            {isBlogOwner ? <BlogActionMenu /> : null}
         </div>
         <div className="flex w-full pl-4 mt-4 space-y-2  flex-col items-start">
           <span
@@ -41,7 +42,7 @@ const CardContentWrapper = ({ blog }: Props) => {
                 ? "@" + blog.user.email.split("@")[0]
                 : ""
             }
-            name={blog.user.name}
+            name={blog?.user?.name}
           />
           <h1 className=" font-[600]">{blog.title}</h1>
         </div>

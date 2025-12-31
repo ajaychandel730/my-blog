@@ -39,7 +39,16 @@ export default async function (state: any, formData: FormData): Promise<any> {
     const client = await clientPromise;
     const userCollection = client.db("blogz").collection("users");
     const objectId =  new ObjectId(session.user.id);
-    
+    // check email already used by other user or not
+    const searchUser = await userCollection.findOne({email}, {projection : {_id : 1}});
+   
+    if(searchUser && !searchUser._id.equals(objectId)){
+         return {
+          status : "error",
+          message : "An account with this email already exists."
+         }
+    }
+    /////
     const user = await userCollection.updateOne(
       { _id: objectId },
       {

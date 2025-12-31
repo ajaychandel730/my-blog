@@ -1,3 +1,4 @@
+"use server";
 import React from "react";
 import CreateNavbar from "@/app/components/blogs/CreateNavbar";
 import ClientBlogEditor from "@/app/components/blogs/ClientBlogEditor";

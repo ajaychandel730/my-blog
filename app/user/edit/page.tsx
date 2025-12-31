@@ -12,6 +12,7 @@ const page = async () => {
   if (!session?.user) {
     notFound();
   }
+  
   const {email, image, name} = session.user;
   
   return (

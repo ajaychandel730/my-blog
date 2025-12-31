@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { RootState, setBlog } from "@/lib/store";
 import BlogTopicTags from "./BlogTopicTags";
 import { useParams } from "next/navigation";
-import { Blog, editBlog } from "@/lib/features/editor/editorSlice";
+import { Blog } from "@/lib/features/editor/editorSlice";
 import getEditBlogById from "@/actions/getEditBlogById";
 import getEditDraftById from "@/actions/getEditDraftById";
 import BlogEditorLoading from "./BlogEditorLoading";

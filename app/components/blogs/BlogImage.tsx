@@ -60,9 +60,11 @@ const BlogImage = () => {
         hidden
       />
       {blog.image && !imageloading ? (
-        <ButtonGroup size="lg" variant="faded" className="absolute z-20 ">
+        <ButtonGroup  size="lg" variant="faded" className="absolute z-20 ">
           <Tooltip content="Change image.">
             <Button
+              role="button"
+              aria-label="upload blog image button"
               onPress={() => {
                 fileRef?.current?.click();
               }}
@@ -74,6 +76,8 @@ const BlogImage = () => {
           </Tooltip>
           <Tooltip content="Delete image.">
             <Button
+              role="button"
+              aria-label="Remove blog banner image button"
               onPress={() => {
                 dispatch(setBlog({ image: "" }));
               }}
@@ -86,6 +90,8 @@ const BlogImage = () => {
         </ButtonGroup>
       ) : (
         <Button
+          role="button"
+          aria-description="upload post image banner"
           variant="shadow"
           isLoading={imageloading}
           startContent={

@@ -43,9 +43,10 @@ export default async function (blog: BlogUpdatePayload) {
     //
     const client = await clientPromise;
     const blogsColl = client.db("blogz").collection("drafts");
-
+    
+    const userId = new ObjectId(session.user.id);
     const updateBlog = await blogsColl.findOneAndUpdate(
-      { _id: new ObjectId(_id) },
+      { _id: new ObjectId(_id), userId},
       {
         $set: { title, description, banner, topics, content },
       },

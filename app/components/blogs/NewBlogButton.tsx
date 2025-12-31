@@ -27,6 +27,8 @@ const NewBlogButton = () => {
   return (
     <>
       <Button
+        role="button"
+        aria-label="Add new blog button"
         startContent={<PlusIcon className="w-5 h-5" />}
         onPress={handleNewBlogClick}
         color="default"
@@ -37,6 +39,8 @@ const NewBlogButton = () => {
         New blog
       </Button>
       <Button
+       role="button"
+        aria-label="Add new blog button"
         className="lg:hidden"
         variant="bordered"
         isIconOnly

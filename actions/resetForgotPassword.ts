@@ -39,7 +39,7 @@ export default async function (preState: unknown, formData: FormData) {
 
     // verify cookie reset_token
     const reset_token = (await cookies()).get("reset_token")?.value;
-    console.log("reset_token:", reset_token);
+ 
     if (typeof reset_token !== "string") {
       return {
         status: 400,
@@ -48,7 +48,6 @@ export default async function (preState: unknown, formData: FormData) {
     }
 
     const payload = await verifyResetToken(reset_token);
-    console.log("payload:", payload);
     const userObjectId = new ObjectId(payload.id);
 
     // secure password
@@ -83,7 +82,8 @@ export default async function (preState: unknown, formData: FormData) {
         message: "Unable to update password.",
       };
     }
-    console.log("password updated successfully");
+
+    (await cookies()).delete("reset_token");
     return {
       status: 200,
       message: "Password changed successfully.",
@@ -91,7 +91,6 @@ export default async function (preState: unknown, formData: FormData) {
   } catch (err) {
     (await cookies()).delete("reset_token");
     console.log("error:", getErrorMessage(err));
-
     return {
       status: 500,
       message: "Link is expired. Please try later.",

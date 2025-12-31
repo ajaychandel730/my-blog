@@ -5,6 +5,9 @@ import { notFound } from "next/navigation";
 import CardContentWrapper from "./CardContentWrapper";
 import { Blog } from "@/types/blog";
 import { isUser } from "@/utils/isUser";
+import ClientSideSessionWrapper from "../ClientSideSessionWrapper";
+import { getServerSession } from "next-auth";
+import { nextAuthOptions } from "@/app/api/auth/[...nextauth]/options";
 
 const BlogContent = async ({ blogId }: { blogId: string }) => {
   const blog = await getBlogById(blogId);
@@ -13,13 +16,13 @@ const BlogContent = async ({ blogId }: { blogId: string }) => {
     notFound();
   }
 
-  const user = "user" in blog ? { ...blog.user, _id: blog.userId.toString() } : {};
+  const user = "user" in blog ? { ...blog.user} : {};
 
   const serializedBlog: Blog = {
     title: String(blog?.title ?? ""),
     banner: String(blog?.banner ?? ""),
     topics: "topics" in blog && Array.isArray(blog.topics) ? blog.topics : [],
-    user: isUser(user) ? user : { email: "", name: "", image: "", _id: "" },
+    user: { email: user?.email || "", name: user?.name || "", image: user?.image || ""},
     description: String(blog?.description ?? ""),
     content:
       "content" in blog && Array.isArray(blog.content) ? blog.content : [],
@@ -27,7 +30,14 @@ const BlogContent = async ({ blogId }: { blogId: string }) => {
     date: "date" in blog ? blog.date.toISOString() : "",
   };
 
-  return <CardContentWrapper blog={serializedBlog} />;
+  const session = await getServerSession(nextAuthOptions);
+  const isBlogOwner = session && session.user.id === String(blog?.userId)? true : false ;
+
+  return  (
+    <ClientSideSessionWrapper>
+        <CardContentWrapper blog={serializedBlog} isBlogOwner={isBlogOwner} />
+    </ClientSideSessionWrapper>
+  );
 };
 
 export default BlogContent;

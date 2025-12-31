@@ -52,7 +52,7 @@ const VerifyOtpForm = () => {
       >
         submit
       </Button>
-       <FormLink text="Didn't receive the code?" href="/Forgot-password/ConfirmEmail" linkText="Resend"/>
+       <FormLink text="Didn't receive the code?" href="/forgot_password/confirm_email" linkText="Resend"/>
     </Form>
   );
 };

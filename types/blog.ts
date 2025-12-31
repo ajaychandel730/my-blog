@@ -1,10 +1,10 @@
 
 export interface Blog {
   user : {
-    name? : string;
-    email? : string;
+    name : string;
+    email : string;
     image? : string;
-    _id : string;
+    _id? : string;
   };
   title: string;
   banner: string;
@@ -13,6 +13,7 @@ export interface Blog {
   content?: Array<unknown>;
   _id : string;
   date:string;
+  userId?:string;
 }
 
 export interface BlogCard  {

@@ -88,6 +88,8 @@ const PublishButton = () => {
   return (
     <>
       <Button
+        aria-describedby="publish button"
+        role="button"
         size="md"
         className="hidden lg:inline-flex"
         isLoading={publishLoading}
@@ -100,6 +102,8 @@ const PublishButton = () => {
         Publish
       </Button>
       <Button
+        aria-label="publish button"
+        role="button"
         size="md"
         isIconOnly
         className="lg:hidden"

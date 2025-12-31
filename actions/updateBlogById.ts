@@ -27,7 +27,9 @@ export default async function (blog: BlogUpdatePayload) {
       return { status: "failed", message: "Please login your account." };
     }
     
+  
     const { title, description, banner, topics, content, _id } = blog;
+
     // check schema
     const result = updateBlogSchema.safeParse({title, description, banner, topics, content});
     if (!result.success) {
@@ -36,9 +38,10 @@ export default async function (blog: BlogUpdatePayload) {
     //
     const client = await clientPromise;
     const blogsColl = client.db("blogz").collection("blogs");
+    const userId = new ObjectId(session.user.id);
 
     const updateBlog = await blogsColl.findOneAndUpdate(
-      { _id: new ObjectId(_id) },
+      { _id: new ObjectId(_id), userId },
       {
         $set: { title, description, banner, topics, content },
       },
