@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
   :root {
     --novel-highlight-default: #ffffff;
@@ -30,7 +29,12 @@
 }
 
 @layer base {
-  h1,h2,h3,h4,h5,h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-size: revert;
   }
 
@@ -44,7 +48,6 @@
     --novel-highlight-orange: #faebdd;
     --novel-highlight-pink: #faf1f5;
     --novel-highlight-gray: #f1f1ef;
-
   }
 
   .dark {
@@ -57,37 +60,59 @@
     --novel-highlight-orange: #5c3a1a;
     --novel-highlight-pink: #5c1a3a;
     --novel-highlight-gray: #3a3a3a;
-
+    /* --heroui-default-foreground : red; */
   }
 }
-
-
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@layer components {
-  
-.ProseMirror {
-  @apply p-12 px-8 sm:px-12;
-}
-
-  .input {
-     @apply shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm;
-  } 
-  .alertContainer {
-    @apply fixed top-2 left-[50%] translate-x-[-50%] z-[200] w-max flex items-center;
-  }
+  --background: #f9fafb !important;
+  --foreground: #030712 !important;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #030712 !important;
+    --foreground: #f9fafb !important;
   }
 }
+
+@layer components {
+  .ProseMirror {
+    @apply p-12 px-8 sm:px-12;
+  }
+  /* //////heroInput */
+  .heroInputLabel {
+    @apply  !text-foreground;
+  }
+  
+  .heroInput{
+    @apply dark:placeholder:!text-white/60 !text-foreground;
+  }
+
+  .heroInputWrapper{
+    @apply dark:!bg-gray-800  dark:hover:!bg-gray-700 dark:group-data-[focus=true]:!bg-gray-700/50;
+  }
+
+  .heroInnerWrapper{
+    @apply dark:!bg-transparent;
+  }
+/* //////heroInput */
+  .darkGrayButton{
+    @apply dark:!bg-gray-800 dark:!border-gray-600 dark:!text-foreground;
+  }
+
+  .darkButton{
+     @apply dark:!bg-gray-900 dark:!border-gray-800 dark:!text-foreground;
+  }
+
+  .input {
+    @apply shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm;
+  }
+  .alertContainer {
+    @apply fixed top-2 left-[50%] translate-x-[-50%] z-[200]  w-max flex items-center;
+  }
+}
+
 
 body {
   color: var(--foreground);
@@ -101,8 +126,7 @@ body {
   }
 }
 
-
- /* prose mirror css */
+/* prose mirror css */
 .ProseMirror .is-editor-empty:first-child::before {
   content: attr(data-placeholder);
   float: left;
@@ -110,6 +134,7 @@ body {
   pointer-events: none;
   height: 0;
 }
+
 .ProseMirror .is-empty::before {
   content: attr(data-placeholder);
   float: left;
@@ -169,12 +194,10 @@ ul[data-type="taskList"] li > label {
   }
 }
 
-
-
 ul[data-type="taskList"] li > label input[type="checkbox"] {
   -webkit-appearance: none;
   appearance: none;
-   outline: none;
+  outline: none;
   background-color: hsl(var(--background));
   margin: 0;
   cursor: pointer;
@@ -214,14 +237,14 @@ ul[data-type="taskList"] li > label input[type="checkbox"] {
     transform: scale(1);
   }
 
-   &::after{
+  &::after {
     content: "";
     width: 1rem;
     height: 1rem;
     margin-right: 2px;
     border-radius: 2px;
     border: black 1px solid;
-  } 
+  }
 }
 
 ul[data-type="taskList"] li[data-checked="true"] > div > p {
@@ -323,4 +346,3 @@ span[style] > strong {
 mark[style] > strong {
   color: inherit;
 }
-

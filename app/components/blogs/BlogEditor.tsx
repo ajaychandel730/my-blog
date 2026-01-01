@@ -12,6 +12,7 @@ import { Blog } from "@/lib/features/editor/editorSlice";
 import getEditBlogById from "@/actions/getEditBlogById";
 import getEditDraftById from "@/actions/getEditDraftById";
 import BlogEditorLoading from "./BlogEditorLoading";
+import { baseInputClasses } from "@/lib/inputClasses";
 
 type Props = {
   type: string;
@@ -73,12 +74,17 @@ const BlogEditor = ({ type }: Props) => {
   }, [editBlogId]);
 
   if (loading) {
-    return <BlogEditorLoading/>;
+    return <BlogEditorLoading />;
   }
 
   return (
     <div className="w-full max-w-[700px] space-y-4">
       <Input
+        classNames={{
+          label: "heroInputLabel",
+          inputWrapper: "heroInputWrapper",
+          input: "heroInput",
+        }}
         name="title"
         value={blog.title}
         onChange={onChangeHandler}
@@ -90,6 +96,11 @@ const BlogEditor = ({ type }: Props) => {
       <BlogTopicTags />
       <BlogImage />
       <Textarea
+        classNames={{
+          label: "heroInputLabel",
+          inputWrapper: "heroInputWrapper",
+          input: "heroInput",
+        }}
         isRequired
         value={blog.description}
         onChange={onChangeHandler}

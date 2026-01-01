@@ -26,6 +26,8 @@ const BlogImage = () => {
       setImageLoading(true);
       const file: File | null = await convertIntoCompressFile(files[0], {});
       if (!file) {
+         console.log("imageFile:", file);
+
         toast.error("Unable to load image. Try again.");
         return;
       }
@@ -36,7 +38,7 @@ const BlogImage = () => {
       reader.onload = async () => {
         const imageBase64Url: string = reader.result as string;
         const imageUrl = await uploadImageOnCloudinary(imageBase64Url);
-
+         console.log("imageUrl:", imageUrl);
         if (imageUrl) {
           dispatch(setBlog({ image: imageUrl }));
         } else {
@@ -51,7 +53,7 @@ const BlogImage = () => {
   };
 
   return (
-    <div className=" relative aspect-video flex items-center justify-center bg-gray-100  rounded-lg overflow-hidden">
+    <div className=" relative aspect-video flex items-center justify-center bg-gray-100 dark:bg-midnight-900  rounded-lg overflow-hidden">
       <input
         onChange={handleOnChange}
         accept=".png, .jpg, .jpeg, .webp"
@@ -92,7 +94,7 @@ const BlogImage = () => {
         <Button
           role="button"
           aria-description="upload post image banner"
-          variant="shadow"
+          variant="solid"
           isLoading={imageloading}
           startContent={
             imageloading ? "" : <ArrowUpToLine className="w-5 h-5" />
@@ -101,7 +103,7 @@ const BlogImage = () => {
             fileRef?.current?.click();
           }}
           color="default"
-          className="bg-gray-50 absolute z-30"
+          className="bg-gray-50 absolute z-30 darkGrayButton"
         >
           Upload image
         </Button>

@@ -9,9 +9,9 @@ const CategoryFilterSkeleton = () => {
       {Array(4)
         .fill(1)
         .map((_, idx) => (
-          <div key={idx} className="flex  justify-center flex-col rounded-full w-20 h-10 p-2  bg-gray-100 space-y-1">
-            <Skeleton  className="w-[90%] h-1 rounded-full"></Skeleton>
-            <Skeleton  className="w-[50%] h-1 rounded-full"></Skeleton>
+          <div key={idx} className="flex  justify-center flex-col rounded-full w-20 h-10 p-2  bg-gray-100  dark:bg-midnight-900 space-y-1">
+            <Skeleton  className="w-[90%] h-1 rounded-full dark:bg-midnight-800"></Skeleton>
+            <Skeleton  className="w-[50%] h-1 rounded-full dark:bg-midnight-800"></Skeleton>
           </div>
         ))}
     </div>

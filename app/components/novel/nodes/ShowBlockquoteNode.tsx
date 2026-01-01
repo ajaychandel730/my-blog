@@ -26,7 +26,7 @@ const ShowBlockquoteNode = ({ node }: BlockquoteNodeProps) => {
     | TaskListNode;
 
   return (
-    <blockquote className="border-l-4 border-blue-500 pl-4">
+    <blockquote className="border-l-4 border-blue-500 pl-4 bg-red-600">
       {Array.isArray(node.content) &&
         node.content.map((childNode: ChildNode) => {
           switch (childNode.type) {

@@ -77,10 +77,11 @@ const SaveDraftButton = () => {
   return (
     <>
       <Button
+        
         aria-describedby="save draft button"
         role="button"
         variant="light"
-        className="hidden lg:inline-flex"
+        className="hidden lg:inline-flex darkButton"
         startContent={!loading && <Files className="w-5 h-5" />}
         isLoading={loading}
         size="md"
@@ -91,7 +92,7 @@ const SaveDraftButton = () => {
       <Button
         aria-label="save draft button"
         role="button"
-        className="lg:hidden"
+        className="lg:hidden darkButton"
         isIconOnly
         variant="bordered"
         radius="full"

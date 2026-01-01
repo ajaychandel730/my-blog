@@ -19,7 +19,7 @@ const CardContentWrapper = ({ blog, isBlogOwner }: Props) => {
   const formattedDate = toLocaleDateString(blog.date, { month: "long" });
 
   return (
-    <Card shadow="none" className="w-full bg-gray-50 lg:w-[900px] p-2">
+    <Card shadow="none" className="w-full bg-gray-50 lg:w-[900px] p-2 dark:bg-midnight-900">
       <CardHeader className="flex flex-col w-full p-0 items-start">
         <div className="flex w-full items-center justify-between">
           <GoBackButton />
@@ -44,10 +44,10 @@ const CardContentWrapper = ({ blog, isBlogOwner }: Props) => {
             }
             name={blog?.user?.name}
           />
-          <h1 className=" font-[600]">{blog.title}</h1>
+          <h1 className=" font-[600] dark:text-midnight-200">{blog.title}</h1>
         </div>
       </CardHeader>
-      <CardBody className="space-y-2">
+      <CardBody className="space-y-2 text-lg dark:text-midnight-200  tracking-normal ">
         <div className="relative w-full rounded-lg overflow-hidden aspect-video shadow-lg  bg-gray-200">
           <NextImage
            src={blog.banner}
@@ -55,7 +55,7 @@ const CardContentWrapper = ({ blog, isBlogOwner }: Props) => {
            fill
           />
         </div>
-        <p className="!mb-10">{blog.description}</p>
+        <p className="!mb-10 text-lg ">{blog.description}</p>
         <ShowBlogContent content={blog.content ?? []} />
       </CardBody>
     </Card>

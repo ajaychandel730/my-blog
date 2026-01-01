@@ -18,13 +18,14 @@ interface Props {
 
 const CategoriesFilterListDropdown = ({ filters, handleClick }: Props) => {
   return (
-    <Dropdown>
+    <Dropdown className="dark:bg-midnight-800">
       <DropdownTrigger>
         <Button variant="shadow" color="primary" startContent={<ListFilter />}>
           Categories
         </Button>
       </DropdownTrigger>
       <DropdownMenu
+  
         onAction={(key) => {
           handleClick(key as string);
         }}

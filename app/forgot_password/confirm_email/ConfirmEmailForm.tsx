@@ -23,6 +23,10 @@ const ConfirmEmailForm = () => {
     >
       <div className="w-full">
         <Input
+          classNames={{
+            inputWrapper : "heroInputWrapper",
+            input : "heroInput"
+          }}
           isRequired
           size="lg"
           name="email"

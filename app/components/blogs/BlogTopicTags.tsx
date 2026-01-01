@@ -4,6 +4,7 @@ import ListOfTags from "./ListOfTags";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { RootState, setBlog } from "@/lib/store";
 import cleanTag from "@/lib/cleanTag";
+import { baseInputClasses } from "@/lib/inputClasses";
 
 const BlogTopicTags = () => {
   const {blog:{topics}} = useAppSelector((state:RootState)=> state.editorReducer); 
@@ -22,6 +23,11 @@ const BlogTopicTags = () => {
   return (
     <div className="flex  w-full flex-col space-y-2 ">
       <Input
+        classNames={{
+          label : "heroInputLabel",
+          inputWrapper : "heroInputWrapper",
+          input : "heroInput"
+        }}
         placeholder="Write topic and hit enter."
         maxLength={30}
         value={topicValue}

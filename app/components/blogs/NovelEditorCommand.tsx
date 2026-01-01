@@ -10,17 +10,16 @@ const NovelEditorCommand = () => {
      <EditorCommandEmpty className="px-2 text-muted-foreground">
        No results
      </EditorCommandEmpty>
-     <EditorCommandList>
+     <EditorCommandList className='dark:bg-midnight-800'>
        {suggestionItems.map((item: SuggestionItem) => (
          <EditorCommandItem
            value={item.title}
            onCommand={(val) =>
            {
-             console.log(item)
              return item.command ? item.command(val) : undefined
            }
            }
-           className={`hover:bg-gray-200 cursor-pointer flex w-full items-center space-x-2 rounded-md px-2 py-1 text-left text-sm hover:bg-accent aria-selected:bg-accent `}
+           className={`hover:bg-gray-200 dark:hover:bg-midnight-700  cursor-pointer flex w-full items-center space-x-2 rounded-md px-2 py-1 text-left text-sm hover:bg-accent aria-selected:bg-accent `}
            key={item.title}
          >
            <div className="flex h-10 w-10 items-center justify-center rounded-md border border-muted bg-background">

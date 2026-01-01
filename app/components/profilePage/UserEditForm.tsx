@@ -7,9 +7,8 @@ import { Input } from "@heroui/input";
 import { Button } from "@heroui/button";
 import EditUserInfo from "@/actions/EditUserInfo";
 import Link from "next/link";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { toast } from "sonner";
 
 export type UserEditFormProps = {
   user: {
@@ -23,7 +22,6 @@ const UserEditForm = ({ user }: UserEditFormProps) => {
   const [state, formAction, isPending] = useActionState(EditUserInfo, user);
   const [profileUrl, setProfileUrl] = useState<string>(user.image);
   const { data: session, update } = useSession();
-  const router = useRouter();
 
   useEffect(() => {
     const updateSession = ():void => {
@@ -75,6 +73,10 @@ const UserEditForm = ({ user }: UserEditFormProps) => {
             minLength={3}
             maxLength={32}
             size="md"
+            classNames={{
+              inputWrapper : "heroInputWrapper",
+              input : "heroInput"
+            }}
             className="z-0"
             type="text"
             labelPlacement="outside"
@@ -93,6 +95,10 @@ const UserEditForm = ({ user }: UserEditFormProps) => {
             defaultValue={user.email}
             className="z-0"
             type="email"
+             classNames={{
+              inputWrapper : "heroInputWrapper",
+              input : "heroInput"
+            }}
             placeholder="name@gmail.com"
             labelPlacement="outside"
             label="Email"

@@ -28,7 +28,7 @@ const TailwindEditor = () => {
   return (
     <>
       <div className="border border-gray-400 dark:border-blue-400 rounded-md">
-        <span className="p-2 text-sm text-gray-600">Content</span>
+        <span className="p-2 text-sm  text-foreground">Content</span>
         <EditorRoot>
           <EditorContent
             editorProps={{

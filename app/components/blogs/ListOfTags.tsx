@@ -18,12 +18,12 @@ const ListOfTags = () => {
   return (
     <div className="space-x-2 space-y-2 w-full">
         <div className="w-full ">
-        <Button onPress={()=>{dispatch(setBlog({topics : []}))}} size="sm"  variant="ghost">
+        <Button type="button" className="darkGrayButton" aria-describedby="clear all tags button" onPress={()=>{dispatch(setBlog({topics : []}))}} size="sm"  variant="ghost">
             Clear all
         </Button>
         </div>
         {tags.map((tag, index) => (
-        <Chip color="primary" key={tag + index} onClose={() => handleClose(tag)} variant="flat">
+        <Chip color="primary" className="text-sm dark:bg-gray-800 dark:text-gray-100" key={tag + index} onClose={() => handleClose(tag)} variant="flat">
           {tag}
         </Chip>
       ))}

@@ -34,6 +34,9 @@ const ResetPasswordForm = () => {
       className="flex flex-1 pt-10 lg:mt-0 flex-col items-end justify-evenly space-y-4"
     >
       <Input
+        classNames={{
+          input: "heroInput",
+        }}
         isRequired
         isInvalid={!!state?.errors?.password}
         errorMessage={() => (
@@ -65,10 +68,13 @@ const ResetPasswordForm = () => {
         }
         name="password"
         variant="bordered"
-        type= {isShowPassword? "text" : "password"}
+        type={isShowPassword ? "text" : "password"}
         placeholder="password"
       />
       <Input
+        classNames={{
+          input: "heroInput",
+        }}
         isRequired
         size="lg"
         isInvalid={!!state?.errors?.repeatPassword}

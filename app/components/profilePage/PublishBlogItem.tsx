@@ -41,9 +41,9 @@ const PublishBlogItem = ({
       <Card
         as={"div"}
         fullWidth
-        className={`flex items-center group  ${isDeleted && "bg-danger-100"}`}
+        className={`flex items-center group  ${isDeleted && "bg-danger-100"} dark:bg-midnight-900`}
       >
-        <CardHeader className="flex justify-between md:hidden">
+        <CardHeader className="flex justify-between md:hidden dark:text-midnight-900">
           <h3 className="text-sm sm:text-base line-clamp-1">{title}</h3>
           {isDeleted ? (
             <span className="text-sm text-danger-600">Deleted</span>
@@ -63,7 +63,7 @@ const PublishBlogItem = ({
               />
             </div>
             <div className="flex flex-col flex-1">
-              <h3 className="text-base max-md:hidden">{title}</h3>
+              <h3 className="text-base max-md:hidden dark:text-midnight-200">{title}</h3>
               <p className="text-gray-500 text-sm">
                 {tab == "Drafts" ? "Draft" : "Published"} <span>•</span>{" "}
                 {formattedDate}
@@ -75,7 +75,7 @@ const PublishBlogItem = ({
                     href={`/blogs/search/${topic}`}
                     key={idx}
                     size="sm"
-                    className="bg-gray-100 text-gray-700 hover:bg-gray-200  transition-colors "
+                    className="bg-gray-100 text-sm dark:bg-midnight-700 dark:text-foreground text-gray-700 hover:bg-gray-200  transition-colors "
                   >
                     {topic}
                   </Chip>

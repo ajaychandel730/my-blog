@@ -51,10 +51,10 @@ const BlogCategoriesFilters = () => {
         key={"all"}
         type="button"
         onClick={() => handleClick("all")}
-        className={`py-2 px-4 rounded-full  text-base ${
+        className={` py-2 px-4 rounded-full  text-base ${
           params.type.toLowerCase() === "all"
             ? "bg-blue-600 text-gray-50"
-            : "bg-white text-black"
+            : "bg-white text-black darkButton"
         } `}
       >
         All
@@ -67,7 +67,7 @@ const BlogCategoriesFilters = () => {
           className={`py-2 px-4 rounded-full  text-base ${
             params.type.toLowerCase() === _id.toLowerCase()
               ? "bg-blue-600 text-gray-50"
-              : "bg-white text-black"
+              : "bg-white text-black darkButton"
           } `}
         >
           {convertLowerCaseIntocammelCase(_id)} {`(${count})`}

@@ -3,6 +3,7 @@ import { Input } from "@heroui/input";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { SearchIcon } from "lucide-react";
+import { baseInputClasses } from "@/lib/inputClasses";
 
 const BlogSearchInput = () => {
   const router = useRouter();
@@ -20,20 +21,27 @@ const BlogSearchInput = () => {
 
   return (
     // <div className="mt-4 flex items-center justify-start w-full">
-      <Input
-        onKeyDown={onKeyHandler}
-        onValueChange={(query: string) => {
-          setQuery(query);
-        }}
-        startContent={<SearchIcon className="w-5 h-5 " />}
-        placeholder="Type to search"
-        size="lg"
-        isClearable
-        color="default"
-        label="Search blogs"
-        value={query}
-        className="max-w-xs text-lg z-0"
-      />
+    <Input
+      type="text"
+      onKeyDown={onKeyHandler}
+      onValueChange={(query: string) => {
+        setQuery(query);
+      }}
+      startContent={<SearchIcon className="w-5 h-5 text-foreground" />}
+      placeholder="Type to search"
+      size="lg"
+      isClearable
+      label="Search blogs"
+      value={query}
+      classNames={{
+        label: "heroInputLabel",
+        inputWrapper:
+          "heroInputWrapper",
+        innerWrapper: "heroInnerWrapper",
+        input: "heroInput",
+      }}
+      className="max-w-xs text-lg z-0 "
+    />
     // </div>
   );
 };

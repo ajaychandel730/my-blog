@@ -34,14 +34,14 @@ const NewBlogButton = () => {
         color="default"
         variant="light"
         size="md"
-        className="hidden lg:inline-flex"
+        className="hidden lg:inline-flex darkButton"
       >
         New blog
       </Button>
       <Button
        role="button"
         aria-label="Add new blog button"
-        className="lg:hidden"
+        className="lg:hidden darkButton"
         variant="bordered"
         isIconOnly
         size="md"

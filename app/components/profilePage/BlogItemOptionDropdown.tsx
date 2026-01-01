@@ -18,13 +18,13 @@ type Props = {
 
 export default function BlogItemOptionsDropdown({ _id, tab, onOpen }: Props) {
   return (
-    <Dropdown>
+    <Dropdown className="dark:bg-midnight-800">
       <DropdownTrigger>
-        <Button variant="light" isIconOnly>
+        <Button variant="light" type="button" aria-label="blog menu" className="darkGrayButton" isIconOnly>
              <Ellipsis className="w-5 h-5"/>
         </Button>
       </DropdownTrigger>
-      <DropdownMenu aria-label="Static Actions">
+      <DropdownMenu aria-label="Static Actions" >
         <DropdownItem as={Link} href={tab === BlogType.published ? `/blog/${_id}` : `/draft/edit/${_id}`} key="view">
            View
         </DropdownItem>

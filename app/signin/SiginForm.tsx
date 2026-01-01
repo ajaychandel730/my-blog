@@ -27,7 +27,7 @@ const SiginForm = () => {
       if (result?.ok) {
         router.push("/");
       } else if (result?.error) {
-      toast.error(result.error);
+        toast.error(result.error);
       }
     } catch (err: unknown) {
       setIsPending(false);
@@ -48,7 +48,7 @@ const SiginForm = () => {
           type="email"
           name="email"
           id="email"
-          className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className = "input"
           placeholder="name@company.com"
         />
       </div>
@@ -64,7 +64,7 @@ const SiginForm = () => {
           name="password"
           id="password"
           placeholder="••••••••"
-          className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className= "input"
         />
       </div>
       <div className="flex items-center justify-between">

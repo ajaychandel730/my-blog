@@ -33,20 +33,20 @@ const UserProfile = () => {
   }
 
   return isAuthenticated ? (
-    <Dropdown shouldBlockScroll={false}>
+    <Dropdown shouldBlockScroll={false} className="dark:bg-midnight-800">
       <DropdownTrigger>
         <User
           className="cursor-pointer"
           
-          description={<p className="hidden sm:block turncate">{"@" + user.email?.split("@")[0].slice(0, 10)}</p>}
+          description={<p className="hidden dark:text-white sm:block turncate">{"@" + user.email?.split("@")[0].slice(0, 10)}</p>}
           avatarProps={{  
             imgProps: {loading : "lazy"},
             src: user.image
           }}
-          name={<p className=" hidden sm:block truncate ">{user.name.slice(0,10)}</p>}
+          name={<p className="hidden sm:block dark:text-white truncate ">{user.name.slice(0,10)}</p>}
         />
       </DropdownTrigger>
-      <DropdownMenu aria-label="User Actions" variant="flat">
+      <DropdownMenu aria-label="User Actions" variant="flat" className="">
         <DropdownItem
           isReadOnly
           key="User"

@@ -20,10 +20,10 @@ const ConnectionErrorState = () => {
       </p>
       <TryAgain />
 
-      <div className=" flex items-start !mt-20 rounded-lg border space-x-2 border-orange-100 bg-orange-50/50 p-4 text-gray-700">
-        <Sparkles className="min-w-7 min-h-7 stroke-orange-600" />
+      <div className=" flex items-start !mt-20 rounded-lg border space-x-2 border-orange-100  dark:bg-midnight-700 bg-orange-50/50 p-4 text-gray-700 dark:text-foreground">
+        <Sparkles className="min-w-5 min-h-5 stroke-orange-600" />
         <p className="text-base">
-          <span className="text-orange-600 mr-1">Note:</span>
+          <span className="text-orange-600  mr-1">Note:</span>
           If the problem persists, please contact support or try again later.
         </p>
       </div>

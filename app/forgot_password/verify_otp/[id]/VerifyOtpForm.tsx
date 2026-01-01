@@ -1,5 +1,5 @@
 "use client";
-import React, { useActionState, useEffect, useMemo, useState } from "react";
+import React, { useActionState, useEffect, useState } from "react";
 import { Form } from "@heroui/form";
 import { InputOtp } from "@heroui/input-otp";
 import { Button } from "@heroui/button";
@@ -34,6 +34,9 @@ const VerifyOtpForm = () => {
       {/* <div className="w-full"> */}
       <input type="hidden" value={userId || ""} name="userId" hidden />
       <InputOtp
+        classNames={{
+          segment : "heroInput",
+        }}
         isRequired
         value={otp}
         onValueChange={setOtp}
