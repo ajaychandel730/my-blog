@@ -19,12 +19,13 @@ const BlogActionMenu = () => {
 
   return (
     <>
-      <Dropdown>
+      <Dropdown className="dark:bg-midnight-800">
         <DropdownTrigger>
           <Button
+            
             size="md"
             radius="full"
-            className="px-2"
+            className="px-2 darkGrayButton !bg-transparent"
             isIconOnly
             variant="light"
           >

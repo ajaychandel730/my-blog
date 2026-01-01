@@ -4,7 +4,6 @@ import getBlogById from "@/actions/getBlogById";
 import { notFound } from "next/navigation";
 import CardContentWrapper from "./CardContentWrapper";
 import { Blog } from "@/types/blog";
-import { isUser } from "@/utils/isUser";
 import ClientSideSessionWrapper from "../ClientSideSessionWrapper";
 import { getServerSession } from "next-auth";
 import { nextAuthOptions } from "@/app/api/auth/[...nextauth]/options";

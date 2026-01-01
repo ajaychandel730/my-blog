@@ -15,7 +15,7 @@ const page = async ({ params }: Params) => {
   return (
     <div className="flex w-full min-h-dvh p-4 pb-20 flex-col items-center">
       <Header/>
-      <Suspense fallback={<HomeBlogCardSekelton/>}>
+      <Suspense fallback={<HomeBlogCardSekelton limit={1}/>}>
          <div className="mt-20 flex">
              <BlogContent blogId={blogId} />
          </div>
