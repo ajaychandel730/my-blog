@@ -1,9 +1,9 @@
 "use client";
 import React, { useActionState, useState } from "react";
-import Submitbutton from "../components/Submitbutton";
+import Submitbutton from "../../components/Submitbutton";
 import { signup } from "@/actions/siginup";
 import SignupSuccessModal from "./SignupSuccessModal";
-import FormLink from "../components/FormLink";
+import FormLink from "../../components/FormLink";
 
 const SignupForm = () => {
   const [state, action, isPending] = useActionState(signup, undefined);
@@ -94,7 +94,7 @@ const SignupForm = () => {
         <Submitbutton isPending={isPending} text="Register new account" />
         <FormLink
           text={"  Already have an account?"}
-          href="/signin"
+          href="/admin/signin"
           linkText="Sign in"
         />
         <SignupSuccessModal state={state} />

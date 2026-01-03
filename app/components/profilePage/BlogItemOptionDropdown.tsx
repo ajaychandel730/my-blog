@@ -25,7 +25,10 @@ export default function BlogItemOptionsDropdown({ _id, tab, onOpen }: Props) {
         </Button>
       </DropdownTrigger>
       <DropdownMenu aria-label="Static Actions" >
-        <DropdownItem as={Link} href={tab === BlogType.published ? `/blog/${_id}` : `/draft/edit/${_id}`} key="view">
+         <DropdownItem as={Link} href={tab === BlogType.published ? `/admin/blog/edit/${_id}` : `/adamin/draft/edit/${_id}`} key="edit">
+           Edit
+        </DropdownItem>         
+        <DropdownItem as={Link} href={tab === BlogType.published ? `/blog/${_id}` : `/admin/draft/edit/${_id}`} key="view">
            View
         </DropdownItem>
         <DropdownItem onPress={onOpen} key="delete" className="text-danger" color="danger">

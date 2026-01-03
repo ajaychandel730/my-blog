@@ -1,5 +1,6 @@
 "use server";
 import { nextAuthOptions } from "@/app/api/auth/[...nextauth]/options";
+import requireAdmin from "@/lib/auth/requireAdmin";
 import clientPromise from "@/lib/dbConnect";
 import rateLimitHandler from "@/lib/rateLimitHandler";
 import { UserEditSchema } from "@/lib/zodDefinations/userSchema";
@@ -12,12 +13,9 @@ export default async function (state: any, formData: FormData): Promise<any> {
     // rate limit
     await rateLimitHandler();
     const session = await getServerSession(nextAuthOptions);
-
-    if (!session || !ObjectId.isValid(session?.user?.id + "")) {
-      return {
-        status: "error",
-        message: "Your session is no longer valid. Please sign in again.",
-      };
+         
+    if(!session){
+      return { status: "failed", message: "Please login your account." };
     }
 
     await rateLimitHandler();

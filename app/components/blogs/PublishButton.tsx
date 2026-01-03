@@ -10,6 +10,7 @@ import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 import updateBlogById, { BlogUpdatePayload } from "@/actions/updateBlogById";
 import { toast } from "sonner";
+import { UserRole } from "@/types/user";
 
 const PublishButton = () => {
   const session = useSession();
@@ -24,16 +25,17 @@ const PublishButton = () => {
     try {
       setPublishLoading(true);
 
-      if (session.status !== "authenticated") {
+      if (!session ||  session.status !== "authenticated") {
          toast.warning("Please login your account.");
         return;
       }
+      
+      const userRole = session.data.user.role;
 
-      const {
-        data: {
-          user: { name, id, image },
-        },
-      } = session;
+      if(userRole !== UserRole.ADMIN){
+        toast.warning("You don’t have permission to access this feature.");
+        return;
+      }
 
       const blogData = {
         title: title || "",

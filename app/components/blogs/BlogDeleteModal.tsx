@@ -54,14 +54,14 @@ const BlogDeleteModal = ({
       res = await deleteDraftById(slug);
     }
    
-    if (res.status == "ok") {
+    if (res.status === "ok") {
       if (typeof onDeleteBlog == "function") {
         onDeleteBlog(slug);
       }
 
       toast.success(res.message || `Your ${itemName} has been removed.`);
     } else {
-      toast.error("Something went wrong. Please try later.");
+      toast.error(res.message || "Something went wrong. Please try later.");
     }
 
     setloading(false);

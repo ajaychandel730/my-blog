@@ -3,7 +3,7 @@ import React, { useActionState, useEffect, useMemo } from "react";
 import { Form } from "@heroui/form";
 import { Input } from "@heroui/input";
 import { Button } from "@heroui/button";
-import confirmEmail from "../../../actions/confirmEmail";
+import confirmEmail from "../../../../actions/confirmEmail";
 import {toast} from "sonner";
 import FormLink from "@/app/components/FormLink";
 
@@ -45,7 +45,7 @@ const ConfirmEmailForm = () => {
       >
         Next
       </Button>
-      <FormLink text="Remember your password?" href="/signin" linkText="Sign in"/>
+      <FormLink text="Remember your password?" href="/admin/signin" linkText="Sign in"/>
     </Form>
   );
 };

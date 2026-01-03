@@ -1,6 +1,6 @@
 import React from "react";
 import SiginForm from "./SiginForm";
-import FullLogoButton from "../components/homePage/HeaderButtons/FullLogoButton";
+import FullLogoButton from "../../components/homePage/HeaderButtons/FullLogoButton";
 
 const SigninPage = () => {
   return (

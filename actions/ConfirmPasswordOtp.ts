@@ -74,5 +74,5 @@ export default async function (preState: unknown, formData: FormData) {
     };
   }
 
-  redirect(`/forgot_password/reset_password/${Date.now()}`);
+  redirect(`/admin/forgot_password/reset_password/${Date.now()}`);
 }

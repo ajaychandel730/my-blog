@@ -1,10 +1,10 @@
 import React from "react";
-import Header from "@/app/components/Header";
 import BackToProfileLink from "@/app/components/profilePage/BackToProfileLink";
 import { getServerSession } from "next-auth";
 import { nextAuthOptions } from "@/app/api/auth/[...nextauth]/options";
 import { notFound } from "next/navigation";
 import UserEditFormWrapper from "@/app/components/profilePage/UserEditFormWrapper";
+import AdminHeader from "@/app/components/AdminHeader";
 
 const page = async () => {
   const session = await getServerSession(nextAuthOptions);
@@ -17,7 +17,7 @@ const page = async () => {
   
   return (
     <div className="min-h-screen w-full flex flex-col items-center p-4  ">
-      <Header />
+      <AdminHeader/>
       <div className="w-full p-2 lg:max-w-[900px] flex flex-col mt-20">
         <div className="w-full space-y-2">
           <BackToProfileLink />

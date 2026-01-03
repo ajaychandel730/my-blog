@@ -35,7 +35,7 @@ const BlogActionMenu = () => {
         <DropdownMenu aria-label="Static Actions">
           <DropdownItem
             onPress={() => {
-              router.push(`/blog/edit/${slug}`);
+              router.push(`/admin/blog/edit/${slug}`);
             }}
             key="edit"
           >

@@ -13,7 +13,6 @@ import { useRouter } from "next/navigation";
 import SigninButton from "./homePage/HeaderButtons/SigninButton";
 import UserSkeleton from "./UserSkeleton";
 import { LogOut, UserRoundPen, UserRound } from "lucide-react";
-import Image from "next/image";
 
 const UserProfile = () => {
   const session = useSession();
@@ -58,7 +57,7 @@ const UserProfile = () => {
         <DropdownItem
           startContent={<UserRound className="w-5 h-5"/>}
           onPress={() => {
-            router.push("/user/profile");
+            router.push("/admin/user/profile");
           }}
           aria-label="User profile button"
           key="profile"
@@ -68,7 +67,7 @@ const UserProfile = () => {
          <DropdownItem
            startContent={<UserRoundPen className="w-5  h-5"/>}
           onPress={() => {
-            router.push("/user/edit");
+            router.push("/admin/user/edit");
           }}
           aria-label="User profile edit button"
           key="editprofile"

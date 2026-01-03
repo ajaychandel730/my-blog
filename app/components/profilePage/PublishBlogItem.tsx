@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { Card, CardBody, CardHeader } from "@heroui/card";
-import { Image as HeroImage } from "@heroui/image";
 import { Chip } from "@heroui/chip";
 import toLocaleDateString from "@/utils/toLocaleDateString";
 import { useRouter } from "next/navigation";

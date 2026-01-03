@@ -65,7 +65,9 @@ const SaveDraftButton = () => {
           Object.entries(res.error).forEach(([key, value]) => {
             toast.error(value.toString());
           });
-        }
+        }else{
+          toast.error(res.message || "Somthing went wrong. Please try later.");
+        }        
       }
     } catch (err) {
        toast.error(getErrorMessage(err));

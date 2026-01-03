@@ -1,8 +1,9 @@
 
 export interface Blog {
   user : {
-    name : string;
+    name  : string;
     email : string;
+    role  :string;
     image? : string;
     _id? : string;
   };

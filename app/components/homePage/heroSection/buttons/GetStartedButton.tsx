@@ -10,7 +10,7 @@ const GetStartedButton = () => {
       as={Link}
       size="md"
       radius="full"
-      href="/blog/create"
+      href="/blogs/category/all"
       className=" bg-slate-800 text-white "
     >
       <span>Get Started</span>

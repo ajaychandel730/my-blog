@@ -61,5 +61,5 @@ export default async function name(initialState: unknown, formData: FormData) {
     };
   }
 
-  redirect(`/forgot_password/verify_otp/${userId}`);
+  redirect(`/admin/forgot_password/verify_otp/${userId}`);
 }

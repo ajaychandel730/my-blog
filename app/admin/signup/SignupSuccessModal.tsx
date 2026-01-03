@@ -64,7 +64,7 @@ const SignupSuccessModal = ({ state }: Props) => {
               </p>
             </ModalBody>
             <ModalFooter>
-              <Link href={"/signin"}>
+              <Link href={"/admin/signin"}>
                 <Button color="primary">Continue</Button>
               </Link>
             </ModalFooter>

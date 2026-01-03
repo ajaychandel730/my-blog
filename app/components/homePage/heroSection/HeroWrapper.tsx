@@ -1,6 +1,5 @@
 import React from "react";
 import GetStartedButton from "./buttons/GetStartedButton";
-import ViewBlogsButton from "./buttons/ViewBlogsButton";
 
 const HeroWrapper = () => {
   return (
@@ -14,13 +13,12 @@ const HeroWrapper = () => {
         </h1>
 
         <p className="mt-6 text-lg sm:text-xl  text-foreground leading-relaxed">
-          A platfrom where everyone can write, share, and explore amazing blogs
+          A platfrom where everyone can share, and explore amazing blogs
           on any topic you love.
         </p>
 
         <div className="mt-8 flex items-center justify-center gap-4">
           <GetStartedButton />
-          <ViewBlogsButton />
         </div>
       </div>
     </div>

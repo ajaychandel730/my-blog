@@ -1,6 +1,6 @@
 import React from "react";
 import SignupForm from "./SignupForm";
-import FullLogoButton from "../components/homePage/HeaderButtons/FullLogoButton";
+import FullLogoButton from "../../components/homePage/HeaderButtons/FullLogoButton";
 
 const SignUp = () => {
   return (

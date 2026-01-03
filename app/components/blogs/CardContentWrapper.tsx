@@ -7,15 +7,13 @@ import NextImage from "next/image";
 import { Blog } from "@/types/blog";
 import ShowBlogContent from "./ShowBlogContent";
 import toLocaleDateString from "@/utils/toLocaleDateString";
-import BlogActionMenu from "./BlogActionMenu";
 
 
 type Props = {
   blog: Blog;
-  isBlogOwner : boolean;
 };
 
-const CardContentWrapper = ({ blog, isBlogOwner }: Props) => {
+const CardContentWrapper = ({ blog}: Props) => {
   const formattedDate = toLocaleDateString(blog.date, { month: "long" });
 
   return (
@@ -23,7 +21,6 @@ const CardContentWrapper = ({ blog, isBlogOwner }: Props) => {
       <CardHeader className="flex flex-col w-full p-0 items-start">
         <div className="flex w-full items-center justify-between">
           <GoBackButton />
-            {isBlogOwner ? <BlogActionMenu /> : null}
         </div>
         <div className="flex w-full pl-4 mt-4 space-y-2  flex-col items-start">
           <span

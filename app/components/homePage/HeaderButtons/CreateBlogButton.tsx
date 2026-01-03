@@ -20,7 +20,7 @@ const CreateBlogButton = () => {
         as={Link}
         isIconOnly
         variant="light"
-        href={"/blog/create"}
+        href={"/admin/blog/create"}
         className="inline-flex px-0 w-fit items-center sm:px-4 sm:py-2 rounded-full sm:rounded-lg text-gray-700 text-foreground"
         aria-label="Create Blog"
       >

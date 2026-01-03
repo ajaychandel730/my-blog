@@ -1,11 +1,10 @@
 "use server";
-import { nextAuthOptions } from "@/app/api/auth/[...nextauth]/options";
-import { getServerSession } from "next-auth";
 import { ObjectId } from "mongodb";
 import updateBlogSchema from "@/lib/zodDefinations/updateBlogSchema";
 import { getErrorMessage } from "@/utils/errors";
 import clientPromise from "@/lib/dbConnect";
 import rateLimitHandler from "@/lib/rateLimitHandler";
+import requireAdmin from "@/lib/auth/requireAdmin";
 
 export type BlogUpdatePayload = {
   title: string;
@@ -21,11 +20,13 @@ export default async function (blog: BlogUpdatePayload) {
        // limiting
           await rateLimitHandler();
          //
-    const session = await getServerSession(nextAuthOptions);
+     const authdata = await requireAdmin();
+     
+     if(authdata.status !== "ok"){
+        return authdata;
+     }
 
-    if (!session) {
-      return { status: "failed", message: "Please login your account." };
-    }
+     const {session} = authdata;
     
   
     const { title, description, banner, topics, content, _id } = blog;

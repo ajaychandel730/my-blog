@@ -1,10 +1,9 @@
 "use server";
-import { getServerSession } from "next-auth";
-import { nextAuthOptions } from "@/app/api/auth/[...nextauth]/options";
 import { ObjectId } from "mongodb";
 import blogSchema from "@/lib/zodDefinations/blogSchema";
 import clientPromise from "@/lib/dbConnect";
 import rateLimitHandler from "@/lib/rateLimitHandler";
+import requireAdmin from "@/lib/auth/requireAdmin";
 
 type Draft = {
   title: string;
@@ -17,13 +16,15 @@ type Draft = {
 export default async function (draft: Draft) {
   try {
     // limiting
-     await rateLimitHandler();
+    await rateLimitHandler();
     //
-    const session = await getServerSession(nextAuthOptions);
+    const authdata = await requireAdmin();
 
-    if (!session) {
-      return { status: "failed", message: "Please login your account." };
+    if (authdata.status !== "ok") {
+      return authdata;
     }
+
+    const { session } = authdata;
 
     const {
       user: { id },

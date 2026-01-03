@@ -43,6 +43,7 @@ const signup = async (state: FormState, formData: FormData) => {
       name: email.split("@")[0],
       image: process.env.USER_DEFAULT_IMAGE,
       password: hashedPassword,
+      role : "user"
     });
 
     if (!user.acknowledged || !user.insertedId) {

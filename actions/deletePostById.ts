@@ -1,27 +1,29 @@
 "use server";
-import { getServerSession } from "next-auth";
-import { nextAuthOptions } from "@/app/api/auth/[...nextauth]/options";
 import { ObjectId } from "mongodb";
 import { getErrorMessage } from "@/utils/errors";
 import clientPromise from "@/lib/dbConnect";
 import rateLimitHandler from "@/lib/rateLimitHandler";
+import requireAdmin from "@/lib/auth/requireAdmin";
 
 export default async function (blogId: string) {
   try {
     // limiting
-      await rateLimitHandler();
+    await rateLimitHandler();
     //
-    const session = await getServerSession(nextAuthOptions);
+    const authData = await requireAdmin();
 
-    if (!session) {
-      return { status: "failed", message: "Please login your account." };
+    if (authData.status !== "ok") {
+      console.log("authError:", authData);
+      return authData;
     }
+
+    const { session } = authData;
     const client = await clientPromise;
     const blogCollection = client.db("blogz").collection("blogs");
 
     const result = await blogCollection.deleteOne({
       _id: new ObjectId(blogId),
-      userId : new ObjectId(session.user.id)
+      userId: new ObjectId(session.user.id),
     });
 
     if (result.deletedCount > 0) {

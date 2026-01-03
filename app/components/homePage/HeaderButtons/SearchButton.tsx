@@ -11,7 +11,7 @@ const SearchButton = () => {
       isIconOnly
       variant="light"
       href={"/blogs/category/all"}
-      className="inline-flex px-0 w-fit items-center sm:px-4 sm:py-2 rounded-full sm:rounded-lg text-gray-700 text-foreground"
+      className="inline-flex px-0 w-fit items-center sm:px-4 sm:py-2 rounded-full sm:rounded-lg text-gray-700 text-foreground dark:hover:bg-midnight-800 "
       aria-label="Search"
     >
       <Search className="w-5 h-5" />

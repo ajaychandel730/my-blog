@@ -3,21 +3,22 @@ import { Blog } from "@/types/blog";
 import { getErrorMessage } from "@/utils/errors";
 import blogSchema from "@/lib/zodDefinations/blogSchema";
 import { ObjectId } from "mongodb";
-import { getServerSession } from "next-auth";
-import { nextAuthOptions } from "@/app/api/auth/[...nextauth]/options";
 import clientPromise from "@/lib/dbConnect";
 import rateLimitHandler from "@/lib/rateLimitHandler";
+import requireAdmin from "@/lib/auth/requireAdmin";
 
 export default async function (blog: Blog) {
   try {
     // limiting
      await rateLimitHandler();
     //
-    const session = await getServerSession(nextAuthOptions);
+     const authdata = await requireAdmin();
+     
+     if(authdata.status !== "ok"){
+        return authdata;
+     }
 
-    if (!session) {
-      return { status: "failed", message: "Please login your account." };
-    }
+     const {session} = authdata;
 
     const {
       user: { id },

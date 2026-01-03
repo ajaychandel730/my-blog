@@ -1,9 +1,8 @@
 import React from "react";
-import AuthSessionProvider from "./AuthSessionProvider";
-import UserProfile from "./UserProfile";
-import CreateBlogButton from "./homePage/HeaderButtons/CreateBlogButton";
 import SearchButton from "./homePage/HeaderButtons/SearchButton";
 import LogoButton from "./homePage/HeaderButtons/LogoButton";
+import AboutButton from "./homePage/HeaderButtons/AboutButton";
+import ContactButton from "./homePage/HeaderButtons/ContactButton";
 
 
 const Header = () => {
@@ -17,11 +16,8 @@ const Header = () => {
           {/* Buttons */}
           <nav className="flex items-center space-x-3">
             <SearchButton />
-            <CreateBlogButton />
-            <AuthSessionProvider>
-              <UserProfile />
-            </AuthSessionProvider>
-            {/* <SideBarMenu /> */}
+            <AboutButton/>
+            <ContactButton/>
           </nav>
         </div>
       </div>

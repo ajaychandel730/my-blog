@@ -12,7 +12,6 @@ import { Blog } from "@/lib/features/editor/editorSlice";
 import getEditBlogById from "@/actions/getEditBlogById";
 import getEditDraftById from "@/actions/getEditDraftById";
 import BlogEditorLoading from "./BlogEditorLoading";
-import { baseInputClasses } from "@/lib/inputClasses";
 
 type Props = {
   type: string;

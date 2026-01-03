@@ -95,7 +95,7 @@ const ResetPasswordForm = () => {
       </Button>
       <FormLink
         text="Remember your password?"
-        href="/signin"
+        href="/admin/signin"
         linkText="Sign in"
       />
     </Form>

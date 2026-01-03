@@ -5,8 +5,6 @@ import { notFound } from "next/navigation";
 import CardContentWrapper from "./CardContentWrapper";
 import { Blog } from "@/types/blog";
 import ClientSideSessionWrapper from "../ClientSideSessionWrapper";
-import { getServerSession } from "next-auth";
-import { nextAuthOptions } from "@/app/api/auth/[...nextauth]/options";
 
 
 const BlogContent = async ({ blogId }: { blogId: string }) => {
@@ -30,12 +28,9 @@ const BlogContent = async ({ blogId }: { blogId: string }) => {
     date: "date" in blog ? blog.date.toISOString() : "",
   };
 
-  const session = await getServerSession(nextAuthOptions);
-  const isBlogOwner = session && session.user.id === String(blog?.userId)? true : false ;
-
   return  (
     <ClientSideSessionWrapper>
-        <CardContentWrapper blog={serializedBlog} isBlogOwner={isBlogOwner} />
+        <CardContentWrapper blog={serializedBlog} />
     </ClientSideSessionWrapper>
   );
 };

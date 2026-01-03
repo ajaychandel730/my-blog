@@ -1,12 +1,12 @@
 "use client";
 import React, { useState } from "react";
-import Submitbutton from "../components/Submitbutton";
+import Submitbutton from "../../components/Submitbutton";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { toast } from "sonner";
 import { getErrorMessage } from "@/utils/errors";
 import { useRouter } from "next/navigation";
-import FormLink from "../components/FormLink";
+import FormLink from "../../components/FormLink";
 
 const SiginForm = () => {
   const router = useRouter();
@@ -25,7 +25,7 @@ const SiginForm = () => {
       setIsPending(false);
 
       if (result?.ok) {
-        router.push("/");
+        router.push("/admin/user/profile");
       } else if (result?.error) {
         toast.error(result.error);
       }
@@ -69,7 +69,7 @@ const SiginForm = () => {
       </div>
       <div className="flex items-center justify-between">
         <Link
-          href="/forgot_password/confirm_email"
+          href="/admin/forgot_password/confirm_email"
           className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
         >
           Forgot password?
@@ -78,7 +78,7 @@ const SiginForm = () => {
       <Submitbutton text={"Sign in"} isPending={isPending} />
       <FormLink
         text=" Don’t have an account yet?"
-        href="/signup"
+        href="/admin/signup"
         linkText="Sign up"
       />
     </form>

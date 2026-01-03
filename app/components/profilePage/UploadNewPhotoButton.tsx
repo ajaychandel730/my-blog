@@ -7,10 +7,10 @@ import React, { useRef, useState } from 'react'
 
 
 interface Props{
-  setProfileUrl : React.Dispatch<React.SetStateAction<string>>
+  changeUserImage : (image:string)=>void;
 }
 
-const UploadNewPhotoButton = ({setProfileUrl}:Props) => {
+const UploadNewPhotoButton = ({changeUserImage}:Props) => {
   const imageInputRef = useRef<HTMLInputElement>(null);
   const [isImageLoading, setIsImageLoading] = useState(false);
 
@@ -41,7 +41,7 @@ const UploadNewPhotoButton = ({setProfileUrl}:Props) => {
             return;
          }
 
-         setProfileUrl(cloudHttpsUrl);
+         changeUserImage(cloudHttpsUrl);
          toast.success("Profile image uploaded.");
          setIsImageLoading(false);
        }

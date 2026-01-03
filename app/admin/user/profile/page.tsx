@@ -1,3 +1,4 @@
+import React from "react";
 import getUserTotalPostsCount from "@/actions/getUserTotalPostsCount";
 import { nextAuthOptions } from "@/app/api/auth/[...nextauth]/options";
 import UserInfoSection from "@/app/components/profilePage/UserInfoSection";
@@ -6,19 +7,15 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import PublishBlogItemSkeleton from "@/app/components/profilePage/PublishBlogItemSkeleton";
 
-import React from "react";
-import Header from "@/app/components/Header";
+import AdminHeader from "@/app/components/AdminHeader";
 
 const UserProfilePage = async () => {
   const session = await getServerSession(nextAuthOptions);
 
   if (!session) {
-    redirect("/signin");
+    redirect("/admin/signin");
   }
- 
-  if (!session) {
-    redirect("/signin");
-  }
+
 
    const {
     user: { id, name, image },
@@ -28,7 +25,7 @@ const UserProfilePage = async () => {
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center p-4  ">
-      <Header />
+      <AdminHeader/>
       <div className="w-full md:max-w-[900px] flex flex-col items-center mt-20">
         <UserInfoSection
           totalPosts={totalPosts}

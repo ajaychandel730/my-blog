@@ -19,16 +19,38 @@ export type UserEditFormProps = {
 };
 
 const UserEditForm = ({ user }: UserEditFormProps) => {
-  const [state, formAction, isPending] = useActionState(EditUserInfo, user);
-  const [profileUrl, setProfileUrl] = useState<string>(user.image);
   const { data: session, update } = useSession();
+  const [state, formAction, isPending] = useActionState(EditUserInfo, user);
+  const [userData, setUserData] = useState(user);
+
+  const changeUserImage = (image:string):void=>{
+   setUserData((data)=>{
+    return {
+     ...data,
+     image
+    }
+   })
+  }
+   
+  const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.value);
+    const { name, value } = event.target;
+    setUserData((data) => {
+      return {
+        ...data,
+        [name]: value,
+      };
+    });
+  };
 
   useEffect(() => {
-    const updateSession = ():void => {
+    const updateSession = (): void => {
       if (state?.status == "ok" && "user" in state) {
         const { name, email, image } = { ...session, ...state.user };
-        update({ name, email, image }).catch(()=>{
-          toast.error("Unable to update session. Please login for updated profile.");
+        update({ name, email, image }).catch(() => {
+          toast.error(
+            "Unable to update session. Please login for updated profile."
+          );
         });
       }
     };
@@ -53,15 +75,15 @@ const UserEditForm = ({ user }: UserEditFormProps) => {
       <div className="w-full space-y-2 pb-10 border-b-1 border-gray-300">
         <h2>Profile picture</h2>
         <div className="flex space-x-4 items-center">
-          <input type="text" value={profileUrl} readOnly name="image" hidden />
+          <input type="text" value={userData.image} readOnly name="image" hidden />
           <Image
             alt="profile image"
             className="rounded-full bg-gray-200 object-fill w-20 h-20"
-            src={profileUrl}
+            src={userData.image}
             width={100}
-            height={100} 
+            height={100}
           />
-          <UploadNewPhotoButton setProfileUrl={setProfileUrl} />
+          <UploadNewPhotoButton changeUserImage={changeUserImage} />
         </div>
       </div>
       <div className="min-w-[300px] flex flex-col space-y-14">
@@ -69,13 +91,14 @@ const UserEditForm = ({ user }: UserEditFormProps) => {
         <div>
           <Input
             name="name"
-            defaultValue={user.name}
+            value={userData.name}
+            onChange={inputChangeHandler}
             minLength={3}
             maxLength={32}
             size="md"
             classNames={{
-              inputWrapper : "heroInputWrapper",
-              input : "heroInput"
+              inputWrapper: "heroInputWrapper",
+              input: "heroInput",
             }}
             className="z-0"
             type="text"
@@ -92,12 +115,13 @@ const UserEditForm = ({ user }: UserEditFormProps) => {
         <div>
           <Input
             name="email"
-            defaultValue={user.email}
+            value={userData.email}
+            onChange={inputChangeHandler}
             className="z-0"
             type="email"
-             classNames={{
-              inputWrapper : "heroInputWrapper",
-              input : "heroInput"
+            classNames={{
+              inputWrapper: "heroInputWrapper",
+              input: "heroInput",
             }}
             placeholder="name@gmail.com"
             labelPlacement="outside"
