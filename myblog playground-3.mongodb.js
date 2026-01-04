@@ -84,7 +84,7 @@ const collection = "blogs";
 //             description: {
 //                bsonType: "string",
 //                maxLength : 300,
-//                description: "Description Maximum character muse be under 300."
+//                description: "Description Maximum character must be under 300."
 //             },
 //             topics : {
 //              bsonType : "array",
