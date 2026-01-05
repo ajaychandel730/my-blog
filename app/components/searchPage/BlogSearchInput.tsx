@@ -33,13 +33,6 @@ const BlogSearchInput = () => {
       isClearable
       label="Search blogs"
       value={query}
-      classNames={{
-        label: "heroInputLabel",
-        inputWrapper:
-          "heroInputWrapper",
-        innerWrapper: "heroInnerWrapper",
-        input: "heroInput",
-      }}
       className="max-w-xs text-lg z-0 "
     />
     // </div>

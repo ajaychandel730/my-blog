@@ -23,11 +23,6 @@ const BlogTopicTags = () => {
   return (
     <div className="flex  w-full flex-col space-y-2 ">
       <Input
-        classNames={{
-          label : "heroInputLabel",
-          inputWrapper : "heroInputWrapper",
-          input : "heroInput"
-        }}
         placeholder="Write topic and hit enter."
         maxLength={30}
         value={topicValue}

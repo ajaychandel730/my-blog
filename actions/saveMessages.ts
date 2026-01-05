@@ -4,7 +4,7 @@ import rateLimitHandler from "@/lib/rateLimitHandler";
 import { MessageSchema } from "@/lib/zodDefinations/messageSchema";
 import { getErrorMessage } from "@/utils/errors";
 
-export default async function (formData: FormData) {
+export default async function (preState:unknown, formData: FormData) {
   try {
     // rate limitor
      await rateLimitHandler();
@@ -18,7 +18,7 @@ export default async function (formData: FormData) {
 
     if(!result.success){
         return {
-            status : "error",
+            status : "validationError",
             errors : result.error.flatten().fieldErrors
         }
     }
@@ -27,9 +27,9 @@ export default async function (formData: FormData) {
     const client = await clientPromise;
     const MessageCollection = client.db("blogz").collection("messages");
     
-    const message = await MessageCollection.insertOne({
+    const message =  await MessageCollection.insertOne({
         ...result.data,
-        expries_at : new Date(Date.now() + 604800000),
+        expires_at : new Date(Date.now() + 604800000),
         created_at : new Date()
     })
 

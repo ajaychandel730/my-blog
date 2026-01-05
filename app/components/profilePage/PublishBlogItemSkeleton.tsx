@@ -1,4 +1,3 @@
-"use server";
 import { Skeleton } from "@heroui/skeleton"
 import React from 'react'
 

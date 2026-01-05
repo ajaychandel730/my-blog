@@ -52,7 +52,7 @@ const PublishBlogItem = ({
         </CardHeader>
         <CardBody>
           <div className="w-full flex max-md:flex-col  space-x-4">
-            <div className="relative w-full  h-[300px] sm:h-[400px] md:w-[100px] md:h-[100px]  max-md:mb-2 rounded-md overflow-hidden">
+            <div className="relative w-full aspect-video sm:h-[400px] md:w-[100px] md:h-[100px]  max-md:mb-2 rounded-md overflow-hidden">
               <Image
                 fill
                 loading="lazy"

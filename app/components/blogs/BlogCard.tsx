@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { Card, CardBody, CardFooter, CardHeader } from "@heroui/card";
-import { Image } from "@heroui/image";
 import NextImage from "next/image";
 import { BlogCard as BlogCardInterface} from "@/types/blog";
 import { Avatar } from "@heroui/avatar";
@@ -39,7 +38,7 @@ const BlogCard = ({ _id, title, banner, description, date, user }: Props) => {
         <Avatar
           size="sm"
           showFallback
-          fallback={<UserRound className="w-5 h-5 text-gray-700" />}
+          fallback={<UserRound className="w-5 h-5" />}
           src={user?.image || ""}
         />
       </CardFooter>

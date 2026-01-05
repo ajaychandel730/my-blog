@@ -3,7 +3,8 @@ import React from 'react'
 import {Tabs, Tab} from "@heroui/tabs";
 import UserPublishBlogs from './UserPublishBlogs';
 import UserDrafts from './UserDrafts';
-import { BlogType } from '@/types/blog';
+import UserMessages from './UserMessages';
+
 
 
 
@@ -19,8 +20,11 @@ const UsersBlogsAndDrafts = ({PublishBlogItemSkeleton}:Props) => {
       <Tab key="blogs" title={"Published"} className='w-full'>
         <UserPublishBlogs PublishBlogItemSkeleton={PublishBlogItemSkeleton}/>
       </Tab>
-      <Tab key="drafts" title={"Draft"} className='w-full'>
+      <Tab  key="drafts" title={"Draft"} className='w-full'>
         <UserDrafts PublishBlogItemSkeleton={PublishBlogItemSkeleton}/>
+      </Tab>
+      <Tab  key="feedback" title={"Feedback"} className='w-full'>
+        <UserMessages/>
       </Tab>
     </Tabs>
   </div>

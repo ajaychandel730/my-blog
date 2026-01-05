@@ -4,3 +4,13 @@ export enum UserRole {
   USER = "user",
   OWNER = "owner",
 };
+
+export interface FeedbackMessage{
+ _id : string; 
+ name : string;
+ email : string;
+ subject : string;
+ text : string;
+ created_at : string;
+ expires_at? : string;
+}

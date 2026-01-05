@@ -51,7 +51,7 @@ const SearchBlogs = async ({ query, token }: Props) => {
       <div className="flex w-full ">
         <h3 className="font-[600]">
           Search results for{" "}
-          <p className="turncate inline-block font-normal text-gray-600">
+          <p className="turncate inline-block font-normal text-gray-600 dark:text-midnight-400">
             {query}
           </p>
         </h3>

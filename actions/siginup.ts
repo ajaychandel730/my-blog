@@ -45,6 +45,7 @@ const signup = async (state: FormState, formData: FormData) => {
       password: hashedPassword,
       role : "user"
     });
+   console.log("user:", user);
 
     if (!user.acknowledged || !user.insertedId) {
       return {

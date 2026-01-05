@@ -2,12 +2,13 @@
 use("blogz");
 
 // const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_{|}~-]{1,64}@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z]{2,}$/; but is the limitions of this regex
+// db.getCollection("messages").createIndex({"expires_at" : 1}, {expireAfterSeconds : 0});
 
 db.createCollection("messages", {
     validator : {
         $jsonSchema : {
             bsonType : "object",
-            required: ["name", "email", "subject", "text", "expries_at", "created_at"],
+            required: ["name", "email", "subject", "text", "expires_at", "created_at"],
             properties : {
                 name : {
                     bsonType : "string",
@@ -19,7 +20,7 @@ db.createCollection("messages", {
                 bsonType : "string",
                 maxLength : 254,
                 description : "Please provide valid email.",
-                pattern : "/^[a-zA-Z0-9.!#$%&'*+/=?^_{|}~-]{1,64}@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z]{2,}$/"
+                pattern :   "^[a-zA-Z0-9.!#$%&'*+/=?^_{|}~-]{1,64}@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*\\.[a-zA-Z]{2,}$"
                 },
                 subject : {
                     bsonType : "string",
@@ -31,9 +32,9 @@ db.createCollection("messages", {
                     maxLength : 300,
                     description : "Your message text under [0-300] character long."
                 },
-                expries_at : {
+                expires_at : {
                     bsonType : "date",
-                    description : "Please provide message expries date."
+                    description : "Please provide message expires date."
                 },
                 created_at : {
                     bsonType : "date",

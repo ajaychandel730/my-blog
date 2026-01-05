@@ -4,7 +4,7 @@ import FullLogoButton from "../../components/homePage/HeaderButtons/FullLogoButt
 
 const SignUp = () => {
   return (
-      <div className="flex flex-col space-y-2 items-center justify-center px-6 py-8 mx-auto min-h-dvh lg:py-0">
+      <div className="flex w-full flex-col space-y-2 items-center justify-center px-6 py-8 mx-auto min-h-dvh lg:py-0">
         <FullLogoButton/>
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">

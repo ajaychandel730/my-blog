@@ -79,11 +79,6 @@ const BlogEditor = ({ type }: Props) => {
   return (
     <div className="w-full max-w-[700px] space-y-4">
       <Input
-        classNames={{
-          label: "heroInputLabel",
-          inputWrapper: "heroInputWrapper",
-          input: "heroInput",
-        }}
         name="title"
         value={blog.title}
         onChange={onChangeHandler}
@@ -95,11 +90,6 @@ const BlogEditor = ({ type }: Props) => {
       <BlogTopicTags />
       <BlogImage />
       <Textarea
-        classNames={{
-          label: "heroInputLabel",
-          inputWrapper: "heroInputWrapper",
-          input: "heroInput",
-        }}
         isRequired
         value={blog.description}
         onChange={onChangeHandler}

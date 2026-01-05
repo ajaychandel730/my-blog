@@ -9,6 +9,7 @@ import EditUserInfo from "@/actions/EditUserInfo";
 import Link from "next/link";
 import Image from "next/image";
 import { toast } from "sonner";
+import FormErrors from "../FormErrors";
 
 export type UserEditFormProps = {
   user: {
@@ -96,10 +97,6 @@ const UserEditForm = ({ user }: UserEditFormProps) => {
             minLength={3}
             maxLength={32}
             size="md"
-            classNames={{
-              inputWrapper: "heroInputWrapper",
-              input: "heroInput",
-            }}
             className="z-0"
             type="text"
             labelPlacement="outside"
@@ -107,10 +104,7 @@ const UserEditForm = ({ user }: UserEditFormProps) => {
             placeholder="Enter your username"
             isRequired
           />
-          {state?.errors?.name &&
-            state.errors.name?.map((message: string) => (
-              <p className="mt-2 text-sm text-red-500 font-medium">{message}</p>
-            ))}
+          <FormErrors errors={state?.errors?.name}/>
         </div>
         <div>
           <Input
@@ -119,21 +113,12 @@ const UserEditForm = ({ user }: UserEditFormProps) => {
             onChange={inputChangeHandler}
             className="z-0"
             type="email"
-            classNames={{
-              inputWrapper: "heroInputWrapper",
-              input: "heroInput",
-            }}
             placeholder="name@gmail.com"
             labelPlacement="outside"
             label="Email"
             isRequired
           />
-          {state?.errors?.email &&
-            state.errors.email?.map((message: string, idx: number) => (
-              <p key={idx} className="mt-2 text-sm text-red-500 font-medium">
-                {message}
-              </p>
-            ))}
+           <FormErrors errors={state?.errors?.email}/>
         </div>
       </div>
       <div className="flex w-full gap-4">

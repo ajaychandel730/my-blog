@@ -29,7 +29,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable}  antialiased min-w-[300px] flex flex-col items-center box-border  overflow-x-hidden`}
+        className={`${geistSans.variable} ${geistMono.variable} dark:dark antialiased min-w-[300px] flex flex-col items-center box-border  overflow-x-hidden`}
         > 
         {children} 
        <ClientToastProvider/>
