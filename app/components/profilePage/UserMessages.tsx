@@ -1,6 +1,6 @@
 "use client";
-import { FeedbackMessage as FeedbackInterface } from "@/types/user";
 import React from "react";
+import { FeedbackMessage as FeedbackInterface } from "@/types/user";
 import useSWRInfinite from "swr/infinite";
 import FeedbackMessage from "./FeedbackMessage";
 import PublishBlogItemSkeleton from "./PublishBlogItemSkeleton";
@@ -13,18 +13,59 @@ const UserMessages = () => {
       revalidateFirstPage: false,
     });
 
-   
+  const mutateFeedback = (feedbackId: string) => {
+    mutate((data) => {
+      if (!data) return data;
+      for (let i = 0; i < data?.length; i++) {
+        if (!data[i].result && !Array.isArray(data[i].result)) {
+          continue;
+        }
+        for (let j = 0; j < data[i]?.result?.length; j++) {
+          if (data[i].result[j]._id === feedbackId) {
+            data[i].result[j].isDeleted = true;
+            return data;
+          }
+        }
+      }
+      return data;
+    });
+  };
+
+  const handleFeedbackDelete = async (id: string, setIsLoading: any) => {
+    const { toast } = await import("sonner");
+    try {
+      setIsLoading(true);
+      const res = await fetch(`/api/user/feedback/delete/${id}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      console.log(data);
+      if (data?.status === "ok") {
+        toast.success(data?.message || "Message Deleted.");
+        mutateFeedback(id);
+      } else {
+        toast.error(data?.message || "Not able to delete. Plese try later.");
+      }
+    } catch (err) {
+      console.log("feedback error:", err);
+      toast.error("Somthing went wrong. Please try later.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="space-y-4">
       {data &&
-        data?.map(({ result }: { result: FeedbackInterface[] }) => {
-          return result.map(
-            ({ name, email, _id, subject, text, created_at }) => (
+        data?.map(({ result }: { result: (FeedbackInterface & {isDeleted?:boolean})[] }) => {
+          return result?.map(
+            ({ name, email, _id, subject, text, created_at, isDeleted }) => (
               <FeedbackMessage
+                handleFeedbackDelete={handleFeedbackDelete}
                 key={_id}
                 name={name}
                 email={email}
+                isDeleted = {isDeleted || false}
                 subject={subject}
                 _id={_id}
                 text={text}
@@ -42,10 +83,9 @@ const UserMessages = () => {
 
       {(isLoading || isValidating) &&
         (!data || (data && data[data.length - 1].status !== "error")) &&
-        Array(5).fill(1).map((_, idx)=>(
-            <PublishBlogItemSkeleton key={idx}/>
-        ))  
-      }
+        Array(5)
+          .fill(1)
+          .map((_, idx) => <PublishBlogItemSkeleton key={idx} />)}
 
       {data &&
         "result" in data[data.length - 1] &&
@@ -78,3 +118,6 @@ const getKey = (
   }
   return `/api/user/feedback?page=${pageIndex + 1}&limit=${15}`;
 };
+function useState(arg0: boolean): [any, any] {
+  throw new Error("Function not implemented.");
+}

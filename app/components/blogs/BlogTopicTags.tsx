@@ -15,7 +15,7 @@ const BlogTopicTags = () => {
     const { key } = e;
     if (key !== "Enter") return;
     if(topicValue.length == 0) return;
-    const newTopics =  Array.isArray(topics)? [...topics, cleanTag(topicValue)] : [cleanTag(topicValue)];
+    const newTopics =  Array.isArray(topics)? [...topics, topicValue] : [topicValue];
     dispatch(setBlog({topics : newTopics}));
     setTopicValue("");
   };

@@ -17,7 +17,6 @@ const AboutPage = () => {
       <QuerySection />
       <MissionSection />
       <ValuesSection />
-      <PersonalNoteSection />
     </div>
   );
 };

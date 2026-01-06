@@ -12,20 +12,19 @@ import { FeedbackMessage } from "@/types/user";
 
 type Props = FeedbackMessage & {
   isOpen: boolean;
-  onOpen: () => void;
+  onDeleteFeedback: ()=>void;
   onOpenChange: () => void;
 };
 
 const FeedbackMessageModal = ({
   isOpen,
-  onOpen,
   onOpenChange,
   name,
   email,
   subject,
   text,
   created_at,
-  _id,
+  onDeleteFeedback,
 }: Props) => {
   return (
     <>
@@ -50,7 +49,7 @@ const FeedbackMessageModal = ({
                     <p aria-description="user name">{name}</p>
                     <p
                       aria-description="user email address"
-                      className="text-neutral-500 text-tiny"
+                      className="text-neutral-500 dark:text-midnight-400 text-tiny"
                     >
                       {email}
                     </p>
@@ -58,23 +57,23 @@ const FeedbackMessageModal = ({
                 </div>
                 <hr/>
                 <div className="flex items-center space-x-2">
-                  <Calendar className="w-5 h-5 stroke-neutral-500" />
-                  <span className="text-tiny text-neutral-600">
+                  <Calendar className="w-5 h-5 stroke-neutral-500 dark:stroke-midnight-400" />
+                  <span className="text-tiny text-neutral-600 dark:text-midnight-300">
                     {created_at}
                   </span>
                 </div>
 
-                <div className="">
-                  <div className="flex items-center space-x-2 text-neutral-500">
+                <div>
+                  <div className="flex items-center space-x-2 text-neutral-500 dark:text-midnight-400 ">
                     <MessageSquare className="w-5 h-5" />
                     <span className="text-sm">Subject</span>
                   </div>
-                  <h3 className="pl-6 text-base">{subject}</h3>
+                  <h3 className="pl-7 text-base">{subject}</h3>
                 </div>
                 <hr/>
                 <div className="space-y-2">
-                   <span className="text-sm text-neutral-800">Message</span>  
-                  <p className="leading-relaxed  text-neutral-600">
+                   <span className="text-sm text-neutral-800 dark:!text-midnight-300">Message</span>  
+                  <p className="leading-relaxed  text-neutral-600 dark:text-midnight-400">
                     {text} 
                   </p>
                 </div>
@@ -83,7 +82,7 @@ const FeedbackMessageModal = ({
                 <Button color="danger" variant="light" onPress={onClose}>
                   Close
                 </Button>
-                <Button color="primary" onPress={onClose}>
+                <Button  color="primary" onPress={()=>{onDeleteFeedback(); onClose();}}>
                   Delete
                 </Button>
               </ModalFooter>

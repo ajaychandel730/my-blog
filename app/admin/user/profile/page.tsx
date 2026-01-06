@@ -2,12 +2,12 @@ import React from "react";
 import getUserTotalPostsCount from "@/actions/getUserTotalPostsCount";
 import { nextAuthOptions } from "@/app/api/auth/[...nextauth]/options";
 import UserInfoSection from "@/app/components/profilePage/UserInfoSection";
-import UsersBlogsAndDrafts from "@/app/components/profilePage/UsersBlogsAndDrafts";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import PublishBlogItemSkeleton from "@/app/components/profilePage/PublishBlogItemSkeleton";
-
 import AdminHeader from "@/app/components/AdminHeader";
+import UsersTabs from "@/app/components/profilePage/UsersTabs";
+import { UserRole } from "@/types/user";
 
 const UserProfilePage = async () => {
   const session = await getServerSession(nextAuthOptions);
@@ -32,8 +32,9 @@ const UserProfilePage = async () => {
           image={image}
           name={name}
         />
-          <UsersBlogsAndDrafts
+          <UsersTabs
             PublishBlogItemSkeleton={<PublishBlogItemSkeleton />}
+            isAdmin={session.user.role === UserRole.ADMIN}
           />
       </div>
     </div>

@@ -5,30 +5,16 @@ import React from 'react'
 
   const socialLinks = [
     {
-      name: "Email",
-      icon: Mail,
-      url: "mailto:your.email@example.com",
-      color: "text-red-600",
-      bgColor: "bg-red-50",
-    },
-    {
       name: "GitHub",
       icon: Github,
-      url: "https://github.com/yourusername",
+      url: "https://github.com/ajaychandel730",
       color: "text-gray-800",
       bgColor: "bg-gray-100",
     },
     {
-      name: "Twitter",
-      icon: Twitter,
-      url: "https://twitter.com/yourusername",
-      color: "text-blue-500",
-      bgColor: "bg-blue-50",
-    },
-    {
       name: "LinkedIn",
       icon: Linkedin,
-      url: "https://linkedin.com/in/yourusername",
+      url: "https://www.linkedin.com/in/ajay-chandel-217b8318b/",
       color: "text-blue-700",
       bgColor: "bg-blue-50",
     },
@@ -39,11 +25,25 @@ const SocialLinks = () => {
    <div>
           <h2 className="text-2xl mb-6">Connect With Me</h2>
           <p className="text-neutral-600 dark:text-midnight-400 mb-8">
-            You can also reach out to me on social media or via email. I'm always happy to connect 
-            with fellow developers and readers!
+            You can also reach out to me on social media or via email.
           </p>
 
           <div className="space-y-4 mb-12">
+                 <Link
+                  key={"email"}
+                  href={"mailto:ajaychandel730@gmail.com"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center dark:bg-midnight-900 gap-4 p-4 border border-gray-300 rounded-lg hover:shadow-md transition-shadow"
+                >
+                  <div className={`w-12 h-12 bg-red-50 rounded-full flex items-center justify-center shrink-0`}>
+                    <Mail className={"text-red-600"} size={24} />
+                  </div>
+                  <div>
+                    <div>Email</div>
+                    <div className="text-sm text-neutral-500 dark:text-midnight-400">ajaychandel730@gmail.com</div>
+                  </div>
+                </Link>
             {socialLinks.map((link) => {
               const Icon = link.icon;
               return (
@@ -59,7 +59,7 @@ const SocialLinks = () => {
                   </div>
                   <div>
                     <div>{link.name}</div>
-                    <div className="text-sm text-neutral-500 dark:text-midnight-400">@yourusername</div>
+                    <div className="text-sm text-neutral-500 dark:text-midnight-400">@ajaychandel</div>
                   </div>
                 </Link>
               );

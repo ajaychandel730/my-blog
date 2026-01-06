@@ -22,7 +22,7 @@ export async function GET(req: NextRequest) {
       });
     }
 
-    if (session && session.user.role === UserRole.USER) {
+    if (session && session.user.role === UserRole.ADMIN) {
       const client = await clientPromise;
       const collection = client.db("blogz").collection("messages");
       const objectUserId = new ObjectId(session.user.id);

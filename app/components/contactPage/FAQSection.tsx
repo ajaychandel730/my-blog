@@ -13,13 +13,6 @@ const FAQSection = () => {
             </p>
           </div>
           <div>
-            <h3 className="mb-2">Do you offer consulting or freelance work?</h3>
-            <p className="text-neutral-600 dark:text-midnight-400">
-              Feel free to reach out to discuss potential collaborations or
-              projects.
-            </p>
-          </div>
-          <div>
             <h3 className="mb-2">How can I support your work?</h3>
             <p className="text-neutral-600 dark:text-midnight-400">
               Sharing my blog posts and providing feedback helps a lot. Your
