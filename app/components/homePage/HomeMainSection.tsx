@@ -1,13 +1,15 @@
 import React from 'react'
 import HeroWrapper from './heroSection/HeroWrapper';
+import HeroSection1 from './heroSection/HeroSection1';
 
 
 const HomeMainSection = async() => {
 
   return (
-    <section className='mt-20 flex flex-col items-center mx-auto  w-full lg:w-[900px]'>
+    <div className='mt-20 flex flex-col items-center mx-auto  w-full lg:w-[80%] space-y-10'>
       <HeroWrapper/>
-    </section>
+       <HeroSection1/>
+    </div>
   )
 }
 

@@ -10,7 +10,7 @@ export async function GET(req:NextRequest){
       await rateLimitHandler();
     //
     const {searchParams} = req.nextUrl;
-    let numBucketSize = 4; 
+    let numBucketSize = 6; 
     const limit = Number(searchParams.get("limit"));
     if(!isNaN(limit) && limit < 10 && limit > 0){
         numBucketSize = limit;

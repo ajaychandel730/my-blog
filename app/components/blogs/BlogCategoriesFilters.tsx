@@ -46,7 +46,7 @@ const BlogCategoriesFilters = () => {
 
   return (
     <>
-    <div  className="hidden  w-full md:flex items-center p-2 space-x-4">
+    <div  className="hidden   md:flex items-center p-2 space-x-4">
       <button
         key={"all"}
         type="button"
