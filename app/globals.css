@@ -6,6 +6,7 @@
   :root {
     --background: #f9fafb !important;
     --foreground: #030712 !important;
+    --hero-background : #18181b !important;
     --novel-highlight-default: #ffffff;
     --novel-highlight-purple: #f6f3f8;
     --novel-highlight-red: #fdebeb;

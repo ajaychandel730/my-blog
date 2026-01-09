@@ -27,8 +27,7 @@ export async function GET(request: NextRequest) {
     }
     const client = await clientPromise;
     const blogsColl = client.db("blogz").collection("blogs");
-    const reqBlogs = await blogsColl
-      .find({}, { skip: (page - 1) * limit, limit })
+    const reqBlogs = await blogsColl.find({}, { skip: (page - 1) * limit, limit })
       .toArray();
     return NextResponse.json({ status: "ok", result: reqBlogs }, { status: 200 });
   } catch (err) {

@@ -20,6 +20,7 @@ type SearchQuery = {
     index: string;
     searchAfter?: string;
     text: object;
+    returnStoredSource:boolean
   };
 };
 
@@ -43,6 +44,7 @@ export default async function (
           maxEdits: 2,
         },
       },
+     returnStoredSource : true
     },
   };
 

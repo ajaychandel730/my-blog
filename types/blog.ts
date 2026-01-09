@@ -38,3 +38,31 @@ export interface BlogFilter{
   _id : string;
   count : number;
 }
+
+export type SearchFacet = {
+  _id  : string;
+  count : number;
+}
+
+
+export type TopBlogsType = {
+  _id : string;
+  title : string;
+  banner : string;
+  description : string;
+  date : string;
+}
+
+export type MostLatestBlogType = {
+  _id : string;
+  title : string;
+  banner : string;
+  date  : string;
+}
+
+export type PicksBlogType = {
+  _id : string;
+  title : string;
+  banner : string;
+  date  : string;
+}

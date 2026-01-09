@@ -7,7 +7,6 @@ import { BlogFilter } from "@/types/blog";
 import { getErrorMessage } from "@/utils/errors";
 import convertLowerCaseIntocammelCase from "@/lib/convertLowerCaseIntocammelCase";
 import CategoryFilterSkeleton from "../blogs/CategoryFilterSkeleton";
-import CategoriesFilterListDropdown from "../blogs/CategoriesFilterListDropdown";
 import { Button } from "@heroui/button";
 import Link from "next/link";
 
@@ -56,10 +55,10 @@ const HeaderCategories = () => {
             variant="light"
             type="button"
             href={`/blogs/category/${_id}`}
-            className={`py-2 px-4 rounded-full  text-base ${
+            className={`py-2 px-4 rounded-full    text-base ${
               params?.type?.toLowerCase() === _id.toLowerCase()
                 ? " bg-blue-500 text-gray-50"
-                : " text-black darkButton"
+                : ""
             } `}
           >
             {convertLowerCaseIntocammelCase(_id)}

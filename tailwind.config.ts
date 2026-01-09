@@ -13,6 +13,7 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        heroBackground : "var(--hero-background)",
         midnight : {
           50 : "oklch(98.5% 0.002 247.839)",
           100 : "oklch(96.7% 0.003 264.542)",

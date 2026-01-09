@@ -24,5 +24,5 @@ export default function(date:string, options : DateFormatOptions={}):string{
       ...options
     }  
 
-    return getDate.toLocaleDateString(undefined, {...defaultOptions})
+    return getDate.toLocaleDateString("en-GB", {...defaultOptions})
 };

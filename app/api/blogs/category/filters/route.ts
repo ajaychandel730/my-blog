@@ -12,7 +12,7 @@ export async function GET(req:NextRequest){
     const {searchParams} = req.nextUrl;
     let numBucketSize = 6; 
     const limit = Number(searchParams.get("limit"));
-    if(!isNaN(limit) && limit < 10 && limit > 0){
+    if(!isNaN(limit) && limit < 30 && limit > 0){
         numBucketSize = limit;
     }
 
