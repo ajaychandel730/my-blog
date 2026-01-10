@@ -5,9 +5,14 @@ import CategoryBlogCardItem from './CategoryBlogCardItem'
 import getFacetsBlogs from '@/actions/getFacetsBlogs';
 import { MostLatestBlogType } from '@/types/blog';
 import toLocaleDateString from '@/utils/toLocaleDateString';
+import NoBlogsState from '../../blogs/NoBlogsState';
 
 const CategoryBlogCard = async ({topic}:{topic:string}) => {
   const blogs:MostLatestBlogType[] = await getFacetsBlogs([topic]);
+  
+  if(blogs.length == 0){
+     return <NoBlogsState/>
+  }
 
   return (
     <div className='rounded-md bg-white dark:bg-midnight-900 p-2 space-y-4'>

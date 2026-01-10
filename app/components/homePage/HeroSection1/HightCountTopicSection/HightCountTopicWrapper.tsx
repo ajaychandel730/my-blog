@@ -6,9 +6,10 @@ import { MostLatestBlogType } from '@/types/blog';
 import getTopFacet from '@/actions/getTopFacet';
 import getHightCountFacetBlogs from '@/actions/getFacetsBlogs';
 
+
 const HightCountTopicWrapper = async () => {
-  const topFacet:string[] = (await getTopFacet(1)).map((val)=> val._id);
-   
+  const topFacet = (await getTopFacet(1)).map(({_id})=> _id);
+
   if(topFacet.length == 0){
     topFacet.push("technology");
   }
@@ -16,7 +17,7 @@ const HightCountTopicWrapper = async () => {
   const result:MostLatestBlogType[]  = await getHightCountFacetBlogs(topFacet);
 
   if(result.length == 0){
-    return <p>No  blogs found.</p>
+    return null;
   }
 
   return (

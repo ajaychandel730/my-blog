@@ -10,8 +10,9 @@ export async function GET(req:NextRequest){
       await rateLimitHandler();
     //
     const {searchParams} = req.nextUrl;
-    let numBucketSize = 6; 
     const limit = Number(searchParams.get("limit"));
+
+    let numBucketSize = 6; 
     if(!isNaN(limit) && limit < 30 && limit > 0){
         numBucketSize = limit;
     }
@@ -50,7 +51,7 @@ export async function GET(req:NextRequest){
     console.log("error on BlogsFiltersList:", getErrorMessage(err));
     return NextResponse.json({
         status : "error",
-        message : "Somthing went wrong."
-    })
+        message : "Somthing went wrong.4"
+    },{status : 500})
   }
 }

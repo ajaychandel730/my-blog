@@ -4,20 +4,26 @@ import { Card, CardHeader, CardBody } from "@heroui/card";
 import { User } from "@heroui/user";
 import GoBackButton from "./GoBackButton";
 import NextImage from "next/image";
-import { Blog } from "@/types/blog";
 import ShowBlogContent from "./ShowBlogContent";
 import toLocaleDateString from "@/utils/toLocaleDateString";
 
-
 type Props = {
-  blog: Blog;
+    title: string;
+    banner: string;
+    user: {
+      name : string;
+      image : string;
+    }
+    description: string;
+    content:unknown[],
+    date: string;
 };
 
-const CardContentWrapper = ({ blog}: Props) => {
-  const formattedDate = toLocaleDateString(blog.date, { month: "long" });
-
+const CardContentWrapper = ({title, banner, description,  content, user, date}: Props) => {
+  const formattedDate = toLocaleDateString(date, { month: "long" });
+  console.log("user:", user);
   return (
-    <Card shadow="none" className="w-full bg-gray-50 lg:w-[900px] p-2 dark:bg-midnight-900">
+    <Card shadow="none" radius="none" className="w-full lg:w-[900px] p-2 ">
       <CardHeader className="flex flex-col w-full p-0 items-start">
         <div className="flex w-full items-center justify-between">
           <GoBackButton />
@@ -32,28 +38,23 @@ const CardContentWrapper = ({ blog}: Props) => {
           <User
             avatarProps={{
               imgProps: { loading: "lazy" },
-              src: blog.user.image,
+              src: user?.image,
             }}
-            description={
-              blog.user?.email && blog.user.email.length > 0
-                ? "@" + blog.user.email.split("@")[0]
-                : ""
-            }
-            name={blog?.user?.name}
+            name={user?.name}
           />
-          <h1 className=" font-[600] dark:text-midnight-200">{blog.title}</h1>
+          <h1 className=" font-[600] dark:text-midnight-200">{title}</h1>
         </div>
       </CardHeader>
       <CardBody className="space-y-2 text-lg dark:text-midnight-200  tracking-normal ">
         <div className="relative w-full rounded-lg overflow-hidden aspect-video shadow-lg  bg-gray-200">
           <NextImage
-           src={blog.banner}
-           alt={blog.title}
+           src={banner}
+           alt={title}
            fill
           />
         </div>
-        <p className="!mb-10 text-lg ">{blog.description}</p>
-        <ShowBlogContent content={blog.content ?? []} />
+        <p className="!mb-10 text-lg ">{description}</p>
+        <ShowBlogContent content={content ?? []} />
       </CardBody>
     </Card>
   );

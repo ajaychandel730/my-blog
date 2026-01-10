@@ -1,4 +1,3 @@
-"use client";
 import Header from "../components/Header";
 import ContactForm from "../components/contactPage/ContactForm";
 import SocialLinks from "../components/contactPage/SocialLinks";

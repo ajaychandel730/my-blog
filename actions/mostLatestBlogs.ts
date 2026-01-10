@@ -10,6 +10,7 @@ export default async function () {
       },
       next: {
         revalidate: 43200,
+        tags : ["most_latest_blogs"]
       },
     });
 

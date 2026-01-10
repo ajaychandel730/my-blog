@@ -74,13 +74,14 @@ const HeaderDropDownOptions = () => {
               <DrawerBody>
                 <ul aria-description="blogs filter list" className="w-full space-y-4">
                   {filters?.map(({ _id }) => (
-                    <li
+                      <li
+                      className="w-full border-b dark:border-midnight-800 pb-1"
                       aria-description="blog filter "
-                      className="w-full border-b  p-2"
                       key={_id}
-                    >
+                      >
                       <Link
-                        href={"/blogs/category/technology"}
+                       className="flex w-full rounded-full  hover:bg-gray-100 hover:dark:bg-neutral-700   p-2"
+                        href={"/blogs/search/technology"}
                       >
                         {_id}
                       </Link>

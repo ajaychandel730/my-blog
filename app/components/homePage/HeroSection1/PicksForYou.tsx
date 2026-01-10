@@ -9,9 +9,9 @@ import toLocaleDateString from "@/utils/toLocaleDateString";
 const PicksForYou = async () => {
   const result:PicksBlogType[] = await getSearchPicks();
 
-  if(result.length == 0){
-    return <p className="tiny font-medium "> no Picks found.</p>
-  }
+   if(result.length == 0){
+     return null;
+   }
 
   return (
     <div className="w-full rounded-md bg-white dark:bg-midnight-900  min-h-[300px] p-4 space-y-4">

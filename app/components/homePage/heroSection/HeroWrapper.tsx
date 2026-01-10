@@ -8,12 +8,13 @@ import Link from "next/Link";
 import getSearchTopBlogs from "@/actions/getSearchTopBlogs";
 import { TopBlogsType } from "@/types/blog";
 import toLocaleDateString from "@/utils/toLocaleDateString";
+import NoBlogsState from "../../blogs/NoBlogsState";
 
 const HeroWrapper = async () => {
   const result: TopBlogsType[] = await getSearchTopBlogs();
 
   if (result.length == 0) {
-    return <p className="w-full text-2xl font-bold"> no Blogs found.</p>;
+    return <NoBlogsState/>
   }
 
   return (

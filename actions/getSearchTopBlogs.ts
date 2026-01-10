@@ -12,9 +12,11 @@ export default async function () {
         },
         next: {
           revalidate: 43200,
+          tags : ["search_top_blogs"]
         },
       }
     );
+    
     const data = await res.json();
     if (
       data?.status == "ok" &&
@@ -25,8 +27,10 @@ export default async function () {
     } else {
       return [];
     }
+    
   } catch (err) {
-    console.log("searchTopBlogsError:", getErrorMessage(err));
+    const message = getErrorMessage(err);
+    console.log("searchTopBlogsError:", message);
     return [];
   }
 }

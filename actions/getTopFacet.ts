@@ -9,18 +9,22 @@ export default async function (limit:number):Promise<SearchFacet[]> {
             "Accept" : "application/json",
         },
         next : {
-            revalidate : 43200
+            revalidate : 43200,
+            tags : ["get_top_facet"],
         }
       });
 
       const data = await res.json();
+
       if(data?.status == "ok" && "result" in data && Array.isArray(data.result)){
         return data.result;
+
       }else{
         return [];
       }
+      
      }catch(err){
-          console.log("homeFacetError:", getErrorMessage(err));
-          return [];
+        console.log("homeFacetError:", getErrorMessage(err));
+        return [];
      }
 };

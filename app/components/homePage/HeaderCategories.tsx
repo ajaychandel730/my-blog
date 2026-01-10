@@ -1,70 +1,34 @@
-"use client";
+"use server";
 import React from "react";
-import useSWR from "swr";
-import { useParams, usePathname, useRouter } from "next/navigation";
-import { toast } from "sonner";
 import { BlogFilter } from "@/types/blog";
-import { getErrorMessage } from "@/utils/errors";
 import convertLowerCaseIntocammelCase from "@/lib/convertLowerCaseIntocammelCase";
 import CategoryFilterSkeleton from "../blogs/CategoryFilterSkeleton";
 import { Button } from "@heroui/button";
 import Link from "next/link";
+import getTopFacet from "@/actions/getTopFacet";
 
- const fetchFiltersList = async (url: string) => {
-  try {
-    const res = await fetch(url, {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-      },
-    });
-    const data = await res.json();
-    if (data.status == "ok") {
-      return data;
-    }
-  } catch (err) {
-    toast.error(getErrorMessage(err));
-  }
-};
-
-const HeaderCategories = () => {
-  const { data, isLoading } = useSWR(
-    "/api/blogs/category/filters",
-    fetchFiltersList
-  );
-
-  const params = useParams<{ type: string }>();
-  const router = useRouter();
-  const pathname = usePathname();
-
-  const filters: BlogFilter[] =
-    data && "result" in data && Array.isArray(data.result) ? data.result : [];
-
-  const handleClick = (value: string) => {
-    const path = pathname.split("/").splice(0, 3).join("/");
-    router.replace(`${path}/${value.toLowerCase()}`);
-  };
+const HeaderCategories = async() => {
+   let filters:string[] = (await getTopFacet(6)).map(({_id})=> _id.toLowerCase()); 
+    
+   if(filters.length == 0){
+      filters = ["technology", "ai", "health", "machine learning", "career", "remote"];
+   }
 
   return (
     <>
       <div className="hidden  xl:flex items-center justify-center p-2 space-x-4">
-        {filters.map(({ _id}) => (
+        {filters.map((topic) => (
           <Button
             as={Link}
-            key={_id}
+            key={topic}
             variant="light"
             type="button"
-            href={`/blogs/category/${_id}`}
-            className={`py-2 px-4 rounded-full    text-base ${
-              params?.type?.toLowerCase() === _id.toLowerCase()
-                ? " bg-blue-500 text-gray-50"
-                : ""
-            } `}
+            href={`/blogs/search/${topic.split(" ").join("")}`}
+            className={"py-2 px-4 rounded-full capitalize   text-base"}
           >
-            {convertLowerCaseIntocammelCase(_id)}
+            {topic}
           </Button>
         ))}
-        {filters.length == 0 && isLoading && <CategoryFilterSkeleton />}
       </div>
     </>
   );

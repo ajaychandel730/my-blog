@@ -16,21 +16,19 @@ const BlogContent = async ({ blogId }: { blogId: string }) => {
 
   const user = "user" in blog ? { ...blog.user} : {};
 
-  const serializedBlog: Blog = {
+  const blogCard = {
     title: String(blog?.title ?? ""),
     banner: String(blog?.banner ?? ""),
-    topics: "topics" in blog && Array.isArray(blog.topics) ? blog.topics : [],
-    user: { email: user?.email || "", name: user?.name || "", image: user?.image || ""},
+    user: {name: user?.name || "", image: user?.image || ""},
     description: String(blog?.description ?? ""),
     content:
       "content" in blog && Array.isArray(blog.content) ? blog.content : [],
-    _id: String(blog?._id ?? ""),
     date: "date" in blog ? blog.date.toISOString() : "",
   };
 
   return  (
     <ClientSideSessionWrapper>
-        <CardContentWrapper blog={serializedBlog} />
+        <CardContentWrapper {...blogCard} />
     </ClientSideSessionWrapper>
   );
 };

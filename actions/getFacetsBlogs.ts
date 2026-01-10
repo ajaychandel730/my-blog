@@ -1,4 +1,5 @@
 import { getErrorMessage } from "@/utils/errors";
+import { revalidateTag } from "next/cache";
 
 export default async function (facets: string[]) {
   try {
@@ -12,6 +13,7 @@ export default async function (facets: string[]) {
         },
         next: {
           revalidate: 43200,
+          tags: ["get_facets_blogs"],
         },
       }
     );

@@ -3,15 +3,14 @@ import React from 'react'
 import HeroHeader from '../heroSection/HeroHeader'
 import CategoryBlogCard from './CategoryBlogCard'
 import getTopFacet from '@/actions/getTopFacet';
-import UniqueFacetValues from '@/lib/uniqueFacetValues';
+
 
 const HeroSection2 = async () => {
-  const categories = UniqueFacetValues((await getTopFacet(6)));
-   
+  const categories = (await getTopFacet(6)).map(({_id}) => _id);
+  
   if(categories.length == 0){
     return null;
-  }
-
+  }  
   return (
     <div className='w-full space-y-4'>
         <HeroHeader heading={"Categories"} isIcon={false}/>
