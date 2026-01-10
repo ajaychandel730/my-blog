@@ -4,7 +4,7 @@ import { Card, CardHeader } from "@heroui/card";
 import Image from "next/image";
 import BlogSmallLineCard from "../HeroSection1/BlogSmallLineCard";
 import HeroHeader from "./HeroHeader";
-import Link from "next/Link";
+import Link from "next/link";
 import getSearchTopBlogs from "@/actions/getSearchTopBlogs";
 import { TopBlogsType } from "@/types/blog";
 import toLocaleDateString from "@/utils/toLocaleDateString";
