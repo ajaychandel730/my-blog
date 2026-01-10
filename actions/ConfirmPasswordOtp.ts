@@ -63,7 +63,7 @@ export default async function (preState: unknown, formData: FormData) {
       secure: process.env.NODE_ENV === "production",
       httpOnly: true,
       sameSite: "strict",
-      path: "/forgot_password",
+      path: "/admin/forgot_password",
       maxAge: min * 60,
     });
   } catch (err) {
