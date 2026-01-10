@@ -21,9 +21,9 @@ type Props = {
 
 const CardContentWrapper = ({title, banner, description,  content, user, date}: Props) => {
   const formattedDate = toLocaleDateString(date, { month: "long" });
-  console.log("user:", user);
+
   return (
-    <Card shadow="none" radius="none" className="w-full lg:w-[900px] p-2 ">
+    <Card shadow="none" radius="none" className="w-full lg:w-[900px] p-2 bg-white">
       <CardHeader className="flex flex-col w-full p-0 items-start">
         <div className="flex w-full items-center justify-between">
           <GoBackButton />
@@ -36,16 +36,17 @@ const CardContentWrapper = ({title, banner, description,  content, user, date}: 
             {formattedDate}
           </span>
           <User
+            className="text-black"
             avatarProps={{
               imgProps: { loading: "lazy" },
               src: user?.image,
             }}
             name={user?.name}
           />
-          <h1 className=" font-[600] dark:text-midnight-200">{title}</h1>
+          <h1 className=" font-[600] text-black">{title}</h1>
         </div>
       </CardHeader>
-      <CardBody className="space-y-2 text-lg dark:text-midnight-200  tracking-normal ">
+      <CardBody className="space-y-2 text-lg  tracking-normal ">
         <div className="relative w-full rounded-lg overflow-hidden aspect-video shadow-lg  bg-gray-200">
           <NextImage
            src={banner}
@@ -53,7 +54,7 @@ const CardContentWrapper = ({title, banner, description,  content, user, date}: 
            fill
           />
         </div>
-        <p className="!mb-10 text-lg ">{description}</p>
+        <p className="!mb-10 text-lg text-black">{description}</p>
         <ShowBlogContent content={content ?? []} />
       </CardBody>
     </Card>

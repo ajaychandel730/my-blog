@@ -1,6 +1,4 @@
 "use client";
-import { useAppSelector } from "@/lib/hooks";
-import { RootState } from "@/lib/store";
 import RenderNode from "@/app/components/novel/RenderNode";
 import { NovelNode } from "@/types/novel";
 import { nanoid } from "@reduxjs/toolkit";
