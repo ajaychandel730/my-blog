@@ -23,7 +23,7 @@ const CardContentWrapper = ({title, banner, description,  content, user, date}: 
   const formattedDate = toLocaleDateString(date, { month: "long" });
 
   return (
-    <Card shadow="none" radius="none" className="w-full lg:w-[900px] p-2 bg-white">
+    <Card shadow="none" radius="none" className="w-full lg:w-[900px] p-2 bg-white !text-black">
       <CardHeader className="flex flex-col w-full p-0 items-start">
         <div className="flex w-full items-center justify-between">
           <GoBackButton />
