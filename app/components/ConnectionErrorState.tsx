@@ -2,7 +2,11 @@ import React from "react";
 import { Sparkles, WifiOff } from "lucide-react";
 import TryAgain from "./TryAgain";
 
-const ConnectionErrorState = () => {
+type Props = {
+  reset : ()=>void;
+}
+
+const ConnectionErrorState = ({reset}:Props) => {
   return (
     <div className="min-w-[300px] max-w-md min-h-[600px] flex flex-col items-center space-y-4  p-2">
       <div className="flex flex-col items-center justify-center space-y-2">
@@ -18,7 +22,7 @@ const ConnectionErrorState = () => {
         We're having trouble connecting to the database. Please check your
         internet connection and try again.
       </p>
-      <TryAgain />
+      <TryAgain reset={reset} />
 
       <div className=" flex items-start !mt-20 rounded-lg border space-x-2 border-orange-100  dark:bg-midnight-700 bg-orange-50/50 p-4 text-gray-700 dark:text-foreground">
         <Sparkles className="min-w-5 min-h-5 stroke-orange-600" />

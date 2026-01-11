@@ -1,11 +1,9 @@
 "use server";
 import React from "react";
-import { BlogFilter } from "@/types/blog";
-import convertLowerCaseIntocammelCase from "@/lib/convertLowerCaseIntocammelCase";
-import CategoryFilterSkeleton from "../blogs/CategoryFilterSkeleton";
 import { Button } from "@heroui/button";
 import Link from "next/link";
 import getTopFacet from "@/actions/getTopFacet";
+
 
 const HeaderCategories = async() => {
    let filters:string[] = (await getTopFacet(6)).map(({_id})=> _id.toLowerCase()); 
@@ -24,7 +22,7 @@ const HeaderCategories = async() => {
             variant="light"
             type="button"
             href={`/blogs/search/${topic.split(" ").join("")}`}
-            className={"py-2 px-4 rounded-full capitalize   text-base"}
+            className={"py-2 px-4 rounded-full capitalize   text-sm"}
           >
             {topic}
           </Button>

@@ -1,6 +1,7 @@
 "use client"; // Error boundaries must be Client Components
-
-import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { startTransition, useEffect } from "react";
+import ConnectionErrorState from "./components/ConnectionErrorState";
 
 export default function Error({
   error,
@@ -9,6 +10,15 @@ export default function Error({
   error: Error & { digest?: string | undefined };
   reset: () => void;
 }) {
+  const router = useRouter();
+ 
+  const refreshPage = () => {
+    startTransition(() => {
+      router.refresh();
+      reset();
+    });
+  };
+
   useEffect(() => {
     // Log the error to an error reporting service
     console.error(error);
@@ -16,18 +26,7 @@ export default function Error({
 
   return (
     <div className="min-h-dvh min-w-full  flex items-center justify-center ">
-      <div>
-        <h2>Something went wrong!</h2>
-        <button
-           className="cursor-pointer  bg-blue-400 text-gray-100 px-2 py-1 rounded-md"
-          onClick={
-            // Attempt to recover by trying to re-render the segment
-            () => reset()
-          }
-        >
-          Try again
-        </button>
-      </div>
+        <ConnectionErrorState reset={refreshPage}/>
     </div>
   );
 }

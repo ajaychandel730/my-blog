@@ -1,10 +1,10 @@
 "use server";
-import React from 'react'
-import HightCountTopicCard from './HightCountTopicCard'
+import React, { Suspense } from 'react'
 import HeroHeader from '../../heroSection/HeroHeader'
-import { MostLatestBlogType } from '@/types/blog';
 import getTopFacet from '@/actions/getTopFacet';
-import getHightCountFacetBlogs from '@/actions/getFacetsBlogs';
+
+import HightCountTopicItemsSkeleton from './HightCountTopicItemsSkeleton';
+import HightCountTopicItems from './HightCountTopicItems';
 
 
 const HightCountTopicWrapper = async () => {
@@ -14,27 +14,11 @@ const HightCountTopicWrapper = async () => {
     topFacet.push("technology");
   }
 
-  const result:MostLatestBlogType[]  = await getHightCountFacetBlogs(topFacet);
-
-  if(result.length == 0){
-    return null;
-  }
-
   return (
     <div className='flex flex-col space-y-4 bg-white dark:bg-midnight-900 p-4'>
-      <HeroHeader heading={topFacet[0]}/>
-      {
-        result?.map(({_id, title, date, banner})=>(
-          <HightCountTopicCard
-           key={_id}
-           _id={_id}
-           title = {title}
-           date = {date}
-           banner = {banner}
-          />
-
-        ))
-      }
+       <Suspense fallback={<HightCountTopicItemsSkeleton/>}>
+         <HightCountTopicItems topFacet={topFacet[0]}/>
+       </Suspense>
     </div>
   )
 }

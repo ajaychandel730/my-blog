@@ -6,7 +6,7 @@ const CategoryFilterSkeleton = () => {
 
   return (
     <div className="w-full flex !m-0 items-center p-2 space-x-6">
-      {Array(4)
+      {Array(6)
         .fill(1)
         .map((_, idx) => (
           <div key={idx} className="flex  justify-center flex-col rounded-full w-20 h-10 p-2  bg-gray-100  dark:bg-midnight-900 space-y-1">

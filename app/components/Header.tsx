@@ -1,23 +1,32 @@
-import React from "react";
+import React, { Suspense } from "react";
 import SearchButton from "./homePage/HeaderButtons/SearchButton";
 import LogoButton from "./homePage/HeaderButtons/LogoButton";
 import AboutButton from "./homePage/HeaderButtons/AboutButton";
 import ContactButton from "./homePage/HeaderButtons/ContactButton";
 import HeaderCategories from "./homePage/HeaderCategories";
-import HeaderDropDownOptions from "./homePage/HeaderDropDownOptions";
+import getTopFacet from "@/actions/getTopFacet";
+import HeaderCategoriesSkeleton from "./homePage/HeaderCategoriesSkeleton";
 
-const Header = () => {
+// dynamic imports
+import dynamic from "next/dynamic";
+const HeaderDropDownOptions = dynamic(()=> import("./homePage/HeaderDropDownOptions"));
+//
+const Header = async() => {
+  const getTopFacetPromise =  getTopFacet(6); 
+
   return (
     <header className="w-full border-b border-gray-200 dark:border-gray-700 box-border bg-background z-20  fixed top-0 right-0 left-0 ">
       <div className="flex items-center justify-between xl:justify-around w-full h-16 px-4">
         {/* Logo */}
         <div className="flex space-x-2">
-          <HeaderDropDownOptions />
+          <HeaderDropDownOptions getTopFacetPromise={getTopFacetPromise} />
           <LogoButton />
         </div>
 
         {/* categories */}
-        <HeaderCategories />
+        <Suspense fallback={ <HeaderCategoriesSkeleton/>}>
+                <HeaderCategories />
+        </Suspense>
         {/* Buttons */}
         <nav className="flex items-center space-x-3">
           <SearchButton />

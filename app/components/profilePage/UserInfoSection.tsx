@@ -29,7 +29,7 @@ const UserInfoSection = ({name, image, totalPosts }: Props) => {
         </p>
       )}
 
-      <Button type="button" aria-description="Edit profile page link" as={Link} href="/admin/user/edit" color="default" size="md" className="px-10 bg-gray-200 mt-10">
+      <Button type="button" aria-description="Edit profile page link" as={Link} href="/admin/user/edit" color="default" size="md" className="px-10  mt-10">
         Edit profile
       </Button>
     </div>

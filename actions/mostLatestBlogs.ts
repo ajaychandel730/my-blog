@@ -1,8 +1,5 @@
 "use server";
-import { getErrorMessage } from "@/utils/errors";
-
 export default async function () {
-  try {
     const res = await fetch(process.env.DOMAIN_NAME + "/api/blogs/mostLatest", {
       method: "GET",
       headers: {
@@ -22,10 +19,6 @@ export default async function () {
     ) {
       return data.result;
     } else {
-      return [];
+      throw new Error(data?.message ||  "Somthing went wrong. Please try later.");
     }
-  } catch (err) {
-    console.log("HomelatestBlogsError:", getErrorMessage(err));
-    return [];
-  }
 }

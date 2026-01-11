@@ -1,8 +1,6 @@
 "use server";
-import { getErrorMessage } from "@/utils/errors";
 
 export default async function () {
-  try {
     const res = await fetch(
       process.env.DOMAIN_NAME + "/api/blogs/searchTopBlogs",
       {
@@ -25,12 +23,6 @@ export default async function () {
     ) {
       return data.result;
     } else {
-      return [];
+      throw Error(data?.message || "Somthing went wrong. Please try later.");
     }
-    
-  } catch (err) {
-    const message = getErrorMessage(err);
-    console.log("searchTopBlogsError:", message);
-    return [];
-  }
 }
