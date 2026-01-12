@@ -17,7 +17,7 @@ const BlogCard = ({ _id, title, banner, description, date, user }: Props) => {
   return (
     <Card  className="z-0 shadow-none dark:bg-midnight-900" onPress={() => router.push(`/blog/${_id}`)} shadow="sm" isPressable>
       <CardHeader>
-        <h4 className="font-semibold text-medium line-clamp-1 dark:text-midnight-200">{title}</h4>
+        <h4 className="font-semibold text-start text-medium  line-clamp-1 dark:text-midnight-200">{title}</h4>
       </CardHeader>
       <CardBody className="overflow-visible px-2 space-y-2">
         <NextImage

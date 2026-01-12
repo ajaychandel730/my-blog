@@ -1,8 +1,7 @@
 "use server";
 import React from "react";
-import { Button } from "@heroui/button";
-import Link from "next/link";
 import getTopFacet from "@/actions/getTopFacet";
+import CategoryButton from "./CategoryButton";
 
 
 const HeaderCategories = async() => {
@@ -15,17 +14,8 @@ const HeaderCategories = async() => {
   return (
     <>
       <div className="hidden  xl:flex items-center justify-center p-2 space-x-4">
-        {filters.map((topic) => (
-          <Button
-            as={Link}
-            key={topic}
-            variant="light"
-            type="button"
-            href={`/blogs/search/${topic.split(" ").join("")}`}
-            className={"py-2 px-4 rounded-full capitalize   text-sm"}
-          >
-            {topic}
-          </Button>
+        {filters.map((topic, idx) => (
+          <CategoryButton topic={topic} key={topic}/>
         ))}
       </div>
     </>

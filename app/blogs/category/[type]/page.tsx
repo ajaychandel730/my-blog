@@ -1,5 +1,4 @@
 import React, { Suspense } from "react";
-import BlogCategoriesFilters from "@/app/components/blogs/BlogCategoriesFilters";
 import BlogCategoryList from "@/app/components/blogs/BlogCategoryList";
 import BlogLoading from "@/app/components/blogs/BlogLoading";
 
@@ -9,8 +8,7 @@ type Params = {
 
 const BlogsPage = async ({ params }: Params) => {
   return (
-    <section className=" min-h-[500px] bg-gray-50 dark:bg-midnight-800 border-t-1 border-t-gray-300 w-full flex flex-col p-2 rounded-md !mb-[100px] space-y-10">
-      <BlogCategoriesFilters />
+    <section className=" min-h-[500px] !my-20 bg-gray-50 dark:bg-midnight-800  w-full flex flex-col p-2 rounded-md !mb-[100px] space-y-10">
       <Suspense fallback={<BlogLoading />}>
         <BlogCategoryList params={params} />
       </Suspense>

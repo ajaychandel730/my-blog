@@ -41,7 +41,7 @@ const HeaderDropDownOptions = ({ getTopFacetPromise }: Props) => {
               </DrawerHeader>
               <DrawerBody>
                 <Suspense fallback={<DropdownMenuListSkeleton />}>
-                  <HeaderDropDownList getTopFacetPromise={getTopFacetPromise} />
+                  <HeaderDropDownList onClose={onClose} getTopFacetPromise={getTopFacetPromise} />
                 </Suspense>
               </DrawerBody>
             </>
