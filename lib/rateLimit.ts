@@ -9,12 +9,12 @@ const requests = new Map<string, { count: number; time: number }>();
 
 function memoryRateLimit(
   key: string,
-  limit:number=defaultLimit,
-  windowMs:number = 60000
+  limit: number = defaultLimit,
+  windowMs: number = 60000
 ) {
   const now = Date.now();
   const entry = requests.get(key);
-   
+
   if (!entry || now - entry.time > windowMs) {
     requests.set(key, { count: 1, time: now });
     return true;
@@ -31,22 +31,24 @@ function memoryRateLimit(
 /* ---------- PROD (Redis) ---------- */
 const redis = isProd ? Redis.fromEnv() : null;
 
-const redisLimiter = redis
-  ? new Ratelimit({
-      redis,
-      limiter: Ratelimit.slidingWindow(10, "1m"),
-    })
-  : null;
-
 /* ---------- PUBLIC API ---------- */
 export async function rateLimit(
   key: string,
-  limit:number = defaultLimit,
-  windowMs:number = 60000
+  limit: number = defaultLimit,
+  windowMs: number = 60000
 ) {
   if (!isProd) {
     return memoryRateLimit(key, limit, windowMs);
   }
+
+  if (redis == null) {
+    return false;
+  }
+
+  const redisLimiter = new Ratelimit({
+    redis,
+    limiter: Ratelimit.slidingWindow(limit, "1m"),
+  });
 
   const { success } = await redisLimiter!.limit(key);
   return success;
