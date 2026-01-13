@@ -8,7 +8,7 @@ const MostRecentBlogs = async () => {
 
   return (
     <>
-      <HeroHeader heading="Most Latest" />
+      <HeroHeader id="most-latest-blogs" heading="Most Latest" />
       <Suspense fallback={<MostRecentBlogsSkeleton/>}>
         <MostRecentBlogsItems/>
       </Suspense>

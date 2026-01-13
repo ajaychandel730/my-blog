@@ -30,7 +30,7 @@ const HeaderDropDownList = ({ getTopFacetPromise, onClose }: Props) => {
     ];
   }
   return (
-    <ul aria-description="blogs filter list" className="w-full space-y-4">
+    <ul role="list" className="w-full space-y-4">
       {filterList?.map((_id) => (
         <li
           onClick={onClose}

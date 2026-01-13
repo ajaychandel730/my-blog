@@ -15,11 +15,11 @@ const HightCountTopicWrapper = async () => {
   }
 
   return (
-    <div className='flex flex-col space-y-4 bg-white dark:bg-midnight-900 p-4'>
+    <section aria-labelledby={topFacet[0].toLowerCase().split(" ").join("-")} className='flex bg-white flex-col space-y-4  dark:bg-midnight-900 p-4'>
        <Suspense fallback={<HightCountTopicItemsSkeleton/>}>
          <HightCountTopicItems topFacet={topFacet[0]}/>
        </Suspense>
-    </div>
+    </section>
   )
 }
 

@@ -12,27 +12,28 @@ type Props = {
 
 const PicksForYouCard = async ({ _id, banner, title, date }: Props) => {
   return (
-    <div className="shadow-none">
-      <div className="flex space-x-2">
-        <div className="flex flex-1 flex-col space-y-1">
-          <Link href={`/blog/${_id}`}>
-            <h4 className="font-medium text-sm line-clamp-4 hover:underline">
-              {title}
-            </h4>
-          </Link>
-
-          <p className="text-tiny uppercase font-bold text-gray-700 dark:text-midnight-400">{date}</p>
-        </div>
-        <div className="relative w-20 h-20 rounded-lg bg-black overflow-hidden">
-          <Image
-            fill
-            alt="Card background"
-            className="w-full h-full object-cover"
-            src={banner}
-          />
-        </div>
+    <Link
+      href={`/blog/${_id}`}
+      className="flex items-center space-x-2  rounded-lg hover:bg-gray-100 dark:hover:bg-midnight-800 p-2 transition"
+    >
+      {/* Text */}
+      <div className="flex flex-1 flex-col space-y-1">
+        <h3 className="font-semibold text-sm line-clamp-4">{title}</h3>
+        <p className="text-tiny uppercase font-bold text-gray-700 dark:text-midnight-400">
+          {date}
+        </p>
       </div>
-    </div>
+
+      {/* Image */}
+      <div className="relative w-20 h-20 rounded-lg bg-black overflow-hidden flex-shrink-0">
+        <Image
+          fill
+          alt={title}
+          className="w-full h-full object-cover"
+          src={banner}
+        />
+      </div>
+    </Link>
   );
 };
 

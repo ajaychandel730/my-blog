@@ -12,9 +12,9 @@ const Top15Topics = async () => {
   }
 
   return (
-    <div className="w-full rounded-md bg-white dark:bg-midnight-900  min-h-[300px] p-4 space-y-4">
-      <HeroHeader heading="Topics" />
-      <ul className="flex flex-wrap gap-2 w-full">
+    <section aria-labelledby="top-topics" className="w-full rounded-md bg-white dark:bg-midnight-900  min-h-[300px] p-4 space-y-4">
+      <HeroHeader id="top-topics"  heading="Topics" />
+      <ul role="list" className="flex flex-wrap gap-2 w-full">
         {topics?.map((topic) => (
           <li key={topic}>
             <Link
@@ -28,7 +28,7 @@ const Top15Topics = async () => {
           </li>
         ))}
       </ul>
-    </div>
+    </section>
   );
 };
 

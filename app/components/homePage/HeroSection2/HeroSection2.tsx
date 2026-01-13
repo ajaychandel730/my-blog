@@ -12,8 +12,8 @@ const HeroSection2 = async () => {
   }  
   
   return (
-    <div className='w-full space-y-4'>
-        <HeroHeader heading={"Categories"} isIcon={false}/>
+    <section aria-labelledby = "blogs-categories" className='w-full space-y-4'>
+        <HeroHeader id='blogs-categories' heading={"Categories"} isIcon={false}/>
         <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-2 gap-y-4'>
           {
             categories?.map((topic)=>(
@@ -21,7 +21,7 @@ const HeroSection2 = async () => {
             ))
           }
         </div>
-    </div>
+    </section>
   )
 }
 

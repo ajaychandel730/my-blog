@@ -10,13 +10,13 @@ import Top15TopicsSkeleton from "./Top15TopicsSkeleton";
 const HeroSection1 = async () => {
   
   return (
-    <section className="w-full grid grid-col-2 space-y-4 lg:grid-cols-3 gap-2 min-h-[600px]">
-      <div className="lg:col-span-2 space-y-10">
+    <div className="w-full grid grid-col-2 space-y-4 lg:grid-cols-3 gap-2 min-h-[600px]">
+      <section aria-labelledby="most-latest-blogs" className="lg:col-span-2 space-y-10">
         <MostRecentBlogs />
         <Suspense fallback={<HightCountWrapperSkeleton/>}>
              <HightCountTopicWrapper />
         </Suspense>
-      </div>
+      </section>
       <div className="lg:space-y-4 grid grid-cols-1 md:grid-cols-2  gap-4 lg:grid-cols-1 sticky top-20 h-fit">
         <Suspense fallback={<PicksForYouSkeleton/>}>
            <PicksForYou />
@@ -25,7 +25,7 @@ const HeroSection1 = async () => {
         <Top15Topics />
         </Suspense>
       </div>
-    </section>
+    </div>
   );
 };
 

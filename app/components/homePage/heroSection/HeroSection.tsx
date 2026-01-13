@@ -17,16 +17,16 @@ const HeroSection = async () => {
   }
 
   return (
-    <section className="w-full grid xl:grid-cols-2 grid-cols-1  gap-2 ">
+    <section aria-labelledby="top-stories-heading" className="w-full grid xl:grid-cols-2 grid-cols-1  gap-2 bg-red-900">
       <Card
         as={NextLink}
         href={`/blog/${result[0]?._id}`}
         className=" h-[300px] md:h-[500px]   rounded-sm"
       >
         <CardHeader className="absolute z-10 !m-0 pt-10 rounded-none bottom-0 flex-col !items-start bg-gradient-to-t from-black via-black/50 to-transparent">
-          <h4 className="text-white font-medium text-large">
+          <h3 className="text-white font-medium text-large">
             {result[0]?.title}
-          </h4>
+          </h3>
           <p className="text-tiny text-white/60 uppercase font-bold">
             {toLocaleDateString(result[0]?.date)}
           </p>
@@ -39,7 +39,7 @@ const HeroSection = async () => {
         />
       </Card>
       <div className="flex flex-col space-y-4 bg-white dark:bg-midnight-900 shadow rounded-sm p-2">
-        <HeroHeader heading="Top Stories" />
+        <HeroHeader id="top-stories-heading" heading="Top Stories" />
         {result?.map(
           ({ _id, title, banner, description, date }: TopBlogsType) => (
             <BlogSmallLineCard

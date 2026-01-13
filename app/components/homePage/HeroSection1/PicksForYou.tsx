@@ -14,8 +14,8 @@ const PicksForYou = async () => {
    }
 
   return (
-    <div className="w-full rounded-md bg-white dark:bg-midnight-900  min-h-[300px] p-4 space-y-4">
-      <HeroHeader heading="Picks For You" />
+    <section aria-labelledby="picks-for-you" className="w-full rounded-md bg-white dark:bg-midnight-900  min-h-[300px] p-4 space-y-4">
+      <HeroHeader id="picks-for-you" heading="Picks For You" />
       {
         result?.map(({_id, title, banner, date})=>(
           <PicksForYouCard 
@@ -27,7 +27,7 @@ const PicksForYou = async () => {
           />
         ))
       }
-    </div>
+    </section>
   );
 };
 

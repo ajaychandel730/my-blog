@@ -13,7 +13,7 @@ const HightCountTopicItems = async ({topFacet}:{topFacet:string}) => {
 
   return (
     <>
-    <HeroHeader heading={topFacet}/>
+    <HeroHeader id={topFacet.toLowerCase().split(" ").join("-")} heading={topFacet}/>
       {result?.map(({ _id, title, date, banner }) => (
         <HightCountTopicCard
           key={_id}

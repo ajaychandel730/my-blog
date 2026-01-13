@@ -4,17 +4,17 @@ import { Skeleton } from '@heroui/skeleton'
 
 const Top15TopicsSkeleton = () => {
   return (
-    <div className="w-full rounded-md bg-white dark:bg-midnight-900  min-h-[300px] p-4 space-y-4">
-      <HeroHeader heading="Topics" />
-       <Skeleton className='w-4/5 h-3 rounded-full'>
+    <section aria-busy="true" aria-labelledby='top-topics' className="w-full rounded-md bg-white dark:bg-midnight-900  min-h-[300px] p-4 space-y-4">
+      <HeroHeader id='top-topics' heading="Topics" />
+       <Skeleton className='w-4/5 h-3 rounded-full' aria-hidden="true">
        </Skeleton>
-       <Skeleton className='w-4/5 h-3 rounded-full'>
+       <Skeleton className='w-4/5 h-3 rounded-full' aria-hidden="true">
        </Skeleton>
-       <Skeleton className='w-4/5 h-3 rounded-full'>
+       <Skeleton className='w-4/5 h-3 rounded-full' aria-hidden="true">
        </Skeleton>
-       <Skeleton className='w-3/5 h-3 rounded-full'>
+       <Skeleton className='w-3/5 h-3 rounded-full' aria-hidden="true">
        </Skeleton>
-    </div>
+    </section>
   )
 }
 
