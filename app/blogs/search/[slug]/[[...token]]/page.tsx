@@ -3,6 +3,16 @@ import SearchBlogs from "@/app/components/searchPage/SearchBlogs";
 import BlogLoading from "@/app/components/blogs/BlogLoading";
 import BlogSearchInput from "@/app/components/searchPage/BlogSearchInput";
 
+
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
+
 type Props = {
   params: Promise<{ slug: string; token?: string[] }>;
 };

@@ -5,7 +5,10 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
+       disallow: [
+          "/blogs/search",
+        ]
     },
-    sitemap: "https://myblog-sepia-nine-vercel.app/sitemap.xml",
+    sitemap: `${process.env.DOMAIN_NAME}/sitemap.xml`,
   };
 }
