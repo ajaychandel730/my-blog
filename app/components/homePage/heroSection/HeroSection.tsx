@@ -17,7 +17,7 @@ const HeroSection = async () => {
   }
 
   return (
-    <section aria-labelledby="top-stories-heading" className="w-full grid xl:grid-cols-2 grid-cols-1  gap-2 bg-red-900">
+    <section aria-labelledby="top-stories-heading" className="w-full grid xl:grid-cols-2 grid-cols-1  gap-2 ">
       <Card
         as={NextLink}
         href={`/blog/${result[0]?._id}`}
