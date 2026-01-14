@@ -11,69 +11,66 @@ type TextNodeProps = {
 };
 
 const ShowTextNode = ({ node }: { node: TextNode }) => {
-  const text: string = node.text;
+  const text = node.text;
   const props: TextNodeProps = {};
   const style: React.CSSProperties = {};
 
-  if (node.marks) {
-    let className = "";
-    let tag: string | typeof Link = "span";
+  let tag: string | typeof Link = "span";
+  let className = "";
 
+  if (node.marks) {
     node.marks.forEach(({ type, attrs }) => {
       switch (type) {
         case "textStyle":
-          style.color = attrs.color;
+          if (attrs?.color) style.color = attrs.color;
           break;
 
         case "highlight":
-          style.backgroundColor = attrs.color;
+          if (attrs?.color) {
+            style.backgroundColor = attrs.color;
+            className += "px-1 rounded ";
+          }
           break;
 
         case "bold":
-          className = className.concat(`font-bold `);
+          className += "font-semibold ";
           break;
 
         case "italic":
-          className = className.concat("italic ");
+          className += "italic ";
           break;
 
         case "underline":
-          className = className.concat("underline ");
+          className += "underline underline-offset-2 ";
           break;
 
         case "strike":
-          className = className.concat("line-through ");
+          className += "line-through ";
           break;
 
         case "code":
           tag = "code";
-          className = className.concat("font-mono px-1 rounded text-sm");
+          className +=
+            "font-mono text-sm bg-neutral-100 px-1.5 py-0.5 rounded ";
           break;
 
         case "link":
           tag = Link;
           props.href = attrs.href;
-          props.rel = attrs.rel;
-          props.target = attrs.target;
-          className = className.concat(
-            "text-blue-500 hover:text-blue-800 cursor-pointer underline"
-          );
+          props.rel = attrs.rel ?? "noopener noreferrer";
+          props.target = attrs.target ?? "_blank";
+          className +=
+            "text-blue-600 underline underline-offset-4 hover:text-blue-800 ";
           break;
-
-        default:
       }
     });
-
-    props.className = className.trim();
-
-    if (Object.values(style).length > 0) {
-      props.style = style;
-    }
-
-    return React.createElement(tag, props, text);
-  } else {
-    return <> {text} </>;
   }
+
+  if (className) props.className = className.trim();
+  if (Object.keys(style).length) props.style = style;
+
+  return React.createElement(tag, props, text);
 };
+
 
 export default ShowTextNode;

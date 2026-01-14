@@ -54,7 +54,7 @@ const CardContentWrapper = ({title, banner, description,  content, user, date}: 
            fill
           />
         </div>
-        <p className="!mb-10 text-lg text-black">{description}</p>
+        <p className="mt-2 mb-8 text-lg leading-relaxed text-neutral-600">{description}</p>
         <ShowBlogContent content={content ?? []} />
       </CardBody>
     </Card>

@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import ClientToastProvider from "./ClientToastProvider";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
 });
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
@@ -72,7 +73,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} dark:dark antialiased min-w-[300px] flex flex-col items-center box-border  overflow-x-hidden`}
+        className={`${inter.variable} ${geistMono.variable} dark:dark antialiased min-w-[300px] flex flex-col items-center box-border  overflow-x-hidden`}
       >
         {children}
         <ClientToastProvider />

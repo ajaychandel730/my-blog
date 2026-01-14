@@ -9,7 +9,7 @@ type Props = {
 
 const ShowParagraphNode = ({ node }: Props): React.JSX.Element => {
   return (
-    <p>
+    <p className="text-base leading-relaxed text-neutral-800">
       {node.content?.map((textNode: TextNode) => (
         <ShowTextNode key={nanoid(6)} node={textNode} />
       ))}

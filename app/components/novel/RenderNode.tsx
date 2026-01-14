@@ -10,6 +10,7 @@ import {
   ParagraphNode,
   TaskListNode,
 } from "@/types/novel";
+
 import ShowParagraphNode from "./nodes/ShowParagraphNode";
 import ShowImageNode from "./nodes/ShowImageNode";
 import ShowHeadingNode from "./nodes/ShowHeadingNode";
@@ -22,24 +23,31 @@ type Props = {
   node: NovelNode;
 };
 
-/// main function
-const RenderNode = ({ node }: Props) => {
-  if (node.type == "paragraph") {
-    return ShowParagraphNode({ node: node as ParagraphNode });
-  } else if (node.type == "image") {
-    return ShowImageNode({ node: node as ImageNode });
-  } else if (node.type == "heading") {
-    return <ShowHeadingNode node={node as HeadingNode} />;
-  } else if (node.type == "bulletList") {
-    return <ShowBulletListNode node={node as BulletListNode} />;
-  } else if (node.type == "orderedList") {
-    return <ShowOrderedListNode node={node as OrderedListNode} />;
-  } else if (node.type == "blockquote") {
-    return <ShowBlockquoteNode node={node as Blockquote} />;
-  } else if (node.type == "taskList") {
-    return <ShowTaskListNode node={node as TaskListNode} />;
-  } else {
-    return null;
+const RenderNode = ({ node }: Props): React.JSX.Element | null => {
+  switch (node.type) {
+    case "paragraph":
+      return <ShowParagraphNode node={node as ParagraphNode} />;
+
+    case "image":
+      return <ShowImageNode node={node as ImageNode} />;
+
+    case "heading":
+      return <ShowHeadingNode node={node as HeadingNode} />;
+
+    case "bulletList":
+      return <ShowBulletListNode node={node as BulletListNode} />;
+
+    case "orderedList":
+      return <ShowOrderedListNode node={node as OrderedListNode} />;
+
+    case "blockquote":
+      return <ShowBlockquoteNode node={node as Blockquote} />;
+
+    case "taskList":
+      return <ShowTaskListNode node={node as TaskListNode} />;
+
+    default:
+      return null;
   }
 };
 

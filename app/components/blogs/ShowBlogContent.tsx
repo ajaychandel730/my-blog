@@ -10,7 +10,7 @@ type Props = {
 
 const ShowBlogContent = ({ content }: Props) => {
   return (
-    <div className="flex w-full flex-col  space-y-2 ">
+    <div className="flex w-full flex-col  space-y-2 font-sans">
       {content.map((node) => (
         <RenderNode key={nanoid(6)} node={node as NovelNode} />
       ))}
