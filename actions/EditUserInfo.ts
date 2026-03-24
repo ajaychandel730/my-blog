@@ -18,7 +18,6 @@ export default async function (state: any, formData: FormData): Promise<any> {
       return { status: "failed", message: "Please login your account." };
     }
 
-    await rateLimitHandler();
     const result = UserEditSchema.safeParse({
       email: formData.get("email"),
       name: formData.get("name"),
