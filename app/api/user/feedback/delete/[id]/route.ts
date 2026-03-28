@@ -29,14 +29,14 @@ export async function DELETE(req:NextRequest ,  { params }: { params: Promise<{ 
      return NextResponse.json({
       status : "error",
       message : "Not able to find message."
-     })
+     }, {status:404});
    }
 
 
     return NextResponse.json({
         status : "ok",
         message : "Message removed successfully 😊"
-    })
+    }, {status:200});
 
   }catch(err){
     console.log("delete Feedback error:", getErrorMessage(err));
