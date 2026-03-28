@@ -34,5 +34,8 @@ export async function GET(req: NextRequest, { params }: Params) {
     return NextResponse.json({ status: "ok", result: blogs }, { status: 200 });
   } catch (err) {
     console.log("error:", getErrorMessage(err));
+    return NextResponse.json({status:"error", message:"Something went wrong. Please try later."},
+                             {status:500}
+                             );
   }
 }
