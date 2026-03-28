@@ -19,7 +19,7 @@ export  async function GET(req: NextRequest) {
       return NextResponse.json({
       status: "error",
       message: "Someting went wrong.",
-    });
+    }, {status:400});
     }
 
     if (session && "id" in session.user) {
@@ -40,7 +40,7 @@ export  async function GET(req: NextRequest) {
     return NextResponse.json({
       status: "error",
       message: "Someting went wrong.",
-    });
+    }, {status:500});
   }
 
   redirect("/signin");
