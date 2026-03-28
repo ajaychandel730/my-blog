@@ -45,7 +45,7 @@ export async function GET(req:NextRequest){
     return NextResponse.json({
         status : "ok",
         result : filterList
-    });
+    }, {status:200});
 
   } catch (err) {
     console.log("error on BlogsFiltersList:", getErrorMessage(err));
