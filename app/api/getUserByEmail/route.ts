@@ -18,6 +18,6 @@ export async function POST(req:Request){
         };
         return NextResponse.json({status : "ok", user}, {status : 200});
       } catch (err: unknown) {
-        return NextResponse.json({status : "error", user : null});
+        return NextResponse.json({status : "error", user : null}, {status:500});
       }
 }
