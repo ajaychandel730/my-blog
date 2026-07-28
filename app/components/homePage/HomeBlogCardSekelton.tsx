@@ -8,7 +8,7 @@ type Props = {
 
 const HomeBlogCardSekelton = ({ limit = 10 }: Props) => {
   return (
-    <div className="mt-20 flex">
+    <div className="w-full mt-20 flex justify-center">
       {Array(limit)
         .fill(1)
         .map((_, idx) => (

@@ -9,7 +9,7 @@ import ClientSideSessionWrapper from "../ClientSideSessionWrapper";
 
 const BlogContent = async ({ blogId }: { blogId: string }) => {
   const blog = await getBlogById(blogId);
-
+  
   if (!blog) {
     notFound();
   }

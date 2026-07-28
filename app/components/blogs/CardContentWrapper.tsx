@@ -36,10 +36,10 @@ const CardContentWrapper = ({title, banner, description,  content, user, date}: 
             {formattedDate}
           </span>
           <User
-            className="text-black"
             avatarProps={{
-              imgProps: { loading: "lazy" },
+              imgProps: { loading: "eager" },
               src: user?.image,
+              alt:"user profile"
             }}
             name={user?.name}
           />
@@ -48,10 +48,12 @@ const CardContentWrapper = ({title, banner, description,  content, user, date}: 
       </CardHeader>
       <CardBody className="space-y-2 text-lg  tracking-normal ">
         <div className="relative w-full rounded-lg overflow-hidden aspect-video shadow-lg  bg-gray-200">
-          <NextImage
+          <NextImage 
            src={banner}
            alt={title}
            fill
+           className="object-fill !m-0"
+           priority
           />
         </div>
         <p className="mt-2 mb-8 text-lg leading-relaxed text-neutral-600">{description}</p>
