@@ -1,0 +1,37 @@
+To get the exact JSON output with the weighted calculation, use this prompt. It is designed to force the AI to act as a data analyst and perform the math strictly.
+
+***
+
+### The Prompt
+
+**Role:** Senior Trend Forecaster & Data Analyst.
+
+**Task:** Evaluate the provided list of topics based on current early-2025 market data. You must provide three specific scores for each topic:
+
+1.  **trendScore (0-100):** Based on search velocity, social media mentions, and news cycle momentum.
+2.  **usefulnessScore (0-100):** Based on practical application, financial impact, or personal development value.
+
+**Constraints:**
+- **No Middle-Ground Bias:** Do not give everything a 70. If a topic is dying, score it low. If it is revolutionary, score it high.
+- **Data Currency:** Base your "Genuine" scores on 2024-2025 data patterns.
+- **Output Format:** Provide the results **ONLY** as a valid JSON array of objects. No introductory text or concluding remarks.
+
+**JSON Structure:**
+```json
+[
+  {
+    "topic": "Topic Name",
+    "trendScore": 0,
+    "usefulnessScore": 0,
+  }
+]
+```
+
+**List of Topics to Process:**
+[INSERT YOUR TOPICS HERE]
+
+***
+
+### Why this prompt is effective:
+1.  **JSON Enforcement:** It explicitly asks for "ONLY" the JSON array, which makes the output ready to be used in any code or spreadsheet.
+2.  **Variable Weights:** It distinguishes between "Hype" (Trend) and "Value" (Usefulness), which is the key to getting a **genuine** score rather than just a popularity score.
