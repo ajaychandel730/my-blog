@@ -16,7 +16,7 @@ const BlogImage = () => {
   const dispatch = useAppDispatch();
 
   const handleOnChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { default: convertIntoCompressFile } = await import("@/lib/convertIntoCompressFile");
+    const { default: convertIntoCompressFile } = await import("@/lib/imageCompress/convertIntoCompressFile");
     const uploadImageOnCloudinary = (await import("@/lib/cloudinary")).uploadImageOnCloudinary;
     const {toast} = await import("sonner");
 

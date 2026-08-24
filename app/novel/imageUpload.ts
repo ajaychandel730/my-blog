@@ -1,6 +1,6 @@
 import { createImageUpload } from "novel/plugins";
 import { uploadImageOnCloudinary } from "@/lib/cloudinary";
-import convertIntoCompressFile from "@/lib/convertIntoCompressFile";
+import convertIntoCompressFile from "@/lib/imageCompress/convertIntoCompressFile";
 import { toast } from "sonner";
 
 const onUpload = async (file: File) => {

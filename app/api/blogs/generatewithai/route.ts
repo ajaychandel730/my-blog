@@ -3,10 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { GoogleNews, googleNewsJson } from "@/lib/postAutomation/googleNews";
 import { googleGeminiAi } from "@/lib/postAutomation/googleGeminiAi";
 /////////////////////////
-import { marked } from "marked";
-import { generateJSON } from "@tiptap/html";
-import StarterKit from "@tiptap/starter-kit";
-import Image from "@tiptap/extension-image";
+
 /////////////////////////
 import {
   getBlogPrompt,
@@ -18,6 +15,7 @@ import {
   topicScoreZodSchema,
 } from "@/lib/zodDefinations/geminiSchemas/topicScoreSchema";
 import { geminiBlogJSONSchema } from "@/lib/zodDefinations/geminiSchemas/geminiBlogSchema";
+import { parseAiBlogContent } from "@/lib/postAutomation/prompts/features/parseAiArticle";
 
 const findTopTopic = (topics: TopicScoreZodSchema) => {
   return topics.reduce((pre, curr) => {
@@ -77,11 +75,12 @@ export async function GET(request: NextRequest) {
         message: blogResult.error.message,
       });
     }
+    
+     const content =  await parseAiBlogContent(blogResult.data.article_markdown);
+     
 
-    const html = await marked.parse(blogResult.data.article_markdown);
-    const content = generateJSON(html, [StarterKit, Image]);
     return NextResponse.json(
-      { status: "ok", result: blogResult.data },
+      { status: "ok", result:content },
       { status: 200 },
     );
   } catch (err) {

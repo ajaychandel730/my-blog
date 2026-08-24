@@ -16,7 +16,7 @@ const UploadNewPhotoButton = ({changeUserImage}:Props) => {
 
   const imageHandler = async (event :React.ChangeEvent<HTMLInputElement>)=>{
     const {toast} = await import("sonner");
-    const {default : convertIntoCompressFile} = await import('@/lib/convertIntoCompressFile');
+    const {default : convertIntoCompressFile} = await import('@/lib/imageCompress/convertIntoCompressFile');
     const {uploadImageOnCloudinary} = await import('@/lib/cloudinary');
     const {files} = event.target;
     if(files == null){

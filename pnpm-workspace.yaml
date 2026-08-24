@@ -1,5 +1,7 @@
-onlyBuiltDependencies:
-  - '@heroui/shared-utils'
-  - bcrypt
-  - sharp
-  - unrs-resolver
+allowBuilds:
+  '@google/genai': true
+  '@heroui/shared-utils': false
+  bcrypt: true
+  protobufjs: false
+  sharp: true
+  unrs-resolver: false
