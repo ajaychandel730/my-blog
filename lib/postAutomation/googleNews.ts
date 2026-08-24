@@ -17,5 +17,5 @@ export async function googleNewsJson(): Promise<Error | GoogleNews[]> {
     pubDate: news.pubDate,
   }));
 
-  return googleNews;
+  return googleNews.slice(0, 6);
 }

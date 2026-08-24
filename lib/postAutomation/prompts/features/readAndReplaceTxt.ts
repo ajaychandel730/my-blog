@@ -19,10 +19,7 @@ export async function getTopicsScorePrompt(data:GoogleNews[]){
 
 export async function getBlogPrompt(topic:string){
    const filePath = Path.join(process.cwd(), "lib", "postAutomation", "prompts", "genrateBlogPrompt.txt");
-   console.log("filePath:", filePath);
     const file  = await fs.readFile(filePath, "utf-8");
-    console.log("readfile:", file);
     const text = file.replace("{{TOPIC}}", "1. " + topic);
-    console.log("text:", text);
     return text;
 }

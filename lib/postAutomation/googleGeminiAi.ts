@@ -1,6 +1,4 @@
 import { GoogleGenAI } from "@google/genai";
-import z from "zod";
-import { TopicScoreJSONSchema } from "../zodDefinations/geminiSchemas/topicScoreSchema";
 
 
 interface ResponseFormat{
