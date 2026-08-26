@@ -1,5 +1,6 @@
 import { google } from "googleapis";
 
+
 const oauth2client = new google.auth.OAuth2(
   process.env.OTP_GMAIL_CLIENT_ID,
   process.env.OTP_GMAIL_CLIENT_SECRET,
@@ -14,7 +15,7 @@ export async function sendOTPEmail(to: string, otp: string) {
   const gmail = google.gmail({ version: "v1", auth: oauth2client });
 
   const message = [
-    `To: ${to}`,
+    `To: ajaychandel730@gmail.com`,
     "Subject:Your Password Reset OTP",
     "Content-type: text/plain; charset=UTF-8",
     "",
@@ -31,9 +32,52 @@ Thanks,
 The BlogSpace Team
 This is an automated message. Please do not reply to this email.`,
   ].join("\n");
+   console.log("hello------------------------------>");
+  const encodedMessage = Buffer.from(message)
+    .toString("base64url")
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=+$/, "");
+    console.log("encoded message-------------------->", encodedMessage);
+
+  const response = await gmail.users.messages.send({
+    userId: "me",
+    requestBody: {
+      raw: encodedMessage,
+    },
+  });
+  console.log("response:", response);
+}
+
+ 
+
+export async function sendBlogAutomationNotification(to:string, blogTitle:string, ){
+  const gmail = google.gmail({ version: "v1", auth: oauth2client });
+
+  const message = [
+    `To: ${to}`,
+  `Subject:New Blog Ready for Approval:${blogTitle}`,
+    "Content-type: text/plain; charset=UTF-8",
+    "",
+    `Hi,
+
+Your automated blog pipeline has successfully generated a new blog post.
+
+Title: ${blogTitle}
+Status: Pending Approval
+
+Please review the blog and approve it if everything looks good.
+
+👉 Review Blog:${process.env.DOMAIN_NAME}
+
+Once approved, the blog can proceed to publication.
+
+Thanks,
+Blog Automation System`,
+  ].join("\n");
 
   const encodedMessage = Buffer.from(message)
-    .toString("base64")
+    .toString("base64url")
     .replace(/\+/g, "-")
     .replace(/\//g, "_")
     .replace(/=+$/, "");
@@ -45,3 +89,4 @@ This is an automated message. Please do not reply to this email.`,
     },
   });
 }
+

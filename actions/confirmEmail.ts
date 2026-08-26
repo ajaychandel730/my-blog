@@ -34,10 +34,11 @@ export default async function name(initialState: unknown, formData: FormData) {
         error: "User not found on this email.",
       };
     }
-
     // send otp to user gmail
     const myOtp = generateOTP(6);
+    console.log("genrate otp after", myOtp);
     const hashMyOtp = hashOTP(myOtp);
+
     // start session
     await session.withTransaction(async () => {
       const otpsCollection = client.db("blogz").collection("otps");
@@ -54,6 +55,15 @@ export default async function name(initialState: unknown, formData: FormData) {
     });
     //end session
   } catch (err) {
+  //  console.log(
+  //   "GMAIL ERROR:",
+  //   JSON.stringify(err?.response?.data, null, 2)
+  // );
+
+  // console.log(
+  //   "GMAIL RESPONSE:",
+  //   JSON.stringify(err?.response, null, 2)
+  // );
     console.log("error on forgot password confirm email:", getErrorMessage(err));
     return {
       status: 500,

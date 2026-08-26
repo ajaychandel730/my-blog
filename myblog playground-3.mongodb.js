@@ -97,6 +97,10 @@ const collection = "blogs";
 //             date : {
 //               bsonType : "date",
 //               description : "Date property must be a date."
+//             },
+//             source:{
+//                 bsonType:"string",
+//                 description:"Source type should be a string."
 //             }
 //          }
 //       }

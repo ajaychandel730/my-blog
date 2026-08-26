@@ -377,7 +377,8 @@ Use exactly these fields:
 JSON REQUIREMENTS
 
 The entire response MUST be valid JSON.
-
+- title should be max 64 characters.
+- description should be max 300 characters.
 - Do not use Markdown code fences around the JSON.
 - Do not add explanations before the JSON.
 - Do not add explanations after the JSON.

@@ -7,8 +7,9 @@ interface ResponseFormat{
   schema?:Object
 }
 
+const ai = new GoogleGenAI({ apiKey: process.env.GIMINI_AI_API_KEY });
+
 export async function googleGeminiAi(text: string, response_format:ResponseFormat) {
-  const ai = new GoogleGenAI({ apiKey: process.env.GIMINI_AI_API_KEY });
   const interaction = await ai.interactions.create({
     model: "gemini-3.1-flash-lite",
     input: text,

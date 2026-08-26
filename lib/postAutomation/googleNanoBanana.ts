@@ -8,7 +8,7 @@ export async function nanoBanana(prompt:string) {
   const ai = new GoogleGenAI({apiKey:process.env.GIMINI_AI_API_KEY});
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image",
+    model: "gemini-3.1-flash-lite-image",
     input: prompt,
   });
 

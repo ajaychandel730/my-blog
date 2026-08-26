@@ -16,6 +16,11 @@ import {
 } from "@/lib/zodDefinations/geminiSchemas/topicScoreSchema";
 import { geminiBlogJSONSchema } from "@/lib/zodDefinations/geminiSchemas/geminiBlogSchema";
 import { parseAiBlogContent } from "@/lib/postAutomation/prompts/features/parseAiArticle";
+import { promptToImageUrl } from "@/lib/postAutomation/prompts/features/promptToImageUrl";
+import clientPromise from "@/lib/dbConnect";
+import DraftSchema from "@/lib/zodDefinations/DraftSchema";
+import { ObjectId } from "mongodb";
+import { sendBlogAutomationNotification } from "@/lib/mail";
 
 const findTopTopic = (topics: TopicScoreZodSchema) => {
   return topics.reduce((pre, curr) => {
@@ -75,14 +80,63 @@ export async function GET(request: NextRequest) {
         message: blogResult.error.message,
       });
     }
-    
-     const content =  await parseAiBlogContent(blogResult.data.article_markdown);
-     
 
-    return NextResponse.json(
-      { status: "ok", result:content },
-      { status: 200 },
+    const content = await parseAiBlogContent(blogResult.data.article_markdown);
+    const hero_post_image_url = process.env.HERO_IMAGE_POST_AI;
+    // get user by email
+    const client = await clientPromise;
+    const UserCollection = client.db("blogz").collection("users");
+
+    const user = await UserCollection.findOne(
+      { email:process.env.OWNER_EMAIL},
+      { projection: { _id: 1 } },
     );
+  
+    if (!user) {
+      return NextResponse.json({
+        status: "failed",
+        message: "Owner account not found.",
+      },{status:401});
+    }
+    ////
+
+    // final draft schema validation
+    const { data: blog } = blogResult;
+     console.log("content:", content.content);
+
+    const draft = DraftSchema.safeParse({
+      userId: user._id.toString(),
+      title: blog.title,
+      banner: hero_post_image_url,
+      topics: blog.tags,
+      description: blog.description,
+      content:content.content,
+      source: "Google Ai",
+    });
+
+    if (!draft.success) {
+      return NextResponse.json(
+        { status: "failed", message: draft.error.message },
+        { status: 422 },
+      );
+    }
+    //////
+    const draftCollection = client.db("blogz").collection("drafts");
+    const newDraft = await draftCollection.insertOne(
+      {
+        ...draft.data,
+        userId: new ObjectId(draft.data.userId),
+        date: new Date(),
+      }
+    );
+
+    if (!newDraft.insertedId) {
+      throw new Error("Database insertone query failed for draft.");
+    }
+     /// Notify owner by email
+    await sendBlogAutomationNotification(process.env.OWNER_EMAIL as string, draft.data.title);
+    return NextResponse.json({ status: "ok", message:"New blog added by automation." }, { status: 200 });
+
   } catch (err) {
     const message = getErrorMessage(err);
     console.log("error:", message);
