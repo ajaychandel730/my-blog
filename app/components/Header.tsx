@@ -15,7 +15,7 @@ const Header = async() => {
   const getTopFacetPromise =  getTopFacet(6); 
 
   return (
-    <header className="w-full border-b border-gray-200 dark:border-gray-700 box-border bg-background z-20  fixed top-0 right-0 left-0 ">
+    <header className="w-full border-b border-gray-200 dark:border-gray-700 box-border bg-background z-20  sticky top-0 right-0 left-0 ">
       <div className="flex items-center justify-between xl:justify-around w-full h-16 px-4">
         {/* Logo */}
         <div className="flex space-x-2">
