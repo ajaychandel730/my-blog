@@ -16,12 +16,12 @@ const Header = async() => {
 
   return (
     <header className="w-full border-b border-gray-200 dark:border-gray-700 box-border bg-background z-20  sticky top-0 right-0 left-0 ">
-      <div className="flex items-center justify-between xl:justify-around w-full h-16 px-4">
+      <div className="flex items-center justify-around w-full h-16 ">
         {/* Logo */}
-        <div className="flex space-x-2">
+        {/* <div className="flex space-x-6"> */}
           <HeaderDropDownOptions getTopFacetPromise={getTopFacetPromise} />
           <LogoButton />
-        </div>
+        {/* </div> */}
 
         {/* categories */}
         <Suspense fallback={ <HeaderCategoriesSkeleton/>}>

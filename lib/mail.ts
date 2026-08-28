@@ -92,7 +92,7 @@ Please review the blog and approve it if everything looks good.
 Once approved, the blog can proceed to publication.
 
 Thanks,
-Blog Automation System`,
+BlogSpace Automation System`,
   ].join("\n");
 
   const encodedMessage = Buffer.from(message)

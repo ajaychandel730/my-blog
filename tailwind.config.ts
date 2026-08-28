@@ -2,6 +2,7 @@ import type { Config } from "tailwindcss";
 const {heroui} = require("@heroui/theme");
 
 const config: Config = {
+    darkMode:"media",
     content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",

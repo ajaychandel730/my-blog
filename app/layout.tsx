@@ -1,14 +1,16 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
-import "./globals.css";
 import ClientToastProvider from "./ClientToastProvider";
+import "./globals.css";
+
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
 });
+
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
@@ -71,7 +73,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark:bg-background">
       <body
         className={`${inter.variable} ${geistMono.variable} dark:dark antialiased min-w-[300px] flex flex-col items-center box-border  overflow-x-hidden`}
       >
