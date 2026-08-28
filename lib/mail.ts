@@ -1,18 +1,38 @@
+"use server";
 import { google } from "googleapis";
+import clientPromise from "./dbConnect";
 
 
-const oauth2client = new google.auth.OAuth2(
-  process.env.OTP_GMAIL_CLIENT_ID,
-  process.env.OTP_GMAIL_CLIENT_SECRET,
-  process.env.OTP_GMAIL_RDIRECT_URI
-);
+////////////////////////////////////
+export async function googleGmailService() {
+  const oauth2client = new google.auth.OAuth2(
+    process.env.GOOGLE_CLIENT_ID,
+    process.env.GOOGLE_CLIENT_SECRET,
+    process.env.GOOGLE_REDIRECT_URI,
+  );
+  const client = await clientPromise;
+  const admin_collection = client.db("blogz").collection("admin_configs");
+  const profile = await admin_collection.findOne(
+    { email: process.env.OWNER_EMAIL },
+    { projection: { refreshToken: 1 } },
+  );
 
-oauth2client.setCredentials({
-  refresh_token: process.env.OTP_GMAIL_REFRESH_TOKEN,
-});
+  if (!profile || !profile.refreshToken) {
+    throw Error(
+      "Refresh token is not exist in database. Please generate new one.",
+    );
+  }
 
+  oauth2client.setCredentials({
+    refresh_token: profile.refreshToken,
+  });
+
+  return google.gmail({ version: "v1", auth: oauth2client });
+}
+////////////////////////////////////////////////////////////
 export async function sendOTPEmail(to: string, otp: string) {
-  const gmail = google.gmail({ version: "v1", auth: oauth2client });
+
+  const gmail = await googleGmailService();
 
   const message = [
     `To: ajaychandel730@gmail.com`,
@@ -32,13 +52,12 @@ Thanks,
 The BlogSpace Team
 This is an automated message. Please do not reply to this email.`,
   ].join("\n");
-   console.log("hello------------------------------>");
+
   const encodedMessage = Buffer.from(message)
     .toString("base64url")
     .replace(/\+/g, "-")
     .replace(/\//g, "_")
     .replace(/=+$/, "");
-    console.log("encoded message-------------------->", encodedMessage);
 
   const response = await gmail.users.messages.send({
     userId: "me",
@@ -46,17 +65,17 @@ This is an automated message. Please do not reply to this email.`,
       raw: encodedMessage,
     },
   });
-  console.log("response:", response);
 }
-
- 
-
-export async function sendBlogAutomationNotification(to:string, blogTitle:string, ){
-  const gmail = google.gmail({ version: "v1", auth: oauth2client });
+////////////////////////////////////////////////////////////////////////
+export async function sendBlogAutomationNotification(
+  to: string,
+  blogTitle: string,
+) {
+  const gmail = await googleGmailService();
 
   const message = [
     `To: ${to}`,
-  `Subject:New Blog Ready for Approval:${blogTitle}`,
+    `Subject:New Blog Ready for Approval:${blogTitle}`,
     "Content-type: text/plain; charset=UTF-8",
     "",
     `Hi,
@@ -89,4 +108,3 @@ Blog Automation System`,
     },
   });
 }
-

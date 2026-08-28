@@ -36,7 +36,6 @@ export default async function name(initialState: unknown, formData: FormData) {
     }
     // send otp to user gmail
     const myOtp = generateOTP(6);
-    console.log("genrate otp after", myOtp);
     const hashMyOtp = hashOTP(myOtp);
 
     // start session
