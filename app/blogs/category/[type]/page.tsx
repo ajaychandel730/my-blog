@@ -8,7 +8,7 @@ type Params = {
 
 const BlogsPage = async ({ params }: Params) => {
   return (
-    <section className=" min-h-[500px] !my-20 bg-gray-50 dark:bg-midnight-800  w-full flex flex-col p-2 rounded-md !mb-[100px] space-y-10">
+    <section className=" min-h-[500px] mt-10 bg-background  w-full flex flex-col p-2 rounded-md !mb-[100px] space-y-10">
       <Suspense fallback={<BlogLoading />}>
         <BlogCategoryList params={params} />
       </Suspense>

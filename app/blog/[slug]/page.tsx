@@ -39,14 +39,16 @@ const page = async ({ params }: Params) => {
   const blogId = (await params).slug;
 
   return (
-    <div className="flex w-full min-h-dvh p-4 pb-20 flex-col items-center">
+    <>
       <Header />
-      <Suspense fallback={<HomeBlogCardSekelton limit={1} />}>
-        <div className="mt-20 flex prose prose-neutral prose-lg  max-w-none leading-relaxed">
-          <BlogContent blogId={blogId} />
-        </div>
-      </Suspense>
-    </div>
+      <div className="flex w-full min-h-dvh p-4 pb-20 flex-col items-center">
+        <Suspense fallback={<HomeBlogCardSekelton limit={1} />}>
+          <div className="mt-20 flex prose prose-neutral prose-lg  max-w-none leading-relaxed">
+            <BlogContent blogId={blogId} />
+          </div>
+        </Suspense>
+      </div>
+    </>
   );
 };
 
