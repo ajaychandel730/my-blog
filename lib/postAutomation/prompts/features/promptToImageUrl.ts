@@ -11,7 +11,7 @@ export async function promptToImageUrl(prompt:string){
   }
 
   const imageBuffer = await sharpImageCompress(generatedImage.data);
-  const cloudUrl = await uploadImageOnCloudinary(imageBuffer.toBase64());
+  const cloudUrl = await uploadImageOnCloudinary(imageBuffer.toString('base64'));
   if(!cloudUrl){
     throw new Error("Unable to upload image on cloudinary.");
   }
