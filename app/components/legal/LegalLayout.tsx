@@ -47,8 +47,8 @@ export function LegalLayout({
           {/* Legal Document Content */}
           <main className="lg:col-span-9">
             {/* Informational Disclaimer Banner */}
-            <aside aria-label="Disclaimer" className="mb-8 rounded-lg border border-amber-200 bg-amber-50/60 p-4 text-xs leading-relaxed text-amber-800 dark:border-amber-900/50 dark:bg-amber-950/20 dark:text-amber-300">
-              <strong>Notice:</strong> MyBlogs is an independent full-stack web and AI demonstration project. This document transparently outlines our technical and data handling practices for informational purposes and does not constitute formal legal advice.
+            <aside aria-label="Disclaimer" className="mb-8 rounded-lg border border-amber-200 bg-amber-50/60 p-4 text-sm leading-relaxed text-amber-800 dark:border-amber-900/50 dark:bg-amber-950/20 dark:text-amber-300">
+              <strong>Notice:</strong> BlogSpace is an independent full-stack web and AI demonstration project. This document transparently outlines our technical and data handling practices for informational purposes and does not constitute formal legal advice.
             </aside>
 
             {/* Mobile TOC Collapsible / Stacked */}
@@ -62,8 +62,6 @@ export function LegalLayout({
           </main>
         </div>
       </div>
-
-      <LegalFooter />
     </div>
   );
 }

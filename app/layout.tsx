@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import ClientToastProvider from "./ClientToastProvider";
 import "./globals.css";
+import { LegalFooter } from "./components/legal/LegalFooter";
 
 
 const inter = Inter({
@@ -79,6 +80,7 @@ export default async function RootLayout({
       >
         {children}
         <ClientToastProvider />
+        <LegalFooter/>
       </body>
     </html>
   );

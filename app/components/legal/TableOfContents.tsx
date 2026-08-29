@@ -31,10 +31,10 @@ export function TableOfContents({ items }: { items: TocItem[] }) {
 
   return (
     <nav aria-label="Table of contents" className="w-full">
-      <div className="mb-3 text-xs font-bold tracking-wider text-zinc-400 uppercase dark:text-zinc-500">
+      <div className="mb-3 text-sm font-bold tracking-wider text-zinc-400 uppercase dark:text-zinc-500">
         On This Page
       </div>
-      <ul className="space-y-1.5 border-l border-zinc-200 text-xs dark:border-zinc-800">
+      <ul className="space-y-1.5 border-l border-zinc-200 text-sm dark:border-zinc-800">
         {items.map((item) => {
           const isActive = activeId === item.id;
           return (

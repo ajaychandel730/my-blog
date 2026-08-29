@@ -383,11 +383,6 @@ export default function PrivacyPolicyPage() {
             encrypted using Transport Layer Security (HTTPS/TLS).
           </li>
         </ul>
-        <p className="text-xs text-zinc-500 dark:text-zinc-400">
-          While rigorous software development and architectural security
-          practices are maintained, no internet-connected platform can guarantee
-          absolute security.
-        </p>
       </LegalSection>
 
       <LegalSection
@@ -456,7 +451,7 @@ export default function PrivacyPolicyPage() {
           </li>
           <li>
             <strong>Password-Reset OTPs:</strong> Automatically invalidated upon
-            expiration (typically within 10 to 15 minutes) and purged from
+            expiration (typically within 5 minutes) and purged from
             active validation routines.
           </li>
         </ul>
