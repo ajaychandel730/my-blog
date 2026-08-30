@@ -17,7 +17,7 @@ jobs:
             --retry 3 \
             --retry-delay 10 \
             --retry-all-errors \
-            -X POST "${{ secrets.CRON_API_URL }}" \
+            -X POST "https://myblog-sepia-nine.vercel.app/api/blogs/generatewithai" \
             -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}"
 
       - name: Report failure
