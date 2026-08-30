@@ -48,16 +48,22 @@ export async function GET(request: NextRequest) {
       );
     }
     console.log("authheader:", authHeader);
-    
+
     const authKey = authHeader.slice(7);
     const myAuthKey = process.env.CRON_SECRET;
 
+  
+    
     if (!myAuthKey) {
       return NextResponse.json(
         { status: "error", message: "cron_secret missing in env file." },
         { status: 500 },
       );
     }
+      console.log("authkey:", authKey);
+    console.log("myAuthKey:", myAuthKey);
+    console.log("authKeyLength", authKey.length);
+    console.log("authKeyLength", myAuthKey.length);
 
     const authKeyBuffer = Buffer.from(authKey);
     const myAuthKeyBuffer = Buffer.from(myAuthKey);

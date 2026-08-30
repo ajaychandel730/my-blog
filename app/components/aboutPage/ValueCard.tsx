@@ -1,4 +1,3 @@
-import { BookOpen } from "lucide-react";
 import React from "react";
 
 type Props ={
