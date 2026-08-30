@@ -1,0 +1,26 @@
+name: Blog Automation
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+
+  workflow_dispatch:
+
+jobs:
+  generate-blog:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger blog API
+        run: |
+          curl --fail-with-body \
+            --retry 3 \
+            --retry-delay 10 \
+            --retry-all-errors \
+            -X POST "${{ secrets.CRON_API_URL }}" \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}"
+
+      - name: Report failure
+        if: failure()
+        run: |
+          echo "Blog automation failed!"
