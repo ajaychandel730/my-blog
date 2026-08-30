@@ -2,6 +2,8 @@ import { getErrorMessage } from "@/utils/errors";
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleNews, googleNewsJson } from "@/lib/postAutomation/googleNews";
 import { googleGeminiAi } from "@/lib/postAutomation/googleGeminiAi";
+import crypto from "node:crypto";
+
 /////////////////////////
 
 /////////////////////////
@@ -21,6 +23,8 @@ import clientPromise from "@/lib/dbConnect";
 import DraftSchema from "@/lib/zodDefinations/DraftSchema";
 import { ObjectId } from "mongodb";
 import { sendBlogAutomationNotification } from "@/lib/mail";
+import { rateLimit } from "@/lib/rateLimit";
+import rateLimitHandler from "@/lib/rateLimitHandler";
 
 const findTopTopic = (topics: TopicScoreZodSchema) => {
   return topics.reduce((pre, curr) => {
@@ -34,6 +38,39 @@ const findTopTopic = (topics: TopicScoreZodSchema) => {
 
 export async function GET(request: NextRequest) {
   try {
+    await rateLimitHandler();
+    // authorization
+    const authHeader = request.headers.get("authorization");
+    if (!authHeader?.startsWith("Bearer ")) {
+      return NextResponse.json(
+        { status: "error", message: "Unauthorized" },
+        { status: 401 },
+      );
+    }
+
+    const authKey = authHeader.slice(7);
+    const myAuthKey = process.env.CRON_SECRET;
+
+    if (!myAuthKey) {
+      return NextResponse.json(
+        { status: "error", message: "cron_secret missing in env file." },
+        { status: 500 },
+      );
+    }
+
+    const authKeyBuffer = Buffer.from(authKey);
+    const myAuthKeyBuffer = Buffer.from(myAuthKey);
+
+    if (
+      authKeyBuffer.length != myAuthKeyBuffer.length ||
+      !crypto.timingSafeEqual(authKeyBuffer, myAuthKeyBuffer)
+    ) {
+      return NextResponse.json(
+        { status: "failed", message: "Something went wrong." },
+        { status: 401 },
+      );
+    }
+////////////////////////////////Authorization done///////////////
     // step1. get latest hot news topics
     const googleNews: GoogleNews[] = (await googleNewsJson()) as GoogleNews[];
     // step2. send to genai score it on bases of trendscore , usefulness
@@ -88,21 +125,24 @@ export async function GET(request: NextRequest) {
     const UserCollection = client.db("blogz").collection("users");
 
     const user = await UserCollection.findOne(
-      { email:process.env.OWNER_EMAIL},
+      { email: process.env.OWNER_EMAIL },
       { projection: { _id: 1 } },
     );
-  
+
     if (!user) {
-      return NextResponse.json({
-        status: "failed",
-        message: "Owner account not found.",
-      },{status:401});
+      return NextResponse.json(
+        {
+          status: "failed",
+          message: "Owner account not found.",
+        },
+        { status: 401 },
+      );
     }
     ////
 
     // final draft schema validation
     const { data: blog } = blogResult;
-     console.log("content:", content.content);
+    console.log("content:", content.content);
 
     const draft = DraftSchema.safeParse({
       userId: user._id.toString(),
@@ -110,7 +150,7 @@ export async function GET(request: NextRequest) {
       banner: hero_post_image_url,
       topics: blog.tags,
       description: blog.description,
-      content:content.content,
+      content: content.content,
       source: "Google Ai",
     });
 
@@ -122,21 +162,24 @@ export async function GET(request: NextRequest) {
     }
     //////
     const draftCollection = client.db("blogz").collection("drafts");
-    const newDraft = await draftCollection.insertOne(
-      {
-        ...draft.data,
-        userId: new ObjectId(draft.data.userId),
-        date: new Date(),
-      }
-    );
+    const newDraft = await draftCollection.insertOne({
+      ...draft.data,
+      userId: new ObjectId(draft.data.userId),
+      date: new Date(),
+    });
 
     if (!newDraft.insertedId) {
       throw new Error("Database insertone query failed for draft.");
     }
-     /// Notify owner by email
-    await sendBlogAutomationNotification(process.env.OWNER_EMAIL as string, draft.data.title);
-    return NextResponse.json({ status: "ok", message:"New blog added by automation." }, { status: 200 });
-
+    /// Notify owner by email
+    await sendBlogAutomationNotification(
+      process.env.OWNER_EMAIL as string,
+      draft.data.title,
+    );
+    return NextResponse.json(
+      { status: "ok", message: "New blog added by automation." },
+      { status: 200 },
+    );
   } catch (err) {
     const message = getErrorMessage(err);
     console.log("error:", message);
