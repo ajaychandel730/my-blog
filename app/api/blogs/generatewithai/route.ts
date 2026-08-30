@@ -47,7 +47,8 @@ export async function GET(request: NextRequest) {
         { status: 401 },
       );
     }
-
+    console.log("authheader:", authHeader);
+    
     const authKey = authHeader.slice(7);
     const myAuthKey = process.env.CRON_SECRET;
 
