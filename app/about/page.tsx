@@ -8,16 +8,17 @@ import ValuesSection from "../components/aboutPage/ValuesSection";
 import PersonalNoteSection from "../components/aboutPage/PersonalNoteSection";
 
 const AboutPage = () => {
- 
   return (
-    <div className=" mx-auto px-2 py-12 max-w-[1100px] dark:text-midnight-200">
+    <>
       <Header />
-      <AboutHeroSection />
-      <StorySection />
-      <QuerySection />
-      <MissionSection />
-      <ValuesSection />
-    </div>
+      <div className=" mx-auto px-2 py-12 max-w-[1100px] dark:text-midnight-200">
+        <AboutHeroSection />
+        <StorySection />
+        <QuerySection />
+        <MissionSection />
+        <ValuesSection />
+      </div>
+    </>
   );
 };
 

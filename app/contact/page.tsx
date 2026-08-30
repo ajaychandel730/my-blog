@@ -6,17 +6,19 @@ import ContactHeroSection from "../components/contactPage/ContactHeroSection";
 
 const ContactPage = () => {
   return (
-    <div className="container mx-auto px-4 py-12  max-w-5xl space-y-20 ">
-      {/* Hero Section */}
+    <>
       <Header />
-      <ContactHeroSection />
-      {/* Contact Form */}
-      <ContactForm />
-      {/* Social Links & Info */}
-      <SocialLinks />
-      {/* FAQ Section */}
-      <FAQSection />
-    </div>
+      <div className="container mx-auto px-4 py-12  max-w-5xl space-y-20 ">
+        {/* Hero Section */}
+        <ContactHeroSection />
+        {/* Contact Form */}
+        <ContactForm />
+        {/* Social Links & Info */}
+        <SocialLinks />
+        {/* FAQ Section */}
+        <FAQSection />
+      </div>
+    </>
   );
 };
 
