@@ -93,7 +93,6 @@ const BlogImage = () => {
       ) : (
         <Button
           role="button"
-          aria-description="upload post image banner"
           variant="solid"
           isLoading={imageloading}
           startContent={

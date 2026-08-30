@@ -12,12 +12,9 @@ import { Blog } from "@/lib/features/editor/editorSlice";
 import getEditBlogById from "@/actions/getEditBlogById";
 import getEditDraftById from "@/actions/getEditDraftById";
 import BlogEditorLoading from "./BlogEditorLoading";
+import { getErrorMessage } from "@/utils/errors";
 
-type Props = {
-  type: string;
-};
-
-const BlogEditor = ({ type }: Props) => {
+const BlogEditor = () => {
   const dispatch = useAppDispatch();
   const { editBlogId, editDraftId } = useParams();
   const [loading, setLoading] = useState(editBlogId ? true : false);
@@ -68,9 +65,10 @@ const BlogEditor = ({ type }: Props) => {
         dispatch(setBlog(blog));
       }
     } catch (err) {
+      console.log("error:", getErrorMessage(err));
       toast.error("Something went wrong. Please refresh page again.");
     }
-  }, [editBlogId]);
+  }, [editBlogId, dispatch, editDraftId, fetchBlog, fetchDraft]);
 
   if (loading) {
     return <BlogEditorLoading />;

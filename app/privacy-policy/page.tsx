@@ -87,7 +87,7 @@ export default function PrivacyPolicyPage() {
         <p>
           You can read public blog posts on MyBlogs without creating an account
           or sharing your name or email. Our web host only records temporary
-          technical details (like your device's connection address and the time
+          technical details (like your devices connection address and the time
           of your visit) strictly to load the page on your screen and keep the
           site working properly.
         </p>

@@ -1,6 +1,6 @@
 "use client";
 import { useAppDispatch } from "@/lib/hooks";
-import { isReseting, resetBlog, setBlog } from "@/lib/store";
+import { isReseting, resetBlog } from "@/lib/store";
 import { Button } from "@heroui/button";
 import React, { useTransition } from "react";
 import { PlusIcon } from "lucide-react";
@@ -8,7 +8,6 @@ import { toast } from "sonner";
 
 const NewBlogButton = () => {
   const dispatch = useAppDispatch();
-  const [isPending, startTransition] = useTransition();
 
   const handleNewBlogClick = () => {
     const confirmReset = window.confirm(

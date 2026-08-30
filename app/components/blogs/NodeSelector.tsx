@@ -17,7 +17,6 @@ import {
 //   import { PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {Popover, PopoverTrigger, PopoverContent} from "@heroui/popover";
   import { Button } from "@heroui/button";
-import { Editor } from "@tiptap/react";
   
   export type SelectorItem = {
     name: string;

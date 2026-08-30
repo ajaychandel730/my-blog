@@ -5,7 +5,6 @@ import StorySection from "../components/aboutPage/StorySection";
 import QuerySection from "../components/aboutPage/QuerySection";
 import MissionSection from "../components/aboutPage/MissionSection";
 import ValuesSection from "../components/aboutPage/ValuesSection";
-import PersonalNoteSection from "../components/aboutPage/PersonalNoteSection";
 
 const AboutPage = () => {
   return (

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import clientPromise from "@/lib/dbConnect";
 import rateLimitHandler from "@/lib/rateLimitHandler";
+import { getErrorMessage } from "@/utils/errors";
 
 
 export async function POST(req:Request){
@@ -18,6 +19,7 @@ export async function POST(req:Request){
         };
         return NextResponse.json({status : "ok", user}, {status : 200});
       } catch (err: unknown) {
+        console.log("Error:", getErrorMessage(err));
         return NextResponse.json({status : "error", user : null}, {status:500});
       }
 }

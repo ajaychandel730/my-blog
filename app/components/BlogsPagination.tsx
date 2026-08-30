@@ -27,7 +27,7 @@ const BlogsPagination = ({ setPage}: Props) => {
     return () => {
       intersectionObserver.disconnect();
     };
-  }, []);
+  },[setPage]);
 
   return <div ref={loadingRef} className="w-full flex h-20"></div>;
 };

@@ -10,7 +10,7 @@ const PersonalNoteSection = () => {
           This blog started as a way for me to document my learning journey in
           web development. As a developer, I believe in learning in public and
           giving back to the community that has helped me so much. Whether
-          you're a beginner just starting out or an experienced developer, I
+          you are a beginner just starting out or an experienced developer, I
           hope you find something useful here. Feel free to reach out if you
           have questions, suggestions, or just want to connect!
         </p>

@@ -158,7 +158,7 @@ export default function TermsAndConditionsPage() {
         <p>
           While we do not review every single post, we reserve the right to
           edit, hide or remove any blog article, draft or image at any time
-          especially if it breaks our rules, copies someone else's work or
+          especially if it breaks our rules, copies someone else&apos;s work or
           causes a security risk.
         </p>
       </LegalSection>

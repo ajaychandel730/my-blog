@@ -18,12 +18,10 @@ import {
 } from "@/lib/zodDefinations/geminiSchemas/topicScoreSchema";
 import { geminiBlogJSONSchema } from "@/lib/zodDefinations/geminiSchemas/geminiBlogSchema";
 import { parseAiBlogContent } from "@/lib/postAutomation/prompts/features/parseAiArticle";
-import { promptToImageUrl } from "@/lib/postAutomation/prompts/features/promptToImageUrl";
 import clientPromise from "@/lib/dbConnect";
 import DraftSchema from "@/lib/zodDefinations/DraftSchema";
 import { ObjectId } from "mongodb";
 import { sendBlogAutomationNotification } from "@/lib/mail";
-import { rateLimit } from "@/lib/rateLimit";
 import rateLimitHandler from "@/lib/rateLimitHandler";
 
 const findTopTopic = (topics: TopicScoreZodSchema) => {

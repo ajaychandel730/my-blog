@@ -3,7 +3,7 @@ import rateLimitHandler from "@/lib/rateLimitHandler";
 import { NextResponse } from "next/server";
 import clientPromise from "@/lib/dbConnect";
 
-export async function GET(request: Request) {
+export async function GET() {
   try {
     // limiting
     await rateLimitHandler();

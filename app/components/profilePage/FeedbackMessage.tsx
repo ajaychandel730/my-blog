@@ -10,7 +10,7 @@ import FeedbackMessageDropdown from "./FeedbackMessageDropdown";
 
 type Props = FeedbackInterface & {
   isDeleted: boolean;
-  handleFeedbackDelete: (id: string, setIsLoading: any) => Promise<void>;
+  handleFeedbackDelete: (id: string, setIsLoading: React.Dispatch<React.SetStateAction<boolean>>) => Promise<void>;
 };
 
 const FeedbackMessage = ({

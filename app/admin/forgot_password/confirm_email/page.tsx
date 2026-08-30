@@ -1,7 +1,5 @@
 import React from "react";
-
 import ConfirmEmailForm from "./ConfirmEmailForm";
-import LogoButton from "@/app/components/homePage/HeaderButtons/LogoButton";
 import FullLogoButton from "@/app/components/homePage/HeaderButtons/FullLogoButton";
 
 const page = () => {

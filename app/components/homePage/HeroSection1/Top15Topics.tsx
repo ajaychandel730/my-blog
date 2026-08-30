@@ -5,7 +5,7 @@ import getTopFacet from "@/actions/getTopFacet";
 import Link from "next/link";
 
 const Top15Topics = async () => {
-  let topics: string[] = (await getTopFacet(21)).map(({_id})=> _id);
+  const topics: string[] = (await getTopFacet(21)).map(({_id})=> _id);
 
   if (topics.length == 0) {
     return null;

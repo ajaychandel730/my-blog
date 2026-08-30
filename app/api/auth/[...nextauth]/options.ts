@@ -62,10 +62,14 @@ export const nextAuthOptions:NextAuthOptions =  {
       }),
     ],
     callbacks: {
-      async signIn({ user, account, profile, email, credentials }) {
+      async signIn({ user }) {
+        if(!user){
+          return false;
+        }
+
         return true;
       },
-      async redirect({ url, baseUrl }) {
+      async redirect({baseUrl }) {
         return baseUrl;
       },
       async session({ session, token}) {
@@ -79,7 +83,7 @@ export const nextAuthOptions:NextAuthOptions =  {
   
         return session;
       },
-      async jwt({ token, user, account, session, profile, trigger }) {
+      async jwt({ token, user, session, trigger }) {
         if(trigger === "update" && session){
            token.name = session?.name || token.name;
            token.email = session?.email || token.email;

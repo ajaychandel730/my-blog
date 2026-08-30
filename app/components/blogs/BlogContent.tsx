@@ -3,7 +3,6 @@ import React from "react";
 import getBlogById from "@/actions/getBlogById";
 import { notFound } from "next/navigation";
 import CardContentWrapper from "./CardContentWrapper";
-import { Blog } from "@/types/blog";
 import ClientSideSessionWrapper from "../ClientSideSessionWrapper";
 
 

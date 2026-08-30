@@ -3,15 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { PenSquare } from "lucide-react";
 import { Button } from "@heroui/button";
-type Props = {
-  color?:
-    | "default"
-    | "primary"
-    | "warning"
-    | "secondary"
-    | "success"
-    | "danger";
-};
+
 
 const CreateBlogButton = () => {
   return (

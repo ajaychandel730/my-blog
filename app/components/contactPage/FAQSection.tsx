@@ -8,7 +8,7 @@ const FAQSection = () => {
           <div>
             <h3 className="mb-2">Can I request a blog topic?</h3>
             <p className="text-neutral-600 dark:text-midnight-400">
-              Absolutely! I love hearing what topics you'd like to learn about.
+              Absolutely! I love hearing what topics you should like to learn about.
               Send me your suggestions!
             </p>
           </div>

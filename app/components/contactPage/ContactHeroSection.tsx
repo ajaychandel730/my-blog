@@ -9,7 +9,7 @@ const ContactHeroSection = () => {
         </div>
         <h1 className="text-4xl mb-4">Get In Touch</h1>
         <p className="text-xl text-neutral-600 dark:text-midnight-400 max-w-2xl mx-auto">
-          Have a question, suggestion, or just want to say hi? I'd love to hear
+          Have a question, suggestion, or just want to say hi? I would love to hear
           from you!
         </p>
       </div>

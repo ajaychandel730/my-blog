@@ -25,7 +25,6 @@ export async function GET(req: NextRequest) {
     if (session && session.user.role === UserRole.ADMIN) {
       const client = await clientPromise;
       const collection = client.db("blogz").collection("messages");
-      const objectUserId = new ObjectId(session.user.id);
       const messages = await collection
         .find({}, { sort: { _id: -1 }, skip: (page - 1) * limit, limit })
         .toArray();

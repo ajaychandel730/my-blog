@@ -4,7 +4,7 @@ import EmptyBlogsErrorMessage from '../blogs/EmptyBlogsErrorMessage';
 
 interface Props {
     isLoading : boolean;
-    data: Object[] | undefined;
+    data: object[] | undefined;
     error : unknown;
 }
 

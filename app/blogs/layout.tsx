@@ -1,5 +1,4 @@
 import React from "react";
-import BlogSearchInput from "../components/searchPage/BlogSearchInput";
 import Header from "../components/Header";
 
 const BlogsLayout = async ({ children }: { children: React.ReactNode }) => {

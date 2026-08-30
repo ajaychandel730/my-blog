@@ -3,7 +3,7 @@ import { getErrorMessage } from "@/utils/errors";
 import rateLimitHandler from "@/lib/rateLimitHandler";
 import clientPromise from "@/lib/dbConnect";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     // limiting
     await rateLimitHandler();

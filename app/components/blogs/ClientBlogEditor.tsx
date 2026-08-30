@@ -4,11 +4,11 @@ import StoreProvider from "@/app/StoreProvider";
 import dynamic from "next/dynamic";
 const BlogEditor = dynamic(()=> import("./BlogEditor"), {ssr : false});
 
-const ClientBlogEditor = ({type}:{type:string}) => {
+const ClientBlogEditor = () => {
   
   return (
     <StoreProvider>
-      <BlogEditor type={type} />
+      <BlogEditor  />
     </StoreProvider>
   );
 };

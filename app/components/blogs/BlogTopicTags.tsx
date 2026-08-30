@@ -4,7 +4,6 @@ import ListOfTags from "./ListOfTags";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { RootState, setBlog } from "@/lib/store";
 import cleanTag from "@/lib/cleanTag";
-import { baseInputClasses } from "@/lib/inputClasses";
 
 const BlogTopicTags = () => {
   const {blog:{topics}} = useAppSelector((state:RootState)=> state.editorReducer); 

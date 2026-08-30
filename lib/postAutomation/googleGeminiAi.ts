@@ -4,7 +4,7 @@ import { GoogleGenAI } from "@google/genai";
 interface ResponseFormat{
   type:string;
   mime_type?:string;
-  schema?:Object
+  schema?:object;
 }
 
 const ai = new GoogleGenAI({ apiKey: process.env.GIMINI_AI_API_KEY });

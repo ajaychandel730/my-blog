@@ -15,7 +15,7 @@ export type BlogItem = BlogCard & {
 };
 
 const UserPublishBlogs = ({ PublishBlogItemSkeleton }: Props) => {
-  const { data, error, isLoading, isValidating, mutate, setSize, size } =
+  const { data, error, isLoading, isValidating, mutate, setSize } =
     useInfiniteSwr(getKey, fetchUserPublishBlogs, {
       revalidateFirstPage: false,
     });
@@ -61,7 +61,7 @@ const UserPublishBlogs = ({ PublishBlogItemSkeleton }: Props) => {
 
       <HandleErrrorMessage
         isLoading={isLoading}
-        data={data as Object[] | undefined}
+        data={data as object[] | undefined}
         error={error}
       />
 

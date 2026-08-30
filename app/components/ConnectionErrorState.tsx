@@ -19,7 +19,7 @@ const ConnectionErrorState = ({reset}:Props) => {
       </div>
 
       <p className="text-base text-gray-600 text-center leading-relaxed">
-        We're having trouble connecting to the database. Please check your
+        We are having trouble connecting to the database. Please check your
         internet connection and try again.
       </p>
       <TryAgain reset={reset} />

@@ -1,15 +1,17 @@
 // import { cn } from "@/lib/utils";
 import { useEditor } from "novel";
 import { Check, Trash } from "lucide-react";
-import { type Dispatch, type FC, type SetStateAction, useEffect, useRef } from "react";
+import {useEffect, useRef } from "react";
 import { Button } from "@heroui/button";
 import {Popover, PopoverContent, PopoverTrigger} from "@heroui/popover"
+import { getErrorMessage } from "@/utils/errors";
 
 export function isValidUrl(url: string) {
   try {
     new URL(url);
     return true;
   } catch (e) {
+    console.log("error:", getErrorMessage(e));
     return false;
   }
 }
@@ -20,6 +22,7 @@ export function getUrlFromString(str: string) {
       return new URL(`https://${str}`).toString();
     }
   } catch (e) {
+    console.log("error:", getErrorMessage(e));
     return null;
   }
 }
@@ -34,7 +37,9 @@ export const LinkSelector = ({ open, onOpenChange }: LinkSelectorProps) => {
 
   // Autofocus on input by default
   useEffect(() => {
-    inputRef.current && inputRef.current?.focus();
+    if(inputRef.current){
+      inputRef.current?.focus();
+    }
   });
   if (!editor) return null;
 
@@ -56,7 +61,9 @@ export const LinkSelector = ({ open, onOpenChange }: LinkSelectorProps) => {
             e.preventDefault();
             const input = target[0] as HTMLInputElement;
             const url = getUrlFromString(input.value);
-            url && editor.chain().focus().setLink({ href: url }).run();
+            if(url){
+               editor.chain().focus().setLink({ href: url }).run();
+            }
           }}
           className='flex  p-1 '>
           <input

@@ -62,7 +62,8 @@ const SaveDraftButton = () => {
         }
       } else {
         if ("error" in res && typeof res.error == "object") {
-          Object.entries(res.error).forEach(([key, value]) => {
+          Object.entries(res.error).forEach((entry) => {
+            const value = entry[1];
             toast.error(value.toString());
           });
         }else{

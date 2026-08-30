@@ -58,7 +58,7 @@ const UserDrafts = ({ PublishBlogItemSkeleton }: Props) => {
 
       <HandleErrrorMessage
         isLoading={isLoading}
-        data={data as Object[] | undefined}
+        data={data as object[] | undefined}
         error={error}
       />
 

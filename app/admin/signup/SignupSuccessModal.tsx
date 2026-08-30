@@ -18,8 +18,6 @@ interface Props {
 
 const SignupSuccessModal = ({ state }: Props) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
-  const stateHandler = (() => {
     try {
       if (
         !state ||
@@ -49,12 +47,11 @@ const SignupSuccessModal = ({ state }: Props) => {
     } catch (err) {
       toast.error("Something went wrong. Please refresh page.");
     }
-  })();
 
   return (
     <Modal hideCloseButton isOpen={isOpen} onOpenChange={onOpenChange}>
       <ModalContent>
-        {(onClose) => (
+        {() => (
           <>
             <ModalHeader className="flex flex-col gap-1">Welcome</ModalHeader>
             <ModalBody>

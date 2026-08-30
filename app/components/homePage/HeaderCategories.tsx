@@ -14,7 +14,7 @@ const HeaderCategories = async() => {
   return (
     <>
       <div className="hidden  xl:flex items-center justify-center p-2 space-x-4">
-        {filters.map((topic, idx) => (
+        {filters.map((topic) => (
           <CategoryButton topic={topic} key={topic}/>
         ))}
       </div>

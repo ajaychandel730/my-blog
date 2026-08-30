@@ -31,7 +31,7 @@ const UserMessages = () => {
     });
   };
 
-  const handleFeedbackDelete = async (id: string, setIsLoading: any) => {
+  const handleFeedbackDelete = async (id: string, setIsLoading:React.Dispatch<React.SetStateAction<boolean>>) => {
     const { toast } = await import("sonner");
     try {
       setIsLoading(true);
@@ -77,7 +77,7 @@ const UserMessages = () => {
 
       <HandleErrrorMessage
         isLoading={isLoading}
-        data={data as Object[] | undefined}
+        data={data as object[] | undefined}
         error={error}
       />
 
@@ -118,6 +118,3 @@ const getKey = (
   }
   return `/api/user/feedback?page=${pageIndex + 1}&limit=${15}`;
 };
-function useState(arg0: boolean): [any, any] {
-  throw new Error("Function not implemented.");
-}

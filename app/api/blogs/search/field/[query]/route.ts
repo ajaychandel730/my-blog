@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { getErrorMessage } from "@/utils/errors";
-import getSearchBlogs, { serverBlogCard } from "@/actions/getSearchBlogs";
 import rateLimitHandler from "@/lib/rateLimitHandler";
 import clientPromise from "@/lib/dbConnect";
 

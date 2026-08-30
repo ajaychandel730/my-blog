@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 const StorySection = () => {
@@ -19,17 +20,19 @@ const StorySection = () => {
               people through the power of words.
             </p>
             <p className="text-lg text-slate-600 dark:text-midnight-400">
-              We're excited to build a platform where diverse voices can be
+              We are excited to build a platform where diverse voices can be
               heard and meaningful conversations can flourish.
             </p>
           </div>
-            <div className="rounded-lg overflow-hidden shadow-xl">
-              <img
-                src="./ourStoryBanner.webp"
-                alt="Person writing"
-                className="w-full h-auto"
-              />
-            </div>
+          <div className="rounded-lg overflow-hidden shadow-xl">
+            <Image
+              src="/ourStoryBanner.webp"
+              alt="Person writing"
+              width={1200}
+              height={600}
+              className="w-full h-auto"
+            />
+          </div>
         </div>
       </div>
     </section>
