@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import BlogImage from "./BlogImage";
 import { Input, Textarea } from "@heroui/input";
 import { toast } from "sonner";
@@ -14,16 +14,18 @@ import getEditDraftById from "@/actions/getEditDraftById";
 import BlogEditorLoading from "./BlogEditorLoading";
 import { getErrorMessage } from "@/utils/errors";
 
+
 const BlogEditor = () => {
   const dispatch = useAppDispatch();
   const { editBlogId, editDraftId } = useParams();
   const [loading, setLoading] = useState(editBlogId ? true : false);
+   
 
   const { blog, isReseting } = useAppSelector(
     (state: RootState) => state.editorReducer
   );
 
-  const fetchBlog = async (id: string) => {
+  const fetchBlog = useCallback(async (id: string) => {
     setLoading(true);
     const blog: Blog | null = await getEditBlogById(id);
     if (!blog) {
@@ -32,9 +34,9 @@ const BlogEditor = () => {
       dispatch(setBlog(blog));
     }
     setTimeout(setLoading, 0, false);
-  };
+  }, []);
 
-  const fetchDraft = async (id: string) => {
+  const fetchDraft = useCallback( async (id: string) => {
     setLoading(true);
     const blog: Blog | null = await getEditDraftById(id);
 
@@ -44,7 +46,7 @@ const BlogEditor = () => {
       dispatch(setBlog(blog));
     }
     setTimeout(setLoading, 0, false);
-  };
+  }, []);
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -68,7 +70,7 @@ const BlogEditor = () => {
       console.log("error:", getErrorMessage(err));
       toast.error("Something went wrong. Please refresh page again.");
     }
-  }, [editBlogId, dispatch, editDraftId, fetchBlog, fetchDraft]);
+  }, [editBlogId, editDraftId]);
 
   if (loading) {
     return <BlogEditorLoading />;
