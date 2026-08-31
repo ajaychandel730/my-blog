@@ -16,22 +16,19 @@ const UserProfilePage = async () => {
     redirect("/admin/signin");
   }
 
-
-   const {
+  const {
     user: { id, name, image },
   } = session;
 
-  const totalPosts: number | undefined = await getUserTotalPostsCount(id as string);
+  const totalPosts: number | undefined = await getUserTotalPostsCount(
+    id as string,
+  );
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center p-4  ">
-      <AdminHeader/>
+      <AdminHeader />
       <div className="w-full md:max-w-[900px] flex flex-col items-center mt-20">
-        <UserInfoSection
-          totalPosts={totalPosts}
-          image={image}
-          name={name}
-        />
+        <UserInfoSection totalPosts={totalPosts} image={image} name={name} />
           <UsersTabs
             PublishBlogItemSkeleton={<PublishBlogItemSkeleton />}
             isAdmin={session.user.role === UserRole.ADMIN}

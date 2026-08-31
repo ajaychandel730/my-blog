@@ -75,7 +75,7 @@ const BlogEditor = () => {
   if (loading) {
     return <BlogEditorLoading />;
   }
-
+  
   return (
     <div className="w-full max-w-[700px] space-y-4">
       <Input

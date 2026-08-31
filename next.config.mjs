@@ -17,7 +17,6 @@ const csp = `
   `.replace(/\s{2,}/g, ' ').trim();
   
   // upgrade-insecure-requests;  
-
 const nextConfig = {
   reactStrictMode: true,
    experimental : { 
