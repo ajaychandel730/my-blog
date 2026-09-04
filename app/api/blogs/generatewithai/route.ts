@@ -140,7 +140,6 @@ export async function GET(request: NextRequest) {
 
     // final draft schema validation
     const { data: blog } = blogResult;
-    console.log("content:", content.content);
 
     const draft = DraftSchema.safeParse({
       userId: user._id.toString(),

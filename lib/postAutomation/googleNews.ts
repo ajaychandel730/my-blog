@@ -9,7 +9,7 @@ export interface GoogleNews {
 export async function googleNewsJson(): Promise<Error | GoogleNews[]> {
   const parser = new Parser();
   const newsResponse = await parser.parseURL(
-    "https://news.google.com/rss/search?q=AI&hl=en-IN&gl=IN&ceid=IN:en",
+    "https://news.google.com/rss/search?q=India&hl=en-IN&gl=IN&ceid=IN:en",
   );
   const googleNews: GoogleNews[] = newsResponse.items.map((news) => ({
     title: news.title,
