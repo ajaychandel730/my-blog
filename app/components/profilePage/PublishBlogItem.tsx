@@ -70,11 +70,12 @@ const PublishBlogItem = ({
               <div className="w-full space-x-2 space-y-2">
                 {topics.map((topic, idx) => (
                   <Chip
+                    variant="solid"
                     as={Link}
+
                     href={`/blogs/search/${topic}`}
                     key={idx}
-                    size="sm"
-                    className="bg-gray-100 text-sm dark:bg-midnight-700 dark:text-foreground text-gray-700 hover:bg-gray-200  transition-colors "
+                    size="md"
                   >
                     {topic}
                   </Chip>
