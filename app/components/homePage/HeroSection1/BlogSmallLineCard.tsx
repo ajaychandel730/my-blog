@@ -26,17 +26,20 @@ const BlogSmallLineCard = async ({
     <Card
       as={Link}
       href={`/blog/${_id}`}
-      className="dark:bg-midnight-900 rounded-sm shadow-none border-t border-gray-200 dark:border-gray-500"
+      className="dark:bg-midnight-900 rounded-sm shadow-none border-t border-gray-200 dark:border-gray-800"
     >
       <CardBody className="">
         <div className="flex space-x-2">
-          <div className="flex flex-1 flex-col space-y-1">
-            <h3 className="font-medium text-lg">{title}</h3>
-            <p className="text-tiny  uppercase font-bold text-gray-700 dark:text-midnight-400">
+          <div className="flex flex-1 flex-col space-y-4">
+            <div className="space-y-1">
+              <h3 className="font-bold text-lg">{title}</h3>
+              <p className="text-sm font-bold  line-clamp-2 text-gray-600 dark:text-midnight-400">
+                {description}
+              </p>
+            </div>
+
+            <p className="text-tiny uppercase font-bold text-gray-600">
               {formattedDate}
-            </p>
-            <p className="text-tiny capitalize font-bold line-clamp-2 text-gray-700 dark:text-midnight-400">
-              {description}
             </p>
           </div>
           <div className="relative w-20 h-20 rounded-lg bg-black overflow-hidden">

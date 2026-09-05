@@ -23,12 +23,12 @@ const CardContentWrapper = ({title, banner, description,  content, user, date}: 
   const formattedDate = toLocaleDateString(date, { month: "long" });
 
   return (
-    <Card shadow="none" radius="none" className="w-full lg:w-[900px] p-2 bg-white !text-black">
+    <Card shadow="none" radius="none" className="w-full lg:w-[900px] p-2 bg-gray-50 dark:bg-white/90 !text-black">
       <CardHeader className="flex flex-col w-full p-0 items-start">
         <div className="flex w-full items-center justify-between">
           <GoBackButton />
         </div>
-        <div className="flex w-full pl-4 mt-4 space-y-2  flex-col items-start">
+        <div className="flex w-full mt-4 space-y-2  flex-col items-start">
           <span
             suppressHydrationWarning
             className="text-sm font-medium text-gray-500"
@@ -36,6 +36,7 @@ const CardContentWrapper = ({title, banner, description,  content, user, date}: 
             {formattedDate}
           </span>
           <User
+            className="text-gray-500"
             avatarProps={{
               imgProps: { loading: "eager" },
               src: user?.image,
@@ -43,7 +44,7 @@ const CardContentWrapper = ({title, banner, description,  content, user, date}: 
             }}
             name={user?.name}
           />
-          <h1 className=" font-[600] text-black">{title}</h1>
+          <h1 className="font-[600] text-black !mt-4 !mb-2">{title}</h1>
         </div>
       </CardHeader>
       <CardBody className="space-y-2 text-lg  tracking-normal ">
@@ -56,7 +57,7 @@ const CardContentWrapper = ({title, banner, description,  content, user, date}: 
            priority
           />
         </div>
-        <p className="mt-2 mb-8 text-lg leading-relaxed text-neutral-600">{description}</p>
+        <p className="mt-2 mb-8 text-base leading-relaxed text-gray-500">{description}</p>
         <ShowBlogContent content={content ?? []} />
       </CardBody>
     </Card>

@@ -15,14 +15,14 @@ type Props = {
 const HightCountTopicCard = async ({_id, title, date, banner}:Props) => {
   const formattedDate = toLocaleDateString(date);
   return (
-    <Card as={Link} href={`/blog/${_id}`} className="shadow-none dark:hover:bg-midnight-800 hover:bg-gray-200 border-t border-gray-200 dark:border-gray-500 rounded-sm dark:bg-midnight-900">
+    <Card as={Link} href={`/blog/${_id}`} className="shadow-none dark:hover:bg-midnight-800 hover:bg-gray-200 border-t border-gray-200 dark:border-gray-800 rounded-sm dark:bg-midnight-900">
       <CardBody className="">
         <div className="flex space-x-2">
           <div className="flex flex-1 flex-col space-y-1">
             <h3 className="font-medium text-large">
               {title}
             </h3>
-            <p className="text-tiny  uppercase font-bold text-gray-700 dark:text-midnight-400">
+            <p className="text-tiny  uppercase font-bold text-gray-600">
               {formattedDate}
             </p>
           </div>

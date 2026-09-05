@@ -18,8 +18,8 @@ const PicksForYouCard = async ({ _id, banner, title, date }: Props) => {
     >
       {/* Text */}
       <div className="flex flex-1 flex-col space-y-1">
-        <h3 className="font-semibold text-sm line-clamp-4">{title}</h3>
-        <p className="text-tiny uppercase font-bold text-gray-700 dark:text-midnight-400">
+        <h3 className="font-bold text-sm line-clamp-4">{title}</h3>
+        <p className="text-tiny uppercase font-bold text-gray-600">
           {date}
         </p>
       </div>

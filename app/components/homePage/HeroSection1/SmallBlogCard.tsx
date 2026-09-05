@@ -30,9 +30,9 @@ const SmallBlogCard = async({ _id, title, banner, date }: Props) => {
         </div>
       </CardHeader>
       <CardBody className="overflow-visible px-2 space-y-2">
-        <h4 className="font-bold text-sm">{title}</h4>
+        <h4 className="font-bold text-sm tracking-wide">{title}</h4>
       </CardBody>
-      <CardFooter className="text-small justify-between">
+      <CardFooter className="text-small text-gray-600">
         <p className="text-tiny uppercase font-bold">{date}</p>
       </CardFooter>
     </Card>

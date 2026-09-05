@@ -37,6 +37,7 @@
   h5,
   h6 {
     font-size: revert;
+    margin : 0px !important;
   }
 }
 
@@ -57,7 +58,7 @@
   }
 
   .darkButton {
-    @apply dark:!bg-gray-900 dark:!border-gray-800 dark:!text-foreground;
+    @apply dark:!bg-gray-800  dark:!text-foreground;
   }
 
   .input {

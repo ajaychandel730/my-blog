@@ -41,9 +41,9 @@ const page = async ({ params }: Params) => {
   return (
     <>
       <Header />
-      <div className="flex w-full min-h-dvh p-4 pb-10 flex-col items-center">
+      <div className="flex mt-6 w-full min-h-dvh  pb-10 flex-col items-center">
         <Suspense fallback={<HomeBlogCardSekelton limit={1} />}>
-          <div className="mt-10 flex prose prose-neutral prose-lg  max-w-none leading-relaxed">
+          <div className="flex prose prose-neutral prose-lg  max-w-none leading-relaxed">
             <BlogContent blogId={blogId} />
           </div>
         </Suspense>

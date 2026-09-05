@@ -26,7 +26,7 @@ const SearchPage = async ({ params }: Props) => {
 
   return (
     <>
-      <div className="!mt-10 mb-10 flex w-full items-center justify-between">
+      <div className="flex w-full items-center justify-between">
         <h1 className="text-blue-600 text-xl hidden md:block">
           Community Blog
         </h1>

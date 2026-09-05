@@ -1,7 +1,7 @@
 import React from "react";
 import { TopBlogsType } from "@/types/blog";
 import toLocaleDateString from "@/utils/toLocaleDateString";
-import { Card, CardHeader } from "@heroui/card";
+import { Card, CardBody, CardHeader } from "@heroui/card";
 import BlogSmallLineCard from "../HeroSection1/BlogSmallLineCard";
 import HeroHeader from "./HeroHeader";
 import NoBlogsState from "../../blogs/NoBlogsState";
@@ -17,13 +17,16 @@ const HeroSection = async () => {
   }
 
   return (
-    <section aria-labelledby="top-stories-heading" className="w-full grid xl:grid-cols-2 grid-cols-1  gap-2 ">
+    <section
+      aria-labelledby="top-stories-heading"
+      className="w-full grid xl:grid-cols-2 grid-cols-1  gap-2 "
+    >
       <Card
         as={NextLink}
         href={`/blog/${result[0]?._id}`}
         className=" h-[300px] md:h-[500px]   rounded-sm"
       >
-        <CardHeader className="absolute z-10 !m-0 pt-10 rounded-none bottom-0 flex-col !items-start bg-gradient-to-t from-black via-black/50 to-transparent">
+        <CardHeader  className="absolute z-10 !m-0 bg-midnight-900/75  pt-10 rounded-none bottom-0 flex-col !items-start">
           <h3 className="text-white font-medium text-large">
             {result[0]?.title}
           </h3>
@@ -31,12 +34,14 @@ const HeroSection = async () => {
             {toLocaleDateString(result[0]?.date)}
           </p>
         </CardHeader>
-        <Image
-          fill
-          alt="Card background"
-          className="z-0 w-full h-full object-cover mask-b-from-20% mask-b-to-80%"
-          src={result[0]?.banner}
-        />
+        <CardBody className="bg-white">
+          <Image
+            fill
+            alt="Card background"
+            className="z-0 w-full h-full object-fill"
+            src={result[0]?.banner}
+          />
+        </CardBody>
       </Card>
       <div className="flex flex-col space-y-4 bg-white dark:bg-midnight-900 shadow rounded-sm p-2">
         <HeroHeader id="top-stories-heading" heading="Top Stories" />
@@ -50,7 +55,7 @@ const HeroSection = async () => {
               description={description}
               date={date}
             />
-          )
+          ),
         )}
       </div>
     </section>

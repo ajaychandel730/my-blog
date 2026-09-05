@@ -9,15 +9,16 @@ const GoBackButton = () => {
 
   return (
     <Button
-      className="darkButton"
+      className="text-gray-500 border-2 border-gray-500 hover:bg-black hover:text-white"
       aria-description="Go back button"
       type="button"
+      radius="full"
+      isIconOnly
       onPress={() => router.back()}
-      startContent={<ArrowLeftIcon className="w-5 h-5" />}
       size="md"
-      variant="light"
+      variant="bordered"
     >
-      Back to blog
+      <ArrowLeftIcon className="w-5 h-5" />
     </Button>
   );
 };
