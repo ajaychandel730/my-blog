@@ -24,7 +24,7 @@ const CardContentWrapper = ({title, banner, description,  content, user, date}: 
 
   return (
     <Card shadow="none" radius="none" className="w-full lg:w-[900px] p-2 bg-gray-50 dark:bg-white/90 !text-black">
-      <CardHeader className="flex flex-col w-full p-0 items-start">
+      <CardHeader className="flex flex-col w-full  items-start">
         <div className="flex w-full items-center justify-between">
           <GoBackButton />
         </div>
