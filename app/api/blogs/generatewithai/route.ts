@@ -9,13 +9,8 @@ import crypto from "node:crypto";
 /////////////////////////
 import {
   getBlogPrompt,
-  getTopicsScorePrompt,
 } from "@/lib/postAutomation/prompts/features/readAndReplaceTxt";
-import {
-  TopicScoreJSONSchema,
-  TopicScoreZodSchema,
-  topicScoreZodSchema,
-} from "@/lib/zodDefinations/geminiSchemas/topicScoreSchema";
+
 import { geminiBlogJSONSchema } from "@/lib/zodDefinations/geminiSchemas/geminiBlogSchema";
 import { parseAiBlogContent } from "@/lib/postAutomation/prompts/features/parseAiArticle";
 import clientPromise from "@/lib/dbConnect";
@@ -23,6 +18,8 @@ import DraftSchema from "@/lib/zodDefinations/DraftSchema";
 import { ObjectId } from "mongodb";
 import { sendBlogAutomationNotification } from "@/lib/mail";
 import rateLimitHandler from "@/lib/rateLimitHandler";
+import { getRandomTopic } from "@/lib/postAutomation/prompts/features/getRandomTopic";
+import { TopicScoreZodSchema } from "@/lib/zodDefinations/geminiSchemas/topicScoreSchema";
 
 const findTopTopic = (topics: TopicScoreZodSchema) => {
   return topics.reduce((pre, curr) => {
@@ -71,32 +68,12 @@ export async function GET(request: NextRequest) {
     ////////////////////////////////Authorization done///////////////
     // step1. get latest hot news topics
     const googleNews: GoogleNews[] = (await googleNewsJson()) as GoogleNews[];
-    // step2. send to genai score it on bases of trendscore , usefulness
-
-    const interaction = await googleGeminiAi(
-      await getTopicsScorePrompt(googleNews),
-      {
-        type: "text",
-        mime_type: "application/json",
-        schema: TopicScoreJSONSchema,
-      },
-    );
-
-    const geminiResponse = JSON.parse(interaction.output_text as string);
-
-    const result = topicScoreZodSchema.safeParse(geminiResponse);
-
-    if (!result.success) {
-      return NextResponse.json(
-        { status: "warning", message: result.error.message },
-        { status: 401 },
-      );
-    }
-
-    // step3. choose top overallscore topic
-    const topTopic = findTopTopic(result.data);
+    
+    // step choose blog by randomization 
+    const topic = await getRandomTopic(googleNews);
+    
     // step4. get blog prmpt
-    const blogPrompt = await getBlogPrompt(topTopic.topic);
+    const blogPrompt = await getBlogPrompt(topic);
 
     //step5. write blog with genai
     const blogInteraction = await googleGeminiAi(blogPrompt, {

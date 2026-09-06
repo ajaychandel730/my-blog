@@ -17,9 +17,10 @@ export async function getTopicsScorePrompt(data:GoogleNews[]){
     return text;
 }
 
-export async function getBlogPrompt(topic:string){
+export async function getBlogPrompt(topic:GoogleNews){
    const filePath = Path.join(process.cwd(), "lib", "postAutomation", "prompts", "genrateBlogPrompt.txt");
     const file  = await fs.readFile(filePath, "utf-8");
-    const text = file.replace("{{TOPIC}}", "1. " + topic);
+    const topicPromptString = `1. title: ${topic.title} \nresourceLink: ${topic.link} \npublish Date: ${topic.pubDate}.` 
+    const text = file.replace("{{TOPIC}}", topicPromptString);
     return text;
 }

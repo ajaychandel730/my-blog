@@ -111,17 +111,21 @@ Do not force an action step into a section where it does not make sense.
 
 ARTICLE STRUCTURE
 
-TITLE
+The `title` provided in TOPIC is the ORIGINAL NEWS TITLE.
 
-Create a clear, useful, and engaging title.
+IMPORTANT:
+- Use the title EXACTLY as provided.
+- Do NOT rewrite it.
+- Do NOT shorten it.
+- Do NOT improve it.
+- Do NOT paraphrase it.
+- Do NOT translate it.
+- Do NOT change punctuation.
+- Do NOT change capitalization.
+- Do NOT remove or add words.
 
-The title should:
-
-- Clearly describe the topic.
-- Give the reader a reason to read.
-- Avoid misleading clickbait.
-- Avoid exaggerated claims.
-
+The value of `title` in the output MUST be identical to the
+provided TOPIC.title.
 
 INTRODUCTION
 
@@ -414,7 +418,3 @@ Before returning the JSON, verify:
 TOPIC
 
 {{TOPIC}}
-
-
-RESEARCH / SOURCES
-google news

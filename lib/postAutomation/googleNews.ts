@@ -11,11 +11,12 @@ export async function googleNewsJson(): Promise<Error | GoogleNews[]> {
   const newsResponse = await parser.parseURL(
     "https://news.google.com/rss/search?q=India&hl=en-IN&gl=IN&ceid=IN:en",
   );
+
   const googleNews: GoogleNews[] = newsResponse.items.map((news) => ({
     title: news.title,
     link: news.link,
     pubDate: news.pubDate,
   }));
 
-  return googleNews.slice(0, 6);
+  return googleNews.slice(0, 20);
 }
