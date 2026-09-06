@@ -10,7 +10,7 @@ const AboutPage = () => {
   return (
     <>
       <Header />
-      <div className=" mx-auto px-2 py-12 max-w-[1100px] dark:text-midnight-200">
+      <div className=" mx-auto px-2 mb-6 max-w-[1100px] dark:text-midnight-200">
         <AboutHeroSection />
         <StorySection />
         <QuerySection />
