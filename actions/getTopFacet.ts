@@ -10,7 +10,7 @@ export default async function (limit: number): Promise<SearchFacet[]> {
         Accept: "application/json",
       },
       next: {
-        revalidate: 43200,
+        revalidate: 3600,
         tags: ["get_top_facet"],
       },
     }

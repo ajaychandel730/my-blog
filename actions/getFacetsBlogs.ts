@@ -12,7 +12,7 @@ export default async function (facets: string[]) {
           Accept: "application/json",
         },
         next: {
-          revalidate: 43200,
+          revalidate: 3600,
           tags: ["get_facets_blogs"],
         },
       }

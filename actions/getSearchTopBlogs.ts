@@ -9,7 +9,7 @@ export default async function () {
           "Accept": "application/json",
         },
         next: {
-          revalidate: 43200,
+          revalidate: 3600,
           tags : ["search_top_blogs"]
         },
       }
