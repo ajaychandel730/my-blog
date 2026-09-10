@@ -24,7 +24,7 @@ const HeroSection = async () => {
       <Card
         as={NextLink}
         href={`/blog/${result[0]?._id}`}
-        className=" h-[300px] md:h-[500px]   rounded-sm"
+        className="rounded-sm"
       >
         <CardHeader  className="absolute z-10 !m-0 bg-midnight-900/75  pt-10 rounded-none bottom-0 flex-col !items-start">
           <h3 className="text-white font-medium text-large">
